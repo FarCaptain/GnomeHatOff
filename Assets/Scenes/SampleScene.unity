@@ -639,7 +639,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1872219611}
-  speed: 0.01
+  speed: 0.08
+  xval: 0
+  zval: 0
 --- !u!1 &2035476980
 GameObject:
   m_ObjectHideFlags: 0

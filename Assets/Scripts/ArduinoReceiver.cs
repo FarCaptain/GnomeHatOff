@@ -9,7 +9,7 @@ public class ArduinoReceiver : MonoBehaviour
     static SerialPort stream;
 
     // SELECT YOUR COM PORT AND BAUDRATE
-    public string port = "COM4";
+    public string port = "COM8";
     int baudrate = 9600;
     int readTimeout = 10;
 
@@ -33,11 +33,11 @@ public class ArduinoReceiver : MonoBehaviour
         //DetectPort();
         connectionEstablish();
 
-        setreferencevalue();
+        //setreferencevalue();
     }
 
-    private void setreferencevalue()
-    {
+   private void setreferencevalue()
+   {
         if (eshtablished)
         {
             dataString = "null received";
@@ -74,7 +74,7 @@ public class ArduinoReceiver : MonoBehaviour
                 }
             }
         }
-    }
+   }
 
     void Update()
     {
@@ -94,6 +94,7 @@ public class ArduinoReceiver : MonoBehaviour
 
             if (stream.IsOpen)
             {
+                //Debug.Log("WTF");
                 try
                 {
                     dataString = stream.ReadLine();
@@ -117,8 +118,11 @@ public class ArduinoReceiver : MonoBehaviour
                 {
                     char splitChar = ',';
                     dataRaw = dataString.Split(splitChar);
-                    xaxis = float.Parse(dataRaw[0]);
-                    zaxis = float.Parse(dataRaw[1]);
+                    if (dataRaw.Length == 2 && dataRaw[0] != "")
+                    {
+                        xaxis = float.Parse(dataRaw[0]);
+                        zaxis = float.Parse(dataRaw[1]);
+                    }
                 }
             }
 

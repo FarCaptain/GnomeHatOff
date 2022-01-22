@@ -671,7 +671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf11ef1628b3a9c4a92e18d4d7fc17bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM3
+  port: COM5
   eshtablished: 0
   dataString: 
 --- !u!4 &2035476982

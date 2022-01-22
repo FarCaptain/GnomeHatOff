@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float zval = ArduinoReceiver.zaxis;
 
     Vector2 initPos;
+    bool ifInit = false;
 
     void Start()
     {
@@ -18,20 +19,24 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if(Input.GetKey(KeyCode.Q))
         {
             initPos = new Vector2(ArduinoReceiver.xaxis, ArduinoReceiver.zaxis);
+            ifInit = true;
         }
-        //float x = Input.GetAxis("Horizontal");
-        //float z = Input.GetAxis("Vertical");
+        
+        if(ifInit)
+        {
+            //float x = Input.GetAxis("Horizontal");
+            //float z = Input.GetAxis("Vertical");
 
-        xval = ArduinoReceiver.xaxis;
-        zval = ArduinoReceiver.zaxis;
+            xval = ArduinoReceiver.xaxis - initPos.x;
+            zval = ArduinoReceiver.zaxis - initPos.y;
 
-        Vector3 move = new Vector3(ArduinoReceiver.xaxis - initPos.x, 0f, ArduinoReceiver.zaxis - initPos.y);
-        move.x = (Mathf.Abs(move.x) > 10f) ? move.x : 0f;
-        move.z = (Mathf.Abs(move.z) > 10f) ? move.z : 0f;
-        controller.Move(move * speed * Time.deltaTime);
+            Vector3 move = new Vector3(ArduinoReceiver.xaxis - initPos.x, 0f, ArduinoReceiver.zaxis - initPos.y);
+            move.x = (Mathf.Abs(move.x) > 3f) ? Mathf.Sign(move.x) * 12f : 0f;
+            move.z = (Mathf.Abs(move.z) > 3f) ? Mathf.Sign(move.z) * 12f : 0f;
+            controller.Move(move * speed * Time.deltaTime);
+        }
     }
 }

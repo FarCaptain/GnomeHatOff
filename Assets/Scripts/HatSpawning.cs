@@ -24,7 +24,7 @@ public class HatSpawning : MonoBehaviour
         timeInterval += Time.deltaTime;
         if (timeInterval > timeGap)
         {
-            timeGap = Random.Range(1.3f, 3.5f);
+            timeGap = Random.Range(0.3f, 3.0f);
             SpawnHat();
             timeInterval = 0f;
         }

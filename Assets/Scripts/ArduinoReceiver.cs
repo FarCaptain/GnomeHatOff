@@ -94,11 +94,10 @@ public class ArduinoReceiver : MonoBehaviour
 
             if (stream.IsOpen)
             {
-                //Debug.Log("WTF");
                 try
                 {
                     dataString = stream.ReadLine();
-                    Debug.Log("data String : " + dataString);
+                    //Debug.Log("data String : " + dataString);
                 }
                 catch (System.Exception ioe)
                 {

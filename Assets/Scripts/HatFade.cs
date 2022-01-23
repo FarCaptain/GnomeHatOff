@@ -7,7 +7,8 @@ public class HatFade : MonoBehaviour
 
     public float defaultTransparency = 1f;
     public float fadeDuration = 3f;
-    public float destroyHeight = 10f;
+    //public float destroyHeight = 10f;
+    public GameObject[] players;
 
     float currentTransparency;
     float toFadeTo;
@@ -23,11 +24,20 @@ public class HatFade : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (transform.localPosition.y < destroyHeight)
+        //if (players.Length > 0)// && transform.localPosition.y < players[0].transform.localPosition.y
+        //{
+        //    for(int i = 0; i < players.Length; i ++)
+        //        Physics.IgnoreCollision(GetComponent<MeshCollider>(), players[i].GetComponent<BoxCollider>());
+
+        //}
+
+        if(players.Length > 0 && transform.localPosition.y < players[0].transform.localPosition.y)
         {
+            Destroy(GetComponent<Rigidbody>());
             FadeT(0.0f);
             Destroy(gameObject, 3f);
         }
+            
 
         if (isFadingUp)
         {

@@ -11,7 +11,6 @@ public class HatCollecter : MonoBehaviour
         {
             if(other.gameObject.transform.position.y > gameObject.transform.position.y)
                 print("Yeay! Hat Collected!" + (++count));
-            
             Destroy(other.gameObject);
         }
     }

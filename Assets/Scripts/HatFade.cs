@@ -15,11 +15,22 @@ public class HatFade : MonoBehaviour
     float tempDist;
     bool isFadingUp;
     bool isFadingDown;
+    float headTop;
 
     void Start()
     {
         currentTransparency = defaultTransparency;
         ApplyTransparency();
+
+        for (int i = 0; i < players[0].transform.childCount; i++)
+        {
+            // inefficient, way to do on resources?
+            if (players[0].transform.GetChild(i).name == "HeadTop")
+            {
+                headTop = players[0].transform.GetChild(i).transform.position.y;
+                break;
+            }
+        }
     }
 
     void FixedUpdate()
@@ -30,8 +41,8 @@ public class HatFade : MonoBehaviour
         //        Physics.IgnoreCollision(GetComponent<MeshCollider>(), players[i].GetComponent<BoxCollider>());
 
         //}
-
-        if(players.Length > 0 && transform.localPosition.y < players[0].transform.localPosition.y)
+        
+        if(players.Length > 0 && transform.position.y < headTop)
         {
             Destroy(GetComponent<Rigidbody>());
             FadeT(0.0f);
@@ -67,7 +78,7 @@ public class HatFade : MonoBehaviour
 
     void ApplyTransparency()
     {
-        GetComponent<MeshRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, currentTransparency);
+        transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material.color *= new Color(1.0f, 1.0f, 1.0f, currentTransparency);
     }
 
     public void SetT(float newT)

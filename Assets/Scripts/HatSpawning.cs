@@ -9,7 +9,7 @@ public class HatSpawning : MonoBehaviour
     public Vector3 center;
     public Vector3 size;
 
-    public float timeInterval = 0f;
+    float timeInterval = 0f;
 
     float timeGap;
     // Start is called before the first frame update

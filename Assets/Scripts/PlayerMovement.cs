@@ -1,4 +1,4 @@
-//#define KEYBOARD
+#define KEYBOARD
 //else use alt controller
 
 using System.Collections;

@@ -44,7 +44,6 @@ public class HatFade : MonoBehaviour
         
         if(players.Length > 0 && transform.position.y < headTop)
         {
-            Destroy(GetComponent<Rigidbody>());
             FadeT(0.0f);
             Destroy(gameObject, 3f);
         }

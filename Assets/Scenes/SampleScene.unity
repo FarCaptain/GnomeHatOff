@@ -918,8 +918,30 @@ PrefabInstance:
       propertyPath: controller
       value: 
       objectReference: {fileID: 1958991168}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6337047249309039360, guid: 2a97db5219d70294797bb53bc23e1195, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2a97db5219d70294797bb53bc23e1195, type: 3}
+--- !u!1 &1664529033 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4310113290025000713, guid: 2a97db5219d70294797bb53bc23e1195,
+    type: 3}
+  m_PrefabInstance: {fileID: 1365943934}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1664529034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664529033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e492cca6a83c964798e237e1d099cc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 1958991168}
+  speed: 0
+  turnAroundEnabled: 1
 --- !u!1 &1750809130
 GameObject:
   m_ObjectHideFlags: 0

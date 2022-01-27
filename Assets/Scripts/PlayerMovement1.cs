@@ -1,4 +1,4 @@
-//#define KEYBOARD
+#define KEYBOARD
 //else use alt controller
 
 using System.Collections;
@@ -45,9 +45,14 @@ public class PlayerMovement1 : MonoBehaviour
         if (ifInit)
         {
 #if KEYBOARD
-            float x = Input.GetAxis("Horizontal");
-            float z = Input.GetAxis("Vertical");
-            Vector3 move = new Vector3(x, 0f, z);
+            Vector3 move = Vector3.zero;
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+            {
+                print("wft");
+                float x = Input.GetAxis("Horizontal");
+                float z = Input.GetAxis("Vertical");
+                move = new Vector3(x, 0f, z);
+            }
 
 #else
 

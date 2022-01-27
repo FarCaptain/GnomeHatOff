@@ -9,6 +9,7 @@ public class PlayerMovement1 : MonoBehaviour
 {
     public CharacterController controller;
     public float speed;
+    public bool turnAroundEnabled = true;
 
 #if KEYBOARD
 #else
@@ -25,7 +26,7 @@ public class PlayerMovement1 : MonoBehaviour
         speed = 12f;
         ifInit = true;
     #else
-        speed = 0.35f;
+        speed = 0.8f;
         ifInit = false;
     #endif
     }
@@ -47,6 +48,7 @@ public class PlayerMovement1 : MonoBehaviour
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
             Vector3 move = new Vector3(x, 0f, z);
+
 #else
 
             xval = ArduinoReceiver1.xaxis - initPos.x;
@@ -56,6 +58,11 @@ public class PlayerMovement1 : MonoBehaviour
             move.x = (Mathf.Abs(move.x) > 3f) ? Mathf.Sign(move.x) * 12f : 0f;
             move.z = (Mathf.Abs(move.z) > 3f) ? Mathf.Sign(move.z) * 12f : 0f;
 #endif
+            if (move != Vector3.zero)
+            {
+                gameObject.transform.forward = move;
+            }
+
             controller.Move(move * speed * Time.deltaTime);
         }
     }

@@ -8,7 +8,7 @@ public class HatFade : MonoBehaviour
     public float defaultTransparency = 1f;
     public float fadeDuration = 3f;
     //public float destroyHeight = 10f;
-    GameObject[] players;
+    GameObject player;
 
     float currentTransparency;
     float toFadeTo;
@@ -22,14 +22,14 @@ public class HatFade : MonoBehaviour
         currentTransparency = defaultTransparency;
         ApplyTransparency();
 
-        players[0] = GameObject.Find("Gnome");
+        player = GameObject.Find("Gnome");
 
-        for (int i = 0; i < players[0].transform.childCount; i++)
+        for (int i = 0; i < player.transform.childCount; i++)
         {
             // inefficient, way to do on resources?
-            if (players[0].transform.GetChild(i).name == "HeadTop")
+            if (player.transform.GetChild(i).name == "HeadTop")
             {
-                headTop = players[0].transform.GetChild(i).transform.position.y;
+                headTop = player.transform.GetChild(i).transform.position.y;
                 break;
             }
         }
@@ -44,7 +44,7 @@ public class HatFade : MonoBehaviour
 
         //}
         
-        if(players.Length > 0 && transform.position.y < headTop)
+        if(transform.position.y < headTop)
         {
             print("this:" + transform.position.y + " " + headTop);
             FadeT(0.0f);

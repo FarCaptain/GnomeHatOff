@@ -79,7 +79,7 @@ MonoBehaviour:
   defaultTransparency: 1
   fadeDuration: 0.6
   players:
-  - {fileID: 4310113290025000713, guid: 2a97db5219d70294797bb53bc23e1195, type: 3}
+  - {fileID: 919132149155446097, guid: 109cef133cc983746ac9e9df91d7ebfa, type: 3}
 --- !u!1 &6292572622566791562
 GameObject:
   m_ObjectHideFlags: 0

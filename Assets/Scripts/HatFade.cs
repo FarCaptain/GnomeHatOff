@@ -8,7 +8,7 @@ public class HatFade : MonoBehaviour
     public float defaultTransparency = 1f;
     public float fadeDuration = 3f;
     //public float destroyHeight = 10f;
-    public GameObject[] players;
+    GameObject[] players;
 
     float currentTransparency;
     float toFadeTo;
@@ -21,6 +21,8 @@ public class HatFade : MonoBehaviour
     {
         currentTransparency = defaultTransparency;
         ApplyTransparency();
+
+        players[0] = GameObject.Find("Gnome");
 
         for (int i = 0; i < players[0].transform.childCount; i++)
         {
@@ -44,6 +46,7 @@ public class HatFade : MonoBehaviour
         
         if(players.Length > 0 && transform.position.y < headTop)
         {
+            print("this:" + transform.position.y + " " + headTop);
             FadeT(0.0f);
             Destroy(gameObject, 3f);
         }

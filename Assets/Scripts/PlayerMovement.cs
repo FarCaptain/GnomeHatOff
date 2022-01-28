@@ -68,7 +68,11 @@ public class PlayerMovement : MonoBehaviour
                 gameObject.transform.forward = move;
             }
 
-            controller.Move(move * speed * Time.deltaTime);
+
+            float inputSpeed = speed;
+            if (move.x != 0f && move.z != 0f)
+                inputSpeed *= 0.70711f; // 1/sqrt(2)
+            controller.Move(move * inputSpeed * Time.deltaTime);
         }
         Vector3 pos = gameObject.transform.position;
         gameObject.transform.position = new Vector3(pos.x, 0.1f, pos.z);

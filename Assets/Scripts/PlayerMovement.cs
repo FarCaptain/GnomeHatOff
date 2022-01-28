@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
     public float speed;
     public bool turnAroundEnabled = true;
+    public float bounceForce = 1.0f;
 
 #if KEYBOARD
 #else
@@ -68,6 +69,19 @@ public class PlayerMovement : MonoBehaviour
             }
 
             controller.Move(move * speed * Time.deltaTime);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        print("doing it");
+        if (collision.transform.tag == "Player")
+        {
+            print("doing it");
+            Rigidbody otherRB = collision.rigidbody;
+
+            // bumped back
+            otherRB.AddExplosionForce(bounceForce, collision.contacts[0].point, 5);
         }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class HatCollecter : MonoBehaviour
 {
     int count = 0;
+
     public void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Hat")

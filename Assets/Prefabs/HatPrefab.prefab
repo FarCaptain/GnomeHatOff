@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2631597963478022457}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 8.89, y: 7.26, z: -7.47}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 6300921562077526407}
   m_Father: {fileID: 0}
@@ -78,8 +78,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultTransparency: 1
   fadeDuration: 0.6
-  players:
-  - {fileID: 919132149155446097, guid: 109cef133cc983746ac9e9df91d7ebfa, type: 3}
 --- !u!1 &6292572622566791562
 GameObject:
   m_ObjectHideFlags: 0

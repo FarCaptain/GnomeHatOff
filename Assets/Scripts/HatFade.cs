@@ -46,7 +46,6 @@ public class HatFade : MonoBehaviour
         
         if(transform.position.y < headTop)
         {
-            print("this:" + transform.position.y + " " + headTop);
             FadeT(0.0f);
             Destroy(gameObject, 3f);
         }

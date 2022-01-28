@@ -70,18 +70,20 @@ public class PlayerMovement : MonoBehaviour
 
             controller.Move(move * speed * Time.deltaTime);
         }
+        Vector3 pos = gameObject.transform.position;
+        gameObject.transform.position = new Vector3(pos.x, 0.1f, pos.z);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        print("doing it");
-        if (collision.transform.tag == "Player")
-        {
-            print("doing it");
-            Rigidbody otherRB = collision.rigidbody;
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    print("doing it");
+    //    if (collision.transform.tag == "Player")
+    //    {
+    //        print("doing it");
+    //        Rigidbody otherRB = collision.rigidbody;
 
-            // bumped back
-            otherRB.AddExplosionForce(bounceForce, collision.contacts[0].point, 5);
-        }
-    }
+    //        // bumped back
+    //        otherRB.AddExplosionForce(bounceForce, collision.contacts[0].point, 5);
+    //    }
+    //}
 }

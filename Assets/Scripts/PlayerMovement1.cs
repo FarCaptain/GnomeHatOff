@@ -69,5 +69,7 @@ public class PlayerMovement1 : MonoBehaviour
 
             controller.Move(move * speed * Time.deltaTime);
         }
+        Vector3 pos = gameObject.transform.position;
+        gameObject.transform.position = new Vector3(pos.x, 0.1f, pos.z);
     }
 }

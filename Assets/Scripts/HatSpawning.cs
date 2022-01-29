@@ -5,6 +5,8 @@ using UnityEngine;
 public class HatSpawning : MonoBehaviour
 {
     public GameObject hatPrefab;
+    public GameObject hatShadowPrefab;
+    public float hatshadowDestroyTime=4;
 
     public Vector3 center;
     public Vector3 size;
@@ -44,8 +46,14 @@ public class HatSpawning : MonoBehaviour
         Vector3 pos = transform.localPosition + center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2), Random.Range(-size.z / 2, size.z / 2));
         GameObject hat = Instantiate(hatPrefab, pos, Quaternion.identity);
         hat.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = hatColors[Random.Range(0, hatColors.Length - 1)];
+        generateShadow(pos);
     }
 
+    public void generateShadow(Vector3 pos)
+    {
+        GameObject hatShadow = Instantiate(hatShadowPrefab, pos - (new Vector3(0, pos.y, 0)), Quaternion.identity);
+        Destroy(hatShadow, hatshadowDestroyTime);
+    }
     void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(1f, 0f, 0f, 0.5f);

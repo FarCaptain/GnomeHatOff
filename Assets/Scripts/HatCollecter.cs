@@ -29,7 +29,12 @@ public class HatCollecter : MonoBehaviour
         {
             if (other.gameObject.transform.position.y > (headTop + 0.01f))
             {
-                print("Yeay! Hat Collected!" + (++count));
+                //print("Yeay! Hat Collected!" + (++count));
+
+                if (gnome.name == "Gnome")
+                    ScoreSystem.playerScore0 += 1;
+                else
+                    ScoreSystem.playerScore1 += 1;
 
                 Vector3 hatPos = hatTop.transform.position;
                 hatPos = new Vector3(hatPos.x, hatPos.y + gap, hatPos.z);

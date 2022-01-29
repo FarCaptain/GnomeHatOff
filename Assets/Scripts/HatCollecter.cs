@@ -5,6 +5,7 @@ using UnityEngine;
 public class HatCollecter : MonoBehaviour
 {
     public GameObject gnome;
+    public int hatCount;
 
     const float gap = 0.06f; // the height difference between hats
     GameObject hatTop;
@@ -50,6 +51,7 @@ public class HatCollecter : MonoBehaviour
             if (other.gameObject.transform.position.y > (headTop + 0.01f))
             {
                 //print("Yeay! Hat Collected!" + (++count));
+                hatCount += 1;
 
                 if (gnome.name == "Gnome")
                     ScoreSystem.hatCount0 += 1;

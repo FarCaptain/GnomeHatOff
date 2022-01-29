@@ -228,6 +228,86 @@ PrefabInstance:
       propertyPath: player1
       value: 
       objectReference: {fileID: 371624563}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: bonusPoints.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: hatThresholds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: bonusModifiers.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: bonusPoints.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: bonusPoints.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: bonusPoints.Array.data[2]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: pointThresholds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: hatThresholds.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: hatThresholds.Array.data[1]
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: hatThresholds.Array.data[2]
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: bonusModifiers.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: bonusModifiers.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: bonusModifiers.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: pointThresholds.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: pointThresholds.Array.data[1]
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: pointThresholds.Array.data[2]
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2848886440943931292, guid: b0a006b4d90729b4dae845579e0ffe10,
         type: 3}
       propertyPath: m_AnchorMax.x

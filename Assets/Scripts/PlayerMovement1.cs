@@ -1,4 +1,4 @@
-#define KEYBOARD
+//#define KEYBOARD
 //else use alt controller
 
 using System.Collections;
@@ -9,7 +9,8 @@ public class PlayerMovement1 : MonoBehaviour
 {
     public CharacterController controller;
     public float speed;
-    public bool turnAroundEnabled = true;
+    public float thresholdFB = 2f;
+    public float thresholdLR = 2f;
 
 #if KEYBOARD
 #else
@@ -26,7 +27,7 @@ public class PlayerMovement1 : MonoBehaviour
         speed = 12f;
         ifInit = true;
     #else
-        speed = 0.8f;
+        //speed = 5f;
         ifInit = false;
     #endif
     }
@@ -60,8 +61,8 @@ public class PlayerMovement1 : MonoBehaviour
             zval = ArduinoReceiver1.zaxis - initPos.y;
 
             Vector3 move = new Vector3(ArduinoReceiver1.xaxis - initPos.x, 0f, ArduinoReceiver1.zaxis - initPos.y);
-            move.x = (Mathf.Abs(move.x) > 3f) ? Mathf.Sign(move.x) * 12f : 0f;
-            move.z = (Mathf.Abs(move.z) > 3f) ? Mathf.Sign(move.z) * 12f : 0f;
+            move.x = (Mathf.Abs(move.x) > thresholdLR) ? Mathf.Sign(move.x) : 0f;
+            move.z = (Mathf.Abs(move.z) > thresholdFB) ? Mathf.Sign(move.z) : 0f;
 #endif
 
             if (move != Vector3.zero)
@@ -71,7 +72,7 @@ public class PlayerMovement1 : MonoBehaviour
 
             float inputSpeed = speed;
             if (move.x != 0f && move.z != 0f)
-                inputSpeed *= 0.70711f; // 1/sqrt(2)
+                inputSpeed *= 0.7071f; // 1/sqrt(2)
             controller.Move(move * inputSpeed * Time.deltaTime);
         }
         Vector3 pos = gameObject.transform.position;

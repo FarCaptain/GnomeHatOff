@@ -10,6 +10,8 @@ public class HatSpawning : MonoBehaviour
 
     public Vector3 center;
     public Vector3 size;
+    public float minGap = 0.3f;
+    public float maxGap = 2.0f;
 
     float timeInterval = 0f;
 
@@ -33,7 +35,7 @@ public class HatSpawning : MonoBehaviour
         timeInterval += Time.deltaTime;
         if (timeInterval > timeGap)
         {
-            timeGap = Random.Range(0.3f, 3.0f);
+            timeGap = Random.Range(minGap, maxGap);
             SpawnHat();
             timeInterval = 0f;
         }

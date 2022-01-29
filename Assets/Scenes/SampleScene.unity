@@ -296,7 +296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 628939f26e72db54588a48d2976a8fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 650289543}
+  scoreText0: {fileID: 650289543}
+  scoreText1: {fileID: 1750809130}
   player0: {fileID: 208240662}
   player1: {fileID: 1664529033}
 --- !u!1 &457873410
@@ -415,6 +416,8 @@ MonoBehaviour:
   hatshadowDestroyTime: 7
   center: {x: 0, y: 0, z: 0}
   size: {x: 10, y: 0.1, z: 10}
+  minGap: 0.3
+  maxGap: 2
 --- !u!1 &650289543
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class ScoreSystem : MonoBehaviour
 {
-    public GameObject scoreText;
+    public GameObject scoreText0;
+    public GameObject scoreText1;
     public GameObject player0;
     public GameObject player1;
 
@@ -35,12 +36,13 @@ public class ScoreSystem : MonoBehaviour
             {
                 playerScore0 += hatCount0;
                 hatCount0 = 0;
-                scoreText.GetComponent<Text>().text = "SCORE: " + playerScore0;
+                scoreText0.GetComponent<TMPro.TextMeshProUGUI>().text = "P1 Score: " + playerScore0;
             }
             else
             {
                 playerScore1 += hatCount1;
                 hatCount1 = 0;
+                scoreText1.GetComponent<TMPro.TextMeshProUGUI>().text = "P1 Score: " + playerScore1;
             }
 
 

@@ -46,10 +46,11 @@ public class PlayerMovement1 : MonoBehaviour
         {
 #if KEYBOARD
             Vector3 move = Vector3.zero;
+
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
             {
-                float x = Input.GetAxis("Horizontal");
-                float z = Input.GetAxis("Vertical");
+                float x = Input.GetAxis("Horizontal1");
+                float z = Input.GetAxis("Vertical1");
                 move = new Vector3(x, 0f, z);
             }
 

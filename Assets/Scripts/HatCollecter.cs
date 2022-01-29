@@ -6,11 +6,13 @@ public class HatCollecter : MonoBehaviour
 {
     public GameObject gnome;
 
-    int count = 0;
     const float gap = 0.06f; // the height difference between hats
     GameObject hatTop;
+    float initHatHeight;
     float headTop;
-    bool flag = true;
+
+    Vector3 initColliderSize;
+    Vector3 initColliderCenter;
 
     private void Start()
     {
@@ -20,6 +22,24 @@ public class HatCollecter : MonoBehaviour
                 hatTop = gnome.transform.GetChild(i).gameObject;
             else if (gnome.transform.GetChild(i).name == "HeadTop")
                 headTop = gnome.transform.GetChild(i).position.y;
+        }
+        initHatHeight = hatTop.transform.position.y;
+        initColliderSize = GetComponent<BoxCollider>().size;
+        initColliderCenter = GetComponent<BoxCollider>().center;
+    }
+
+    private void Update()
+    {
+        if (hatTop.transform.position.y != initHatHeight)
+        {
+            if (gnome.name == "Gnome" && ScoreSystem.hatCount0 == 0 || (gnome.name == "Gnome(1)" && ScoreSystem.hatCount1 == 0))
+            {
+                Vector3 hatPos = hatTop.transform.position;
+                hatTop.transform.position = new Vector3(hatPos.x, initHatHeight, hatPos.z);
+
+                GetComponent<BoxCollider>().size = initColliderSize;
+                GetComponent<BoxCollider>().center = initColliderCenter;
+            }
         }
     }
 
@@ -32,16 +52,27 @@ public class HatCollecter : MonoBehaviour
                 //print("Yeay! Hat Collected!" + (++count));
 
                 if (gnome.name == "Gnome")
-                    ScoreSystem.playerScore0 += 1;
+                    ScoreSystem.hatCount0 += 1;
                 else
-                    ScoreSystem.playerScore1 += 1;
+                    ScoreSystem.hatCount1 += 1;
 
                 Vector3 hatPos = hatTop.transform.position;
                 hatPos = new Vector3(hatPos.x, hatPos.y + gap, hatPos.z);
                 Destroy(other.gameObject.GetComponent<Rigidbody>());
+                //other.gameObject.GetComponentInChildren<MeshRenderer>().material
+
                 other.transform.parent = gnome.transform;
                 other.gameObject.transform.position = hatPos;
                 hatTop.transform.position = hatPos;
+
+                // expand collider
+                BoxCollider bc = GetComponent<BoxCollider>();
+                Vector3 size = bc.size;
+                Vector3 center = bc.center;
+
+                float param = 0.2f;
+                bc.size = new Vector3(size.x, size.y + gap * param, size.z);
+                bc.center = new Vector3(center.x, center.y + 0.5f * gap * param, center.z);
             }
         }
     }

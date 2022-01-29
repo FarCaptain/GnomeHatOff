@@ -222,7 +222,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player0
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 866065892}
     - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
         type: 3}
       propertyPath: player1
@@ -3130,8 +3130,6 @@ MonoBehaviour:
   speed: 3
   thresholdFB: 1
   thresholdLR: 1
-  xval: 0
-  zval: 0
 --- !u!143 &371624565 stripped
 CharacterController:
   m_CorrespondingSourceObject: {fileID: 7129006518892494857, guid: 2a97db5219d70294797bb53bc23e1195,
@@ -7545,8 +7543,6 @@ MonoBehaviour:
   speed: 3
   thresholdFB: 1
   thresholdLR: 1
-  xval: 0
-  zval: 0
 --- !u!143 &866065894 stripped
 CharacterController:
   m_CorrespondingSourceObject: {fileID: 7129006518892494857, guid: 2a97db5219d70294797bb53bc23e1195,

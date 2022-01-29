@@ -17,6 +17,8 @@ public class HatFade : MonoBehaviour
     bool isFadingDown;
     float headTop;
 
+    public bool hatFadeEnabled = true;
+
     void Start()
     {
         currentTransparency = defaultTransparency;
@@ -44,7 +46,7 @@ public class HatFade : MonoBehaviour
 
         //}
         
-        if(transform.position.y < headTop)
+        if(hatFadeEnabled && transform.position.y < headTop)
         {
             FadeT(0.0f);
             Destroy(gameObject, 3f);
@@ -100,5 +102,10 @@ public class HatFade : MonoBehaviour
             tempDist = currentTransparency - toFadeTo;
             isFadingDown = true;
         }
+    }
+
+    public void hatFadeDisable()
+    {
+        hatFadeEnabled = false;
     }
 }

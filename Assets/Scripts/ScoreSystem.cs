@@ -81,14 +81,14 @@ public class ScoreSystem : MonoBehaviour
         {
             if (player.name == "Gnome")
             {
-                int bonusPoints = hatCount0 * getBonusPoints(player.gameObject);
+                int bonusPoints = hatCount0 + getBonusPoints(player.gameObject);
                 playerScore0 += bonusPoints;
                 hatCount0 = 0;
                 scoreText0.GetComponent<TMPro.TextMeshProUGUI>().text = "P1 Score: " + playerScore0;
             }
             else
             {
-                int bonusPoints = hatCount1 * getBonusPoints(player.gameObject);
+                int bonusPoints = hatCount1 + getBonusPoints(player.gameObject);
                 playerScore1 += bonusPoints;
                 hatCount1 = 0;
                 scoreText1.GetComponent<TMPro.TextMeshProUGUI>().text = "P1 Score: " + playerScore1;

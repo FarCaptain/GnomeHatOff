@@ -11,7 +11,7 @@ public class Timer : MonoBehaviour
 {
     private Scene currentScene;
     private TextMeshProUGUI timerText;
-    private float timeRemaining = 5;      // measured in seconds
+    private float timeRemaining = 90;      // measured in seconds
     private bool isTimerRunning = false;
 
     public ScoreSystem scoreSystem;

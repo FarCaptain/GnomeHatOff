@@ -48,13 +48,14 @@ public class HatSpawning : MonoBehaviour
         Vector3 pos = transform.localPosition + center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2), Random.Range(-size.z / 2, size.z / 2));
         GameObject hat = Instantiate(hatPrefab, pos, Quaternion.identity);
         hat.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = hatColors[Random.Range(0, hatColors.Length - 1)];
-        generateShadow(pos);
+        generateShadow(pos, hat);
     }
 
-    public void generateShadow(Vector3 pos)
+    public void generateShadow(Vector3 pos, GameObject hat)
     {
         GameObject hatShadow = Instantiate(hatShadowPrefab, pos - (new Vector3(0, pos.y, 0)), Quaternion.identity);
-        Destroy(hatShadow, hatshadowDestroyTime);
+        hat.GetComponent<HatFade>().HatshadowPrefab = hatShadow;
+        //  Destroy(hatShadow, hatshadowDestroyTime);
     }
     void OnDrawGizmosSelected()
     {

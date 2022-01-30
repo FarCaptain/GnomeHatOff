@@ -9,6 +9,7 @@ public class HatFade : MonoBehaviour
     public float fadeDuration = 3f;
     //public float destroyHeight = 10f;
     GameObject player;
+    public GameObject HatshadowPrefab;
 
     float currentTransparency;
     float toFadeTo;
@@ -45,13 +46,14 @@ public class HatFade : MonoBehaviour
         //        Physics.IgnoreCollision(GetComponent<MeshCollider>(), players[i].GetComponent<BoxCollider>());
 
         //}
-        
-        if(hatFadeEnabled && transform.position.y < headTop)
+
+        if (hatFadeEnabled && transform.position.y < headTop)
         {
             FadeT(0.0f);
+            Destroy(HatshadowPrefab);
             Destroy(gameObject, 3f);
         }
-            
+
 
         if (isFadingUp)
         {
@@ -107,5 +109,10 @@ public class HatFade : MonoBehaviour
     public void hatFadeDisable()
     {
         hatFadeEnabled = false;
+    }
+
+    public void hatShadowDestroy()
+    {
+        Destroy(HatshadowPrefab);
     }
 }

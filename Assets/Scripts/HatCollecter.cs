@@ -77,6 +77,10 @@ public class HatCollecter : MonoBehaviour
                 float param = 0.2f;
                 bc.size = new Vector3(size.x, size.y + gap * param, size.z);
                 bc.center = new Vector3(center.x, center.y + 0.5f * gap * param, center.z);
+
+
+
+                other.gameObject.GetComponent<HatFade>().hatShadowDestroy();
             }
         }
     }

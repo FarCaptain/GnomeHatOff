@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 /// <summary>
@@ -8,14 +9,24 @@ using TMPro;
 /// </summary>
 public class Timer : MonoBehaviour
 {
+    private Scene currentScene;
     private TextMeshProUGUI timerText;
-    private float timeRemaining = 120;      // measured in seconds
+    private float timeRemaining = 5;      // measured in seconds
     private bool isTimerRunning = false;
+
+    public ScoreSystem scoreSystem;
 
     void Start()
     {
+        currentScene = SceneManager.GetActiveScene();
         timerText = gameObject.GetComponent<TextMeshProUGUI>();
         isTimerRunning = true;
+    }
+
+    public void restartGame()
+    {
+        Debug.Log("Reload Game");
+        SceneManager.LoadScene(currentScene.name);
     }
 
     /// <summary>
@@ -40,7 +51,7 @@ public class Timer : MonoBehaviour
             }
             else
             {
-                Debug.Log("Debuglog - Game End");
+                scoreSystem.displayWinner();
                 timeRemaining = 0;
                 isTimerRunning = false;
             }

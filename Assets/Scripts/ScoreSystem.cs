@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScoreSystem : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class ScoreSystem : MonoBehaviour
     public GameObject scoreText1;
     public GameObject player0;
     public GameObject player1;
+    public GameObject winPanel;
+    public TextMeshProUGUI winText;
+    public TextMeshProUGUI winnerScoreText;
+
     public List<int> hatThresholds;
 
     [Header("Size must match HatThresholds")]
@@ -30,6 +35,26 @@ public class ScoreSystem : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void displayWinner()
+    {
+        winPanel.SetActive(true);
+        if (playerScore0 > playerScore1)
+        {
+            winText.text = "Player 1 Wins!!!";
+            winnerScoreText.text = "Score: " + playerScore0;
+        }
+        else if (playerScore0 == playerScore1)
+        {
+            winText.text = "DRAW";
+            winnerScoreText.text = "";
+        }
+        else
+        {
+            winText.text = "Player 2 Wins!!!";
+            winnerScoreText.text = "Score: " + playerScore1;
+        }
     }
 
     private int getBonusPoints(GameObject player)

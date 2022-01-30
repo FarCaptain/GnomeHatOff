@@ -5,6 +5,7 @@ using UnityEngine;
 public class HatCollecter : MonoBehaviour
 {
     public GameObject gnome;
+    public AudioClip collectSound;
     public int hatCount;
 
     const float gap = 0.06f; // the height difference between hats
@@ -52,6 +53,7 @@ public class HatCollecter : MonoBehaviour
             {
                 //print("Yeay! Hat Collected!" + (++count));
                 hatCount += 1;
+                gameObject.GetComponent<AudioSource>().PlayOneShot(collectSound);
 
                 if (gnome.name == "Gnome")
                     ScoreSystem.hatCount0 += 1;

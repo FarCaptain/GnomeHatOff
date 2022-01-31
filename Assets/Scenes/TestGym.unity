@@ -3090,6 +3090,7 @@ MonoBehaviour:
   speed: 3
   thresholdFB: 1
   thresholdLR: 1
+  runDust: {fileID: 1856293800}
 --- !u!143 &371624565 stripped
 CharacterController:
   m_CorrespondingSourceObject: {fileID: 7129006518892494857, guid: 2a97db5219d70294797bb53bc23e1195,
@@ -7518,6 +7519,7 @@ MonoBehaviour:
   speed: 3
   thresholdFB: 1
   thresholdLR: 1
+  runDust: {fileID: 1239716717}
   xval: 0
   zval: 0
 --- !u!143 &866065894 stripped
@@ -11085,6 +11087,12 @@ Transform:
   m_Father: {fileID: 1853988294}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &1239716717 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6793471845936780206, guid: 2a97db5219d70294797bb53bc23e1195,
+    type: 3}
+  m_PrefabInstance: {fileID: 1624334302}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1242857143
 GameObject:
   m_ObjectHideFlags: 0
@@ -17264,6 +17272,12 @@ Transform:
   m_Father: {fileID: 918028723}
   m_RootOrder: 45
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &1856293800 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6793471845936780206, guid: 2a97db5219d70294797bb53bc23e1195,
+    type: 3}
+  m_PrefabInstance: {fileID: 848486121}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1865825197
 GameObject:
   m_ObjectHideFlags: 0
@@ -20631,6 +20645,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 734359950586549179, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: runDust
+      value: 
+      objectReference: {fileID: 734359949230167233}
     - target: {fileID: 3593979466627239089, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
       propertyPath: m_Name
@@ -20693,6 +20712,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdc8e89d69cc6564c87384009a43f4b7, type: 3}
+--- !u!198 &734359949230167233 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 9213401639292347797, guid: cdc8e89d69cc6564c87384009a43f4b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 734359949230167232}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5154856035333242850
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20760,5 +20785,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gnome Red
       objectReference: {fileID: 0}
+    - target: {fileID: 5154856036340132846, guid: 4569103a97551e245b460df25ea57d2a,
+        type: 3}
+      propertyPath: runDust
+      value: 
+      objectReference: {fileID: 5154856035333242851}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4569103a97551e245b460df25ea57d2a, type: 3}
+--- !u!198 &5154856035333242851 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 9215827718586595239, guid: 4569103a97551e245b460df25ea57d2a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5154856035333242850}
+  m_PrefabAsset: {fileID: 0}

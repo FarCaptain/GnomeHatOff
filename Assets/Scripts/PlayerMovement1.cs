@@ -12,6 +12,8 @@ public class PlayerMovement1 : MonoBehaviour
     public float thresholdFB = 2f;
     public float thresholdLR = 2f;
 
+    public ParticleSystem runDust;
+
 #if KEYBOARD
 #else
     public float xval = ArduinoReceiver1.xaxis;
@@ -68,6 +70,7 @@ public class PlayerMovement1 : MonoBehaviour
             if (move != Vector3.zero)
             {
                 gameObject.transform.forward = move;
+                drawRunDust();
             }
 
             float inputSpeed = speed;
@@ -77,5 +80,10 @@ public class PlayerMovement1 : MonoBehaviour
         }
         Vector3 pos = gameObject.transform.position;
         gameObject.transform.position = new Vector3(pos.x, 0.1f, pos.z);
+    }
+
+    private void drawRunDust()
+    {
+        runDust.Play();
     }
 }

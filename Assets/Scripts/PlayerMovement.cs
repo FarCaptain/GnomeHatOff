@@ -1,4 +1,4 @@
-//#define KEYBOARD
+#define KEYBOARD
 //else use alt controller
 
 using System.Collections;
@@ -7,10 +7,13 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Movement")]
     public CharacterController controller;
     public float speed;
     public float thresholdFB = 2f;
     public float thresholdLR = 2f;
+
+    public ParticleSystem runDust;
 
 #if KEYBOARD
 #else
@@ -68,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
             if (move != Vector3.zero)
             {
                 gameObject.transform.forward = move;
+                drawRunDust( );
             }
 
             float inputSpeed = speed;
@@ -77,5 +81,10 @@ public class PlayerMovement : MonoBehaviour
         }
         Vector3 pos = gameObject.transform.position;
         gameObject.transform.position = new Vector3(pos.x, 0.1f, pos.z);
+    }
+
+    private void drawRunDust()
+    {
+        runDust.Play();
     }
 }

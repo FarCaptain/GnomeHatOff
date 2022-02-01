@@ -53,13 +53,15 @@ public class HatFade : MonoBehaviour
         {
             FadeT(0.0f);
             Destroy(HatshadowPrefab);
-            Destroy(gameObject, 3f);
+            Destroy(gameObject, 2f);
 
             Vector3 pos = transform.position;
             pos.y = 0.15f;
 
             ParticleSystem dust = Instantiate(circleDust, pos, Quaternion.identity);
             dust.Play();
+
+            Destroy(dust, 1f);
 
             hatFadeEnabled = false;
         }

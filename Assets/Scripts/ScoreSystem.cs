@@ -25,6 +25,9 @@ public class ScoreSystem : MonoBehaviour
     static public int playerScore0 = 0;
     static public int playerScore1 = 0;
 
+    public ParticleSystem fire0;
+    public ParticleSystem fire1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -87,6 +90,7 @@ public class ScoreSystem : MonoBehaviour
                     playerScore0 += bonusPoints;
                     hatCount0 = 0;
                     scoreText0.GetComponent<TMPro.TextMeshProUGUI>().text = playerScore0.ToString();
+                    fire0.Play();
                 }
                 else
                 {
@@ -94,6 +98,7 @@ public class ScoreSystem : MonoBehaviour
                     playerScore1 += bonusPoints;
                     hatCount1 = 0;
                     scoreText1.GetComponent<TMPro.TextMeshProUGUI>().text = playerScore1.ToString();
+                    fire1.Play();
                 }
 
                 player.GetComponentInChildren<HatCollecter>().hatCount = 0;

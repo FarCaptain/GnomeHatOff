@@ -66,7 +66,6 @@ public class HatCollecter : MonoBehaviour
                 hatPos = new Vector3(hatPos.x, hatPos.y + gap, hatPos.z);
                 Destroy(other.gameObject.GetComponent<Rigidbody>());
                 //other.gameObject.GetComponentInChildren<MeshRenderer>().material
-                drawSparks();
 
                 other.transform.parent = gnome.transform;
                 other.gameObject.transform.position = hatPos;

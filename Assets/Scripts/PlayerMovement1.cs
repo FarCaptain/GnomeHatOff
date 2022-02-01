@@ -7,11 +7,13 @@ using UnityEngine;
 
 public class PlayerMovement1 : MonoBehaviour
 {
+    [Header("Movement")]
     public CharacterController controller;
     public float speed;
     public float thresholdFB = 2f;
     public float thresholdLR = 2f;
 
+    [Header("Effects")]
     public ParticleSystem runDust;
 
 #if KEYBOARD

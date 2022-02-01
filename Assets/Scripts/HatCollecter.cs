@@ -8,6 +8,8 @@ public class HatCollecter : MonoBehaviour
     public AudioClip collectSound;
     public int hatCount;
 
+    public ParticleSystem sparks;
+
     const float gap = 0.06f; // the height difference between hats
     GameObject hatTop;
     float initHatHeight;
@@ -64,6 +66,7 @@ public class HatCollecter : MonoBehaviour
                 hatPos = new Vector3(hatPos.x, hatPos.y + gap, hatPos.z);
                 Destroy(other.gameObject.GetComponent<Rigidbody>());
                 //other.gameObject.GetComponentInChildren<MeshRenderer>().material
+                drawSparks();
 
                 other.transform.parent = gnome.transform;
                 other.gameObject.transform.position = hatPos;
@@ -83,5 +86,9 @@ public class HatCollecter : MonoBehaviour
                 other.gameObject.GetComponent<HatFade>().hatShadowDestroy();
             }
         }
+    }
+    private void drawSparks()
+    {
+        sparks.Play();
     }
 }

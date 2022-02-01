@@ -11,6 +11,8 @@ public class HatFade : MonoBehaviour
     GameObject player;
     public GameObject HatshadowPrefab;
 
+    public ParticleSystem circleDust;
+
     float currentTransparency;
     float toFadeTo;
     float tempDist;
@@ -52,6 +54,14 @@ public class HatFade : MonoBehaviour
             FadeT(0.0f);
             Destroy(HatshadowPrefab);
             Destroy(gameObject, 3f);
+
+            Vector3 pos = transform.position;
+            pos.y = 0.15f;
+
+            ParticleSystem dust = Instantiate(circleDust, pos, Quaternion.identity);
+            dust.Play();
+
+            hatFadeEnabled = false;
         }
 
 
@@ -114,5 +124,10 @@ public class HatFade : MonoBehaviour
     public void hatShadowDestroy()
     {
         Destroy(HatshadowPrefab);
+    }
+
+    public void drawCircleDust()
+    {
+        circleDust.Play();
     }
 }

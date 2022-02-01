@@ -59,7 +59,7 @@ public class ScoreSystem : MonoBehaviour
 
     private int getBonusPoints(GameObject player)
     {
-        int points = 1;
+        int points = 0;
         int currentHats = player.GetComponentInChildren<HatCollecter>().hatCount;
 
         for (int i = 0; i < hatThresholds.Count; i++)
@@ -79,32 +79,35 @@ public class ScoreSystem : MonoBehaviour
     {
         if(player.tag == "Player")
         {
-            if (player.name == "Gnome")
+            if (player.GetComponentInChildren<HatCollecter>().hatCount > 0)
             {
-                int bonusPoints = hatCount0 + getBonusPoints(player.gameObject);
-                playerScore0 += bonusPoints;
-                hatCount0 = 0;
-                scoreText0.GetComponent<TMPro.TextMeshProUGUI>().text = "P1 Score: " + playerScore0;
-            }
-            else
-            {
-                int bonusPoints = hatCount1 + getBonusPoints(player.gameObject);
-                playerScore1 += bonusPoints;
-                hatCount1 = 0;
-                scoreText1.GetComponent<TMPro.TextMeshProUGUI>().text = "P1 Score: " + playerScore1;
-            }
-
-            player.GetComponentInChildren<HatCollecter>().hatCount = 0;
-
-            for (int i = 0; i < player.transform.childCount; i++)
-            {
-                if (player.transform.GetChild(i).name == "HatPrefab(Clone)")
+                if (player.name == "Gnome")
                 {
-                    print("YYYYY");
-                    print("ddd"+playerScore0);
-                    Destroy(player.transform.GetChild(i).gameObject);
+                    int bonusPoints = hatCount0 + getBonusPoints(player.gameObject);
+                    playerScore0 += bonusPoints;
+                    hatCount0 = 0;
+                    scoreText0.GetComponent<TMPro.TextMeshProUGUI>().text = playerScore0.ToString();
                 }
-                    
+                else
+                {
+                    int bonusPoints = hatCount1 + getBonusPoints(player.gameObject);
+                    playerScore1 += bonusPoints;
+                    hatCount1 = 0;
+                    scoreText1.GetComponent<TMPro.TextMeshProUGUI>().text = playerScore1.ToString();
+                }
+
+                player.GetComponentInChildren<HatCollecter>().hatCount = 0;
+
+                for (int i = 0; i < player.transform.childCount; i++)
+                {
+                    if (player.transform.GetChild(i).name == "HatPrefab(Clone)")
+                    {
+                        print("YYYYY");
+                        print("ddd" + playerScore0);
+                        Destroy(player.transform.GetChild(i).gameObject);
+                    }
+
+                }
             }
         }
     }

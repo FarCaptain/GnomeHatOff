@@ -12,10 +12,15 @@ public class HatSpawning : MonoBehaviour
     public Vector3 size;
     public float minGap = 0.3f;
     public float maxGap = 2.0f;
+    public float hatRushTime = 30f;
+    public float hatRushMinGap = 0.2f;
 
     float timeInterval = 0f;
+    bool isHatRush = false;
 
     float timeGap;
+    float deltaDashChange;
+    public float accumulatedSpeed;
     Color[] hatColors = new Color[4];
 
     // Start is called before the first frame update
@@ -27,15 +32,24 @@ public class HatSpawning : MonoBehaviour
         ColorUtility.TryParseHtmlString("#7637A7", out hatColors[1]);
         ColorUtility.TryParseHtmlString("#A7A037", out hatColors[2]);
         ColorUtility.TryParseHtmlString("#FFFFFF", out hatColors[3]); //original
+
+        float dashStartSpeed = minGap;
+        hatRushMinGap = Mathf.Min(dashStartSpeed, hatRushMinGap);
+
+        deltaDashChange = (dashStartSpeed - hatRushMinGap) / hatRushTime;
+        accumulatedSpeed = dashStartSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!isHatRush && Timer.timeRemaining < hatRushTime)
+            isHatRush = true;
+
         timeInterval += Time.deltaTime;
         if (timeInterval > timeGap)
         {
-            timeGap = Random.Range(minGap, maxGap);
+            timeGap = isHatRush? accumulatedSpeed = Mathf.Max(accumulatedSpeed - (deltaDashChange * timeGap), hatRushMinGap) : Random.Range(minGap, maxGap);
             SpawnHat();
             timeInterval = 0f;
         }

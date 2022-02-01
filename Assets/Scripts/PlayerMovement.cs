@@ -85,6 +85,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void drawRunDust()
     {
-        runDust.Play();
+        if (!runDust.isPlaying)
+        {
+            runDust.Play();
+        }
     }
 }

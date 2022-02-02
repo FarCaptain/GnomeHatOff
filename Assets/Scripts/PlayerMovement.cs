@@ -1,4 +1,4 @@
-#define KEYBOARD
+//#define KEYBOARD
 //else use alt controller
 
 using System.Collections;
@@ -10,10 +10,18 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     public CharacterController controller;
     public float speed;
-    public float thresholdFB = 2f;
-    public float thresholdLR = 2f;
+    public float MinthresholdFB = 2f;
+    public float MinthresholdLR = 2f;
+
+    public float MaxthresholdFB = 4f;
+    public float MaxthresholdLR = 4f;
+
+    // to filter the value we get from the gyroscope
+    public int delayedFrames;
 
     public ParticleSystem runDust;
+
+    public Vector3 shownSpeed;
 
 #if KEYBOARD
 #else
@@ -63,9 +71,13 @@ public class PlayerMovement : MonoBehaviour
             xval = ArduinoReceiver.xaxis - initPos.x;
             zval = ArduinoReceiver.zaxis - initPos.y;
 
-            Vector3 move = new Vector3(ArduinoReceiver.xaxis - initPos.x, 0f, ArduinoReceiver.zaxis - initPos.y);
-            move.x = (Mathf.Abs(move.x) > thresholdLR) ? Mathf.Sign(move.x) : 0f;
-            move.z = (Mathf.Abs(move.z) > thresholdFB) ? Mathf.Sign(move.z) : 0f;
+            Vector3 move = new Vector3(xval, 0f, zval);
+
+            move.x = (Mathf.Abs(move.x) > MinthresholdLR) ? move.x : 0f;
+            move.z = (Mathf.Abs(move.z) > MinthresholdFB) ? move.z : 0f;
+
+            move.x = Mathf.Min(Mathf.Abs(move.x), MaxthresholdLR) * Mathf.Sign(move.x);
+            move.z = Mathf.Min(Mathf.Abs(move.z), MaxthresholdFB) * Mathf.Sign(move.z);
 #endif
 
             if (move != Vector3.zero)
@@ -74,10 +86,11 @@ public class PlayerMovement : MonoBehaviour
                 drawRunDust( );
             }
 
-            float inputSpeed = speed;
-            if (move.x != 0f && move.z != 0f)
-                inputSpeed *= 0.7071f; // 1/sqrt(2)
-            controller.Move(move * inputSpeed * Time.deltaTime);
+            //float inputSpeed = speed;
+            //if (move.x != 0f && move.z != 0f)
+            //    inputSpeed *= 0.7071f; // 1/sqrt(2)
+            controller.Move(move * speed * Time.deltaTime);
+            shownSpeed = controller.velocity;
         }
         Vector3 pos = gameObject.transform.position;
         gameObject.transform.position = new Vector3(pos.x, 0.1f, pos.z);

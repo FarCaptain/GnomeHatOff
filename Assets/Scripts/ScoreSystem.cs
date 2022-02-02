@@ -19,19 +19,25 @@ public class ScoreSystem : MonoBehaviour
     [Header("Size must match HatThresholds")]
     public List<int> bonusModifiers;
 
+    public List<float> fireSizeModifiers;
+
     static public int hatCount0 = 0;
     static public int hatCount1 = 0;
     
     static public int playerScore0 = 0;
     static public int playerScore1 = 0;
 
-    public ParticleSystem fire0;
-    public ParticleSystem fire1;
+    public ParticleSystem[] fires = new ParticleSystem[2];
+
+
+    private Vector3[] initFireScale = new Vector3[8];
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        for(int id = 0; id < 2; id ++)
+            for (int i = 0; i < fires[id].transform.childCount; i++)
+                initFireScale[id*4 + i] = fires[id].transform.GetChild(i).transform.localScale;
     }
 
     // Update is called once per frame
@@ -78,6 +84,24 @@ public class ScoreSystem : MonoBehaviour
         return points;
     }
 
+    private float getFireSize(GameObject player)
+    {
+        float size = 1;
+        int currentHats = player.GetComponentInChildren<HatCollecter>().hatCount;
+
+        for (int i = 0; i < hatThresholds.Count; i++)
+        {
+            if (currentHats >= hatThresholds[0])
+            {
+                if (currentHats >= hatThresholds[i])
+                    size = fireSizeModifiers[i];
+            }
+            else
+                break;
+        }
+        return size;
+    }
+
     public void OnTriggerEnter(Collider player)
     {
         if(player.tag == "Player")
@@ -90,7 +114,10 @@ public class ScoreSystem : MonoBehaviour
                     playerScore0 += bonusPoints;
                     hatCount0 = 0;
                     scoreText0.GetComponent<TMPro.TextMeshProUGUI>().text = playerScore0.ToString();
-                    fire0.Play();
+
+                    revertChangesOnFire(0);
+                    magnifyFire(0, getFireSize(player.gameObject));
+                    fires[0].Play();
                 }
                 else
                 {
@@ -98,7 +125,11 @@ public class ScoreSystem : MonoBehaviour
                     playerScore1 += bonusPoints;
                     hatCount1 = 0;
                     scoreText1.GetComponent<TMPro.TextMeshProUGUI>().text = playerScore1.ToString();
-                    fire1.Play();
+
+                    revertChangesOnFire(1);
+                    magnifyFire(1, getFireSize(player.gameObject));
+                    fires[1].Play();
+                    // revert the change in stop call back
                 }
 
                 player.GetComponentInChildren<HatCollecter>().hatCount = 0;
@@ -115,5 +146,17 @@ public class ScoreSystem : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void magnifyFire(int fireId, float bonus)
+    {
+        for(int i = 0; i < fires[fireId].transform.childCount; i ++)
+            fires[fireId].transform.GetChild(i).transform.localScale *= bonus;
+    }
+
+    private void revertChangesOnFire(int fireId)
+    {
+        for (int i = 0; i < fires[fireId].transform.childCount; i++)
+            fires[fireId].transform.GetChild(i).transform.localScale = initFireScale[fireId * 4 + i];
     }
 }

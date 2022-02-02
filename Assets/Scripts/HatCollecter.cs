@@ -10,7 +10,7 @@ public class HatCollecter : MonoBehaviour
 
     public ParticleSystem sparks;
 
-    const float gap = 0.06f; // the height difference between hats
+    public float gap = 0.1f; // the height difference between hats
     GameObject hatTop;
     float initHatHeight;
     float headTop;

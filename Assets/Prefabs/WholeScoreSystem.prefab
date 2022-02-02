@@ -533,7 +533,9 @@ MonoBehaviour:
   winText: {fileID: 1532173578974174889}
   winnerScoreText: {fileID: 4641000535402004080}
   hatThresholds: 030000000600000009000000
-  bonusModifiers: 020000000300000004000000
+  bonusModifiers: 010000000300000005000000
+  fire0: {fileID: 0}
+  fire1: {fileID: 0}
 --- !u!135 &266496834
 SphereCollider:
   m_ObjectHideFlags: 0

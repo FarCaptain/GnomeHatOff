@@ -1,4 +1,4 @@
-#define KEYBOARD
+//#define KEYBOARD
 //else use alt controller
 
 using System.Collections;
@@ -9,12 +9,20 @@ public class PlayerMovement1 : MonoBehaviour
 {
     [Header("Movement")]
     public CharacterController controller;
-    public float forcePush;
-    public float speed;
-    public float thresholdFB = 2f;
-    public float thresholdLR = 2f;
+    public float MinthresholdFB = 2f;
+    public float MinthresholdLR = 2f;
 
-    [Header("Effects")]
+    public float MaxthresholdFB = 4f;
+    public float MaxthresholdLR = 4f;
+
+    public float maxSpeed;
+    public float minSpeed;
+
+    // to filter the value we get from the gyroscope
+    public int delayedFrames;
+    private int remainingFrames;
+    private float prevLRSign;
+
     public ParticleSystem runDust;
 
     private Rigidbody rigidBody;
@@ -35,48 +43,67 @@ public class PlayerMovement1 : MonoBehaviour
     #if KEYBOARD
         //speed = 12f;
         ifInit = true;
-    #else
+#else
         //speed = 5f;
         ifInit = false;
-    #endif
+
+        remainingFrames = delayedFrames;
+#endif
     }
 
     void FixedUpdate()
     {
-        #if KEYBOARD
-        #else
-                if(Input.GetKey(KeyCode.Q))
-                {
-                    initPos = new Vector2(ArduinoReceiver1.xaxis, ArduinoReceiver1.zaxis);
-                    ifInit = true;
-                }
-        #endif
+#if KEYBOARD
+#else
+        if (Input.GetKey(KeyCode.Q))
+        {
+            initPos = new Vector2(ArduinoReceiver1.xaxis, ArduinoReceiver1.zaxis);
+            ifInit = true;
+            prevLRSign = 0;
+        }
+#endif
 
         if (ifInit)
         {
 #if KEYBOARD
             Vector3 move = Vector3.zero;
 
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
             {
-                float x = Input.GetAxis("Horizontal1");
-                float z = Input.GetAxis("Vertical1");
+                float x = Input.GetAxis("Horizontal");
+                float z = Input.GetAxis("Vertical");
                 move = new Vector3(x, 0f, z);
             }
-
 #else
 
             xval = ArduinoReceiver1.xaxis - initPos.x;
             zval = ArduinoReceiver1.zaxis - initPos.y;
 
-            Vector3 move = new Vector3(ArduinoReceiver1.xaxis - initPos.x, 0f, ArduinoReceiver1.zaxis - initPos.y);
-            move.x = (Mathf.Abs(move.x) > thresholdLR) ? Mathf.Sign(move.x) : 0f;
-            move.z = (Mathf.Abs(move.z) > thresholdFB) ? Mathf.Sign(move.z) : 0f;
+            Vector3 move = new Vector3(xval, 0f, zval);
+
+            float speed_x, speed_z;
+            if (Mathf.Abs(move.x) <= MinthresholdLR)
+                speed_x = 0f;
+            else if (Mathf.Abs(move.x) >= MaxthresholdLR)
+                speed_x = maxSpeed;
+            else
+                speed_x = map(Mathf.Abs(move.x), MinthresholdLR, MaxthresholdLR, minSpeed, maxSpeed);
+
+            if (Mathf.Abs(move.z) <= MinthresholdFB)
+                speed_z = 0f;
+            else if (Mathf.Abs(move.z) >= MaxthresholdFB)
+                speed_z = maxSpeed;
+            else
+                speed_z = map(Mathf.Abs(move.z), MinthresholdFB, MaxthresholdFB, minSpeed, maxSpeed);
+
+            speed_x *= Mathf.Sign(move.x);
+            speed_z *= Mathf.Sign(move.z);
 #endif
 
-            if (move != Vector3.zero)
+            Vector3 speed = new Vector3(speed_x, 0f, speed_z);
+            if (speed != Vector3.zero)
             {
-                gameObject.transform.forward = move;
+                gameObject.transform.forward = speed;
                 drawRunDust();
             }
 
@@ -100,5 +127,11 @@ public class PlayerMovement1 : MonoBehaviour
         {
             runDust.Play();
         }
+    }
+
+    //map changes the range of a1,a2 to b1,b1
+    private float map(float s, float a1, float a2, float b1, float b2)
+    {
+        return (s - a1) * (b2 - b1) / (a2 - a1) + b1;
     }
 }

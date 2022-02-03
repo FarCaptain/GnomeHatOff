@@ -9,12 +9,19 @@ public class PlayerMovement1 : MonoBehaviour
 {
     [Header("Movement")]
     public CharacterController controller;
-    public float speed;
     public float MinthresholdFB = 2f;
     public float MinthresholdLR = 2f;
 
     public float MaxthresholdFB = 4f;
     public float MaxthresholdLR = 4f;
+
+    public float maxSpeed;
+    public float minSpeed;
+
+    // to filter the value we get from the gyroscope
+    public int delayedFrames;
+    private int remainingFrames;
+    private float prevLRSign;
 
     public ParticleSystem runDust;
 
@@ -37,6 +44,8 @@ public class PlayerMovement1 : MonoBehaviour
 #else
         //speed = 5f;
         ifInit = false;
+
+        remainingFrames = delayedFrames;
 #endif
     }
 
@@ -48,6 +57,7 @@ public class PlayerMovement1 : MonoBehaviour
         {
             initPos = new Vector2(ArduinoReceiver1.xaxis, ArduinoReceiver1.zaxis);
             ifInit = true;
+            prevLRSign = 0;
         }
 #endif
 
@@ -62,7 +72,6 @@ public class PlayerMovement1 : MonoBehaviour
                 float z = Input.GetAxis("Vertical");
                 move = new Vector3(x, 0f, z);
             }
-
 #else
 
             xval = ArduinoReceiver1.xaxis - initPos.x;
@@ -70,24 +79,34 @@ public class PlayerMovement1 : MonoBehaviour
 
             Vector3 move = new Vector3(xval, 0f, zval);
 
-            move.x = (Mathf.Abs(move.x) > MinthresholdLR) ? move.x : 0f;
-            move.z = (Mathf.Abs(move.z) > MinthresholdFB) ? move.z : 0f;
+            float speed_x, speed_z;
+            if (Mathf.Abs(move.x) <= MinthresholdLR)
+                speed_x = 0f;
+            else if (Mathf.Abs(move.x) >= MaxthresholdLR)
+                speed_x = maxSpeed;
+            else
+                speed_x = map(Mathf.Abs(move.x), MinthresholdLR, MaxthresholdLR, minSpeed, maxSpeed);
 
-            move.x = Mathf.Min(Mathf.Abs(move.x), MaxthresholdLR) * Mathf.Sign(move.x);
-            move.z = Mathf.Min(Mathf.Abs(move.z), MaxthresholdFB) * Mathf.Sign(move.z);
+            if (Mathf.Abs(move.z) <= MinthresholdFB)
+                speed_z = 0f;
+            else if (Mathf.Abs(move.z) >= MaxthresholdFB)
+                speed_z = maxSpeed;
+            else
+                speed_z = map(Mathf.Abs(move.z), MinthresholdFB, MaxthresholdFB, minSpeed, maxSpeed);
+
+            speed_x *= Mathf.Sign(move.x);
+            speed_z *= Mathf.Sign(move.z);
 #endif
 
-            if (move != Vector3.zero)
+            Vector3 speed = new Vector3(speed_x, 0f, speed_z);
+            if (speed != Vector3.zero)
             {
-                gameObject.transform.forward = move;
+                gameObject.transform.forward = speed;
                 drawRunDust();
             }
 
-            //float inputSpeed = speed;
-            //if (move.x != 0f && move.z != 0f)
-            //    inputSpeed *= 0.7071f; // 1/sqrt(2)
-            controller.Move(move * speed * Time.deltaTime);
-            shownSpeed = controller.velocity;
+            controller.Move(speed * Time.deltaTime);
+            shownSpeed = speed;
         }
         Vector3 pos = gameObject.transform.position;
         gameObject.transform.position = new Vector3(pos.x, 0.1f, pos.z);
@@ -99,5 +118,11 @@ public class PlayerMovement1 : MonoBehaviour
         {
             runDust.Play();
         }
+    }
+
+    //map changes the range of a1,a2 to b1,b1
+    private float map(float s, float a1, float a2, float b1, float b2)
+    {
+        return (s - a1) * (b2 - b1) / (a2 - a1) + b1;
     }
 }

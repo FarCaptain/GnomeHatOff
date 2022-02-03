@@ -1,4 +1,4 @@
-#define KEYBOARD
+//#define KEYBOARD
 //else use alt controller
 
 using System.Collections;
@@ -9,11 +9,14 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     public CharacterController controller;
+    public float forcePush;
     public float speed;
     public float thresholdFB = 2f;
     public float thresholdLR = 2f;
 
     public ParticleSystem runDust;
+
+    private Rigidbody rigidBody;
 
 #if KEYBOARD
 #else
@@ -26,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        rigidBody = GetComponent<Rigidbody>();
+
 #if KEYBOARD
         speed = 12f;
         ifInit = true;
@@ -35,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 #endif
     }
 
-    void Update()
+    void FixedUpdate()
     {
 #if KEYBOARD
 #else
@@ -77,12 +82,25 @@ public class PlayerMovement : MonoBehaviour
             float inputSpeed = speed;
             if (move.x != 0f && move.z != 0f)
                 inputSpeed *= 0.7071f; // 1/sqrt(2)
-            controller.Move(move * inputSpeed * Time.deltaTime);
+            Move(move * inputSpeed * Time.deltaTime);
         }
         Vector3 pos = gameObject.transform.position;
         gameObject.transform.position = new Vector3(pos.x, 0.1f, pos.z);
     }
 
+    private void Move(Vector3 motion)
+    {
+        rigidBody.velocity = motion;
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * forcePush * Time.deltaTime);
+        }
+    }
+    
     private void drawRunDust()
     {
         if (!runDust.isPlaying)

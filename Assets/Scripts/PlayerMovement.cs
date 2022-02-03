@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     public int delayedFrames;
     private int remainingFrames;
     private float prevLRSign;
+    private Rigidbody rigidBody;
 
     public ParticleSystem runDust;
 
@@ -79,6 +80,21 @@ public class PlayerMovement : MonoBehaviour
             xval = ArduinoReceiver.xaxis - initPos.x;
             zval = ArduinoReceiver.zaxis - initPos.y;
 
+            //if (transform.forward.x > 0)
+            //{
+            //    if (transform.forward.x < 0)
+            //    {
+                    
+            //    }
+            //}
+            //else if (transform.forward.x < 0)
+            //{
+            //    if (transform.forward.x > 0)
+            //    {
+            //        xval *= -1;
+            //    }
+            //}
+
             Vector3 move = new Vector3(xval, 0f, zval);
 
             float speed_x, speed_z;
@@ -107,10 +123,7 @@ public class PlayerMovement : MonoBehaviour
                 drawRunDust( );
             }
 
-            float inputSpeed = speed;
-            if (move.x != 0f && move.z != 0f)
-                inputSpeed *= 0.7071f; // 1/sqrt(2)
-            Move(move * inputSpeed * Time.deltaTime);
+            Move(speed * Time.deltaTime);
         }
         Vector3 pos = gameObject.transform.position;
         gameObject.transform.position = new Vector3(pos.x, 0.1f, pos.z);

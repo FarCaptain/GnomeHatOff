@@ -3255,11 +3255,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 371624565}
-  forcePush: 0
-  speed: 3
-  thresholdFB: 1
-  thresholdLR: 1
+  MinthresholdFB: 2
+  MinthresholdLR: 2
+  MaxthresholdFB: 4
+  MaxthresholdLR: 4
+  maxSpeed: 0
+  minSpeed: 0
+  delayedFrames: 0
   runDust: {fileID: 1856293800}
+  xval: 0
+  zval: 0
 --- !u!143 &371624565 stripped
 CharacterController:
   m_CorrespondingSourceObject: {fileID: 7129006518892494857, guid: 2a97db5219d70294797bb53bc23e1195,
@@ -5818,7 +5823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf11ef1628b3a9c4a92e18d4d7fc17bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM9
+  port: COM8
   eshtablished: 0
   dataString: 
 --- !u!4 &614847106
@@ -7919,11 +7924,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 866065894}
-  forcePush: 0
-  speed: 3
-  thresholdFB: 1
-  thresholdLR: 1
+  MinthresholdFB: 2
+  MinthresholdLR: 2
+  MaxthresholdFB: 4
+  MaxthresholdLR: 4
+  maxSpeed: 0
+  minSpeed: 0
+  delayedFrames: 0
   runDust: {fileID: 1239716717}
+  shownSpeed: {x: 0, y: 0, z: 0}
   xval: 0
   zval: 0
 --- !u!143 &866065894 stripped
@@ -8061,7 +8070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0f9cb55834d5e64ca8f42ec746d6200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM8
+  port: COM9
   eshtablished: 0
   dataString: 
 --- !u!4 &892952944
@@ -21546,6 +21555,11 @@ PrefabInstance:
       objectReference: {fileID: 734359949230167233}
     - target: {fileID: 734359950586549179, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
+      propertyPath: maxSpeed
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 734359950586549179, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
       propertyPath: forcePush
       value: 500
       objectReference: {fileID: 0}
@@ -21558,6 +21572,26 @@ PrefabInstance:
         type: 3}
       propertyPath: thresholdLR
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 734359950586549179, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: MaxthresholdFB
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 734359950586549179, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: MaxthresholdLR
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 734359950586549179, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: MinthresholdFB
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 734359950586549179, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: MinthresholdLR
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1351224391847534519, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
@@ -21794,6 +21828,11 @@ PrefabInstance:
       propertyPath: runDust
       value: 
       objectReference: {fileID: 5154856035333242851}
+    - target: {fileID: 5154856036340132846, guid: 4569103a97551e245b460df25ea57d2a,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 250
+      objectReference: {fileID: 0}
     - target: {fileID: 5154856036340132846, guid: 4569103a97551e245b460df25ea57d2a,
         type: 3}
       propertyPath: forcePush

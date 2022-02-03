@@ -82,14 +82,14 @@ public class PlayerMovement : MonoBehaviour
 
             //if (transform.forward.x > 0)
             //{
-            //    if (transform.forward.x < 0)
+            //    if (xval < 0)
             //    {
-                    
+            //        xval = Mathf.Abs(xval);
             //    }
             //}
             //else if (transform.forward.x < 0)
             //{
-            //    if (transform.forward.x > 0)
+            //    if (xval > 0)
             //    {
             //        xval *= -1;
             //    }

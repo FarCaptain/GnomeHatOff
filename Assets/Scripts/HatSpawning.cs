@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class HatSpawning : MonoBehaviour
 {
     public GameObject hatPrefab;
     public GameObject hatShadowPrefab;
+    public GameObject hatRushMessage;
+    public TextMeshProUGUI timerText;
+    public Animator hatRushAnim;
     public float hatshadowDestroyTime=4;
 
     public Vector3 center;
@@ -44,7 +48,13 @@ public class HatSpawning : MonoBehaviour
     void Update()
     {
         if (!isHatRush && Timer.timeRemaining < hatRushTime)
+        {
             isHatRush = true;
+            timerText.color = Color.red;
+            hatRushMessage.SetActive(true);
+            hatRushAnim.Play("FadeAnimation");
+        }
+            
 
         timeInterval += Time.deltaTime;
         if (timeInterval > timeGap)

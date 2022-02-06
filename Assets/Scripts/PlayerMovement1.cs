@@ -33,7 +33,7 @@ public class PlayerMovement1 : MonoBehaviour
     public float zval = ArduinoReceiver1.zaxis;
 #endif
 
-    Vector2 initPos;
+    Vector2 initPos;        // new default position for controller when calibrated
     bool ifInit;
 
     void Start()
@@ -55,6 +55,7 @@ public class PlayerMovement1 : MonoBehaviour
     {
 #if KEYBOARD
 #else
+        // used for calibration
         if (Input.GetKey(KeyCode.Q))
         {
             initPos = new Vector2(ArduinoReceiver1.xaxis, ArduinoReceiver1.zaxis);
@@ -81,6 +82,7 @@ public class PlayerMovement1 : MonoBehaviour
 
             Vector3 move = new Vector3(xval, 0f, zval);
 
+            // adjusts speed according to our thresholds for an acceleration effect
             float speed_x, speed_z;
             if (Mathf.Abs(move.x) <= MinthresholdLR)
                 speed_x = 0f;
@@ -96,6 +98,7 @@ public class PlayerMovement1 : MonoBehaviour
             else
                 speed_z = map(Mathf.Abs(move.z), MinthresholdFB, MaxthresholdFB, minSpeed, maxSpeed);
 
+            // assigns direction
             speed_x *= Mathf.Sign(move.x);
             speed_z *= Mathf.Sign(move.z);
 #endif
@@ -109,6 +112,7 @@ public class PlayerMovement1 : MonoBehaviour
             
             Move(speed * Time.deltaTime);
         }
+        // keeps object from flying off (might be removable)
         Vector3 pos = gameObject.transform.position;
         gameObject.transform.position = new Vector3(pos.x, 0.1f, pos.z);
     }

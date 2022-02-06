@@ -24,9 +24,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 20594180178891567}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.07, y: 18, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0.6000445}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -47,8 +47,14 @@ MonoBehaviour:
     type: 3}
   hatShadowPrefab: {fileID: 7701874447860785056, guid: a8cd75574f9785c47ac4a108743a5feb,
     type: 3}
+  hatRushMessage: {fileID: 0}
+  timerText: {fileID: 0}
+  hatRushAnim: {fileID: 0}
   hatshadowDestroyTime: 7
   center: {x: 0, y: 0, z: 0}
-  size: {x: 10, y: 0.1, z: 10}
-  minGap: 0.3
-  maxGap: 2
+  size: {x: 9, y: 0.1, z: 5}
+  minGap: 1
+  maxGap: 4
+  hatRushTime: 30
+  hatRushMinGap: 0.3
+  accumulatedSpeed: 0

@@ -7,8 +7,7 @@ public class HatFade : MonoBehaviour
 
     public float defaultTransparency = 1f;
     public float fadeDuration = 3f;
-    //public float destroyHeight = 10f;
-    GameObject player;
+    public GameObject player;
     public GameObject HatshadowPrefab;
 
     public ParticleSystem circleDust;
@@ -29,6 +28,7 @@ public class HatFade : MonoBehaviour
 
         player = GameObject.Find("Gnome");
 
+        // TODO: Adjust for loop code
         for (int i = 0; i < player.transform.childCount; i++)
         {
             // inefficient, way to do on resources?
@@ -65,7 +65,6 @@ public class HatFade : MonoBehaviour
 
             hatFadeEnabled = false;
         }
-
 
         if (isFadingUp)
         {

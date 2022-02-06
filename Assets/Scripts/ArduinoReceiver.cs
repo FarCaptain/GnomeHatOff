@@ -8,7 +8,7 @@ public class ArduinoReceiver : MonoBehaviour
 {
     static SerialPort stream;
 
-    // SELECT YOUR COM PORT AND BAUDRATE
+    [Header("SELECT YOUR COM PORT AND BAUDRATE")]
     public string port = "COM8";
     int baudrate = 9600;
     int readTimeout = 10;
@@ -19,10 +19,8 @@ public class ArduinoReceiver : MonoBehaviour
     public static float zaxis;
     public static float referencevalue;
 
-
-    public bool eshtablished = false;
-    public string dataString;
-
+    public bool established = false;
+    public string dataString;       // string output of arduino transmission
 
     //  public int PortsPastLength = 0;
 
@@ -36,119 +34,9 @@ public class ArduinoReceiver : MonoBehaviour
         //setreferencevalue();
     }
 
-   private void setreferencevalue()
-   {
-        if (eshtablished)
-        {
-            dataString = "null received";
-
-
-            if (stream.IsOpen)
-            {
-                try
-                {
-                    dataString = stream.ReadLine();
-                    //Debug.Log("data String : " + dataString);
-                }
-                catch (System.Exception ioe)
-                {
-                    // Debug.Log("IOException: " + ioe.Message);
-                }
-
-            }
-            else
-            {
-                dataString = "NOT OPEN";
-                eshtablished = false;
-            }
-
-            if (!dataString.Equals("NOT OPEN"))
-            {
-                if (!dataString.Equals("null received"))
-                {
-                    char splitChar = '|';
-                    dataRaw = dataString.Split(splitChar);
-                    datafinal = dataRaw[2].Split('=');
-                    referencevalue = float.Parse(datafinal[1]);
-                    referencevalue = (referencevalue / 1023) * 2 - 1;
-                }
-            }
-        }
-   }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-           // DetectPort();
-            connectionEstablish();
-        }
-
-        if (port == null)
-            return;
-
-        if (eshtablished)
-        {
-            dataString = "null received";
-
-
-            if (stream.IsOpen)
-            {
-                try
-                {
-                    dataString = stream.ReadLine();
-                    //Debug.Log("data String : " + dataString);
-                }
-                catch (System.Exception ioe)
-                {
-                    // Debug.Log("IOException: " + ioe.Message);
-                }
-
-            }
-            else
-            {
-                dataString = "NOT OPEN";
-                eshtablished = false;
-            }
-
-            if (!dataString.Equals("NOT OPEN"))
-            {
-                if (!dataString.Equals("null received"))
-                {
-                    char splitChar = ',';
-                    dataRaw = dataString.Split(splitChar);
-                    if (dataRaw.Length == 2 && dataRaw[0] != "")
-                    {
-                        xaxis = float.Parse(dataRaw[0]);
-                        zaxis = float.Parse(dataRaw[1]);
-                    }
-                }
-            }
-
-
-            //stream.Close();
-        }
-    }
-
-    void DetectPort()
-    {
-        //List<string> names = ComPortNames("2341", "0043"); // UNO CODE _ arduino
-        List<string> names = ComPortNames("1A86", "7523");  // MEGA CODE_arduino
-        if (names.Count > 0)
-        {
-            foreach (String s in SerialPort.GetPortNames())
-            {
-                if (names.Contains(s))
-                {
-                    Console.WriteLine("My Arduino port is " + s);
-                    port = s;
-                }
-            }
-        }
-        else
-            Console.WriteLine("No COM ports found");
-    }
-
+    /// <summary>
+    /// Ensures Serial Ports are connected
+    /// </summary>
     void connectionEstablish()
     {
         if (stream != null)
@@ -179,51 +67,162 @@ public class ArduinoReceiver : MonoBehaviour
 
         finally
         {
-            eshtablished = true;
+            established = true;
             // port = portTemp;
         }
     }
 
-    //map changes the range of a1,a2 to b1,b1
-    float map(float s, float a1, float a2, float b1, float b2)
+    void Update()
     {
-        return (s - a1) * (b2 - b1) / (a2 - a1) + b1;
-    }
-
-    public void ResetHardware()
-    {
-        DetectPort();
-        connectionEstablish();
-    }
-
-    List<string> ComPortNames(string VID, string PID)
-    {
-        string pattern = string.Format("^VID_{0}.PID_{1}", VID, PID);
-        Regex _rx = new Regex(pattern, RegexOptions.IgnoreCase);
-        List<string> comports = new List<string>();
-        RegistryKey rk1 = Registry.LocalMachine;
-        RegistryKey rk2 = rk1.OpenSubKey("SYSTEM\\CurrentControlSet\\Enum");
-        foreach (string s3 in rk2.GetSubKeyNames())
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            RegistryKey rk3 = rk2.OpenSubKey(s3);
-            foreach (string s in rk3.GetSubKeyNames())
+            // DetectPort();
+            connectionEstablish();
+        }
+
+        if (port == null)
+            return;
+
+        if (established)
+        {
+            dataString = "null received";
+
+            if (stream.IsOpen)
             {
-                if (_rx.Match(s).Success)
+                try
                 {
-                    RegistryKey rk4 = rk3.OpenSubKey(s);
-                    foreach (string s2 in rk4.GetSubKeyNames())
+                    dataString = stream.ReadLine();
+                    //Debug.Log("data String : " + dataString);
+                }
+                catch (System.Exception ioe)
+                {
+                    // Debug.Log("IOException: " + ioe.Message);
+                }
+            }
+            else
+            {
+                dataString = "NOT OPEN";
+                established = false;
+            }
+
+            // Parsing data recieved from Arduino
+            if (!dataString.Equals("NOT OPEN"))
+            {
+                if (!dataString.Equals("null received"))
+                {
+                    char splitChar = ',';
+                    dataRaw = dataString.Split(splitChar);
+                    if (dataRaw.Length == 2 && dataRaw[0] != "")
                     {
-                        RegistryKey rk5 = rk4.OpenSubKey(s2);
-                        RegistryKey rk6 = rk5.OpenSubKey("Device Parameters");
-                        comports.Add((string)rk6.GetValue("PortName"));
+                        xaxis = float.Parse(dataRaw[0]);
+                        zaxis = float.Parse(dataRaw[1]);
                     }
                 }
             }
+            //stream.Close();
         }
-        return comports;
     }
 }
+#region UnsusedCode
 
+//void DetectPort()
+//{
+//    //List<string> names = ComPortNames("2341", "0043"); // UNO CODE _ arduino
+//    List<string> names = ComPortNames("1A86", "7523");  // MEGA CODE_arduino
+//    if (names.Count > 0)
+//    {
+//        foreach (String s in SerialPort.GetPortNames())
+//        {
+//            if (names.Contains(s))
+//            {
+//                Console.WriteLine("My Arduino port is " + s);
+//                port = s;
+//            }
+//        }
+//    }
+//    else
+//        Console.WriteLine("No COM ports found");
+//}
+
+//private void setreferencevalue()
+//{
+//    if (established)
+//    {
+//        dataString = "null received";
+
+
+//        if (stream.IsOpen)
+//        {
+//            try
+//            {
+//                dataString = stream.ReadLine();
+//                //Debug.Log("data String : " + dataString);
+//            }
+//            catch (System.Exception ioe)
+//            {
+//                // Debug.Log("IOException: " + ioe.Message);
+//            }
+
+//        }
+//        else
+//        {
+//            dataString = "NOT OPEN";
+//            established = false;
+//        }
+
+//        if (!dataString.Equals("NOT OPEN"))
+//        {
+//            if (!dataString.Equals("null received"))
+//            {
+//                char splitChar = '|';
+//                dataRaw = dataString.Split(splitChar);
+//                datafinal = dataRaw[2].Split('=');
+//                referencevalue = float.Parse(datafinal[1]);
+//                referencevalue = (referencevalue / 1023) * 2 - 1;
+//            }
+//        }
+//    }
+//}
+
+////map changes the range of a1,a2 to b1,b1
+//float map(float s, float a1, float a2, float b1, float b2)
+//{
+//    return (s - a1) * (b2 - b1) / (a2 - a1) + b1;
+//}
+
+//public void ResetHardware()
+//{
+//    DetectPort();
+//    connectionEstablish();
+//}
+
+//List<string> ComPortNames(string VID, string PID)
+//{
+//    string pattern = string.Format("^VID_{0}.PID_{1}", VID, PID);
+//    Regex _rx = new Regex(pattern, RegexOptions.IgnoreCase);
+//    List<string> comports = new List<string>();
+//    RegistryKey rk1 = Registry.LocalMachine;
+//    RegistryKey rk2 = rk1.OpenSubKey("SYSTEM\\CurrentControlSet\\Enum");
+//    foreach (string s3 in rk2.GetSubKeyNames())
+//    {
+//        RegistryKey rk3 = rk2.OpenSubKey(s3);
+//        foreach (string s in rk3.GetSubKeyNames())
+//        {
+//            if (_rx.Match(s).Success)
+//            {
+//                RegistryKey rk4 = rk3.OpenSubKey(s);
+//                foreach (string s2 in rk4.GetSubKeyNames())
+//                {
+//                    RegistryKey rk5 = rk4.OpenSubKey(s2);
+//                    RegistryKey rk6 = rk5.OpenSubKey("Device Parameters");
+//                    comports.Add((string)rk6.GetValue("PortName"));
+//                }
+//            }
+//        }
+//    }
+//    return comports;
+//}
+#endregion
 
 #region OldCode
 
@@ -262,7 +261,7 @@ public class ArduinoReceiver : MonoBehaviour
 //    public static int engine = 1;       // 0 represents on, 1 represents off
 
 //    public static bool lever3 = true;
-//    public bool eshtablished = false;
+//    public bool established = false;
 //    public string dataString;
 
 
@@ -292,7 +291,7 @@ public class ArduinoReceiver : MonoBehaviour
 //        //    {
 //        //        Debug.Log("IOExc: " + e.Message);
 //        //    }
-//        //    eshtablished = false;
+//        //    established = false;
 //        //    connectionEstablish();
 //        //}
 
@@ -307,7 +306,7 @@ public class ArduinoReceiver : MonoBehaviour
 //            return;
 
 //        // Debug.Log(SerialPort.GetPortNames()[0] + "   " + SerialPort.GetPortNames().Length);
-//        if (eshtablished)
+//        if (established)
 //        {
 //             dataString = "null received";
 
@@ -327,7 +326,7 @@ public class ArduinoReceiver : MonoBehaviour
 //            else
 //            {
 //                dataString = "NOT OPEN";
-//                eshtablished = false;
+//                established = false;
 //            }
 
 //            if (!dataString.Equals("NOT OPEN"))
@@ -400,7 +399,7 @@ public class ArduinoReceiver : MonoBehaviour
 
 //            finally
 //            {             
-//                eshtablished = true;
+//                established = true;
 //               // port = portTemp;
 //            }         
 
@@ -431,7 +430,7 @@ public class ArduinoReceiver : MonoBehaviour
 
 //            finally
 //            {             
-//                eshtablished = true;
+//                established = true;
 //                port = portTemp;
 //            }         
 

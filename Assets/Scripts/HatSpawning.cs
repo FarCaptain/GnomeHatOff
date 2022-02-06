@@ -47,6 +47,7 @@ public class HatSpawning : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // HAT RUSH!!!!
         if (!isHatRush && Timer.timeRemaining < hatRushTime)
         {
             isHatRush = true;
@@ -55,7 +56,6 @@ public class HatSpawning : MonoBehaviour
             hatRushAnim.Play("FadeAnimation");
         }
             
-
         timeInterval += Time.deltaTime;
         if (timeInterval > timeGap)
         {

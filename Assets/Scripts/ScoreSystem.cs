@@ -40,12 +40,6 @@ public class ScoreSystem : MonoBehaviour
                 initFireScale[id*4 + i] = fires[id].transform.GetChild(i).transform.localScale;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void displayWinner()
     {
         winPanel.SetActive(true);
@@ -66,6 +60,9 @@ public class ScoreSystem : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Bonus Points are assigned after a player drops off multiple hats, points are determined by passing thresholds
+    /// </summary>
     private int getBonusPoints(GameObject player)
     {
         int points = 0;
@@ -73,8 +70,10 @@ public class ScoreSystem : MonoBehaviour
 
         for (int i = 0; i < hatThresholds.Count; i++)
         {
+            // greater than the lowest threshold
             if (currentHats >= hatThresholds[0])
             {
+                // check for highest threshold
                 if (currentHats >= hatThresholds[i])
                     points = bonusModifiers[i];
             }
@@ -108,6 +107,7 @@ public class ScoreSystem : MonoBehaviour
         {
             if (player.GetComponentInChildren<HatCollecter>().hatCount > 0)
             {
+                // TODO: Perhpas adjust how we can reference different players (not an issue now since we only have 2)
                 if (player.name == "Gnome")
                 {
                     int bonusPoints = hatCount0 + getBonusPoints(player.gameObject);

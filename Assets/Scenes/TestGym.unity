@@ -3174,8 +3174,7 @@ MonoBehaviour:
   minSpeed: 0
   delayedFrames: 0
   runDust: {fileID: 1856293800}
-  xval: 0
-  zval: 0
+  keyboardSpeed: 0
 --- !u!143 &371624565 stripped
 CharacterController:
   m_CorrespondingSourceObject: {fileID: 7129006518892494857, guid: 2a97db5219d70294797bb53bc23e1195,
@@ -7856,8 +7855,7 @@ MonoBehaviour:
   delayedFrames: 0
   runDust: {fileID: 1239716717}
   shownSpeed: {x: 0, y: 0, z: 0}
-  xval: 0
-  zval: 0
+  keyboardSpeed: 0
 --- !u!143 &866065894 stripped
 CharacterController:
   m_CorrespondingSourceObject: {fileID: 7129006518892494857, guid: 2a97db5219d70294797bb53bc23e1195,
@@ -21451,6 +21449,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 734359950586549179, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: keyboardSpeed
+      value: 210
+      objectReference: {fileID: 0}
     - target: {fileID: 3593979466627239089, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
       propertyPath: m_Name
@@ -21579,6 +21582,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gnome(1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5154856036340132846, guid: 4569103a97551e245b460df25ea57d2a,
+        type: 3}
+      propertyPath: keyboardSpeed
+      value: 210
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4569103a97551e245b460df25ea57d2a, type: 3}

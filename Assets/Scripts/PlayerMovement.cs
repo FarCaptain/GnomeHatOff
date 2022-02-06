@@ -1,4 +1,4 @@
-//#define KEYBOARD
+#define KEYBOARD
 //else use alt controller
 
 using System.Collections;
@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 shownSpeed;
 
 #if KEYBOARD
+    public float keyboardSpeed;
 #else
     public float xval = ArduinoReceiver.xaxis;
     public float zval = ArduinoReceiver.zaxis;
@@ -42,7 +43,6 @@ public class PlayerMovement : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
 
 #if KEYBOARD
-        speed = 12f;
         ifInit = true;
 #else
         //speed = 5f;
@@ -76,6 +76,8 @@ public class PlayerMovement : MonoBehaviour
                 float z = Input.GetAxis("Vertical");
                 move = new Vector3(x, 0f, z);
             }
+
+            Vector3 speed = move * keyboardSpeed;
 #else
 
             xval = ArduinoReceiver.xaxis - initPos.x;
@@ -102,9 +104,9 @@ public class PlayerMovement : MonoBehaviour
             // assigns direction
             speed_x *= Mathf.Sign(move.x);
             speed_z *= Mathf.Sign(move.z);
+            Vector3 speed = new Vector3(speed_x, 0f, speed_z);
 #endif
 
-            Vector3 speed = new Vector3(speed_x, 0f, speed_z);
             if (speed != Vector3.zero)
             {
                 gameObject.transform.forward = speed;

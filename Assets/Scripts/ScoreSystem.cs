@@ -103,10 +103,11 @@ public class ScoreSystem : MonoBehaviour
     {
         if(player.tag == "Player")
         {
-            if (player.GetComponentInChildren<HatCollecter>().hatCount > 0)
+            HatCollecter hatcollecter = player.GetComponentInChildren<HatCollecter>();
+            if (hatcollecter.hatCount > 0)
             {
                 // TODO: Perhpas adjust how we can reference different players (not an issue now since we only have 2)
-                int bonusPoints = player.GetComponentInChildren<HatCollecter>().hatCount + getBonusPoints(player.gameObject);
+                int bonusPoints = hatcollecter.hatCount + getBonusPoints(player.gameObject);
 
                 int player_id = 0;
                 if (player.name == "Gnome_0")
@@ -122,18 +123,32 @@ public class ScoreSystem : MonoBehaviour
                     player_id = 1;
                 }
 
-                player.GetComponentInChildren<HatCollecter>().hatCount = 0;
+                hatcollecter.hatCount = 0;
                 
                 revertChangesOnFire(player_id);
                 magnifyFire(player_id, getFireSize(player.gameObject));
                 fires[player_id].Play();
 
-                player.GetComponentInChildren<HatCollecter>().hatCount = 0;
+                hatcollecter.hatCount = 0;
 
                 for (int i = 0; i < player.transform.childCount; i++)
                 {
                     if (player.transform.GetChild(i).name == "HatPrefab(Clone)")
                         Destroy(player.transform.GetChild(i).gameObject);
+                }
+
+               
+                //reset the collision on the gnome
+                if (hatcollecter.hatTop.transform.position.y != hatcollecter.initHatHeight)
+                {
+                    if (hatcollecter.hatCount == 0)
+                    {
+                        Vector3 hatPos = hatcollecter.hatTop.transform.position;
+                        hatcollecter.hatTop.transform.position = new Vector3(hatPos.x, hatcollecter.initHatHeight, hatPos.z);
+
+                        GetComponent<BoxCollider>().size = hatcollecter.initColliderSize;
+                        GetComponent<BoxCollider>().center = hatcollecter.initColliderCenter;
+                    }
                 }
             }
         }

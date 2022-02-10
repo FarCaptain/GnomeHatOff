@@ -36,7 +36,7 @@ public class HatCollecter : MonoBehaviour
     {
         if (hatTop.transform.position.y != initHatHeight)
         {
-            if (gnome.name == "Gnome" && ScoreSystem.hatCount0 == 0 || (gnome.name == "Gnome(1)" && ScoreSystem.hatCount1 == 0))
+            if (hatCount == 0)
             {
                 Vector3 hatPos = hatTop.transform.position;
                 hatTop.transform.position = new Vector3(hatPos.x, initHatHeight, hatPos.z);
@@ -56,11 +56,6 @@ public class HatCollecter : MonoBehaviour
                 //print("Yeay! Hat Collected!" + (++count));
                 hatCount += 1;
                 gameObject.GetComponent<AudioSource>().PlayOneShot(collectSound);
-
-                if (gnome.name == "Gnome")
-                    ScoreSystem.hatCount0 += 1;
-                else
-                    ScoreSystem.hatCount1 += 1;
 
                 Vector3 hatPos = hatTop.transform.position;
                 hatPos = new Vector3(hatPos.x, hatPos.y + gap, hatPos.z);

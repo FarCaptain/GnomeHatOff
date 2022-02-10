@@ -11,12 +11,13 @@ public class HatCollecter : MonoBehaviour
     public ParticleSystem sparks;
 
     public float gap = 0.1f; // the height difference between hats
-    GameObject hatTop;
-    float initHatHeight;
-    float headTop;
+    
+    public GameObject hatTop;
+    public float initHatHeight;
+    public float headTop;
 
-    Vector3 initColliderSize;
-    Vector3 initColliderCenter;
+    public Vector3 initColliderSize;
+    public Vector3 initColliderCenter;
 
     private void Start()
     {
@@ -34,17 +35,6 @@ public class HatCollecter : MonoBehaviour
 
     private void Update()
     {
-        if (hatTop.transform.position.y != initHatHeight)
-        {
-            if (gnome.name == "Gnome" && ScoreSystem.hatCount0 == 0 || (gnome.name == "Gnome(1)" && ScoreSystem.hatCount1 == 0))
-            {
-                Vector3 hatPos = hatTop.transform.position;
-                hatTop.transform.position = new Vector3(hatPos.x, initHatHeight, hatPos.z);
-
-                GetComponent<BoxCollider>().size = initColliderSize;
-                GetComponent<BoxCollider>().center = initColliderCenter;
-            }
-        }
     }
 
     public void OnTriggerEnter(Collider other)
@@ -56,11 +46,6 @@ public class HatCollecter : MonoBehaviour
                 //print("Yeay! Hat Collected!" + (++count));
                 hatCount += 1;
                 gameObject.GetComponent<AudioSource>().PlayOneShot(collectSound);
-
-                if (gnome.name == "Gnome")
-                    ScoreSystem.hatCount0 += 1;
-                else
-                    ScoreSystem.hatCount1 += 1;
 
                 Vector3 hatPos = hatTop.transform.position;
                 hatPos = new Vector3(hatPos.x, hatPos.y + gap, hatPos.z);

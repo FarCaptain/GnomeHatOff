@@ -27,14 +27,15 @@ public class ScoreSystem : MonoBehaviour
     public ParticleSystem[] fires = new ParticleSystem[2];
 
 
-    private Vector3[] initFireScale = new Vector3[8];
+    private Vector3[,] initFireScale = new Vector3[2,4];
 
     // Start is called before the first frame update
     void Start()
     {
+        // iterate all the children particles
         for(int id = 0; id < 2; id ++)
             for (int i = 0; i < fires[id].transform.childCount; i++)
-                initFireScale[id*4 + i] = fires[id].transform.GetChild(i).transform.localScale;
+                initFireScale[id, i] = fires[id].transform.GetChild(i).transform.localScale;
     }
 
     public void displayWinner()
@@ -147,6 +148,6 @@ public class ScoreSystem : MonoBehaviour
     private void revertChangesOnFire(int fireId)
     {
         for (int i = 0; i < fires[fireId].transform.childCount; i++)
-            fires[fireId].transform.GetChild(i).transform.localScale = initFireScale[fireId * 4 + i];
+            fires[fireId].transform.GetChild(i).transform.localScale = initFireScale[fireId, i];
     }
 }

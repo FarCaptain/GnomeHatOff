@@ -20,9 +20,6 @@ public class ScoreSystem : MonoBehaviour
     public List<int> bonusModifiers;
 
     public List<float> fireSizeModifiers;
-
-    static public int hatCount0 = 0;
-    static public int hatCount1 = 0;
     
     static public int playerScore0 = 0;
     static public int playerScore1 = 0;
@@ -108,41 +105,34 @@ public class ScoreSystem : MonoBehaviour
             if (player.GetComponentInChildren<HatCollecter>().hatCount > 0)
             {
                 // TODO: Perhpas adjust how we can reference different players (not an issue now since we only have 2)
-                if (player.name == "Gnome")
-                {
-                    int bonusPoints = hatCount0 + getBonusPoints(player.gameObject);
-                    playerScore0 += bonusPoints;
-                    hatCount0 = 0;
-                    scoreText0.GetComponent<TMPro.TextMeshProUGUI>().text = playerScore0.ToString();
+                int bonusPoints = player.GetComponentInChildren<HatCollecter>().hatCount + getBonusPoints(player.gameObject);
 
-                    revertChangesOnFire(0);
-                    magnifyFire(0, getFireSize(player.gameObject));
-                    fires[0].Play();
+                int player_id = 0;
+                if (player.name == "Gnome_0")
+                {
+                    playerScore0 += bonusPoints;
+                    scoreText0.GetComponent<TMPro.TextMeshProUGUI>().text = playerScore0.ToString();
+                    player_id = 0;
                 }
                 else
                 {
-                    int bonusPoints = hatCount1 + getBonusPoints(player.gameObject);
                     playerScore1 += bonusPoints;
-                    hatCount1 = 0;
                     scoreText1.GetComponent<TMPro.TextMeshProUGUI>().text = playerScore1.ToString();
-
-                    revertChangesOnFire(1);
-                    magnifyFire(1, getFireSize(player.gameObject));
-                    fires[1].Play();
-                    // revert the change in stop call back
+                    player_id = 1;
                 }
+
+                player.GetComponentInChildren<HatCollecter>().hatCount = 0;
+                
+                revertChangesOnFire(player_id);
+                magnifyFire(player_id, getFireSize(player.gameObject));
+                fires[player_id].Play();
 
                 player.GetComponentInChildren<HatCollecter>().hatCount = 0;
 
                 for (int i = 0; i < player.transform.childCount; i++)
                 {
                     if (player.transform.GetChild(i).name == "HatPrefab(Clone)")
-                    {
-                        print("YYYYY");
-                        print("ddd" + playerScore0);
                         Destroy(player.transform.GetChild(i).gameObject);
-                    }
-
                 }
             }
         }

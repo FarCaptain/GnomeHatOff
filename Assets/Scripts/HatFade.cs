@@ -26,7 +26,7 @@ public class HatFade : MonoBehaviour
         currentTransparency = defaultTransparency;
         ApplyTransparency();
 
-        player = GameObject.Find("Gnome");
+        player = GameObject.Find("Gnome_0");
 
         // TODO: Adjust for loop code
         for (int i = 0; i < player.transform.childCount; i++)

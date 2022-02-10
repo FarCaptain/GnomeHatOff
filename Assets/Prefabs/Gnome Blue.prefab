@@ -201,7 +201,6 @@ GameObject:
   - component: {fileID: 5943361334100308877}
   - component: {fileID: 2815035792123803094}
   - component: {fileID: 7556945426137748401}
-  - component: {fileID: 734359950586549179}
   m_Layer: 9
   m_Name: Gnome Blue
   m_TagString: Player
@@ -277,29 +276,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.1, z: 0}
---- !u!114 &734359950586549179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3593979466627239089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e492cca6a83c964798e237e1d099cc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 7556945426137748401}
-  MinthresholdFB: 1.7
-  MinthresholdLR: 1.7
-  MaxthresholdFB: 4.5
-  MaxthresholdLR: 4.5
-  maxSpeed: 250
-  minSpeed: 0
-  delayedFrames: 0
-  runDust: {fileID: 9213401639292347797}
-  xval: 0
-  zval: 0
 --- !u!1 &5399210617733372346
 GameObject:
   m_ObjectHideFlags: 0
@@ -842,12 +818,6 @@ PrefabInstance:
 --- !u!4 &9011741900931212915 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4060481939114612, guid: 83ec04c6dd4853443b1f9d62fef5a825,
-    type: 3}
-  m_PrefabInstance: {fileID: 9015730913658219527}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &9213401639292347797 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 198963802851412370, guid: 83ec04c6dd4853443b1f9d62fef5a825,
     type: 3}
   m_PrefabInstance: {fileID: 9015730913658219527}
   m_PrefabAsset: {fileID: 0}

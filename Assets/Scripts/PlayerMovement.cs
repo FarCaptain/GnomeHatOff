@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float maxSpeed;
     public float minSpeed;
-
+    public int playerIndex = 0;
     // to filter the value we get from the gyroscope
     public int delayedFrames;
     private int remainingFrames;
@@ -69,13 +69,26 @@ public class PlayerMovement : MonoBehaviour
         {
 #if KEYBOARD
             Vector3 move = Vector3.zero;
-
-            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+            if(playerIndex == 0)
             {
-                float x = Input.GetAxis("Horizontal");
-                float z = Input.GetAxis("Vertical");
-                move = new Vector3(x, 0f, z);
+                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+                {
+                    float x = Input.GetAxis("Horizontal1");
+                    float z = Input.GetAxis("Vertical1");
+                    move = new Vector3(x, 0f, z);
+                }
             }
+           
+            else if(playerIndex == 1)
+            {
+                if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+                {
+                    float x = Input.GetAxis("Horizontal");
+                    float z = Input.GetAxis("Vertical");
+                    move = new Vector3(x, 0f, z);
+                }
+            }
+           
 
             Vector3 speed = move * keyboardSpeed;
 #else

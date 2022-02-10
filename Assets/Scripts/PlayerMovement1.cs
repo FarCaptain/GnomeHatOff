@@ -18,14 +18,13 @@ public class PlayerMovement1 : MonoBehaviour
     public float maxSpeed;
     public float minSpeed;
 
-    // to filter the value we get from the gyroscope
-    public int delayedFrames;
-    private int remainingFrames;
-    private float prevLRSign;
+    //TODO. to filter the value we get from the gyroscope
+
+    private Rigidbody rigidBody;
 
     public ParticleSystem runDust;
 
-    private Rigidbody rigidBody;
+    //private Rigidbody rigidBody;
 
 #if KEYBOARD
 #else
@@ -47,7 +46,6 @@ public class PlayerMovement1 : MonoBehaviour
         //speed = 5f;
         ifInit = false;
 
-        remainingFrames = delayedFrames;
 #endif
     }
 
@@ -59,7 +57,6 @@ public class PlayerMovement1 : MonoBehaviour
         {
             initPos = new Vector2(ArduinoReceiver1.xaxis, ArduinoReceiver1.zaxis);
             ifInit = true;
-            prevLRSign = 0;
         }
 #endif
 

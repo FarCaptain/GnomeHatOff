@@ -141,14 +141,11 @@ public class ScoreSystem : MonoBehaviour
                 //reset the collision on the gnome
                 if (hatcollecter.hatTop.transform.position.y != hatcollecter.initHatHeight)
                 {
-                    if (hatcollecter.hatCount == 0)
-                    {
-                        Vector3 hatPos = hatcollecter.hatTop.transform.position;
-                        hatcollecter.hatTop.transform.position = new Vector3(hatPos.x, hatcollecter.initHatHeight, hatPos.z);
+                    Vector3 hatPos = hatcollecter.hatTop.transform.position;
+                    hatcollecter.hatTop.transform.position = new Vector3(hatPos.x, hatcollecter.initHatHeight, hatPos.z);
 
-                        GetComponent<BoxCollider>().size = hatcollecter.initColliderSize;
-                        GetComponent<BoxCollider>().center = hatcollecter.initColliderCenter;
-                    }
+                    hatcollecter.GetComponent<BoxCollider>().size = hatcollecter.initColliderSize;
+                    hatcollecter.GetComponent<BoxCollider>().center = hatcollecter.initColliderCenter;
                 }
             }
         }

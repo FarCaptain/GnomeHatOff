@@ -16,10 +16,22 @@ using System.Collections;
  */
 public class SampleMessageListener : MonoBehaviour
 {
+    public MainGameController Game;
+    private string[] dataRaw;
     // Invoked when a line of data is received from the serial device.
     void OnMessageArrived(string msg)
     {
-        Debug.Log("Message arrived: " + msg);
+        //Debug.Log("Message arrived: " + msg);
+       
+        char splitChar = ',';
+        dataRaw = msg.Split(splitChar);
+        if (dataRaw.Length == 3 && dataRaw[0] != " ")
+        {
+            float xaxis = float.Parse(dataRaw[0]);
+            float zaxis = float.Parse(dataRaw[1]);
+            string jump = dataRaw[2];
+            Game.RecieveSignal(0, xaxis, 0, zaxis, jump);
+        }
     }
 
     // Invoked when a connect/disconnect event occurs. The parameter 'success'

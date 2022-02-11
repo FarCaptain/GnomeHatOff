@@ -18,9 +18,10 @@ public class HatCollecter : MonoBehaviour
 
     public Vector3 initColliderSize;
     public Vector3 initColliderCenter;
-
+    public bool hatdrop = false;
     private void Start()
     {
+        hatdrop = false;
         for (int i = 0; i < gnome.transform.childCount; i++)
         {
             if (gnome.transform.GetChild(i).name == "HatTop")
@@ -35,6 +36,7 @@ public class HatCollecter : MonoBehaviour
 
     private void Update()
     {
+        //Debug.Log(hatdrop);
     }
 
     public void OnTriggerEnter(Collider other)

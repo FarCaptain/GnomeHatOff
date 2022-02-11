@@ -8,7 +8,7 @@ public class ArduinoReceiver : MonoBehaviour
 {
     public MainGameController Game;
     static List<SerialPort> streams = new List<SerialPort>();
-
+     
     
     int baudrate = 9600;
     int readTimeout = 10;
@@ -92,11 +92,12 @@ public class ArduinoReceiver : MonoBehaviour
                         dataString = streams[i].ReadLine();
                         char splitChar = ',';
                         dataRaw = dataString.Split(splitChar);
-                        if (dataRaw.Length == 2 && dataRaw[0] != "")
+                        if (dataRaw.Length == 3 && dataRaw[0] != "")
                         {
                             float xaxis = float.Parse(dataRaw[0]);
                             float zaxis = float.Parse(dataRaw[1]);
-                            Game.RecieveSignal(i, xaxis, 0, zaxis);
+                            string jump = dataRaw[2];
+                            Game.RecieveSignal(i, xaxis, 0, zaxis,jump);
                         }
                     }
                     catch (System.Exception ioe)

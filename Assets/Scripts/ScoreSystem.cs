@@ -98,13 +98,13 @@ public class ScoreSystem : MonoBehaviour
         }
         return size;
     }
-
-    public void OnTriggerEnter(Collider player)
+    
+    public void OnTriggerStay(Collider player)
     {
         if(player.tag == "Player")
         {
             HatCollecter hatcollecter = player.GetComponentInChildren<HatCollecter>();
-            if (hatcollecter.hatCount > 0)
+            if (hatcollecter.hatCount > 0 && hatcollecter.hatdrop == true)
             {
                 // TODO: Perhpas adjust how we can reference different players (not an issue now since we only have 2)
                 int bonusPoints = hatcollecter.hatCount + getBonusPoints(player.gameObject);
@@ -136,8 +136,8 @@ public class ScoreSystem : MonoBehaviour
                     if (player.transform.GetChild(i).name == "HatPrefab(Clone)")
                         Destroy(player.transform.GetChild(i).gameObject);
                 }
+                
 
-               
                 //reset the collision on the gnome
                 if (hatcollecter.hatTop.transform.position.y != hatcollecter.initHatHeight)
                 {
@@ -148,6 +148,7 @@ public class ScoreSystem : MonoBehaviour
                     hatcollecter.GetComponent<BoxCollider>().center = hatcollecter.initColliderCenter;
                 }
             }
+            hatcollecter.hatdrop = false;
         }
     }
 

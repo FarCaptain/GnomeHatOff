@@ -34,19 +34,21 @@ public class MainGameController : MonoBehaviour
         }
     }
 
-    public void RecieveSignal(int playerIndex, float x, float y, float z)
+    public void RecieveSignal(int playerIndex, float x, float y, float z, string jump)
     {
-        Debug.Log(playerIndex + "Receive");
+        Debug.Log(jump);
         switch (status)
         {
             case GameStatus.Ready:
                 playerMovements[playerIndex].SetOffset(new Vector3(x,y,z));
-                
                 break;
             case GameStatus.Playing:
-               
-                 playerMovements[playerIndex].Move(x, y, z);
-                
+                playerMovements[playerIndex].Move(x, y, z);
+                if (jump == "True")
+                {
+                    playerMovements[playerIndex].jumpset(true);
+                }
+
                 break;
         }
     }

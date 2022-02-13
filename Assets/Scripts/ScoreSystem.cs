@@ -8,11 +8,16 @@ public class ScoreSystem : MonoBehaviour
 {
     public GameObject scoreText0;
     public GameObject scoreText1;
+    [SerializeField] GameObject player1BonusMessage;
+    [SerializeField] GameObject player2BonusMessage;
+    bool player1BonusRecieved = false;
+    bool player2BonusRecieved= false;
     public GameObject player0;
     public GameObject player1;
     public GameObject winPanel;
     public TextMeshProUGUI winText;
     public TextMeshProUGUI winnerScoreText;
+   
 
     public List<int> hatThresholds;
 
@@ -25,14 +30,27 @@ public class ScoreSystem : MonoBehaviour
     static public int playerScore1 = 0;
 
     public ParticleSystem[] fires = new ParticleSystem[2];
-
-
     private Vector3[,] initFireScale = new Vector3[2,4];
 
+    private NewTimer bonusMessageScaleTimer;
+    private NewTimer bonusMessageFadeTimer;
+
+    private Color opaque = new Color(1, 1, 1, 1);
+    private Color transparent = new Color(1, 1, 1, 0);
+
+    private Vector3 initialMessageScale;
+    private Vector3 finalMessageScale;
+
+    private enum fadeStates {FadeIn, FadeOut};
+    fadeStates currentFade=fadeStates.FadeIn;
+
+    
     // Start is called before the first frame update
     void Start()
     {
-        // iterate all the children particles
+        initialMessageScale = player1BonusMessage.GetComponent<RectTransform>().localScale;
+        finalMessageScale = initialMessageScale + Vector3.one;
+     
         for(int id = 0; id < 2; id ++)
             for (int i = 0; i < fires[id].transform.childCount; i++)
                 initFireScale[id, i] = fires[id].transform.GetChild(i).transform.localScale;
@@ -63,25 +81,70 @@ public class ScoreSystem : MonoBehaviour
     /// </summary>
     private int getBonusPoints(GameObject player)
     {
-        int points = 0;
+        int bonusPoints = 0;
         int currentHats = player.GetComponentInChildren<HatCollecter>().hatCount;
 
         for (int i = 0; i < hatThresholds.Count; i++)
         {
             // greater than the lowest threshold
-            if (currentHats >= hatThresholds[0])
+            if (currentHats >= hatThresholds[i])
             {
-                // check for highest threshold
-                if (currentHats >= hatThresholds[i])
-                    points = bonusModifiers[i];
+                bonusPoints = bonusModifiers[i];
             }
             else
                 break;
         }
-        return points;
+        if (bonusPoints > 0)
+        {
+            bonusMessageScaleTimer = gameObject.AddComponent<NewTimer>();
+            bonusMessageFadeTimer = gameObject.AddComponent<NewTimer>();
+            bonusMessageScaleTimer.MaxTime = 2f;
+            bonusMessageFadeTimer.MaxTime = 1f;
+            bonusMessageScaleTimer.TimerStart = true;
+            bonusMessageFadeTimer.TimerStart = true;
+
+            if (player.name=="Gnome_0")
+			{
+                player1BonusMessage.GetComponent<TextMeshProUGUI>().text = "+" + bonusPoints + " BONUS!";
+                player1BonusRecieved = true;
+            }
+            else if(player.name=="Gnome_1")
+			{
+                player2BonusMessage.GetComponent<TextMeshProUGUI>().text = "+" + bonusPoints + " BONUS!";
+                player2BonusRecieved = true;
+			}
+            
+        }
+		return bonusPoints;
     }
 
-    private float getFireSize(GameObject player)
+	private bool DisplayBonusMessage(GameObject bonusMessageDisplayObject, bool bonusActivated)
+	{
+        print("Work");
+        if (currentFade == fadeStates.FadeIn)
+        {
+            bonusMessageDisplayObject.GetComponent<TextMeshProUGUI>().color = Color.Lerp(transparent, opaque, bonusMessageFadeTimer.CurrentTime / bonusMessageFadeTimer.MaxTime);
+            if (bonusMessageFadeTimer.TimerStart == false)
+            {
+                currentFade = fadeStates.FadeOut;
+                bonusMessageFadeTimer.TimerStart = true;
+            }
+        }
+        else if (currentFade == fadeStates.FadeOut)
+        {
+            bonusMessageDisplayObject.GetComponent<TextMeshProUGUI>().color = Color.Lerp(opaque, transparent, bonusMessageFadeTimer.CurrentTime / bonusMessageFadeTimer.MaxTime);
+            if (bonusMessageFadeTimer.TimerStart == false)
+            {
+                currentFade = fadeStates.FadeIn;
+                bonusMessageDisplayObject.GetComponent<TextMeshProUGUI>().color = transparent;
+                bonusActivated = false;
+            }
+        }
+        bonusMessageDisplayObject.GetComponent<RectTransform>().localScale = Vector3.Lerp(initialMessageScale, finalMessageScale, bonusMessageScaleTimer.CurrentTime / bonusMessageScaleTimer.MaxTime);
+        return bonusActivated;
+    }
+
+	private float getFireSize(GameObject player)
     {
         float size = 1;
         int currentHats = player.GetComponentInChildren<HatCollecter>().hatCount;
@@ -163,4 +226,16 @@ public class ScoreSystem : MonoBehaviour
         for (int i = 0; i < fires[fireId].transform.childCount; i++)
             fires[fireId].transform.GetChild(i).transform.localScale = initFireScale[fireId, i];
     }
+
+	private void Update()
+	{
+        if (player1BonusRecieved)
+        {
+            player1BonusRecieved=DisplayBonusMessage(player1BonusMessage,player1BonusRecieved);
+        }
+        if (player2BonusRecieved)
+		{
+            player2BonusRecieved=DisplayBonusMessage(player2BonusMessage,player2BonusRecieved);
+        }
+	}
 }

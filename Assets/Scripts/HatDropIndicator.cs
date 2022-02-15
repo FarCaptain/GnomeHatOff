@@ -64,6 +64,6 @@ public class HatDropIndicator : MonoBehaviour
 
 	public void SetPoints(int points)
 	{
-        pointsText.text = points.ToString();
+        pointsText.text = "+" + points.ToString();
 	}
 }

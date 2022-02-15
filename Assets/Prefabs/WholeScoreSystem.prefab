@@ -756,6 +756,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText0: {fileID: 2848886440943931283}
   scoreText1: {fileID: 2848886441842988094}
+  player1BonusMessage: {fileID: 0}
+  player2BonusMessage: {fileID: 0}
   player0: {fileID: 0}
   player1: {fileID: 0}
   winPanel: {fileID: 887937762175973849}

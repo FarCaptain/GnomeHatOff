@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public float maxSpeed;
     public float minSpeed;
     public int playerIndex = 0;
+    
     // to filter the value we get from the gyroscope
     public int delayedFrames;
     private int remainingFrames;
@@ -94,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
     private void Move(Vector3 motion)
     {
         rigidBody.velocity = motion;
-        Debug.Log(motion);
+        //Debug.Log(motion);
     }
 
     public void Move(float xaxis, float yaxis,float zaxis)

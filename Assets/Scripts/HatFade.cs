@@ -58,11 +58,9 @@ public class HatFade : MonoBehaviour
             Vector3 pos = transform.position;
             pos.y = 0.15f;
 
-            ParticleSystem dust = Instantiate(circleDust, pos, Quaternion.identity);
-            dust.Play();
+            circleDust.Play();
 
-            Destroy(dust, 1f);
-
+            Destroy(circleDust, 1f);
             hatFadeEnabled = false;
         }
 

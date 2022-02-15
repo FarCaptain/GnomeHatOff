@@ -178,7 +178,7 @@ public class ScoreSystem : MonoBehaviour
                     playerScore0 += bonusPoints;
                     scoreText0.GetComponent<TMPro.TextMeshProUGUI>().text = playerScore0.ToString();
                     HatDropIndicator gnome0HatDropIndicator = Instantiate(pointsPopupDisplay, player.transform.position, Quaternion.identity).GetComponent<HatDropIndicator>();
-                    gnome0HatDropIndicator.SetPoints(bonusPoints);
+                    gnome0HatDropIndicator.SetPoints(hatcollecter.hatCount);
                     player_id = 0;
                 }
                 else
@@ -186,7 +186,7 @@ public class ScoreSystem : MonoBehaviour
                     playerScore1 += bonusPoints;
                     scoreText1.GetComponent<TMPro.TextMeshProUGUI>().text = playerScore1.ToString();
                     HatDropIndicator gnome1HatDropIndicator = Instantiate(pointsPopupDisplay, player.transform.position, Quaternion.identity).GetComponent<HatDropIndicator>();
-                    gnome1HatDropIndicator.SetPoints(bonusPoints);
+                    gnome1HatDropIndicator.SetPoints(hatcollecter.hatCount);
                     player_id = 1;
                 }
 

@@ -30,6 +30,7 @@ public class HatDropIndicator : MonoBehaviour
 		float distance = Random.Range(minDist, maxDist);
 		transform.LookAt(2 * transform.position - Camera.main.transform.position);
 		targetPos = initialPos + (Quaternion.Euler(0, 0, direction) * new Vector3(distance, distance, 0f));
+		targetPos = new Vector3(targetPos.x, Mathf.Abs(targetPos.y), targetPos.z);
 		transform.localScale = Vector3.zero;
 	}
 

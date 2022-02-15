@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -233,6 +233,12 @@ PrefabInstance:
       propertyPath: player1
       value: 
       objectReference: {fileID: 371624563}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: pointsPopupDisplay
+      value: 
+      objectReference: {fileID: 3289768302961792009, guid: 7b0b62390b1acb64d8af2d58d9cd5076,
+        type: 3}
     - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
         type: 3}
       propertyPath: fires.Array.data[0]

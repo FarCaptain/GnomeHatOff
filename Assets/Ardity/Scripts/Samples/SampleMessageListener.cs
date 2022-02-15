@@ -14,10 +14,12 @@ using System.Collections;
  *  - OnMessageArrived
  *  - OnConnectionEvent
  */
+
 public class SampleMessageListener : MonoBehaviour
 {
     public MainGameController Game;
     private string[] dataRaw;
+    public int Playerindex;
     // Invoked when a line of data is received from the serial device.
     void OnMessageArrived(string msg)
     {
@@ -30,7 +32,16 @@ public class SampleMessageListener : MonoBehaviour
             float xaxis = float.Parse(dataRaw[0]);
             float zaxis = float.Parse(dataRaw[1]);
             string jump = dataRaw[2];
-            Game.RecieveSignal(0, xaxis, 0, zaxis, jump);
+            Game.RecieveSignal(Playerindex, xaxis, 0, zaxis, jump);
+            Debug.Log("Player 1: " + xaxis + "," + zaxis);
+        }
+        if (dataRaw.Length == 2 && dataRaw[0] != " ")
+        {
+            float xaxis = float.Parse(dataRaw[0]);
+            float zaxis = float.Parse(dataRaw[1]);
+            //string jump = dataRaw[2];
+            Game.RecieveSignal(Playerindex, xaxis, 0, zaxis, "True");
+            Debug.Log("Player 2: " + xaxis + "," + zaxis);
         }
     }
 

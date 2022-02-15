@@ -763,7 +763,7 @@ MonoBehaviour:
   MinthresholdLR: 2
   MaxthresholdFB: 4
   MaxthresholdLR: 4
-  maxSpeed: 250
+  maxSpeed: 600
   minSpeed: 0
   playerIndex: 0
   delayedFrames: 0
@@ -771,6 +771,51 @@ MonoBehaviour:
   shownSpeed: {x: 0, y: 0, z: 0}
   keyboardSpeed: 210
   xval: 0
+--- !u!1 &80979934
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 80979936}
+  - component: {fileID: 80979935}
+  m_Layer: 0
+  m_Name: MessageListener(1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &80979935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80979934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a03027548d784348a5d2b1fbe819cfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Game: {fileID: 1853148507}
+  Playerindex: 1
+--- !u!4 &80979936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80979934}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1202250007}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &84356501
 GameObject:
   m_ObjectHideFlags: 0
@@ -1662,6 +1707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Game: {fileID: 1853148507}
+  Playerindex: 0
 --- !u!4 &186120746
 Transform:
   m_ObjectHideFlags: 0
@@ -10614,6 +10660,12 @@ Transform:
   m_Father: {fileID: 918028723}
   m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1169032116 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5154856036340132840, guid: 4569103a97551e245b460df25ea57d2a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5154856035333242850}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1172806224
 GameObject:
   m_ObjectHideFlags: 0
@@ -11151,6 +11203,55 @@ Transform:
   - {fileID: 270663025}
   m_Father: {fileID: 918028723}
   m_RootOrder: 47
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1202250005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1202250007}
+  - component: {fileID: 1202250006}
+  m_Layer: 0
+  m_Name: Arduino (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1202250006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202250005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bc5f48af2cffd747a079fe8c632e2c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  portName: COM6
+  baudRate: 9600
+  messageListener: {fileID: 80979934}
+  reconnectionDelay: 1000
+  maxUnreadMessages: 2
+--- !u!4 &1202250007
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202250005}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 80979936}
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1215680859
 PrefabInstance:
@@ -17710,6 +17811,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   players:
   - {fileID: 76353149}
+  - {fileID: 1169032116}
 --- !u!1 &1853988290
 GameObject:
   m_ObjectHideFlags: 0
@@ -21530,6 +21632,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gnome_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5154856036340132846, guid: 4569103a97551e245b460df25ea57d2a,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 5154856036340132846, guid: 4569103a97551e245b460df25ea57d2a,
         type: 3}

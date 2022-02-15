@@ -17,6 +17,10 @@ public class PlayerMovement : MonoBehaviour
 
     public float maxSpeed;
     public float minSpeed;
+    [Header("The decrease of max speed each hat gives you")]
+    public float hatBurden = 0;
+    public float speedDecreaseEachHat;
+
     public int playerIndex = 0;
     
     // to filter the value we get from the gyroscope
@@ -106,21 +110,25 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = new Vector3(xval, 0f, zval);
 
+        float currentMaxSpeed = maxSpeed;
+        if (maxSpeed - hatBurden >= minSpeed)
+            currentMaxSpeed = maxSpeed - hatBurden;
+
         // adjusts speed according to our thresholds for an acceleration effect
         float speed_x, speed_z;
         if (Mathf.Abs(move.x) <= MinthresholdLR)
             speed_x = 0f;
         else if (Mathf.Abs(move.x) >= MaxthresholdLR)
-            speed_x = maxSpeed;
+            speed_x = currentMaxSpeed;
         else
-            speed_x = map(Mathf.Abs(move.x), MinthresholdLR, MaxthresholdLR, minSpeed, maxSpeed);
+            speed_x = map(Mathf.Abs(move.x), MinthresholdLR, MaxthresholdLR, minSpeed, currentMaxSpeed);
 
         if (Mathf.Abs(move.z) <= MinthresholdFB)
             speed_z = 0f;
         else if (Mathf.Abs(move.z) >= MaxthresholdFB)
-            speed_z = maxSpeed;
+            speed_z = currentMaxSpeed;
         else
-            speed_z = map(Mathf.Abs(move.z), MinthresholdFB, MaxthresholdFB, minSpeed, maxSpeed);
+            speed_z = map(Mathf.Abs(move.z), MinthresholdFB, MaxthresholdFB, minSpeed, currentMaxSpeed);
 
         // assigns direction
         speed_x *= Mathf.Sign(move.x);

@@ -44,7 +44,7 @@ public class MainGameController : MonoBehaviour
                 break;
             case GameStatus.Playing:
                 playerMovements[playerIndex].Move(x, y, z);
-                if (jump == "True")
+                if (jump == "False")
                 {
                     playerMovements[playerIndex].jumpset(true);
                 }

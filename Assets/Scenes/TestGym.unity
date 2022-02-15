@@ -763,7 +763,7 @@ MonoBehaviour:
   MinthresholdLR: 2
   MaxthresholdFB: 4
   MaxthresholdLR: 4
-  maxSpeed: 600
+  maxSpeed: 1200
   minSpeed: 0
   playerIndex: 0
   delayedFrames: 0
@@ -11220,7 +11220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1202250006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15226,8 +15226,8 @@ MonoBehaviour:
   portName: COM4
   baudRate: 9600
   messageListener: {fileID: 186120744}
-  reconnectionDelay: 1000
-  maxUnreadMessages: 2
+  reconnectionDelay: 100
+  maxUnreadMessages: 1
 --- !u!4 &1589612144
 Transform:
   m_ObjectHideFlags: 0

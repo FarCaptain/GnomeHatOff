@@ -58,6 +58,14 @@ public class NewTimer : MonoBehaviour
 		}
 	}
 
+    public float TimerCompletionRate
+	{
+		get
+		{
+            return timerCompletionRate;
+		}
+	}
+
     void Start()
     {
         
@@ -69,6 +77,7 @@ public class NewTimer : MonoBehaviour
         if(timerStart)
 		{
             currentTime += Time.deltaTime;
+            timerCompletionRate = Mathf.Sin(currentTime / maxTime);
             if(currentTime>=maxTime)
 			{
                 timerStart = false;

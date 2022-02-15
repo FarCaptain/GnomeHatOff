@@ -10,6 +10,7 @@ public class ScoreSystem : MonoBehaviour
     public GameObject scoreText1;
     [SerializeField] GameObject player1BonusMessage;
     [SerializeField] GameObject player2BonusMessage;
+    [SerializeField] GameObject pointsPopupDisplay;
     bool player1BonusRecieved = false;
     bool player2BonusRecieved= false;
     public GameObject player0;
@@ -120,7 +121,6 @@ public class ScoreSystem : MonoBehaviour
 
 	private bool DisplayBonusMessage(GameObject bonusMessageDisplayObject, bool bonusActivated)
 	{
-        print("Work");
         if (currentFade == fadeStates.FadeIn)
         {
             bonusMessageDisplayObject.GetComponent<TextMeshProUGUI>().color = Color.Lerp(transparent, opaque, bonusMessageFadeTimer.CurrentTime / bonusMessageFadeTimer.MaxTime);
@@ -177,12 +177,16 @@ public class ScoreSystem : MonoBehaviour
                 {
                     playerScore0 += bonusPoints;
                     scoreText0.GetComponent<TMPro.TextMeshProUGUI>().text = playerScore0.ToString();
+                    HatDropIndicator gnome0HatDropIndicator = Instantiate(pointsPopupDisplay, player.transform.position, Quaternion.identity).GetComponent<HatDropIndicator>();
+                    gnome0HatDropIndicator.SetPoints(bonusPoints);
                     player_id = 0;
                 }
                 else
                 {
                     playerScore1 += bonusPoints;
                     scoreText1.GetComponent<TMPro.TextMeshProUGUI>().text = playerScore1.ToString();
+                    HatDropIndicator gnome1HatDropIndicator = Instantiate(pointsPopupDisplay, player.transform.position, Quaternion.identity).GetComponent<HatDropIndicator>();
+                    gnome1HatDropIndicator.SetPoints(bonusPoints);
                     player_id = 1;
                 }
 

@@ -34,9 +34,9 @@ public class MainGameController : MonoBehaviour
         }
     }
 
-    public void RecieveSignal(int playerIndex, float x, float y, float z, string jump)
+    public void RecieveSignal(int playerIndex, float x, float y, float z, string RFID)
     {
-        Debug.Log(jump);
+        Debug.Log(RFID);
         switch (status)
         {
             case GameStatus.Ready:
@@ -44,7 +44,7 @@ public class MainGameController : MonoBehaviour
                 break;
             case GameStatus.Playing:
                 playerMovements[playerIndex].Move(x, y, z);
-                if (jump == "False")
+                if (RFID == "False")
                 {
                     playerMovements[playerIndex].jumpset(true);
                 }

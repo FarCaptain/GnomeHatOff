@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Hat
+  - Knockback
   layers:
   - Default
   - TransparentFX

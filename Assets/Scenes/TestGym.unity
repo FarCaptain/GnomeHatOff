@@ -793,6 +793,21 @@ MonoBehaviour:
   shownSpeed: {x: 0, y: 0, z: 0}
   keyboardSpeed: 210
   xval: 0
+  canMove: 1
+--- !u!114 &76353151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76353149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a21181763c9d97547a8fe35066184937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockBackForceAmount: 10
+  knockBackForceDistance: 1
 --- !u!1 &84356501
 GameObject:
   m_ObjectHideFlags: 0
@@ -21984,3 +21999,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4569103a97551e245b460df25ea57d2a, type: 3}
+--- !u!1 &5154856035333242851 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5154856036340132840, guid: 4569103a97551e245b460df25ea57d2a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5154856035333242850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5154856035333242852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5154856035333242851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a21181763c9d97547a8fe35066184937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockBackForceAmount: 10
+  knockBackForceDistance: 1

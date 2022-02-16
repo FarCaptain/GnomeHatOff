@@ -5270,7 +5270,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &537913610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8842,8 +8842,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2130f634f48e4624c82b61b451ad645f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accelerationTime: 0.5
-  maxSpeed: 2
+  accelerationTime: 0.01
+  maxSpeed: 80
   rb: {fileID: 985829403}
 --- !u!54 &985829403
 Rigidbody:
@@ -8929,8 +8929,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 985829401}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.41, y: 1.11, z: 0.31}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 2.41, y: 6.387, z: 0.31}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 22

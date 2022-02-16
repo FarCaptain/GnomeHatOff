@@ -19,6 +19,7 @@ public class Mushroom_Man : MonoBehaviour
         if (delay <= 0)
         {
             ground = true;
+            
         }
         if(ground==true)
         {
@@ -34,5 +35,6 @@ public class Mushroom_Man : MonoBehaviour
     void FixedUpdate()
     {
         rb.AddForce(movement * maxSpeed);
+        
     }
 }

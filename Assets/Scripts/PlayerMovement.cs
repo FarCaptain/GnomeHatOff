@@ -35,8 +35,10 @@ public class PlayerMovement : MonoBehaviour
     public float xval;
 
 
-    Vector3 initPos = new Vector3(0,0,0);        // new default position for controller when calibrated
- 
+    Vector3 initPos = new Vector3(0,0,0);       // new default position for controller when calibrated
+    
+    [HideInInspector]
+    public bool canMove = true;
 
     void Start()
     {
@@ -94,12 +96,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move(Vector3 motion)
     {
+        if (canMove == false)
+		{
+            return;
+		}
         rigidBody.velocity = motion;
         //Debug.Log(motion);
     }
 
     public void Move(float xaxis, float yaxis,float zaxis)
     {
+        if (canMove == false)
+        {
+            return;
+        }
         float xval = xaxis - initPos.x;
         float yval = yaxis - initPos.y;
         float zval = zaxis - initPos.y;
@@ -163,6 +173,5 @@ public class PlayerMovement : MonoBehaviour
 
         GetComponentInChildren<HatCollecter>().hatdrop = value;
     }
-
 
 }

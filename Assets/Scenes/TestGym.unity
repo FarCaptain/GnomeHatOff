@@ -899,6 +899,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockBackForceAmount: 10
   knockBackForceDistance: 1
+  FlashingTime: 0.08
+  TimeInterval: 0.1
 --- !u!1 &84356501
 GameObject:
   m_ObjectHideFlags: 0
@@ -5376,7 +5378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &537913610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15514,7 +15516,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1589612143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22070,3 +22072,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockBackForceAmount: 10
   knockBackForceDistance: 1
+  FlashingTime: 0.08
+  TimeInterval: 0.1

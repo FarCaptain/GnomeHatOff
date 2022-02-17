@@ -34,11 +34,13 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Knockback" && playerMovement.canMove == true)
         {
             StartCoroutine(KnockbackPlayer(collision.gameObject));
+            OnDamageEnable();
+            
         }
-        //if (collision.gameObject.tag == "Damage")
-        //{
-        //    isDamaged = true;
-        //}
+        if (collision.gameObject.tag == "Damage")
+        {
+            OnDamageEnable();
+        }
     }
     IEnumerator KnockbackPlayer(GameObject objectCausingKnockback)
 	{
@@ -93,7 +95,7 @@ public class Player : MonoBehaviour
 
 
 
-    public float FlashingTime = .6f;
+    public float FlashingTime = .2f;
     public float TimeInterval = .1f;
 
     void OnDamageEnable()
@@ -117,6 +119,7 @@ public class Player : MonoBehaviour
             r.enabled = true;
             elapsedTime += Time.deltaTime;
             yield return new WaitForSeconds(intervalTime);
+            Debug.Log(elapsedTime);
         }
     }
 }

@@ -139,11 +139,17 @@ public class Player : MonoBehaviour
             //Get all renderer in child also
             Renderer[] RendererArray = GetComponentsInChildren<Renderer>();
             foreach (Renderer r in RendererArray)
-            r.enabled = false;
+            {
+                if (!r) continue;
+                r.enabled = false;
+            }
             elapsedTime += Time.deltaTime;
             yield return new WaitForSeconds(intervalTime);
             foreach (Renderer r in RendererArray)
-            r.enabled = true;
+            {
+                if (!r) continue;
+                r.enabled = true;
+            }
             elapsedTime += Time.deltaTime;
             yield return new WaitForSeconds(intervalTime);
         }

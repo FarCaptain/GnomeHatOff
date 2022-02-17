@@ -11,6 +11,7 @@ public class DiglettBehaviour : MonoBehaviour
     public float maxSpawnTimeGap;
 
     public float stayTime;
+    public bool stealHat;
 
     private NewTimer stayTimer;
     private NewTimer spawnTimer;

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4488891854235144380}
   m_Layer: 0
   m_Name: Diglett
-  m_TagString: Untagged
+  m_TagString: StealHat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,3 +111,4 @@ MonoBehaviour:
   minSpawnTimeGap: 5
   maxSpawnTimeGap: 10
   stayTime: 20
+  stealHat: 0

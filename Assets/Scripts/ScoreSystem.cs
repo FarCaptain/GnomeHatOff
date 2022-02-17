@@ -256,7 +256,7 @@ public class ScoreSystem : MonoBehaviour
                 magnifyFire(player_id, getFireSize(player.gameObject));
                 fires[player_id].Play();
 
-                hatcollecter.hatCount = 0;
+                player.GetComponentInChildren<PlayerMovement>().hatBurden = 0f;
 
                 for (int i = 0; i < player.transform.childCount; i++)
                 {

@@ -34,11 +34,13 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Knockback" && playerMovement.canMove == true)
         {
             StartCoroutine(KnockbackPlayer(collision.gameObject));
+            OnDamageEnable();
+            
         }
-        //if (collision.gameObject.tag == "Damage")
-        //{
-        //    isDamaged = true;
-        //}
+        if (collision.gameObject.tag == "Damage")
+        {
+            OnDamageEnable();
+        }
     }
     IEnumerator KnockbackPlayer(GameObject objectCausingKnockback)
 	{
@@ -72,19 +74,53 @@ public class Player : MonoBehaviour
 		return directionOfKnockback;
 	}
 
-	//void ShowDamageFeedback()
- //   {
+    //void ShowDamageFeedback()
+    //   {
 
- //       if (isDamaged == true)
- //       {
+    //       if (isDamaged == true)
+    //       {
 
- //       }
- //       else
- //       {
- //           NewTimer iFramesTimer = gameObject.AddComponent<NewTimer>();
- //           iFramesTimer.MaxTime = feedbackTime;
- //           iFramesTimer.TimerStart = true;
- //       }
- //       isDamaged = true;
- //   }
+    //       }
+    //       else
+    //       {
+    //           NewTimer iFramesTimer = gameObject.AddComponent<NewTimer>();
+    //           iFramesTimer.MaxTime = feedbackTime;
+    //           iFramesTimer.TimerStart = true;
+    //       }
+    //       isDamaged = true;
+    //   }
+
+
+
+
+
+
+    public float FlashingTime = .2f;
+    public float TimeInterval = .1f;
+
+    void OnDamageEnable()
+    { 
+        StartCoroutine(Flash(FlashingTime, TimeInterval));
+    }
+
+    IEnumerator Flash(float time, float intervalTime)
+    {
+        //initialize timer
+        float elapsedTime = 0f;
+        GetComponentInChildren<HatCollecter>().isdamaged = true;
+        while (elapsedTime < time)
+        {
+            //Get all renderer in child also
+            Renderer[] RendererArray = GetComponentsInChildren<Renderer>();
+            foreach (Renderer r in RendererArray)
+            r.enabled = false;
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForSeconds(intervalTime);
+            foreach (Renderer r in RendererArray)
+            r.enabled = true;
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForSeconds(intervalTime);
+        }
+        GetComponentInChildren<HatCollecter>().isdamaged = false;
+    }
 }

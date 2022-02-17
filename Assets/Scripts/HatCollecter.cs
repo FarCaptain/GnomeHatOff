@@ -19,6 +19,7 @@ public class HatCollecter : MonoBehaviour
     public Vector3 initColliderSize;
     public Vector3 initColliderCenter;
     public bool hatdrop = false;
+    public bool isdamaged = false;
     private void Start()
     {
         hatdrop = false;
@@ -41,7 +42,7 @@ public class HatCollecter : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Hat")
+        if (other.tag == "Hat" && isdamaged == false)
         {
             if (other.gameObject.transform.position.y > (headTop + 0.01f))
             {
@@ -66,6 +67,10 @@ public class HatCollecter : MonoBehaviour
                 float param = 0.2f;
                 bc.size = new Vector3(size.x, size.y + gap * param, size.z);
                 bc.center = new Vector3(center.x, center.y + 0.5f * gap * param, center.z);
+
+                //decrease speed of Gnome
+                PlayerMovement movement = GetComponentInParent<PlayerMovement>();
+                movement.hatBurden = movement.speedDecreaseEachHat * hatCount;
 
                 other.gameObject.GetComponent<HatFade>().hatShadowDestroy();
             }

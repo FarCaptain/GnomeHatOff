@@ -6,7 +6,7 @@ public class NewTimer : MonoBehaviour
 {
     private float maxTime;
     private float currentTime=0f;
-    private bool isTimerRunning;
+    private bool timerRunning=false;
     private bool timerStart;
     private float timerCompletionRate;
 
@@ -46,15 +46,15 @@ public class NewTimer : MonoBehaviour
 		}
 	}
 
-    public bool IsTimerRunning
+    public bool TimerRunning
 	{
         set
 		{
-            IsTimerRunning = value;
+            timerRunning = value;
 		}
         get
 		{
-            return isTimerRunning;
+            return timerRunning;
 		}
 	}
 
@@ -76,13 +76,20 @@ public class NewTimer : MonoBehaviour
     {
         if(timerStart)
 		{
+            timerRunning = true;
             currentTime += Time.deltaTime;
             timerCompletionRate = Mathf.Sin(currentTime / maxTime);
             if(currentTime>=maxTime)
 			{
+                timerRunning = false;
                 timerStart = false;
                 currentTime = 0;
 			}
 		}
     }
+
+    public void ResetTimer()
+	{
+        currentTime = 0f;
+	}
 }

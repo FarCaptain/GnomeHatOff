@@ -13,6 +13,7 @@ public class Timer : MonoBehaviour
     private TextMeshProUGUI timerText;
     public static float timeRemaining = 90;      // measured in seconds
     private bool isTimerRunning = false;
+    public bool timerPaused = false;
 
     public ScoreSystem scoreSystem;
 
@@ -44,12 +45,12 @@ public class Timer : MonoBehaviour
     {
         if (isTimerRunning)
         {
-            if (timeRemaining > 0)
+            if (timeRemaining > 0 && timerPaused == false)
             {
                 timeRemaining -= Time.deltaTime;
                 DisplayTime(timeRemaining);
             }
-            else
+            else if(timeRemaining<=0)
             {
                 scoreSystem.displayWinner();
                 timeRemaining = 0;

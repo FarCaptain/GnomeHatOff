@@ -6,20 +6,29 @@ using TMPro;
 
 public class ScoreSystem : MonoBehaviour
 {
+    [Header("Points Display Objects")]
+    [SerializeField] GameObject player1HatDropDisplay;
+    [SerializeField] GameObject player2HatDropDisplay;
+    [SerializeField] GameObject bonusPointsPopupDisplay;
+
+    [Header("Player Specific Points Colors")]
+    [SerializeField] Color player1HatDropDisplayTextColor;
+    [SerializeField] Color player1HatDropDisplayTextTransparent;
+    [SerializeField] Color player2HatDropDisplayTextColor;
+    [SerializeField] Color player2HatDropDisplayTextTransparent;
+
+    [Header("")]
+    [SerializeField] float simultaneousDisplayHeightOffset = 1f;
     public GameObject scoreText0;
     public GameObject scoreText1;
-    [SerializeField] GameObject player1BonusMessage;
-    [SerializeField] GameObject player2BonusMessage;
-    [SerializeField] GameObject pointsPopupDisplay;
-    bool player1BonusRecieved = false;
-    bool player2BonusRecieved= false;
+    bool player1HatDropped = false;
+    bool player2HatDropped = false;
     public GameObject player0;
     public GameObject player1;
     public GameObject winPanel;
     public TextMeshProUGUI winText;
     public TextMeshProUGUI winnerScoreText;
    
-
     public List<int> hatThresholds;
 
     [Header("Size must match HatThresholds")]
@@ -33,11 +42,9 @@ public class ScoreSystem : MonoBehaviour
     public ParticleSystem[] fires = new ParticleSystem[2];
     private Vector3[,] initFireScale = new Vector3[2,4];
 
-    private NewTimer bonusMessageScaleTimer;
-    private NewTimer bonusMessageFadeTimer;
+    private NewTimer hatDropDisplayScaleTimer;
+    private NewTimer hatDropDisplayFadeTimer;
 
-    private Color opaque = new Color(1, 1, 1, 1);
-    private Color transparent = new Color(1, 1, 1, 0);
 
     private Vector3 initialMessageScale;
     private Vector3 finalMessageScale;
@@ -45,19 +52,29 @@ public class ScoreSystem : MonoBehaviour
     private enum fadeStates {FadeIn, FadeOut};
     fadeStates currentFade=fadeStates.FadeIn;
 
-    
+    private BonusPointsIndicator[] bonusPointIndicatorsInScene;
     // Start is called before the first frame update
     void Start()
-    {
-        initialMessageScale = player1BonusMessage.GetComponent<RectTransform>().localScale;
-        finalMessageScale = initialMessageScale + Vector3.one;
-     
-        for(int id = 0; id < 2; id ++)
-            for (int i = 0; i < fires[id].transform.childCount; i++)
-                initFireScale[id, i] = fires[id].transform.GetChild(i).transform.localScale;
-    }
+	{
+		initialMessageScale = player1HatDropDisplay.GetComponent<RectTransform>().localScale;
+		finalMessageScale = initialMessageScale + Vector3.one*1.5f;
 
-    public void displayWinner()
+		for (int id = 0; id < 2; id++)
+			for (int i = 0; i < fires[id].transform.childCount; i++)
+				initFireScale[id, i] = fires[id].transform.GetChild(i).transform.localScale;
+
+		InitializeFadeAndScaleTimer();
+	}
+
+	private void InitializeFadeAndScaleTimer()
+	{
+		hatDropDisplayScaleTimer = gameObject.AddComponent<NewTimer>();
+		hatDropDisplayFadeTimer = gameObject.AddComponent<NewTimer>();
+		hatDropDisplayScaleTimer.MaxTime = 2f;
+		hatDropDisplayFadeTimer.MaxTime = 1f;
+	}
+
+	public void displayWinner()
     {
         winPanel.SetActive(true);
         if (playerScore0 > playerScore1)
@@ -97,51 +114,83 @@ public class ScoreSystem : MonoBehaviour
         }
         if (bonusPoints > 0)
         {
-            bonusMessageScaleTimer = gameObject.AddComponent<NewTimer>();
-            bonusMessageFadeTimer = gameObject.AddComponent<NewTimer>();
-            bonusMessageScaleTimer.MaxTime = 2f;
-            bonusMessageFadeTimer.MaxTime = 1f;
-            bonusMessageScaleTimer.TimerStart = true;
-            bonusMessageFadeTimer.TimerStart = true;
-
-            if (player.name=="Gnome_0")
-			{
-                player1BonusMessage.GetComponent<TextMeshProUGUI>().text = "+" + bonusPoints + " BONUS!";
-                player1BonusRecieved = true;
-            }
-            else if(player.name=="Gnome_1")
-			{
-                player2BonusMessage.GetComponent<TextMeshProUGUI>().text = "+" + bonusPoints + " BONUS!";
-                player2BonusRecieved = true;
-			}
-            
+            BonusPointsIndicator bonusPointsIndicatorObject = Instantiate(bonusPointsPopupDisplay, player.transform.position, Quaternion.identity).GetComponent<BonusPointsIndicator>();
+            HandleSimultaneousBonusDisplaySpawns();
+            bonusPointsIndicatorObject.SetPointsText(bonusPoints, player.GetComponent<PlayerMovement>().playerIndex);  
         }
 		return bonusPoints;
     }
 
-	private bool DisplayBonusMessage(GameObject bonusMessageDisplayObject, bool bonusActivated)
+    private void HandleSimultaneousBonusDisplaySpawns()
+	{
+        bonusPointIndicatorsInScene = FindObjectsOfType<BonusPointsIndicator>();
+        if (bonusPointIndicatorsInScene.Length <= 1)
+		{
+            return;
+		}
+        if (bonusPointIndicatorsInScene[0].startTime == bonusPointIndicatorsInScene[1].startTime)
+        {
+            bonusPointIndicatorsInScene[1].initialPos += new Vector3(0, simultaneousDisplayHeightOffset, 0);
+        }
+        //for (int i = 0; i < bonusPointIndicatorsInScene.Length; i++)
+        //{
+        //    bool firstMatch = false;
+        //    for (int j = i; j < bonusPointIndicatorsInScene.Length; i++)
+        //    {
+        //        if (bonusPointIndicatorsInScene[i].startTime == bonusPointIndicatorsInScene[j].startTime)
+        //        {
+        //            if (firstMatch == false)
+        //            {
+        //                firstMatch = true;
+
+        //            }
+        //            else
+        //            {
+
+        //            }
+        //        }
+        //    }
+        //}
+    }
+	private bool DisplayHatDropFeedback(GameObject hatDropDisplay, bool hatDropped)
 	{
         if (currentFade == fadeStates.FadeIn)
         {
-            bonusMessageDisplayObject.GetComponent<TextMeshProUGUI>().color = Color.Lerp(transparent, opaque, bonusMessageFadeTimer.CurrentTime / bonusMessageFadeTimer.MaxTime);
-            if (bonusMessageFadeTimer.TimerStart == false)
+            if(hatDropDisplay.name == "Player1HatDropDisplay")
+			{
+                hatDropDisplay.GetComponent<TextMeshProUGUI>().color = Color.Lerp(player1HatDropDisplayTextTransparent, player1HatDropDisplayTextColor, hatDropDisplayFadeTimer.CurrentTime / hatDropDisplayFadeTimer.MaxTime);
+            }
+            else if(hatDropDisplay.name == "Player2HatDropDisplay")
+			{
+                hatDropDisplay.GetComponent<TextMeshProUGUI>().color = Color.Lerp(player2HatDropDisplayTextTransparent, player2HatDropDisplayTextColor, hatDropDisplayFadeTimer.CurrentTime / hatDropDisplayFadeTimer.MaxTime);
+			}
+            
+            if (hatDropDisplayFadeTimer.TimerStart == false)
             {
                 currentFade = fadeStates.FadeOut;
-                bonusMessageFadeTimer.TimerStart = true;
+                hatDropDisplayFadeTimer.TimerStart = true;
             }
         }
         else if (currentFade == fadeStates.FadeOut)
         {
-            bonusMessageDisplayObject.GetComponent<TextMeshProUGUI>().color = Color.Lerp(opaque, transparent, bonusMessageFadeTimer.CurrentTime / bonusMessageFadeTimer.MaxTime);
-            if (bonusMessageFadeTimer.TimerStart == false)
+            if (hatDropDisplay.name == "Player1HatDropDisplay")
+            {
+                hatDropDisplay.GetComponent<TextMeshProUGUI>().color = Color.Lerp(player1HatDropDisplayTextColor, player1HatDropDisplayTextTransparent, hatDropDisplayFadeTimer.CurrentTime / hatDropDisplayFadeTimer.MaxTime);
+            }
+            else if (hatDropDisplay.name == "Player2HatDropDisplay")
+            {
+                hatDropDisplay.GetComponent<TextMeshProUGUI>().color = Color.Lerp(player2HatDropDisplayTextColor, player2HatDropDisplayTextTransparent, hatDropDisplayFadeTimer.CurrentTime / hatDropDisplayFadeTimer.MaxTime);
+            }
+           
+            if (hatDropDisplayFadeTimer.TimerStart == false)
             {
                 currentFade = fadeStates.FadeIn;
-                bonusMessageDisplayObject.GetComponent<TextMeshProUGUI>().color = transparent;
-                bonusActivated = false;
+                hatDropDisplay.GetComponent<TextMeshProUGUI>().color = Color.clear;
+                hatDropped = false;
             }
         }
-        bonusMessageDisplayObject.GetComponent<RectTransform>().localScale = Vector3.Lerp(initialMessageScale, finalMessageScale, bonusMessageScaleTimer.CurrentTime / bonusMessageScaleTimer.MaxTime);
-        return bonusActivated;
+        hatDropDisplay.GetComponent<RectTransform>().localScale = Vector3.Lerp(initialMessageScale, finalMessageScale, hatDropDisplayScaleTimer.CurrentTime / hatDropDisplayScaleTimer.MaxTime);
+        return hatDropped;
     }
 
 	private float getFireSize(GameObject player)
@@ -171,22 +220,33 @@ public class ScoreSystem : MonoBehaviour
             {
                 // TODO: Perhpas adjust how we can reference different players (not an issue now since we only have 2)
                 int bonusPoints = hatcollecter.hatCount + getBonusPoints(player.gameObject);
-
                 int player_id = 0;
+
+                if(hatDropDisplayFadeTimer.TimerRunning==true || hatDropDisplayScaleTimer.TimerRunning==true)
+				{
+                    hatDropDisplayFadeTimer.ResetTimer();
+                    hatDropDisplayScaleTimer.ResetTimer();
+                } 
+                else if(hatDropDisplayFadeTimer.TimerRunning == false || hatDropDisplayScaleTimer.TimerRunning == false)
+				{
+                    hatDropDisplayScaleTimer.TimerStart = true;
+                    hatDropDisplayFadeTimer.TimerStart = true;
+                }
+               
                 if (player.name == "Gnome_0")
                 {
                     playerScore0 += bonusPoints;
                     scoreText0.GetComponent<TMPro.TextMeshProUGUI>().text = playerScore0.ToString();
-                    HatDropIndicator gnome0HatDropIndicator = Instantiate(pointsPopupDisplay, player.transform.position, Quaternion.identity).GetComponent<HatDropIndicator>();
-                    gnome0HatDropIndicator.SetPoints(hatcollecter.hatCount);
+                    player1HatDropDisplay.GetComponent<TextMeshProUGUI>().text = "+" + hatcollecter.hatCount;
+                    player1HatDropped = true;
                     player_id = 0;
                 }
                 else
                 {
                     playerScore1 += bonusPoints;
                     scoreText1.GetComponent<TMPro.TextMeshProUGUI>().text = playerScore1.ToString();
-                    HatDropIndicator gnome1HatDropIndicator = Instantiate(pointsPopupDisplay, player.transform.position, Quaternion.identity).GetComponent<HatDropIndicator>();
-                    gnome1HatDropIndicator.SetPoints(hatcollecter.hatCount);
+                    player2HatDropDisplay.GetComponent<TextMeshProUGUI>().text = "+" + hatcollecter.hatCount;
+                    player2HatDropped  = true;
                     player_id = 1;
                 }
 
@@ -233,13 +293,13 @@ public class ScoreSystem : MonoBehaviour
 
 	private void Update()
 	{
-        if (player1BonusRecieved)
+        if (player1HatDropped)
         {
-            player1BonusRecieved=DisplayBonusMessage(player1BonusMessage,player1BonusRecieved);
+            player1HatDropped=DisplayHatDropFeedback(player1HatDropDisplay,player1HatDropped);
         }
-        if (player2BonusRecieved)
+        if (player2HatDropped )
 		{
-            player2BonusRecieved=DisplayBonusMessage(player2BonusMessage,player2BonusRecieved);
+            player2HatDropped =DisplayHatDropFeedback(player2HatDropDisplay,player2HatDropped );
         }
 	}
 }

@@ -5,9 +5,11 @@ using UnityEngine;
 public class DevModeDebug : MonoBehaviour
 {
     HatCollecter[] hatCollecters;
+	Timer timer;
     void Start()
     {
         hatCollecters = FindObjectsOfType<HatCollecter>();
+		timer = FindObjectOfType<Timer>();
     }
 
     // Update is called once per frame
@@ -16,6 +18,22 @@ public class DevModeDebug : MonoBehaviour
         if (Debug.isDebugBuild)
 		{
 			UseMKeyForDrop();
+			PauseAndUnpauseTime();
+		}
+	}
+
+	private void PauseAndUnpauseTime()
+	{
+		if (Input.GetKeyDown(KeyCode.X))
+		{
+			if (timer.timerPaused == false)
+			{
+				timer.timerPaused = true;
+			}
+			else
+			{
+				timer.timerPaused = false;
+			}
 		}
 	}
 

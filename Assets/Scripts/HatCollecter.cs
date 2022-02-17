@@ -19,6 +19,7 @@ public class HatCollecter : MonoBehaviour
     public Vector3 initColliderSize;
     public Vector3 initColliderCenter;
     public bool hatdrop = false;
+    public bool isdamaged = false;
     private void Start()
     {
         hatdrop = false;
@@ -41,7 +42,7 @@ public class HatCollecter : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Hat")
+        if (other.tag == "Hat" && isdamaged == false)
         {
             if (other.gameObject.transform.position.y > (headTop + 0.01f))
             {

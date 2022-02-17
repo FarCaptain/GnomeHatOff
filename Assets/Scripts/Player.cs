@@ -107,6 +107,7 @@ public class Player : MonoBehaviour
     {
         //initialize timer
         float elapsedTime = 0f;
+        GetComponentInChildren<HatCollecter>().isdamaged = true;
         while (elapsedTime < time)
         {
             //Get all renderer in child also
@@ -119,7 +120,7 @@ public class Player : MonoBehaviour
             r.enabled = true;
             elapsedTime += Time.deltaTime;
             yield return new WaitForSeconds(intervalTime);
-            Debug.Log(elapsedTime);
         }
+        GetComponentInChildren<HatCollecter>().isdamaged = false;
     }
 }

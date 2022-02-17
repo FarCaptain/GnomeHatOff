@@ -878,6 +878,8 @@ MonoBehaviour:
   MaxthresholdLR: 4
   maxSpeed: 1200
   minSpeed: 0
+  hatBurden: 0
+  speedDecreaseEachHat: 0
   playerIndex: 0
   delayedFrames: 0
   runDust: {fileID: 1135746368}

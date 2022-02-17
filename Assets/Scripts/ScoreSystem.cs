@@ -18,7 +18,7 @@ public class ScoreSystem : MonoBehaviour
     [SerializeField] Color player2HatDropDisplayTextTransparent;
 
     [Header("")]
-    [SerializeField] float simultaneousDisplayHeightOffset = 1f;
+    [SerializeField] float simultaneousDisplayHeightOffsetValue = 1f;
     public GameObject scoreText0;
     public GameObject scoreText1;
     bool player1HatDropped = false;
@@ -53,6 +53,7 @@ public class ScoreSystem : MonoBehaviour
     fadeStates currentFade=fadeStates.FadeIn;
 
     private BonusPointsIndicator[] bonusPointIndicatorsInScene;
+    private bool simultaneousBonusesBeingDisplayed = false;
     // Start is called before the first frame update
     void Start()
 	{
@@ -115,44 +116,45 @@ public class ScoreSystem : MonoBehaviour
         if (bonusPoints > 0)
         {
             BonusPointsIndicator bonusPointsIndicatorObject = Instantiate(bonusPointsPopupDisplay, player.transform.position, Quaternion.identity).GetComponent<BonusPointsIndicator>();
-            HandleSimultaneousBonusDisplaySpawns();
+            if(simultaneousBonusesBeingDisplayed==false)
+            {
+                int numberOfSameSpawnTimeDisplays = 0;
+                simultaneousBonusesBeingDisplayed = HandleSimultaneousBonusDisplaySpawns(simultaneousBonusesBeingDisplayed, numberOfSameSpawnTimeDisplays);
+            }
             bonusPointsIndicatorObject.SetPointsText(bonusPoints, player.GetComponent<PlayerMovement>().playerIndex);  
         }
 		return bonusPoints;
     }
 
-    private void HandleSimultaneousBonusDisplaySpawns()
+    private bool HandleSimultaneousBonusDisplaySpawns(bool simultaneousCheck, int displayCounter)
 	{
         bonusPointIndicatorsInScene = FindObjectsOfType<BonusPointsIndicator>();
         if (bonusPointIndicatorsInScene.Length <= 1)
 		{
-            return;
+            return simultaneousCheck = false; ;
 		}
-        if (bonusPointIndicatorsInScene[0].startTime == bonusPointIndicatorsInScene[1].startTime)
+        for (int i = 0; i < bonusPointIndicatorsInScene.Length-1; i++)
         {
-            bonusPointIndicatorsInScene[1].initialPos += new Vector3(0, simultaneousDisplayHeightOffset, 0);
+         
+            for (int j = i + 1; j < bonusPointIndicatorsInScene.Length; j++)
+            {
+                if (bonusPointIndicatorsInScene[i].startTime == bonusPointIndicatorsInScene[j].startTime)
+                {
+                    print("aSDJKasbDUIVASIDU");
+                    simultaneousCheck = true;
+                    displayCounter++;
+                    bonusPointIndicatorsInScene[j].initialPos += new Vector3(0, simultaneousDisplayHeightOffsetValue * displayCounter, 0);
+                }
+            }
         }
-        //for (int i = 0; i < bonusPointIndicatorsInScene.Length; i++)
+        return simultaneousCheck;
+        //if (bonusPointIndicatorsInScene[0].startTime == bonusPointIndicatorsInScene[1].startTime)
         //{
-        //    bool firstMatch = false;
-        //    for (int j = i; j < bonusPointIndicatorsInScene.Length; i++)
-        //    {
-        //        if (bonusPointIndicatorsInScene[i].startTime == bonusPointIndicatorsInScene[j].startTime)
-        //        {
-        //            if (firstMatch == false)
-        //            {
-        //                firstMatch = true;
-
-        //            }
-        //            else
-        //            {
-
-        //            }
-        //        }
-        //    }
+        //    bonusPointIndicatorsInScene[1].initialPos += new Vector3(0, simultaneousDisplayHeightOffsetValue, 0);
         //}
     }
-	private bool DisplayHatDropFeedback(GameObject hatDropDisplay, bool hatDropped)
+
+    private bool DisplayHatDropFeedback(GameObject hatDropDisplay, bool hatDropped)
 	{
         if (currentFade == fadeStates.FadeIn)
         {
@@ -218,6 +220,7 @@ public class ScoreSystem : MonoBehaviour
             HatCollecter hatcollecter = player.GetComponentInChildren<HatCollecter>();
             if (hatcollecter.hatCount > 0 && hatcollecter.hatdrop == true)
             {
+                hatcollecter.hatdrop = false;
                 // TODO: Perhpas adjust how we can reference different players (not an issue now since we only have 2)
                 int bonusPoints = hatcollecter.hatCount + getBonusPoints(player.gameObject);
                 int player_id = 0;
@@ -275,7 +278,6 @@ public class ScoreSystem : MonoBehaviour
                     hatcollecter.GetComponent<BoxCollider>().center = hatcollecter.initColliderCenter;
                 }
             }
-            hatcollecter.hatdrop = false;
         }
     }
 

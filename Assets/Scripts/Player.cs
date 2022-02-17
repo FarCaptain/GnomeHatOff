@@ -17,10 +17,16 @@ public class Player : MonoBehaviour
     //Cached Player Components
     Rigidbody playerRigidBody;
     PlayerMovement playerMovement;
+    HatCollecter playerHatCollecter;
+
+    NewTimer stealHatIFrame;
     void Start()
     {
         playerRigidBody = gameObject.GetComponent<Rigidbody>();
         playerMovement = gameObject.GetComponent<PlayerMovement>();
+        playerHatCollecter = gameObject.GetComponentInChildren<HatCollecter>();
+
+        stealHatIFrame = gameObject.AddComponent<NewTimer>();
     }
 
     // Update is called once per frame
@@ -40,6 +46,26 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Damage")
         {
             OnDamageEnable();
+        }
+
+        if (collision.gameObject.tag == "StealHat" && playerMovement.canMove == true && stealHatIFrame.TimerStart == false)
+        {
+            StartCoroutine(KnockbackPlayer(collision.gameObject));
+            OnDamageEnable();
+
+            for (int i = 0; i < gameObject.transform.childCount; i++)
+            {
+                if (gameObject.transform.GetChild(i).name == "HatPrefab(Clone)")
+                {
+                    Destroy(playerHatCollecter.hatStack.Pop());
+                    playerHatCollecter.hatCount--;
+                    playerHatCollecter.updateCollecter();
+                    stealHatIFrame.MaxTime = 2f;
+                    stealHatIFrame.TimerStart = true;
+                    break;
+                }
+            }
+            
         }
     }
     IEnumerator KnockbackPlayer(GameObject objectCausingKnockback)

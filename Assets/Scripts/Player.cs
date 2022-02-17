@@ -60,8 +60,8 @@ public class Player : MonoBehaviour
                     Destroy(playerHatCollecter.hatStack.Pop());
                     playerHatCollecter.hatCount--;
                     playerHatCollecter.updateCollecter();
-                    stealHatIFrame.MaxTime = 2f;
-                    stealHatIFrame.TimerStart = true;
+                    //stealHatIFrame.MaxTime = 2f;
+                    //stealHatIFrame.TimerStart = true;
                     break;
                 }
             }

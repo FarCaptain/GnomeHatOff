@@ -68,7 +68,7 @@ public class HatCollecter : MonoBehaviour
                 bc.center = new Vector3(center.x, center.y + 0.5f * gap * param, center.z);
 
                 //decrease speed of Gnome
-                PlayerMovement movement = gameObject.GetComponent<PlayerMovement>();
+                PlayerMovement movement = GetComponentInParent<PlayerMovement>();
                 movement.hatBurden = movement.speedDecreaseEachHat * hatCount;
 
                 other.gameObject.GetComponent<HatFade>().hatShadowDestroy();

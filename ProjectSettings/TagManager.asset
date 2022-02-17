@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Hat
   - Knockback
+  - Mushroom
   layers:
   - Default
   - TransparentFX

@@ -8,7 +8,7 @@ public class HatFade : MonoBehaviour
     public float defaultTransparency = 1f;
     public float fadeDuration = 3f;
     public GameObject player;
-    public GameObject HatshadowPrefab;
+    public GameObject shadowPrefab;
 
     public ParticleSystem circleDust;
 
@@ -52,9 +52,9 @@ public class HatFade : MonoBehaviour
         if (hatFadeEnabled && transform.position.y < headTop)
         {
             FadeT(0.0f);
-            Destroy(HatshadowPrefab);
+     
             Destroy(gameObject, 2f);
-
+            hatShadowDestroy();
             Vector3 pos = transform.position;
             pos.y = 0.15f;
 
@@ -119,12 +119,10 @@ public class HatFade : MonoBehaviour
     {
         hatFadeEnabled = false;
     }
-
     public void hatShadowDestroy()
     {
-        Destroy(HatshadowPrefab);
+        Destroy(shadowPrefab);
     }
-
     public void drawCircleDust()
     {
         circleDust.Play();

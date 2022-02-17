@@ -11,30 +11,25 @@ public class Mushroom_Man : MonoBehaviour
     private float timeLeft;
     [SerializeField]public Rigidbody rb;
     bool ground;
-    float delay =5 ;
+   
 
     void Update()
     {
-        delay -= Time.deltaTime;
-        if (delay <= 0)
-        {
-            ground = true;
-            
-        }
+        
         if(ground==true)
         {
-        timeLeft -= Time.deltaTime;
-        if (timeLeft <= 0)
-        {
-            movement = new Vector3(Random.Range(-1f, 1f), 0.0f, Random.Range(-1f, 1f));
-            timeLeft += accelerationTime;
-        }
+            timeLeft -= Time.deltaTime;
+            if (timeLeft <= 0)
+            {
+                movement = new Vector3(Random.Range(-1f, 1f), 0.0f, Random.Range(-1f, 1f));
+                timeLeft = accelerationTime;
+            }
+
         }
     }
 
     void FixedUpdate()
     {
         rb.AddForce(movement * maxSpeed);
-        
     }
 }

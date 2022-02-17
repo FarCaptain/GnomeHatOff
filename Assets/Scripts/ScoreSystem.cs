@@ -302,4 +302,16 @@ public class ScoreSystem : MonoBehaviour
             player2HatDropped =DisplayHatDropFeedback(player2HatDropDisplay,player2HatDropped );
         }
 	}
+
+    public void AddScore(int player_index, int score)
+    {
+
+        playerScore1 += score;
+        scoreText1.GetComponent<TMPro.TextMeshProUGUI>().text = playerScore1.ToString();
+        player2HatDropDisplay.GetComponent<TextMeshProUGUI>().text = "+" + score;
+        
+        
+    }
+
+
 }

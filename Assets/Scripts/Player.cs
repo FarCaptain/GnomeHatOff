@@ -72,19 +72,51 @@ public class Player : MonoBehaviour
 		return directionOfKnockback;
 	}
 
-	//void ShowDamageFeedback()
- //   {
+    //void ShowDamageFeedback()
+    //   {
 
- //       if (isDamaged == true)
- //       {
+    //       if (isDamaged == true)
+    //       {
 
- //       }
- //       else
- //       {
- //           NewTimer iFramesTimer = gameObject.AddComponent<NewTimer>();
- //           iFramesTimer.MaxTime = feedbackTime;
- //           iFramesTimer.TimerStart = true;
- //       }
- //       isDamaged = true;
- //   }
+    //       }
+    //       else
+    //       {
+    //           NewTimer iFramesTimer = gameObject.AddComponent<NewTimer>();
+    //           iFramesTimer.MaxTime = feedbackTime;
+    //           iFramesTimer.TimerStart = true;
+    //       }
+    //       isDamaged = true;
+    //   }
+
+
+
+
+
+
+    public float FlashingTime = .6f;
+    public float TimeInterval = .1f;
+
+    void OnDamageEnable()
+    { 
+        StartCoroutine(Flash(FlashingTime, TimeInterval));
+    }
+
+    IEnumerator Flash(float time, float intervalTime)
+    {
+        //initialize timer
+        float elapsedTime = 0f;
+        while (elapsedTime < time)
+        {
+            //Get all renderer in child also
+            Renderer[] RendererArray = GetComponentsInChildren<Renderer>();
+            foreach (Renderer r in RendererArray)
+            r.enabled = false;
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForSeconds(intervalTime);
+            foreach (Renderer r in RendererArray)
+            r.enabled = true;
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForSeconds(intervalTime);
+        }
+    }
 }

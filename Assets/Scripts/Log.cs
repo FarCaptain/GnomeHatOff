@@ -14,11 +14,9 @@ public class Log : MonoBehaviour
     [SerializeField] int reverseX = 1;
     [SerializeField] int reverseZ = 1;
 
-    private GameObject parentGameObject;
-
     void Start()
     {
-        parentGameObject = gameObject.transform.parent.gameObject;
+
     }
 
     // Update is called once per frame
@@ -39,8 +37,6 @@ public class Log : MonoBehaviour
 	{
 		if(other.gameObject.name == "LogDestroyer")
 		{
-            parentGameObject.GetComponent<LogSpawner>().logSpawnTimer.TimerStart = true;
-            parentGameObject.GetComponent<LogSpawner>().logAlive = false;
             Destroy(gameObject);
 		}
 	}

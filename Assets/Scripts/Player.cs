@@ -7,18 +7,20 @@ public class Player : MonoBehaviour
 
     [Header("Knockback Variables")]
     [SerializeField] int knockBackForceAmount = 10;
-    [SerializeField] float knockBackForceDistance = 1;
     private float waitTimeBeforeMoving = 0.5f;
 
-    //[SerializeField] float feedbackTime = 2f;
-    //private bool isDamaged = false;
+    [Header("Damage Variables")]
+    [SerializeField] float iFrameMaxTime = 2f;
 
+    enum TypesOfHatSteal {None, Some, All};
+    [Header("Hat Steal Variables")]
+    [SerializeField] TypesOfHatSteal typeOfHatStealChosen = TypesOfHatSteal.Some;
+    [SerializeField] int maxHatsToSteal = 0;
 
     //Cached Player Components
     Rigidbody playerRigidBody;
     PlayerMovement playerMovement;
     HatCollecter playerHatCollecter;
-
     NewTimer stealHatIFrame;
     void Start()
     {
@@ -27,6 +29,7 @@ public class Player : MonoBehaviour
         playerHatCollecter = gameObject.GetComponentInChildren<HatCollecter>();
 
         stealHatIFrame = gameObject.AddComponent<NewTimer>();
+        stealHatIFrame.MaxTime = iFrameMaxTime;
     }
 
     // Update is called once per frame
@@ -37,38 +40,70 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Knockback" && playerMovement.canMove == true)
+        /// Guard Statment
+        /// Always make sure player can move before applying any debuff on them
+        if(playerMovement.canMove == false)
+		{
+            return;
+		}
+
+        if (collision.gameObject.tag.Contains("Knockback"))
         {
             StartCoroutine(KnockbackPlayer(collision.gameObject));
-            OnDamageEnable();
-            
         }
-        if (collision.gameObject.tag == "Damage")
+
+        if (collision.gameObject.tag.Contains("Damage") && stealHatIFrame.TimerStart == false)
         {
             OnDamageEnable();
         }
 
-        if (collision.gameObject.tag == "StealHat" && playerMovement.canMove == true && stealHatIFrame.TimerStart == false)
+        if (collision.gameObject.tag.Contains("StealHat"))
         {
-            StartCoroutine(KnockbackPlayer(collision.gameObject));
-            OnDamageEnable();
-
-            for (int i = 0; i < gameObject.transform.childCount; i++)
-            {
-                if (gameObject.transform.GetChild(i).name == "HatPrefab(Clone)")
-                {
-                    Destroy(playerHatCollecter.hatStack.Pop());
-                    playerHatCollecter.hatCount--;
-                    playerHatCollecter.updateCollecter();
-                    //stealHatIFrame.MaxTime = 2f;
-                    //stealHatIFrame.TimerStart = true;
-                    break;
-                }
-            }
-            
-        }
+            if(playerHatCollecter.hatCount==0)
+			{
+                return;
+			}
+            else
+			{
+				SetMaxHatsToStealBasedOnType();
+			}
+		}
     }
-    IEnumerator KnockbackPlayer(GameObject objectCausingKnockback)
+
+	private void SetMaxHatsToStealBasedOnType()
+	{
+        switch(typeOfHatStealChosen)
+		{
+            case TypesOfHatSteal.None:
+                break;
+
+			case TypesOfHatSteal.Some:
+                StealHat(maxHatsToSteal, typeOfHatStealChosen);
+                break;
+
+            case TypesOfHatSteal.All:
+                maxHatsToSteal = playerHatCollecter.hatCount;
+                StealHat(maxHatsToSteal, typeOfHatStealChosen);
+                break;
+        }
+		
+	}
+
+	private void StealHat(int numberOfHats,TypesOfHatSteal typeOfHatStealChosen)
+	{
+        for(int i=0;i<numberOfHats; i++)
+		{
+            if(playerHatCollecter.hatStack.Count == 0)
+			{
+                return;
+			}
+            Destroy(playerHatCollecter.hatStack.Pop());
+            playerHatCollecter.hatCount--;
+            playerHatCollecter.updateCollecter();
+        }
+	}
+
+	IEnumerator KnockbackPlayer(GameObject objectCausingKnockback)
 	{
         playerMovement.canMove = false;
 
@@ -100,32 +135,12 @@ public class Player : MonoBehaviour
 		return directionOfKnockback;
 	}
 
-    //void ShowDamageFeedback()
-    //   {
-
-    //       if (isDamaged == true)
-    //       {
-
-    //       }
-    //       else
-    //       {
-    //           NewTimer iFramesTimer = gameObject.AddComponent<NewTimer>();
-    //           iFramesTimer.MaxTime = feedbackTime;
-    //           iFramesTimer.TimerStart = true;
-    //       }
-    //       isDamaged = true;
-    //   }
-
-
-
-
-
-
     public float FlashingTime = .2f;
     public float TimeInterval = .1f;
 
     void OnDamageEnable()
-    { 
+    {
+        stealHatIFrame.TimerStart = true;
         StartCoroutine(Flash(FlashingTime, TimeInterval));
     }
 

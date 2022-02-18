@@ -7,6 +7,12 @@ TagManager:
   - Hat
   - Knockback
   - Mushroom
+  - StealHat
+  - Damage
+  - KnockbackAndDamage
+  - KnockbackAndStealHat
+  - DamageAndStealHat
+  - DamageAndStealHatAndKnockback
   layers:
   - Default
   - TransparentFX

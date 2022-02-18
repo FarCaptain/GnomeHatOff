@@ -15725,6 +15725,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DevModeDebug
       objectReference: {fileID: 0}
+    - target: {fileID: 2545062758632908130, guid: 18ed26ed538fe8e49ae637fb601ac073,
+        type: 3}
+      propertyPath: numberOfHatsToSpawn
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2545062758632908131, guid: 18ed26ed538fe8e49ae637fb601ac073,
         type: 3}
       propertyPath: m_RootOrder
@@ -18662,6 +18667,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Diglett
+      objectReference: {fileID: 0}
+    - target: {fileID: 3985182262057193440, guid: 0764ca12d062cdf4080fa505e52fcb05,
+        type: 3}
+      propertyPath: m_TagString
+      value: DamageAndStealHat
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0764ca12d062cdf4080fa505e52fcb05, type: 3}

@@ -22,12 +22,14 @@ public class Player : MonoBehaviour
     PlayerMovement playerMovement;
     HatCollecter playerHatCollecter;
     NewTimer stealHatIFrame;
+    AudioSource playerAudioSource;
     void Start()
     {
         playerRigidBody = gameObject.GetComponent<Rigidbody>();
         playerMovement = gameObject.GetComponent<PlayerMovement>();
         playerHatCollecter = gameObject.GetComponentInChildren<HatCollecter>();
-
+        playerAudioSource = GetComponent<AudioSource>();
+ 
         stealHatIFrame = gameObject.AddComponent<NewTimer>();
         stealHatIFrame.MaxTime = iFrameMaxTime;
     }
@@ -140,6 +142,7 @@ public class Player : MonoBehaviour
 
     void OnDamageEnable()
     {
+        AudioManager.PlayPlayerAudioClip(PlayerAudioStates.Damaged, playerAudioSource);
         stealHatIFrame.TimerStart = true;
         StartCoroutine(Flash(FlashingTime, TimeInterval));
     }

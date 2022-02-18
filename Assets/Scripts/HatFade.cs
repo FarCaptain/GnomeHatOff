@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HatFade : MonoBehaviour
 {
-
+    private AudioSource hatAudioSource;
     public float defaultTransparency = 1f;
     public float fadeDuration = 3f;
     public GameObject player;
@@ -23,6 +23,7 @@ public class HatFade : MonoBehaviour
 
     void Start()
     {
+        hatAudioSource = GetComponent<AudioSource>();
         currentTransparency = defaultTransparency;
         ApplyTransparency();
 
@@ -59,7 +60,7 @@ public class HatFade : MonoBehaviour
             pos.y = 0.15f;
 
             circleDust.Play();
-
+            AudioManager.PlayHatAudioClip(HatAudioStates.Destroyed, hatAudioSource);
             Destroy(circleDust, 1f);
             hatFadeEnabled = false;
         }

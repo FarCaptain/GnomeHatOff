@@ -5,7 +5,6 @@ using UnityEngine;
 public class HatCollecter : MonoBehaviour
 {
     public GameObject gnome;
-    public AudioClip collectSound;
     public int hatCount;
     public ScoreSystem scoreSystem;
     public ParticleSystem sparks;
@@ -51,8 +50,7 @@ public class HatCollecter : MonoBehaviour
             {
                 //print("Yeay! Hat Collected!" + (++count));
                 hatCount += 1;
-                gameObject.GetComponent<AudioSource>().PlayOneShot(collectSound);
-
+                AudioManager.PlayHatAudioClip(HatAudioStates.Collected, gameObject.GetComponentInParent<AudioSource>());
                 Vector3 hatPos = hatTop.transform.position;
                 hatPos = new Vector3(hatPos.x, hatPos.y + gap, hatPos.z);
                 Destroy(other.gameObject.GetComponent<Rigidbody>());
@@ -79,7 +77,7 @@ public class HatCollecter : MonoBehaviour
             {
                 Debug.Log("Catch in the sky");
                 hatCount += 5;
-                gameObject.GetComponent<AudioSource>().PlayOneShot(collectSound);
+                AudioManager.PlayHatAudioClip(HatAudioStates.Collected, gameObject.GetComponentInParent<AudioSource>());
 
                 Vector3 hatPos = hatTop.transform.position;
                 hatPos = new Vector3(hatPos.x, hatPos.y + gap, hatPos.z);
@@ -104,8 +102,8 @@ public class HatCollecter : MonoBehaviour
             else
             {
                 Debug.Log("Catch on the ground");
-                
-                gameObject.GetComponent<AudioSource>().PlayOneShot(collectSound);
+
+                AudioManager.PlayHatAudioClip(HatAudioStates.Collected, gameObject.GetComponentInParent<AudioSource>());
 
                 other.gameObject.GetComponent<MushroomController>().hatShadowDestroy();
                 scoreSystem.AddScore(gnome.GetComponent<PlayerMovement>().playerIndex, 5);

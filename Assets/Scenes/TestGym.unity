@@ -5393,7 +5393,7 @@ Transform:
   m_Children:
   - {fileID: 1299762276}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &540843732
 GameObject:
@@ -15707,7 +15707,7 @@ Transform:
   m_Children:
   - {fileID: 186120746}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1592914622
 GameObject:
@@ -21833,6 +21833,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1351224391847534519, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: hatPrefab
+      value: 
+      objectReference: {fileID: 2631597963478022457, guid: ca2ab3463ab86de44bf08caa74a774dd,
+        type: 3}
     - target: {fileID: 1351224391847534519, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
       propertyPath: scoreSystem

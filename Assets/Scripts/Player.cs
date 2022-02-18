@@ -70,6 +70,8 @@ public class Player : MonoBehaviour
 				SetMaxHatsToStealBasedOnType();
 			}
 		}
+
+    
     }
 
 	private void SetMaxHatsToStealBasedOnType()
@@ -101,9 +103,10 @@ public class Player : MonoBehaviour
 			}
             Destroy(playerHatCollecter.hatStack.Pop());
             playerHatCollecter.hatCount--;
-            playerHatCollecter.updateCollecter();
+            
         }
-	}
+        playerHatCollecter.updateCollecter();
+    }
 
 	IEnumerator KnockbackPlayer(GameObject objectCausingKnockback)
 	{

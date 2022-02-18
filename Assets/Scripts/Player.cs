@@ -48,7 +48,6 @@ public class Player : MonoBehaviour
 		{
             return;
 		}
-
         if (collision.gameObject.tag.Contains("Knockback"))
         {
             StartCoroutine(KnockbackPlayer(collision.gameObject));
@@ -157,7 +156,7 @@ public class Player : MonoBehaviour
         GetComponentInChildren<HatCollecter>().isdamaged = true;
         while (elapsedTime < time)
         {
-            //Get all renderer in child also
+            Physics.IgnoreLayerCollision(9, 10);
             Renderer[] RendererArray = GetComponentsInChildren<Renderer>();
             foreach (Renderer r in RendererArray)
             {
@@ -174,6 +173,7 @@ public class Player : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return new WaitForSeconds(intervalTime);
         }
+        Physics.IgnoreLayerCollision(9, 10,false);
         GetComponentInChildren<HatCollecter>().isdamaged = false;
     }
 }

@@ -606,8 +606,8 @@ GameObject:
   - component: {fileID: 1993336045482525912}
   - component: {fileID: 1194880276440648521}
   - component: {fileID: 5154856036340132841}
-  - component: {fileID: 5154856036340132846}
   - component: {fileID: 347020995950931954}
+  - component: {fileID: 5154856036340132846}
   - component: {fileID: 255995053195774679}
   m_Layer: 9
   m_Name: Gnome Red
@@ -684,34 +684,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.1, z: 0}
---- !u!114 &5154856036340132846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5154856036340132840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26d5701d3b68b2444a7938a281cf50fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 5154856036340132841}
-  MinthresholdFB: 2
-  MinthresholdLR: 2
-  MaxthresholdFB: 4
-  MaxthresholdLR: 4
-  maxSpeed: 250
-  minSpeed: 0
-  hatBurden: 0
-  speedDecreaseEachHat: 0
-  playerIndex: 1
-  delayedFrames: 0
-  runDust: {fileID: 9215827718586595239}
-  shownSpeed: {x: 0, y: 0, z: 0}
-  keyboardSpeed: 210
-  xval: 0
-  canMove: 1
 --- !u!82 &347020995950931954
 AudioSource:
   m_ObjectHideFlags: 0
@@ -808,6 +780,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5154856036340132846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5154856036340132840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d5701d3b68b2444a7938a281cf50fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 5154856036340132841}
+  MinthresholdFB: 2
+  MinthresholdLR: 2
+  MaxthresholdFB: 4
+  MaxthresholdLR: 4
+  maxSpeed: 250
+  minSpeed: 0
+  hatBurden: 0
+  speedDecreaseEachHat: 0
+  playerIndex: 1
+  delayedFrames: 0
+  runDust: {fileID: 9215827718586595239}
+  shownSpeed: {x: 0, y: 0, z: 0}
+  keyboardSpeed: 210
+  xval: 0
+  canMove: 1
 --- !u!114 &255995053195774679
 MonoBehaviour:
   m_ObjectHideFlags: 0

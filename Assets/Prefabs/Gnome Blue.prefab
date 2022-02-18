@@ -407,7 +407,7 @@ MonoBehaviour:
   speedDecreaseEachHat: 0
   playerIndex: 0
   delayedFrames: 0
-  runDust: {fileID: 0}
+  runDust: {fileID: 9213401639292347797}
   shownSpeed: {x: 0, y: 0, z: 0}
   keyboardSpeed: 210
   xval: 0
@@ -972,6 +972,12 @@ PrefabInstance:
 --- !u!4 &9011741900931212915 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4060481939114612, guid: 83ec04c6dd4853443b1f9d62fef5a825,
+    type: 3}
+  m_PrefabInstance: {fileID: 9015730913658219527}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &9213401639292347797 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198963802851412370, guid: 83ec04c6dd4853443b1f9d62fef5a825,
     type: 3}
   m_PrefabInstance: {fileID: 9015730913658219527}
   m_PrefabAsset: {fileID: 0}

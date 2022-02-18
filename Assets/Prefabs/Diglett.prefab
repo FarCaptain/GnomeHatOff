@@ -97,9 +97,9 @@ GameObject:
   - component: {fileID: 8063206569272661754}
   - component: {fileID: 8126845857989202631}
   - component: {fileID: 6322365562220656385}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DiglettModel
-  m_TagString: StealHat
+  m_TagString: DamageAndStealHat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

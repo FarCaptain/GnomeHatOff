@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 4687867110540855794}
   - component: {fileID: -5134306358508790635}
   - component: {fileID: 1774150486508408096}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Log
-  m_TagString: Knockback
+  m_TagString: KnockbackAndDamage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,10 +93,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
+  m_Radius: 0.6062
+  m_Height: 2.59
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Center: {x: 0.03216171, y: -8.495899e-17, z: 0}
 --- !u!114 &4687867110540855794
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -259,23 +259,18 @@ public class ScoreSystem : MonoBehaviour
                 magnifyFire(player_id, getFireSize(player.gameObject));
                 fires[player_id].Play();
 
-                hatcollecter.hatCount = 0;
+                player.GetComponentInChildren<PlayerMovement>().hatBurden = 0f;
 
-                for (int i = 0; i < player.transform.childCount; i++)
+                while (hatcollecter.hatStack.Count != 0)
                 {
-                    if (player.transform.GetChild(i).name == "HatPrefab(Clone)")
-                        Destroy(player.transform.GetChild(i).gameObject);
+                    Destroy(hatcollecter.hatStack.Pop());
                 }
                 
 
                 //reset the collision on the gnome
                 if (hatcollecter.hatTop.transform.position.y != hatcollecter.initHatHeight)
                 {
-                    Vector3 hatPos = hatcollecter.hatTop.transform.position;
-                    hatcollecter.hatTop.transform.position = new Vector3(hatPos.x, hatcollecter.initHatHeight, hatPos.z);
-
-                    hatcollecter.GetComponent<BoxCollider>().size = hatcollecter.initColliderSize;
-                    hatcollecter.GetComponent<BoxCollider>().center = hatcollecter.initColliderCenter;
+                    hatcollecter.updateCollecter();
                 }
             }
         }
@@ -304,4 +299,16 @@ public class ScoreSystem : MonoBehaviour
             player2HatDropped =DisplayHatDropFeedback(player2HatDropDisplay,player2HatDropped );
         }
 	}
+
+    public void AddScore(int player_index, int score)
+    {
+
+        playerScore1 += score;
+        scoreText1.GetComponent<TMPro.TextMeshProUGUI>().text = playerScore1.ToString();
+        player2HatDropDisplay.GetComponent<TextMeshProUGUI>().text = "+" + score;
+        
+        
+    }
+
+
 }

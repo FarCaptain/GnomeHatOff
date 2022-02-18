@@ -5,22 +5,31 @@ using UnityEngine;
 public class HatCollecter : MonoBehaviour
 {
     public GameObject gnome;
-    public AudioClip collectSound;
     public int hatCount;
-
+    public ScoreSystem scoreSystem;
     public ParticleSystem sparks;
-
+    public GameObject hatPrefab;
     public float gap = 0.1f; // the height difference between hats
     
     public GameObject hatTop;
     public float initHatHeight;
     public float headTop;
-
+    
     public Vector3 initColliderSize;
     public Vector3 initColliderCenter;
     public bool hatdrop = false;
+
+    public Stack<GameObject> hatStack = new Stack<GameObject>();
+    public bool isdamaged = false;
+    Color[] hatColors = new Color[4];
     private void Start()
     {
+
+        ColorUtility.TryParseHtmlString("#3768A7", out hatColors[0]);
+        ColorUtility.TryParseHtmlString("#7637A7", out hatColors[1]);
+        ColorUtility.TryParseHtmlString("#A7A037", out hatColors[2]);
+        ColorUtility.TryParseHtmlString("#FFFFFF", out hatColors[3]); //original
+
         hatdrop = false;
         for (int i = 0; i < gnome.transform.childCount; i++)
         {
@@ -41,38 +50,81 @@ public class HatCollecter : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Hat")
+        if (other.tag == "Hat" && isdamaged == false)
         {
             if (other.gameObject.transform.position.y > (headTop + 0.01f))
             {
+                if(hatCount < 9)
+                {
+                    AddHat(other.gameObject);
+                }
+                else
+                {
+                    Destroy(other.gameObject);
+                }
                 //print("Yeay! Hat Collected!" + (++count));
-                hatCount += 1;
-                gameObject.GetComponent<AudioSource>().PlayOneShot(collectSound);
-
-                Vector3 hatPos = hatTop.transform.position;
-                hatPos = new Vector3(hatPos.x, hatPos.y + gap, hatPos.z);
-                Destroy(other.gameObject.GetComponent<Rigidbody>());
-                //other.gameObject.GetComponentInChildren<MeshRenderer>().material
-
-                other.transform.parent = gnome.transform;
-                other.gameObject.transform.position = hatPos;
-                hatTop.transform.position = hatPos;
-
-                // expand collider
-                BoxCollider bc = GetComponent<BoxCollider>();
-                Vector3 size = bc.size;
-                Vector3 center = bc.center;
-
-                float param = 0.2f;
-                bc.size = new Vector3(size.x, size.y + gap * param, size.z);
-                bc.center = new Vector3(center.x, center.y + 0.5f * gap * param, center.z);
-
+               
+                
                 other.gameObject.GetComponent<HatFade>().hatShadowDestroy();
             }
+        }
+        if (other.tag == "Mushroom")
+        {
+            
+          
+              for(int i=hatCount; i < 9; i++)
+                {
+                    GameObject hat = Instantiate(hatPrefab, hatTop.transform.position, Quaternion.identity);
+                    hat.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = hatColors[Random.Range(0, hatColors.Length - 1)];
+                    AddHat(hat);
+                }
+            other.GetComponent<MushroomController>().hatShadowDestroy();
+            Destroy(other.gameObject);
+            updateCollecter();
+            
         }
     }
     private void drawSparks()
     {
         sparks.Play();
+    }
+
+    public void updateCollecter()
+    {
+        BoxCollider bc = GetComponent<BoxCollider>();
+        Vector3 size = bc.size;
+        Vector3 center = bc.center;
+        int hatCount = hatStack.Count;
+        float param = 0.2f;
+        Vector3 hatPos = hatTop.transform.position;
+        hatTop.transform.position = new Vector3(hatPos.x, initHatHeight+hatCount*gap, hatPos.z);
+       
+        // the scale of the collider is different from the hat model
+        
+        bc.size = new Vector3(size.x, initColliderSize.y + gap * param * hatCount, size.z);
+        bc.center = new Vector3(center.x, initColliderCenter.y + 0.5f * gap * param * hatCount, center.z);
+    }
+
+    private void AddHat(GameObject hat)
+    {
+        hatCount += 1;
+      
+        Vector3 hatPos = hatTop.transform.position;
+        hatPos = new Vector3(hatPos.x, hatPos.y + gap, hatPos.z);
+        Destroy(hat.GetComponent<Rigidbody>());
+        //other.gameObject.GetComponentInChildren<MeshRenderer>().material
+
+       
+        //hat.gameObject.GetInstanceID
+        hatStack.Push(hat);
+
+        hat.transform.parent = gnome.transform;
+        hat.gameObject.transform.position = hatPos;
+        hatTop.transform.position = hatPos;
+
+        //decrease speed of Gnome
+        PlayerMovement movement = GetComponentInParent<PlayerMovement>();
+        movement.hatBurden = movement.speedDecreaseEachHat * hatCount;
+        updateCollecter();
     }
 }

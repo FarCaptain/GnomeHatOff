@@ -4,13 +4,26 @@ using UnityEngine;
 
 public class DevModeDebug : MonoBehaviour
 {
+	[SerializeField] int numberOfHatsToSpawn = 5;
+
     HatCollecter[] hatCollecters;
+	HatSpawning hatSpawner;
 	Timer timer;
-    void Start()
+
+	private void Awake()
+	{
+		if(!Debug.isDebugBuild)
+		{
+			Destroy(gameObject);
+		}
+	}
+	void Start()
     {
         hatCollecters = FindObjectsOfType<HatCollecter>();
 		timer = FindObjectOfType<Timer>();
-    }
+		hatSpawner = FindObjectOfType<HatSpawning>();
+
+	}
 
     // Update is called once per frame
     void Update()
@@ -19,6 +32,7 @@ public class DevModeDebug : MonoBehaviour
 		{
 			UseMKeyForDrop();
 			PauseAndUnpauseTime();
+			SpawnAlotOfHats();
 		}
 	}
 
@@ -44,6 +58,17 @@ public class DevModeDebug : MonoBehaviour
 			for (int i = 0; i < hatCollecters.Length; i++)
 			{
 				hatCollecters[i].hatdrop = true;
+			}
+		}
+	}
+
+	private void SpawnAlotOfHats()
+	{
+		if(Input.GetKeyDown(KeyCode.P))
+		{
+			for(int i=0;i<numberOfHatsToSpawn;i++)
+			{
+				hatSpawner.SpawnHat();
 			}
 		}
 	}

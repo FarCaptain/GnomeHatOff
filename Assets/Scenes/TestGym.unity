@@ -21875,21 +21875,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5154856036340132846, guid: 4569103a97551e245b460df25ea57d2a,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5154856036340132846, guid: 4569103a97551e245b460df25ea57d2a,
-        type: 3}
-      propertyPath: playerIndex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5154856036340132846, guid: 4569103a97551e245b460df25ea57d2a,
-        type: 3}
-      propertyPath: keyboardSpeed
-      value: 210
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4569103a97551e245b460df25ea57d2a, type: 3}
 --- !u!4 &5154856035333242856 stripped

@@ -22,9 +22,10 @@ public class HatCollecter : MonoBehaviour
     public Stack<GameObject> hatStack = new Stack<GameObject>();
     public bool isdamaged = false;
     Color[] hatColors = new Color[4];
+    AudioSource playerAudioSource;
     private void Start()
     {
-
+        playerAudioSource = GetComponentInParent<AudioSource>();
         ColorUtility.TryParseHtmlString("#3768A7", out hatColors[0]);
         ColorUtility.TryParseHtmlString("#7637A7", out hatColors[1]);
         ColorUtility.TryParseHtmlString("#A7A037", out hatColors[2]);
@@ -56,6 +57,7 @@ public class HatCollecter : MonoBehaviour
             {
                 if(hatCount < 9)
                 {
+                  
                     AddHat(other.gameObject);
                 }
                 else
@@ -107,6 +109,10 @@ public class HatCollecter : MonoBehaviour
 
     private void AddHat(GameObject hat)
     {
+        if(playerAudioSource.isPlaying==false)
+		{
+            AudioManager.PlayHatAudioClip(HatAudioStates.Collected, playerAudioSource);
+        }
         hatCount += 1;
       
         Vector3 hatPos = hatTop.transform.position;

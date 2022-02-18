@@ -62,6 +62,8 @@ MonoBehaviour:
   hatCount: 0
   scoreSystem: {fileID: 0}
   sparks: {fileID: 2378273450002545123}
+  hatPrefab: {fileID: 2631597963478022457, guid: ca2ab3463ab86de44bf08caa74a774dd,
+    type: 3}
   gap: 0.2
   hatTop: {fileID: 0}
   initHatHeight: 0

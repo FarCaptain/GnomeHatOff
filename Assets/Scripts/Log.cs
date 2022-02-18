@@ -14,9 +14,12 @@ public class Log : MonoBehaviour
     [SerializeField] int reverseX = 1;
     [SerializeField] int reverseZ = 1;
 
+    AudioSource logAudioSource;
+
     void Start()
     {
-
+        logAudioSource = GetComponent<AudioSource>();
+        AudioManager.PlayLogAudioClip(LogAudioStates.Rolling, logAudioSource);
     }
 
     // Update is called once per frame

@@ -4,16 +4,20 @@ using UnityEngine;
 
 public enum HatAudioStates { Destroyed, Collected };
 public enum PlayerAudioStates { Damaged};
+public enum LogAudioStates { Rolling};
 public class AudioManager : MonoBehaviour
 {
     static Object[] hatAudioClips;
     static Object[] playerAudioClips;
+    static Object[] logAudioClips;
 
     static AudioSource hatAudioSource;
     static AudioSource playerAudioSource;
+    static AudioSource logAudioSource;
 
     static Dictionary<HatAudioStates, AudioClip> hatAudioClipsLibrary = new Dictionary<HatAudioStates, AudioClip>();
     static Dictionary<PlayerAudioStates, AudioClip> playerAudioClipsLibrary = new Dictionary<PlayerAudioStates, AudioClip>();
+    static Dictionary<LogAudioStates, AudioClip> logAudioClipsLibrary = new Dictionary<LogAudioStates, AudioClip>();
 
     void Start()
     {
@@ -22,6 +26,9 @@ public class AudioManager : MonoBehaviour
 
         PopulatePlayerAudioClipsList();
         PopulatePlayerAudioClipsLibrary();
+
+        PopulateLogAudioClipsList();
+        PopulateLogAudioClipsLibrary();
     }
     private static void PopulateHatAudioClipsList()
     {
@@ -44,6 +51,16 @@ public class AudioManager : MonoBehaviour
         playerAudioClipsLibrary.Add(PlayerAudioStates.Damaged, (AudioClip)playerAudioClips[0]);
     }
 
+    private static void PopulateLogAudioClipsList()
+    {
+        logAudioClips = Resources.LoadAll("Audio/SFX/Log", typeof(AudioClip));
+    }
+
+    private static void PopulateLogAudioClipsLibrary()
+    {
+         logAudioClipsLibrary.Add(LogAudioStates.Rolling, (AudioClip)logAudioClips[0]);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -64,5 +81,10 @@ public class AudioManager : MonoBehaviour
         playerAudioSource.PlayOneShot(clipToPlay);
     }
 
-
+    public static void PlayLogAudioClip(LogAudioStates audioState, AudioSource audio)
+	{
+        logAudioSource = audio;
+        AudioClip clipToPlay = logAudioClipsLibrary[audioState];
+        logAudioSource.PlayOneShot(clipToPlay);
+    }
 }

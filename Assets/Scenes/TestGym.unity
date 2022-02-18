@@ -21835,12 +21835,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1351224391847534519, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
-      propertyPath: hatPrefab
-      value: 
-      objectReference: {fileID: 2631597963478022457, guid: ca2ab3463ab86de44bf08caa74a774dd,
-        type: 3}
-    - target: {fileID: 1351224391847534519, guid: cdc8e89d69cc6564c87384009a43f4b7,
-        type: 3}
       propertyPath: scoreSystem
       value: 
       objectReference: {fileID: 144383040}

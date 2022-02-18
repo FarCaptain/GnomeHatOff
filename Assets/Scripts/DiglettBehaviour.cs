@@ -1,52 +1,95 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DiglettBehaviour : MonoBehaviour
 {
-    //x, z (-x, -z) ~ (x, z)
-    public Vector2 spawnRange;
-
-    public float minSpawnTimeGap;
-    public float maxSpawnTimeGap;
+    public float minHideTime;
+    public float maxHideTime;
 
     public float stayTime;
+    //public float warnTime;
+
+    public List<Transform> players = new List<Transform>();
 
     private NewTimer stayTimer;
-    private NewTimer spawnTimer;
-    private bool isStaying;
+    private NewTimer hideTimer;
+    //private NewTimer warnTimer;
+
+    private enum diglettStates {Hide, Warn, Stay};
+    private int state;
+
+    public ParticleSystem dust;
+    private NavMeshAgent navMeshAgent;
+    public Transform digletModel;
 
     // Start is called before the first frame update
     void Start()
     {
+        //hide - warn - stay
         stayTimer =gameObject.AddComponent<NewTimer>();
-        spawnTimer =gameObject.AddComponent<NewTimer>();
+        hideTimer = gameObject.AddComponent<NewTimer>();
+        //warnTimer =gameObject.AddComponent<NewTimer>();
+
+        // config the timers
         stayTimer.MaxTime = stayTime;
-        spawnTimer.MaxTime = Random.Range(minSpawnTimeGap, maxSpawnTimeGap);
-        spawnTimer.TimerStart = true;
-        isStaying = false;
+        hideTimer.MaxTime = Random.Range(minHideTime, maxHideTime);
+        //warnTimer.MaxTime = warnTime;
+
+        // set the Timer to Hide
+        state = (int)diglettStates.Hide;
+        hideTimer.TimerStart = true;
+
+        Vector3 pos = new Vector3(-2f, 0f, 2f);
+        transform.position = pos;
+        digletModel.position = new Vector3(pos.x, -1.5f, pos.z);
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(spawnTimer.TimerStart == false && stayTimer.TimerStart == false)
+        if (state == (int)diglettStates.Hide)
         {
-            if (isStaying)
+            if (hideTimer.TimerStart == false)
             {
-                transform.position = new Vector3(0f, -0.5f, 0f);
+                state = (int)diglettStates.Warn;
+                //warnTimer.ResetTimer();
+                //warnTimer.TimerStart = true;
 
-                spawnTimer.MaxTime = Random.Range(minSpawnTimeGap, maxSpawnTimeGap);
-                spawnTimer.TimerStart = true;
-                isStaying = false;
+                // ToDo. might need bias to avoid bug
+                int index = Random.Range(0, players.Count);
+                Vector3 playerPos = players[index].position;
+                navMeshAgent.destination = playerPos;
+                dust.Play();
             }
-            else
+        }
+        else if (state == (int)diglettStates.Warn)
+        {
+            float dist = navMeshAgent.remainingDistance;
+            if (dist != Mathf.Infinity && navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete && navMeshAgent.remainingDistance == 0)
             {
-                transform.position = new Vector3(Random.Range(-spawnRange.x, spawnRange.x), 0f, Random.Range(-spawnRange.y, spawnRange.y));
-
-                stayTimer.MaxTime = stayTime;
+                state = (int)diglettStates.Stay;
+                stayTimer.ResetTimer();
                 stayTimer.TimerStart = true;
-                isStaying = true;
+
+                // Emerging
+                Vector3 pos = transform.position;
+                digletModel.position = new Vector3(pos.x, 0f, pos.z);
+                dust.Stop();
+            }
+        }
+        else
+        {
+            if (stayTimer.TimerStart == false)
+            {
+                state = (int)diglettStates.Hide;
+                hideTimer.ResetTimer();
+                hideTimer.TimerStart = true;
+
+                Vector3 pos = transform.position;
+                digletModel.position = new Vector3(pos.x, -1.5f, pos.z);
             }
         }
     }

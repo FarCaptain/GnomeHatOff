@@ -7631,6 +7631,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5251544785673274877, guid: d1117047cbf63b34e8d61ba71cc3be26,
+        type: 3}
+      propertyPath: m_TagString
+      value: DamageAndStealHatAndKnockback
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1117047cbf63b34e8d61ba71cc3be26, type: 3}
 --- !u!1 &797537212

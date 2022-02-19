@@ -5,10 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    [Header("Knockback Variables")]
-    [SerializeField] int knockBackForceAmount = 10;
-    private float waitTimeBeforeMoving = 0.5f;
-
     [Header("Damage Variables")]
     [SerializeField] float iFrameMaxTime = 2f;
 
@@ -45,7 +41,7 @@ public class Player : MonoBehaviour
 		}
         if (collision.gameObject.tag.Contains("Knockback"))
         {
-            StartCoroutine(KnockbackPlayer(collision.gameObject));
+            StartCoroutine(KnockbackPlayer(collision.gameObject.GetComponentInParent<Hazard>()));
         }
 
         if (collision.gameObject.tag.Contains("Damage") && stealHatIFrame.TimerStart == false)
@@ -61,38 +57,38 @@ public class Player : MonoBehaviour
 			}
             else
 			{
-                if(collision.gameObject.GetComponent<HatSteal>()==null)
+                if(collision.gameObject.GetComponent<Hazard>()==null)
 				{
-                    SetMaxHatsToStealBasedOnType(collision.gameObject.GetComponentInParent<HatSteal>());
+                    SetMaxHatsToStealBasedOnType(collision.gameObject.GetComponentInParent<Hazard>());
                 }
                 else
 				{
-                    SetMaxHatsToStealBasedOnType(collision.gameObject.GetComponent<HatSteal>());
+                    SetMaxHatsToStealBasedOnType(collision.gameObject.GetComponent<Hazard>());
                 }
 			}
 		}
     }
 
-	private void SetMaxHatsToStealBasedOnType(HatSteal hatStealObject)
+	private void SetMaxHatsToStealBasedOnType(Hazard hazardObject)
 	{
-        switch(hatStealObject.typeOfHatStealChosen)
+        switch(hazardObject.typeOfHatStealChosen)
 		{
-            case HatSteal.TypesOfHatSteal.None:
+            case Hazard.TypesOfHatSteal.None:
                 break;
 
-			case HatSteal.TypesOfHatSteal.Some:
-                StealHat(hatStealObject.maxHatsToSteal, hatStealObject.typeOfHatStealChosen);
+			case Hazard.TypesOfHatSteal.Some:
+                StealHat(hazardObject.maxHatsToSteal, hazardObject.typeOfHatStealChosen);
                 break;
 
-            case HatSteal.TypesOfHatSteal.All:
-                hatStealObject.maxHatsToSteal = playerHatCollecter.hatCount;
-                StealHat(hatStealObject.maxHatsToSteal, hatStealObject.typeOfHatStealChosen);
+            case Hazard.TypesOfHatSteal.All:
+                hazardObject.maxHatsToSteal = playerHatCollecter.hatCount;
+                StealHat(hazardObject.maxHatsToSteal, hazardObject.typeOfHatStealChosen);
                 break;
         }
 		
 	}
 
-	private void StealHat(int numberOfHats,HatSteal.TypesOfHatSteal typeOfHatStealChosen)
+	private void StealHat(int numberOfHats, Hazard.TypesOfHatSteal typeOfHatStealChosen)
 	{
         for(int i=0;i<numberOfHats; i++)
 		{
@@ -107,16 +103,16 @@ public class Player : MonoBehaviour
         playerHatCollecter.updateCollecter();
     }
 
-	IEnumerator KnockbackPlayer(GameObject objectCausingKnockback)
+	IEnumerator KnockbackPlayer(Hazard hazardObject)
 	{
         playerMovement.canMove = false;
 
         Vector3 directionOfKnockback = -transform.forward;
 		directionOfKnockback = SelectRandomHorizontalDirection(directionOfKnockback);
 
-        playerRigidBody.AddForce(directionOfKnockback*knockBackForceAmount, ForceMode.Impulse);
+        playerRigidBody.AddForce(directionOfKnockback*hazardObject.knockBackForceAmount, ForceMode.Impulse);
 
-        yield return new WaitForSecondsRealtime(waitTimeBeforeMoving); // Stops player from overriding the force by moving
+        yield return new WaitForSecondsRealtime(hazardObject.KnockBackTime); // Stops player from overriding the force by moving
 		playerMovement.canMove = true;
     }
 

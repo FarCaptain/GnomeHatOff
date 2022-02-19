@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Log : HatSteal
+public class Log : Hazard
 {
     [Header("Mobility Variables")]
     [SerializeField] float movementSpeed = 0.5f;

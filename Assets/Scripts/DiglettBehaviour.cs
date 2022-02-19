@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class DiglettBehaviour : HatSteal
+public class DiglettBehaviour : Hazard
 {
     [Header("")]
     public float minHideTime;

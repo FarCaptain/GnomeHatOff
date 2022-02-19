@@ -55,6 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eea5b9e570c7c945baf5797aa226dfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockBackForceAmount: 3
   typeOfHatStealChosen: 1
   maxHatsToSteal: 2
   minHideTime: 3
@@ -101,7 +102,7 @@ GameObject:
   - component: {fileID: 6322365562220656385}
   m_Layer: 10
   m_Name: DiglettModel
-  m_TagString: DamageAndStealHat
+  m_TagString: DamageAndStealHatAndKnockback
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

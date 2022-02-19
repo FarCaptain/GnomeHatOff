@@ -50,6 +50,7 @@ MonoBehaviour:
   hasLogSpawned: 0
   logToSpawn: {fileID: 4687867110540855795, guid: e6188ae67086c99478965ee18f154fa1,
     type: 3}
+  spawnLocation: {fileID: 6891929944638976150}
 --- !u!95 &5758184593884956645
 Animator:
   serializedVersion: 3

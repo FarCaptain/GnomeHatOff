@@ -42,18 +42,16 @@ public class LogSpawnManager : MonoBehaviour
 	{
         logSpawnTimer.MaxTime = Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns);
         logSpawnTimer.TimerStart = true;
-        int oldNumber = 0;
+        int oldNumber = gameObject.transform.childCount + 1;                        //Can be any number greater than the number or equal to the number of spawners.
+                                                                                    //This is so that initially oldNumber will never match any random spawn index
         for(int i=0;i<numberOfActiveSpawners;i++)
 		{
             int randomSpawnerIndex = Random.Range(0, gameObject.transform.childCount);
-
-            while(oldNumber == randomSpawnerIndex)
+            while(oldNumber == randomSpawnerIndex || logPiles[randomSpawnerIndex].GetComponent<LogSpawner>().enabled)
 			{
                 randomSpawnerIndex = Random.Range(0, gameObject.transform.childCount);
             }
-
             logPiles[randomSpawnerIndex].GetComponent<LogSpawner>().enabled = true;
-
             oldNumber = randomSpawnerIndex;
 		}
 	}

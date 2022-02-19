@@ -13,6 +13,7 @@ TagManager:
   - KnockbackAndStealHat
   - DamageAndStealHat
   - DamageAndStealHatAndKnockback
+  - Ground
   layers:
   - Default
   - TransparentFX

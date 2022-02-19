@@ -9,6 +9,7 @@ public class LogSpawner : MonoBehaviour
     public bool hasLogSpawned = false;
 
     [SerializeField] GameObject logToSpawn;
+    [SerializeField] GameObject spawnLocation;
     private Animator logPileAnimator;
  
 
@@ -33,7 +34,9 @@ public class LogSpawner : MonoBehaviour
     public void SpawnLog()
 	{
         hasLogSpawned = true;
-        GameObject logSpawned = Instantiate(logToSpawn, transform.localPosition, logToSpawn.transform.rotation);
+        GameObject logSpawned = Instantiate(logToSpawn, spawnLocation.transform.position, logToSpawn.transform.rotation);
+        logSpawned.GetComponent<Log>().GetOriginLog(spawnLocation);
+        spawnLocation.SetActive(false);
         gameObject.GetComponent<LogSpawner>().enabled= false;
     }
 

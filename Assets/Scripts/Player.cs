@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+    
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -154,9 +154,9 @@ public class Player : MonoBehaviour
         //initialize timer
         float elapsedTime = 0f;
         GetComponentInChildren<HatCollecter>().isdamaged = true;
+        Physics.IgnoreLayerCollision(9, 10);
         while (elapsedTime < time)
         {
-            Physics.IgnoreLayerCollision(9, 10);
             Renderer[] RendererArray = GetComponentsInChildren<Renderer>();
             foreach (Renderer r in RendererArray)
             {

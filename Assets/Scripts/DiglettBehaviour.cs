@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class DiglettBehaviour : MonoBehaviour
+public class DiglettBehaviour : HatSteal
 {
+    [Header("")]
     public float minHideTime;
     public float maxHideTime;
 

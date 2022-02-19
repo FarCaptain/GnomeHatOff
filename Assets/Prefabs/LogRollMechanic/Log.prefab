@@ -221,6 +221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43a549a5d803fd46a9a7b587eaa43d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeOfHatStealChosen: 1
+  maxHatsToSteal: 4
   movementSpeed: 3
   rotationSpeed: 250
   xAxis: 0

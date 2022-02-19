@@ -55,6 +55,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eea5b9e570c7c945baf5797aa226dfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeOfHatStealChosen: 1
+  maxHatsToSteal: 2
   minHideTime: 3
   maxHideTime: 8
   stayTime: 5

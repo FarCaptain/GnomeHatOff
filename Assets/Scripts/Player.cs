@@ -12,11 +12,6 @@ public class Player : MonoBehaviour
     [Header("Damage Variables")]
     [SerializeField] float iFrameMaxTime = 2f;
 
-    enum TypesOfHatSteal {None, Some, All};
-    [Header("Hat Steal Variables")]
-    [SerializeField] TypesOfHatSteal typeOfHatStealChosen = TypesOfHatSteal.Some;
-    [SerializeField] int maxHatsToSteal = 0;
-
     //Cached Player Components
     Rigidbody playerRigidBody;
     PlayerMovement playerMovement;
@@ -66,33 +61,38 @@ public class Player : MonoBehaviour
 			}
             else
 			{
-				SetMaxHatsToStealBasedOnType();
+                if(collision.gameObject.GetComponent<HatSteal>()==null)
+				{
+                    SetMaxHatsToStealBasedOnType(collision.gameObject.GetComponentInParent<HatSteal>());
+                }
+                else
+				{
+                    SetMaxHatsToStealBasedOnType(collision.gameObject.GetComponent<HatSteal>());
+                }
 			}
 		}
-
-    
     }
 
-	private void SetMaxHatsToStealBasedOnType()
+	private void SetMaxHatsToStealBasedOnType(HatSteal hatStealObject)
 	{
-        switch(typeOfHatStealChosen)
+        switch(hatStealObject.typeOfHatStealChosen)
 		{
-            case TypesOfHatSteal.None:
+            case HatSteal.TypesOfHatSteal.None:
                 break;
 
-			case TypesOfHatSteal.Some:
-                StealHat(maxHatsToSteal, typeOfHatStealChosen);
+			case HatSteal.TypesOfHatSteal.Some:
+                StealHat(hatStealObject.maxHatsToSteal, hatStealObject.typeOfHatStealChosen);
                 break;
 
-            case TypesOfHatSteal.All:
-                maxHatsToSteal = playerHatCollecter.hatCount;
-                StealHat(maxHatsToSteal, typeOfHatStealChosen);
+            case HatSteal.TypesOfHatSteal.All:
+                hatStealObject.maxHatsToSteal = playerHatCollecter.hatCount;
+                StealHat(hatStealObject.maxHatsToSteal, hatStealObject.typeOfHatStealChosen);
                 break;
         }
 		
 	}
 
-	private void StealHat(int numberOfHats,TypesOfHatSteal typeOfHatStealChosen)
+	private void StealHat(int numberOfHats,HatSteal.TypesOfHatSteal typeOfHatStealChosen)
 	{
         for(int i=0;i<numberOfHats; i++)
 		{

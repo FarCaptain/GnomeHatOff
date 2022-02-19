@@ -424,10 +424,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21181763c9d97547a8fe35066184937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForceAmount: 10
+  defaultLayerName: Moveables
+  iFramesLayerName: IFrames
   iFrameMaxTime: 2
-  typeOfHatStealChosen: 1
-  maxHatsToSteal: 3
   FlashingTime: 0.08
   TimeInterval: 0.1
 --- !u!1 &5399210617733372346

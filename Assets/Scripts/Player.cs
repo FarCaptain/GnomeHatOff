@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("Player Collision Layers")]
+    [SerializeField] string defaultLayerName;
+    [SerializeField] string iFramesLayerName;
 
     [Header("Damage Variables")]
     [SerializeField] float iFrameMaxTime = 2f;
@@ -15,7 +18,7 @@ public class Player : MonoBehaviour
     NewTimer stealHatIFrame;
     AudioSource playerAudioSource;
     void Start()
-    {
+    { 
         playerRigidBody = gameObject.GetComponent<Rigidbody>();
         playerMovement = gameObject.GetComponent<PlayerMovement>();
         playerHatCollecter = gameObject.GetComponentInChildren<HatCollecter>();
@@ -28,7 +31,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -150,7 +153,7 @@ public class Player : MonoBehaviour
         //initialize timer
         float elapsedTime = 0f;
         GetComponentInChildren<HatCollecter>().isdamaged = true;
-        Physics.IgnoreLayerCollision(9, 10);
+        gameObject.layer = LayerMask.NameToLayer(iFramesLayerName);
         while (elapsedTime < time)
         {
             Renderer[] RendererArray = GetComponentsInChildren<Renderer>();
@@ -169,7 +172,7 @@ public class Player : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return new WaitForSeconds(intervalTime);
         }
-        Physics.IgnoreLayerCollision(9, 10,false);
+        gameObject.layer = LayerMask.NameToLayer(defaultLayerName);
         GetComponentInChildren<HatCollecter>().isdamaged = false;
     }
 }

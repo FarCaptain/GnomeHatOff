@@ -20,6 +20,7 @@ public class HatFade : MonoBehaviour
     float headTop;
 
     public bool hatFadeEnabled = true;
+    public bool hatCollectedByPlayer = false;
 
     void Start()
     {

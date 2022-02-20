@@ -10,13 +10,13 @@ public class Player : MonoBehaviour
 
     [Header("Damage Variables")]
     [SerializeField] float iFrameMaxTime = 2f;
-
     //Cached Player Components
     Rigidbody playerRigidBody;
     PlayerMovement playerMovement;
     HatCollecter playerHatCollecter;
     NewTimer stealHatIFrame;
     AudioSource playerAudioSource;
+
     void Start()
     { 
         playerRigidBody = gameObject.GetComponent<Rigidbody>();
@@ -42,7 +42,8 @@ public class Player : MonoBehaviour
 		{
             return;
 		}
-        if (collision.gameObject.tag.Contains("Knockback"))
+
+		if (collision.gameObject.tag.Contains("Knockback"))
         {
             StartCoroutine(KnockbackPlayer(collision.gameObject.GetComponentInParent<Hazard>()));
         }
@@ -71,7 +72,6 @@ public class Player : MonoBehaviour
 			}
 		}
     }
-
 	private void SetMaxHatsToStealBasedOnType(Hazard hazardObject)
 	{
         switch(hazardObject.typeOfHatStealChosen)
@@ -109,14 +109,11 @@ public class Player : MonoBehaviour
 	IEnumerator KnockbackPlayer(Hazard hazardObject)
 	{
         playerMovement.canMove = false;
-
         Vector3 directionOfKnockback = -transform.forward;
-		directionOfKnockback = SelectRandomHorizontalDirection(directionOfKnockback);
-
-        playerRigidBody.AddForce(directionOfKnockback*hazardObject.knockBackForceAmount, ForceMode.Impulse);
-
-        yield return new WaitForSecondsRealtime(hazardObject.KnockBackTime); // Stops player from overriding the force by moving
-		playerMovement.canMove = true;
+        directionOfKnockback = SelectRandomHorizontalDirection(directionOfKnockback);
+        playerRigidBody.AddForce(directionOfKnockback * hazardObject.knockBackForceAmount, ForceMode.Impulse);
+        yield return new WaitForSecondsRealtime(hazardObject.KnockBackTime);
+        playerMovement.canMove = true;
     }
 
 
@@ -138,6 +135,7 @@ public class Player : MonoBehaviour
 		return directionOfKnockback;
 	}
 
+    [Header("IFrames variables")] 
     public float FlashingTime = .2f;
     public float TimeInterval = .1f;
 

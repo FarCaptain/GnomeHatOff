@@ -51,7 +51,7 @@ public class HatCollecter : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Hat" && isdamaged == false)
+        if (other.tag == "Hat" && isdamaged == false && other.gameObject.GetComponent<HatFade>().hatCollectedByPlayer==false)
         {
             if (other.gameObject.transform.position.y > (headTop + 0.01f))
             {
@@ -114,7 +114,7 @@ public class HatCollecter : MonoBehaviour
             AudioManager.PlayHatAudioClip(HatAudioStates.Collected, playerAudioSource);
         }
         hatCount += 1;
-      
+        hat.GetComponent<HatFade>().hatCollectedByPlayer = true;
         Vector3 hatPos = hatTop.transform.position;
         hatPos = new Vector3(hatPos.x, hatPos.y + gap, hatPos.z);
         Destroy(hat.GetComponent<Rigidbody>());

@@ -47,6 +47,7 @@ MonoBehaviour:
     type: 3}
   hatShadowPrefab: {fileID: 7701874447860785056, guid: a8cd75574f9785c47ac4a108743a5feb,
     type: 3}
+  mushroomManPrefab: {fileID: 0}
   hatRushMessage: {fileID: 0}
   timerText: {fileID: 0}
   hatRushAnim: {fileID: 0}
@@ -57,4 +58,5 @@ MonoBehaviour:
   maxGap: 4
   hatRushTime: 30
   hatRushMinGap: 0.3
+  mushroomCount: 0
   accumulatedSpeed: 0

@@ -4,40 +4,48 @@ using UnityEngine;
 
 public class LogSpawner : MonoBehaviour
 {
-    [SerializeField] float minTimeBetweenSpawns;
-    [SerializeField] float maxTimeBetweenSpawns;
+
     [HideInInspector]
-    public bool logAlive = false;
+    public bool hasLogSpawned = false;
 
     [SerializeField] GameObject logToSpawn;
-    [HideInInspector]
-    public NewTimer logSpawnTimer;
+    [SerializeField] GameObject spawnLocation;
+    private Animator logPileAnimator;
+ 
 
-    void Start()
+    void OnEnable()
 	{
-        InitializeLogSpawnTimer();
-        SpawnLog();
+        logPileAnimator = gameObject.GetComponent<Animator>();
+        logPileAnimator.SetBool("spawnWarningPlaying", true);
+        hasLogSpawned = false;
     }
 
-	private void InitializeLogSpawnTimer()
-	{
-		logSpawnTimer = gameObject.AddComponent<NewTimer>();
-	}
 
-	// Update is called once per frame
-	void Update()
+    // Update is called once per frame
+    void Update()
     {
-        if (logSpawnTimer.TimerStart == false && logAlive == false && logSpawnTimer!=null)
-        {
+		if (IsAnimationIsPlaying(logPileAnimator, "LogRumble") == false && hasLogSpawned == false)
+		{
+			logPileAnimator.SetBool("spawnWarningPlaying", false);
             SpawnLog();
-        }
-    }
+		}
+	}
 
     public void SpawnLog()
 	{
-        logAlive = true;
-        logSpawnTimer.MaxTime = Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns);
-        GameObject logSpawned = Instantiate(logToSpawn, transform.position, logToSpawn.transform.rotation);
-        logSpawned.transform.SetParent(transform);
-	}
+        hasLogSpawned = true;
+        GameObject logSpawned = Instantiate(logToSpawn, spawnLocation.transform.position, logToSpawn.transform.rotation);
+        logSpawned.GetComponent<Log>().GetOriginLog(spawnLocation);
+        spawnLocation.SetActive(false);
+        gameObject.GetComponent<LogSpawner>().enabled= false;
+    }
+
+    bool IsAnimationIsPlaying(Animator anim, string stateName)
+    {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName(stateName) &&
+                anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+            return true;
+        else
+            return false;
+    }
 }

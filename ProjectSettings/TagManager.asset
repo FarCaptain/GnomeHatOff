@@ -7,6 +7,13 @@ TagManager:
   - Hat
   - Knockback
   - Mushroom
+  - StealHat
+  - Damage
+  - KnockbackAndDamage
+  - KnockbackAndStealHat
+  - DamageAndStealHat
+  - DamageAndStealHatAndKnockback
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -18,8 +25,8 @@ TagManager:
   - 
   - Dropables
   - Moveables
-  - 
-  - 
+  - Damage
+  - IFrames
   - 
   - 
   - 

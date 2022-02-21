@@ -4,21 +4,31 @@ using UnityEngine;
 
 public enum HatAudioStates { Destroyed, Collected };
 public enum PlayerAudioStates { Damaged};
-public enum LogAudioStates { Rolling};
+public enum LogAudioStates { Rolling, Shaking };
+public enum MushroomManAudioStates {Falling, Landed };
+public enum GameGeneralAudioStates {RoundBegin, RoundEnd, HatRushBegin }
+//public enum GeneralGameAudioStates { };
 public class AudioManager : MonoBehaviour
 {
     static Object[] hatAudioClips;
     static Object[] playerAudioClips;
     static Object[] logAudioClips;
+    static Object[] mushroomManAudioClips;
+    static Object[] gameGeneralAudioClips;
 
     static AudioSource hatAudioSource;
     static AudioSource playerAudioSource;
     static AudioSource logAudioSource;
+    static AudioSource mushroomManAudioSource;
+    static AudioSource gameGeneralSFXAudioSource;
 
     static Dictionary<HatAudioStates, AudioClip> hatAudioClipsLibrary = new Dictionary<HatAudioStates, AudioClip>();
     static Dictionary<PlayerAudioStates, AudioClip> playerAudioClipsLibrary = new Dictionary<PlayerAudioStates, AudioClip>();
     static Dictionary<LogAudioStates, AudioClip> logAudioClipsLibrary = new Dictionary<LogAudioStates, AudioClip>();
-	private void Awake()
+	static Dictionary<MushroomManAudioStates, AudioClip> mushroomManAudioClipsLibrary = new Dictionary<MushroomManAudioStates, AudioClip>();
+    static Dictionary<GameGeneralAudioStates, AudioClip> gameGeneralAudioClipsLibrary = new Dictionary<GameGeneralAudioStates, AudioClip>();
+
+    private void Awake()
 	{
         PopulateHatAudioClipsList();
         PopulateHatAudioClipsLibrary();
@@ -28,6 +38,15 @@ public class AudioManager : MonoBehaviour
 
         PopulateLogAudioClipsList();
         PopulateLogAudioClipsLibrary();
+
+        PopulateMushroomManAudioClipsList();
+        PopulateMushroomManAudioClipsLibrary();
+
+        PopulateGameGeneralAudioClipsList();
+        PopulateGameGeneralAudioClipsLibrary();
+
+        gameGeneralSFXAudioSource = gameObject.GetComponent<AudioSource>();
+
     }
 	void Start()
     {
@@ -61,8 +80,33 @@ public class AudioManager : MonoBehaviour
 
     private static void PopulateLogAudioClipsLibrary()
     {
-         logAudioClipsLibrary.Add(LogAudioStates.Rolling, (AudioClip)logAudioClips[0]);
+        logAudioClipsLibrary.Add(LogAudioStates.Rolling, (AudioClip)logAudioClips[0]);
+        logAudioClipsLibrary.Add(LogAudioStates.Shaking, (AudioClip)logAudioClips[1]);
     }
+
+    private static void PopulateMushroomManAudioClipsList()
+    {
+        mushroomManAudioClips = Resources.LoadAll("Audio/SFX/MushroomMan", typeof(AudioClip));
+    }
+
+    private static void PopulateMushroomManAudioClipsLibrary()
+    {
+        mushroomManAudioClipsLibrary.Add(MushroomManAudioStates.Falling, (AudioClip)mushroomManAudioClips[0]);
+        mushroomManAudioClipsLibrary.Add(MushroomManAudioStates.Landed, (AudioClip)mushroomManAudioClips[1]);
+    }
+
+    private static void PopulateGameGeneralAudioClipsList()
+    {
+        gameGeneralAudioClips = Resources.LoadAll("Audio/SFX/GameGeneral", typeof(AudioClip));
+    }
+
+    private static void PopulateGameGeneralAudioClipsLibrary()
+    {
+        gameGeneralAudioClipsLibrary.Add(GameGeneralAudioStates.RoundBegin, (AudioClip)gameGeneralAudioClips[0]);
+		gameGeneralAudioClipsLibrary.Add(GameGeneralAudioStates.RoundEnd, (AudioClip)gameGeneralAudioClips[1]);
+        gameGeneralAudioClipsLibrary.Add(GameGeneralAudioStates.HatRushBegin, (AudioClip)gameGeneralAudioClips[2]);
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -90,4 +134,17 @@ public class AudioManager : MonoBehaviour
         AudioClip clipToPlay = logAudioClipsLibrary[audioState];
         logAudioSource.PlayOneShot(clipToPlay);
     }
+
+    public static void PlayMushroomManAudioClip(MushroomManAudioStates audioState, AudioSource audio)
+    {
+        mushroomManAudioSource = audio;
+        AudioClip clipToPlay = mushroomManAudioClipsLibrary[audioState];
+        mushroomManAudioSource.PlayOneShot(clipToPlay);
+    }
+    public static void PlayGeneralGameAudioClip(GameGeneralAudioStates audioState)
+    {
+        AudioClip clipToPlay = gameGeneralAudioClipsLibrary[audioState];
+        gameGeneralSFXAudioSource.PlayOneShot(clipToPlay);
+    }
+
 }

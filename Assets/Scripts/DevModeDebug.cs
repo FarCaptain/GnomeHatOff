@@ -33,6 +33,19 @@ public class DevModeDebug : MonoBehaviour
 			UseMKeyForDrop();
 			PauseAndUnpauseTime();
 			SpawnAlotOfHats();
+			//TestSomeAudio();
+		}
+	}
+
+	private static void TestSomeAudio()
+	{
+		if (Input.GetKeyDown(KeyCode.O))
+		{
+			AudioManager.PlayGeneralGameAudioClip(GameGeneralAudioStates.HatRushBegin);
+		}
+		if (Input.GetKeyDown(KeyCode.I))
+		{
+			AudioManager.PlayGeneralGameAudioClip(GameGeneralAudioStates.RoundEnd);
 		}
 	}
 

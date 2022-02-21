@@ -223,6 +223,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 711133231, guid: b0a006b4d90729b4dae845579e0ffe10, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
         type: 3}
       propertyPath: player0
@@ -951,7 +955,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &95222411
 Transform:
   m_ObjectHideFlags: 0
@@ -5405,41 +5409,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533968643947538932, guid: c22f9a4a78f30d4408493717d252f3f6,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.836756
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533968643947538932, guid: c22f9a4a78f30d4408493717d252f3f6,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.070182
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533968643947538932, guid: c22f9a4a78f30d4408493717d252f3f6,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 12.881354
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533968643947538932, guid: c22f9a4a78f30d4408493717d252f3f6,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533968643947538932, guid: c22f9a4a78f30d4408493717d252f3f6,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533968643947538932, guid: c22f9a4a78f30d4408493717d252f3f6,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533968643947538932, guid: c22f9a4a78f30d4408493717d252f3f6,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4533968643947538932, guid: c22f9a4a78f30d4408493717d252f3f6,
         type: 3}

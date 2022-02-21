@@ -55,6 +55,7 @@ public class HatSpawning : MonoBehaviour
             isHatRush = true;
             timerText.color = Color.red;
             hatRushMessage.SetActive(true);
+            AudioManager.PlayGeneralGameAudioClip(GameGeneralAudioStates.HatRushBegin);
             hatRushAnim.Play("FadeAnimation");
         }
             

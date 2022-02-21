@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7002744857728199004}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pasted__pCylinder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 5420937770696995740}
   - component: {fileID: 5030812563763782190}
   - component: {fileID: 3084877908114875516}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: log
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8552397734032297306}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCylinder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6542249513184383478}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: transform1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 6219488122193659904}
   - component: {fileID: 2125275903357473078}
   - component: {fileID: 1126695478638318006}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Log
   m_TagString: KnockbackAndDamage
   m_Icon: {fileID: 0}
@@ -366,7 +366,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 686013864249503819}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -397,7 +397,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1507070065858295384}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: transform2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

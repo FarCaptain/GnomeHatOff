@@ -18,9 +18,8 @@ public class AudioManager : MonoBehaviour
     static Dictionary<HatAudioStates, AudioClip> hatAudioClipsLibrary = new Dictionary<HatAudioStates, AudioClip>();
     static Dictionary<PlayerAudioStates, AudioClip> playerAudioClipsLibrary = new Dictionary<PlayerAudioStates, AudioClip>();
     static Dictionary<LogAudioStates, AudioClip> logAudioClipsLibrary = new Dictionary<LogAudioStates, AudioClip>();
-
-    void Start()
-    {
+	private void Awake()
+	{
         PopulateHatAudioClipsList();
         PopulateHatAudioClipsLibrary();
 
@@ -29,6 +28,10 @@ public class AudioManager : MonoBehaviour
 
         PopulateLogAudioClipsList();
         PopulateLogAudioClipsLibrary();
+    }
+	void Start()
+    {
+        
     }
     private static void PopulateHatAudioClipsList()
     {

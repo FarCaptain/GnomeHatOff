@@ -32,7 +32,7 @@ public class Log : Hazard
     void Update()
 	{
 		LandLog();
-		transform.Rotate(new Vector3(0, -rotationSpeed * Time.deltaTime, 0));
+		transform.Rotate(new Vector3(-rotationSpeed * Time.deltaTime,0, 0));
 		MoveLog();
 	}
 

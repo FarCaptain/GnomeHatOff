@@ -58,5 +58,6 @@ MonoBehaviour:
   maxGap: 4
   hatRushTime: 30
   hatRushMinGap: 0.3
-  mushroomCount: 0
+  mushroomMaxCount: 3
+  mushroomOneTime: 0
   accumulatedSpeed: 0

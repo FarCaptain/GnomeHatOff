@@ -20,7 +20,9 @@ public class HatSpawning : MonoBehaviour
     public float hatRushTime = 30f;
     public float hatRushMinGap = 0.2f;
 
-    public int mushroomCount = 0;
+    private int mushroomCount = 0;
+    public int mushroomMaxCount;
+    public int mushroomOneTime = 0;
     float timeInterval = 0f;
     bool isHatRush = false;
 
@@ -68,9 +70,10 @@ public class HatSpawning : MonoBehaviour
             if(ifMushroom < 30 && !isHatRush)
             {
                 timeGap = Random.Range(minGap, maxGap);
-                if (mushroomCount < 2)
+                if (mushroomOneTime < 1&& mushroomCount<mushroomMaxCount)
                 {
                     SpawnMushroomMan();
+                    mushroomOneTime++;
                     mushroomCount++;
                 }
                     
@@ -87,11 +90,8 @@ public class HatSpawning : MonoBehaviour
         //test
         if (Input.GetKeyDown(KeyCode.K))
         {
-            if (mushroomCount < 2)
-            {
                 SpawnMushroomMan();
-                mushroomCount++;
-            }
+               
             
         }
         

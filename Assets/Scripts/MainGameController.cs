@@ -36,7 +36,7 @@ public class MainGameController : MonoBehaviour
 
     public void RecieveSignal(int playerIndex, float x, float y, float z, string RFID)
     {
-        Debug.Log(RFID);
+//        Debug.Log(playerIndex + x + z + RFID);
         switch (status)
         {
             case GameStatus.Ready:

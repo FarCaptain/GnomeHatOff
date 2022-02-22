@@ -6,18 +6,24 @@ public class MushroomController : MonoBehaviour
 {
 
     GameObject[] players;
+    private float moveScaleX = 4f;
+    private float moveScaleZ = 2.0f;
     public float defaultTransparency = 1f;
     public float fadeDuration = 3f;
     public GameObject player;
     public GameObject shadowPrefab;
     public HatSpawning hatSpawn;
     public ParticleSystem circleDust;
-    private float closeDistance = 2;
-    public float accelerationTime = 1f;
-    public float maxSpeed = 0.5f;
+    [SerializeField] public Rigidbody rb;
+
+    public float closeDistance = 2;
+    public float moveSpeed = 0.5f;
+    public Vector3 dropSpeed;
+    private float accelerationTime = 1f;
+    
     private Vector3 movement;
     private float timeLeft;
-    [SerializeField] public Rigidbody rb;
+    
 
     bool isOnGround = false;
     float headTop;
@@ -33,7 +39,9 @@ public class MushroomController : MonoBehaviour
 
         hatSpawn = GameObject.Find("HatSpawner").GetComponent<HatSpawning>();
         player = GameObject.Find("Gnome_0");
-
+        rb.velocity = -dropSpeed;
+        
+        
         // TODO: Adjust for loop code
         for (int i = 0; i < player.transform.childCount; i++)
         {
@@ -65,7 +73,7 @@ public class MushroomController : MonoBehaviour
         {
            
             Move();
-            rb.velocity = (movement.normalized * maxSpeed);
+            rb.velocity = (movement.normalized * moveSpeed);
         }
         
         
@@ -82,7 +90,7 @@ public class MushroomController : MonoBehaviour
     public void hatShadowDestroy()
     {
         Destroy(shadowPrefab);
-        hatSpawn.mushroomCount--;
+        hatSpawn.mushroomOneTime--;
     }
     public void drawCircleDust()
     {
@@ -92,35 +100,72 @@ public class MushroomController : MonoBehaviour
 
     public void Move()
     {
-        timeLeft -= Time.deltaTime;
-        int closePlayer = ClosedToGnome();
-        if (closePlayer != -1)
+        bool ifOutscale = OutScale();
+        if (ifOutscale)
         {
-           
-            Escape(players[closePlayer]);
-        }
-
-        if (timeLeft <= 0 )
-        {
-            
-            if(closePlayer == -1)
+            if (movement == Vector3.zero)
             {
                 movement = new Vector3(Random.Range(-1f, 1f), 0.0f, Random.Range(-1f, 1f));
             }
-                
             timeLeft = accelerationTime;
         }
-        
+        else
+        {
+            timeLeft -= Time.deltaTime;
+
+            int closePlayer = ClosedToGnome();
+            if (closePlayer != -1)
+            {
+
+                Escape(players[closePlayer]);
+            }
+
+            if (timeLeft <= 0)
+            {
+
+                if (closePlayer == -1)
+                {
+                    movement = new Vector3(Random.Range(-1f, 1f), 0.0f, Random.Range(-1f, 1f));
+                }
+
+                timeLeft = accelerationTime;
+            }
+        }
+       
+
 
 
     }
-    public void OnCollisionStay(Collision collision)
+    public bool OutScale()
     {
-        if (isOnGround && collision.gameObject.tag != "Ground")
+        float x = transform.position.x;
+        float z = transform.position.z;
+        float movementX = movement.x;
+        float movementZ = movement.z;
+        bool outcome = false;
+        if (x < -moveScaleX)
         {
-            timeLeft = 0;
-
+            movementX = movementX < 0 ? -movementX : movementX;
+            outcome = true;
         }
+        else if ( x > moveScaleX)
+        {
+            movementX = movementX < 0 ? movementX : -movementX;
+            outcome = true;
+        }
+
+        if (z < -moveScaleZ)
+        {
+            movementZ = movementZ <0? -movementZ:movementZ;
+            outcome = true;
+        }
+        else if (  z > moveScaleZ)
+        {
+            movementZ = movementZ < 0 ? movementZ : -movementZ;
+            outcome = true;
+        }
+        movement = new Vector3(movementX, 0, movementZ);
+        return outcome;
     }
     public void OnCollisionEnter(Collision s)
     {

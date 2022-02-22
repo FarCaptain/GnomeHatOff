@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3355802726085938711}
   - component: {fileID: 2852957453135122760}
   - component: {fileID: 1863367558274309943}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Diglett
   m_TagString: Untagged
   m_Icon: {fileID: 0}

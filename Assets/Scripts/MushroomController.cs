@@ -23,9 +23,12 @@ public class MushroomController : MonoBehaviour
 
     public bool hatFadeEnabled = true;
     private MeshCollider collider;
+    private AudioSource mushroomManAudioSource;
     void Start()
     {
-        
+        mushroomManAudioSource = GetComponent<AudioSource>();
+        AudioManager.PlayMushroomManAudioClip(MushroomManAudioStates.Falling, mushroomManAudioSource);
+
         hatSpawn = GameObject.Find("HatSpawner").GetComponent<HatSpawning>();
         player = GameObject.Find("Gnome_0");
 
@@ -103,7 +106,10 @@ public class MushroomController : MonoBehaviour
         {
             Debug.Log("sss");
             movement = -movement;
-            
+        }
+        if(s.gameObject.tag == "Ground")
+		{
+            AudioManager.PlayMushroomManAudioClip(MushroomManAudioStates.Landed, mushroomManAudioSource);
         }
     }
 }

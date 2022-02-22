@@ -78,6 +78,7 @@ public class ScoreSystem : MonoBehaviour
 	public void displayWinner()
     {
         winPanel.SetActive(true);
+        AudioManager.PlayGeneralGameAudioClip(GameGeneralAudioStates.RoundEnd);
         if (playerScore0 > playerScore1)
         {
             winText.text = "Player 1 Wins!!!";

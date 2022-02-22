@@ -19,6 +19,7 @@ public class Timer : MonoBehaviour
 
     void Start()
     {
+        AudioManager.PlayGeneralGameAudioClip(GameGeneralAudioStates.RoundBegin);
         currentScene = SceneManager.GetActiveScene();
         timerText = gameObject.GetComponent<TextMeshProUGUI>();
         isTimerRunning = true;

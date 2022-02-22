@@ -12,6 +12,8 @@ public class DiglettBehaviour : Hazard
     public float stayTime;
     //public float warnTime;
 
+    public float DiglettSpeed;
+
     public List<Transform> players = new List<Transform>();
 
     private NewTimer stayTimer;
@@ -63,6 +65,7 @@ public class DiglettBehaviour : Hazard
                 int index = Random.Range(0, players.Count);
                 Vector3 playerPos = players[index].position;
                 navMeshAgent.destination = playerPos;
+                navMeshAgent.speed = DiglettSpeed;
                 dust.Play();
             }
         }

@@ -12,7 +12,9 @@ public class DiglettBehaviour : Hazard
     public float stayTime;
     //public float warnTime;
 
-    public float DiglettSpeed;
+    public float diglettSpeed;
+    public float trackingPathLength;
+    public float stopTrackingDistance;
 
     public List<Transform> players = new List<Transform>();
 
@@ -64,8 +66,13 @@ public class DiglettBehaviour : Hazard
                 // ToDo. might need bias to avoid bug
                 int index = Random.Range(0, players.Count);
                 Vector3 playerPos = players[index].position;
+
+                float rad = Random.Range(0f, 2f * Mathf.PI);
+                Vector3 shift = new Vector3(trackingPathLength * Mathf.Cos(rad), 0f, trackingPathLength * Mathf.Sin(rad));
+                transform.position = playerPos + shift;
+
                 navMeshAgent.destination = playerPos;
-                navMeshAgent.speed = DiglettSpeed;
+                navMeshAgent.speed = diglettSpeed;
                 dust.Play();
             }
         }

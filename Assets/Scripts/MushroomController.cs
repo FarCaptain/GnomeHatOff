@@ -5,15 +5,16 @@ using UnityEngine;
 public class MushroomController : MonoBehaviour
 {
 
+    GameObject[] players;
     public float defaultTransparency = 1f;
     public float fadeDuration = 3f;
     public GameObject player;
     public GameObject shadowPrefab;
     public HatSpawning hatSpawn;
     public ParticleSystem circleDust;
-
+    private float closeDistance = 2;
     public float accelerationTime = 1f;
-    public float maxSpeed = 3f;
+    public float maxSpeed = 0.5f;
     private Vector3 movement;
     private float timeLeft;
     [SerializeField] public Rigidbody rb;
@@ -26,6 +27,7 @@ public class MushroomController : MonoBehaviour
     private AudioSource mushroomManAudioSource;
     void Start()
     {
+        players = GameObject.FindGameObjectsWithTag("Player");
         mushroomManAudioSource = GetComponent<AudioSource>();
         AudioManager.PlayMushroomManAudioClip(MushroomManAudioStates.Falling, mushroomManAudioSource);
 
@@ -61,8 +63,9 @@ public class MushroomController : MonoBehaviour
         //On ground
         if (isOnGround)
         {
+           
             Move();
-            rb.velocity = (movement * maxSpeed);
+            rb.velocity = (movement.normalized * maxSpeed);
         }
         
         
@@ -90,26 +93,69 @@ public class MushroomController : MonoBehaviour
     public void Move()
     {
         timeLeft -= Time.deltaTime;
-        if (timeLeft <= 0)
+        int closePlayer = ClosedToGnome();
+        if (closePlayer != -1)
         {
-            movement = new Vector3(Random.Range(-1f, 1f), 0.0f, Random.Range(-1f, 1f));
+           
+            Escape(players[closePlayer]);
+        }
+
+        if (timeLeft <= 0 )
+        {
+            
+            if(closePlayer == -1)
+            {
+                movement = new Vector3(Random.Range(-1f, 1f), 0.0f, Random.Range(-1f, 1f));
+            }
+                
             timeLeft = accelerationTime;
         }
         
 
 
     }
+    public void OnCollisionStay(Collision collision)
+    {
+        if (isOnGround && collision.gameObject.tag != "Ground")
+        {
+            timeLeft = 0;
 
+        }
+    }
     public void OnCollisionEnter(Collision s)
     {
         if (isOnGround)
         {
-            Debug.Log("sss");
             movement = -movement;
+           
         }
         if(s.gameObject.tag == "Ground")
 		{
             AudioManager.PlayMushroomManAudioClip(MushroomManAudioStates.Landed, mushroomManAudioSource);
         }
+    }
+
+    private void Escape(GameObject player)
+    {
+
+        Vector3 vec = transform.position - player.transform.position;
+        movement = new Vector3(vec.x,0,vec.z).normalized;
+       
+    }
+
+    private int ClosedToGnome()
+    {
+        int closest = -1;
+        float minDistance = 999;
+        for (int i = 0; i < players.Length; i++)
+        {
+            float distance = Vector2.Distance(transform.position, players[i].transform.position);
+            if ( distance < closeDistance && distance < minDistance)
+            {
+                minDistance = distance;
+                closest = i;
+            }
+        }
+        return closest;
     }
 }

@@ -31,8 +31,10 @@ public class MainGameController : MonoBehaviour
             playerMovements.Add(players[i].GetComponent<PlayerMovement>());
             GameObject arduino =  Instantiate(Arduino, players[i].gameObject.transform);
             arduino.GetComponent<SerialController>().portName = COM[i];
+            arduino.GetComponent<SerialController>().enabled = true;
             arduino.GetComponentInChildren<SampleMessageListener>().Playerindex = i;
             arduino.GetComponentInChildren<SampleMessageListener>().Game = this;
+         
         }
     }
     void Start()

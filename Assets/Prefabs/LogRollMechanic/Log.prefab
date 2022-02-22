@@ -357,6 +357,8 @@ MonoBehaviour:
   reverseX: 1
   reverseZ: -1
   fallAmount: 1.4
+  logDebrisVFX: {fileID: 4789552965078813661, guid: 323118040ee667a47829dc1999b6b9f4,
+    type: 3}
 --- !u!1 &8476816986254524881
 GameObject:
   m_ObjectHideFlags: 0

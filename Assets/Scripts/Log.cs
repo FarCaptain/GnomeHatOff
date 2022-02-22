@@ -4,27 +4,30 @@ using UnityEngine;
 
 public class Log : Hazard
 {
-    [Header("Mobility Variables")]
-    [SerializeField] float movementSpeed = 0.5f;
-    [SerializeField] float rotationSpeed = 100f;
+	[Header("Mobility Variables")]
+	[SerializeField] float movementSpeed = 0.5f;
+	[SerializeField] float rotationSpeed = 100f;
 
-    [Header("Direction Variables")]
-    [SerializeField] bool xAxis;
-    [SerializeField] bool zAxis;
-    [SerializeField] int reverseX = 1;
-    [SerializeField] int reverseZ = 1;
+	[Header("Direction Variables")]
+	[SerializeField] bool xAxis;
+	[SerializeField] bool zAxis;
+	[SerializeField] int reverseX = 1;
+	[SerializeField] int reverseZ = 1;
 
-    [Header("Landing Variables")]
-    [SerializeField] float fallAmount = 0.5f;
+	[Header("Landing Variables")]
+	[SerializeField] float fallAmount = 0.5f;
 
     private bool hasLanded = false;
 
-    private AudioSource logAudioSource;
+	[Header("Log Debris VFX")]
+	[SerializeField] ParticleSystem logDebrisVFX;
+
+	private AudioSource logAudioSource;
 	private GameObject originLog;
 
     void Start()
     {
-        logAudioSource = GetComponent<AudioSource>();
+		logAudioSource = GetComponent<AudioSource>();
         AudioManager.PlayLogAudioClip(LogAudioStates.Rolling, logAudioSource);
     }
 
@@ -34,6 +37,11 @@ public class Log : Hazard
 		LandLog();
 		transform.Rotate(new Vector3(-rotationSpeed * Time.deltaTime,0, 0));
 		MoveLog();
+	}
+
+	private void LateUpdate()
+	{
+		
 	}
 
 	private void LandLog()
@@ -52,6 +60,17 @@ public class Log : Hazard
 		if (zAxis)
 		{
 			transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + (movementSpeed * Time.deltaTime * reverseZ));
+		}
+		SpawnLogDebrisVFX();
+
+	}
+
+	void SpawnLogDebrisVFX()
+	{
+		if(logDebrisVFX.isPlaying == false)
+		{
+			logDebrisVFX = Instantiate<ParticleSystem>(logDebrisVFX, transform.position, Quaternion.identity);
+			logDebrisVFX.Play();
 		}
 	}
 

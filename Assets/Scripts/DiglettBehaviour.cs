@@ -29,6 +29,9 @@ public class DiglettBehaviour : Hazard
     private NavMeshAgent navMeshAgent;
     public Transform digletModel;
 
+    private int targetedPlayerIndex;
+    private bool keepTrack;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,8 +67,8 @@ public class DiglettBehaviour : Hazard
                 //warnTimer.TimerStart = true;
 
                 // ToDo. might need bias to avoid bug
-                int index = Random.Range(0, players.Count);
-                Vector3 playerPos = players[index].position;
+                targetedPlayerIndex = Random.Range(0, players.Count);
+                Vector3 playerPos = players[targetedPlayerIndex].position;
 
                 float rad = Random.Range(0f, 2f * Mathf.PI);
                 Vector3 shift = new Vector3(trackingPathLength * Mathf.Cos(rad), 0f, trackingPathLength * Mathf.Sin(rad));
@@ -73,13 +76,24 @@ public class DiglettBehaviour : Hazard
 
                 navMeshAgent.destination = playerPos;
                 navMeshAgent.speed = diglettSpeed;
+                keepTrack = true;
                 dust.Play();
             }
         }
         else if (state == (int)diglettStates.Warn)
         {
+            Vector3 playerPos = players[targetedPlayerIndex].position;
+
+            // keep following the player if it is not close enough
+            if (keepTrack && Vector3.Distance(playerPos, transform.position) < stopTrackingDistance)
+                keepTrack = false;
+
+            if(keepTrack)
+                navMeshAgent.destination = playerPos;
+
             float dist = navMeshAgent.remainingDistance;
-            if (dist != Mathf.Infinity && navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete && navMeshAgent.remainingDistance == 0)
+            //&& navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete
+            if (dist != Mathf.Infinity  && navMeshAgent.remainingDistance < 0.15f)
             {
                 state = (int)diglettStates.Stay;
                 stayTimer.ResetTimer();

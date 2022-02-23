@@ -54,6 +54,7 @@ public class DiglettBehaviour : Hazard
         digletModel.position = new Vector3(pos.x, -1.5f, pos.z);
 
         navMeshAgent = GetComponent<NavMeshAgent>();
+        targetedPlayerIndex = Random.Range(0, players.Count);
     }
 
     void Update()
@@ -66,9 +67,10 @@ public class DiglettBehaviour : Hazard
                 //warnTimer.ResetTimer();
                 //warnTimer.TimerStart = true;
 
-                // ToDo. might need bias to avoid bug
-                targetedPlayerIndex = Random.Range(0, players.Count);
+                // target players in turn
+                targetedPlayerIndex = (targetedPlayerIndex + 1) % players.Count;
                 Vector3 playerPos = players[targetedPlayerIndex].position;
+                // ToDo. might need bias to avoid bug
 
                 float rad = Random.Range(0f, 2f * Mathf.PI);
                 Vector3 shift = new Vector3(trackingPathLength * Mathf.Cos(rad), 0f, trackingPathLength * Mathf.Sin(rad));

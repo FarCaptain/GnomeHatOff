@@ -46,5 +46,9 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
+<<<<<<< Updated upstream
 ProjectSettings/ProjectVersion.txt
 ProjectSettings/ProjectVersion.txt
+=======
+*.meta
+>>>>>>> Stashed changes

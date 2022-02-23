@@ -10,17 +10,36 @@ enum GameStatus
 public class MainGameController : MonoBehaviour
 {
     private GameStatus status = GameStatus.Ready;
+    [HideInInspector]
     public GameObject[] players;
     private List<PlayerMovement> playerMovements = new List<PlayerMovement>();
     private int playerAmount;
+    public GameObject Arduino;
+    public string[] COM;
+    Player[] playerfetch;
+
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        playerfetch = FindObjectsOfType<Player>();
+        players = new GameObject[playerfetch.Length];
+        for (int i = 0; i < playerfetch.Length; i++)
+        {
+            players[i] = playerfetch[i].gameObject;
+            players[i].GetComponent<PlayerMovement>().playerIndex = i;
+            playerMovements.Add(players[i].GetComponent<PlayerMovement>());
+            GameObject arduino =  Instantiate(Arduino, players[i].gameObject.transform);
+            arduino.GetComponent<SerialController>().portName = COM[i];
+            arduino.GetComponent<SerialController>().enabled = true;
+            arduino.GetComponentInChildren<SampleMessageListener>().Playerindex = i;
+            arduino.GetComponentInChildren<SampleMessageListener>().Game = this;
+         
+        }
+    }
     void Start()
     {
-        playerAmount = players.Length;
-        for(int i=0; i < playerAmount; i++)
-        {
-            playerMovements.Add(players[i].GetComponent<PlayerMovement>());
-        }
+
     }
 
     // Update is called once per frame
@@ -36,11 +55,11 @@ public class MainGameController : MonoBehaviour
 
     public void RecieveSignal(int playerIndex, float x, float y, float z, string RFID)
     {
-//        Debug.Log(playerIndex + x + z + RFID);
+        //        Debug.Log(playerIndex + x + z + RFID);
         switch (status)
         {
             case GameStatus.Ready:
-                playerMovements[playerIndex].SetOffset(new Vector3(x,y,z));
+                playerMovements[playerIndex].SetOffset(new Vector3(x, y, z));
                 break;
             case GameStatus.Playing:
                 playerMovements[playerIndex].Move(x, y, z);

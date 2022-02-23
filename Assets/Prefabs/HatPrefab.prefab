@@ -84,6 +84,7 @@ MonoBehaviour:
   shadowPrefab: {fileID: 0}
   circleDust: {fileID: 6842651306954289397}
   hatFadeEnabled: 1
+  hatCollectedByPlayer: 0
 --- !u!82 &9199296803561114643
 AudioSource:
   m_ObjectHideFlags: 0

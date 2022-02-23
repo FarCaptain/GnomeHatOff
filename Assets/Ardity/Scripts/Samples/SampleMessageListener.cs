@@ -33,7 +33,7 @@ public class SampleMessageListener : MonoBehaviour
             float zaxis = float.Parse(dataRaw[1]);
             string RFID = dataRaw[2];
             Game.RecieveSignal(Playerindex, xaxis, 0, zaxis, RFID);
-         //   Debug.Log(Playerindex + xaxis + "," + zaxis);
+            Debug.Log("PlayerIndex: " + Playerindex + "/" +  xaxis + "," + zaxis);
         }
         if (dataRaw.Length == 2 && dataRaw[0] != " ")
         {

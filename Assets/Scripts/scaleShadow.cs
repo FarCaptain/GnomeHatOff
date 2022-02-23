@@ -5,9 +5,16 @@ using UnityEngine;
 public class scaleShadow : MonoBehaviour
 {
     public float scaleSpeed = 0.2f;
+    bool attraction;
+    GameObject player;
+    float MagnetismStrength = 3f;
+    float MagnetismReductionOverTime = 0.1f;
+    float MinimumSnapValue = 0.08f;
+    float Timer = 1;
     // Start is called before the first frame update
     void Start()
     {
+        attraction = false;
         transform.localScale = new Vector3(0, 0, 0); 
     }
 
@@ -18,5 +25,34 @@ public class scaleShadow : MonoBehaviour
         {
             transform.localScale = transform.localScale + new Vector3(1, 1, 1) * scaleSpeed * Time.deltaTime;
         }
+        if(player)
+        {
+            if (attraction == true)
+            {
+                Vector3 direction = (this.transform.position - player.transform.position).normalized;
+                   // Debug.Log(direction);
+                player.GetComponent<Rigidbody>().AddForce(direction * MagnetismStrength, ForceMode.Force);
+                if(MagnetismStrength > 0)
+                MagnetismStrength -= MagnetismReductionOverTime;
+/*                if ((direction.x >= -MinimumSnapValue && direction.x <= MinimumSnapValue) || (direction.z >= -MinimumSnapValue && direction.z <= MinimumSnapValue))
+                {
+                    player.transform.position = this.transform.position;
+                    attraction = false;
+                }*/
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        attraction = true;
+        if(other.gameObject.tag == "Player")
+        { player = other.gameObject; }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        attraction = false;
+        player = null;
     }
 }

@@ -21515,6 +21515,11 @@ PrefabInstance:
       propertyPath: scoreSystem
       value: 
       objectReference: {fileID: 144383040}
+    - target: {fileID: 1696658363055628154, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3593979466627239089, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
       propertyPath: m_Name
@@ -21575,12 +21580,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4835091648898173498, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835091648898173498, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7460995463974118362, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
       propertyPath: m_Volume
       value: 0.504
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7556945426137748401, guid: cdc8e89d69cc6564c87384009a43f4b7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cdc8e89d69cc6564c87384009a43f4b7, type: 3}
 --- !u!1001 &2568850846263522179
 PrefabInstance:
@@ -21593,6 +21609,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2568850845096396120, guid: 0af16847889ebed4da19d6838573a8f5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2568850845096396126, guid: 0af16847889ebed4da19d6838573a8f5,
         type: 3}
@@ -21657,12 +21678,12 @@ PrefabInstance:
     - target: {fileID: 2568850845096396127, guid: 0af16847889ebed4da19d6838573a8f5,
         type: 3}
       propertyPath: COM.Array.data[0]
-      value: COM3
+      value: COM6
       objectReference: {fileID: 0}
     - target: {fileID: 2568850845096396127, guid: 0af16847889ebed4da19d6838573a8f5,
         type: 3}
       propertyPath: COM.Array.data[1]
-      value: COM4
+      value: COM3
       objectReference: {fileID: 0}
     - target: {fileID: 2568850845096396127, guid: 0af16847889ebed4da19d6838573a8f5,
         type: 3}
@@ -21853,7 +21874,8 @@ PrefabInstance:
       propertyPath: maxSpeed
       value: 600
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5154856036340132841, guid: 4569103a97551e245b460df25ea57d2a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4569103a97551e245b460df25ea57d2a, type: 3}
 --- !u!4 &5154856035333242856 stripped
 Transform:

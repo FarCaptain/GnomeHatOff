@@ -104,7 +104,6 @@ public class MushroomController : MonoBehaviour
     {
         if (isOnGround)
         {
-            Debug.Log("sss");
             movement = -movement;
         }
         if(s.gameObject.tag == "Ground")

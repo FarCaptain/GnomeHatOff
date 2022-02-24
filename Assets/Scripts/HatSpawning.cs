@@ -15,6 +15,7 @@ public class HatSpawning : MonoBehaviour
 
     public Vector3 center;
     public Vector3 size;
+    public Vector3 scale_mushroom;
     public float minGap = 0.3f;
     public float maxGap = 2.0f;
     public float hatRushTime = 30f;
@@ -123,7 +124,7 @@ public class HatSpawning : MonoBehaviour
 
     void SpawnMushroomMan()
     {
-        Vector3 pos = transform.localPosition + center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2), Random.Range(-size.z / 2, size.z / 2));
+        Vector3 pos = transform.localPosition + center + new Vector3(Random.Range(-4.5f, 4.5f), Random.Range(-scale_mushroom.y / 2, scale_mushroom.y / 2), Random.Range(-2.36f, 2.59f));
         GameObject hat = Instantiate(mushroomManPrefab, pos, Quaternion.identity);
         hat.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = Color.black;
         generateShadow(pos, hat, "MushroomController");

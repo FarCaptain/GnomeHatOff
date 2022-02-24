@@ -6,8 +6,7 @@ public class MushroomController : MonoBehaviour
 {
 
     GameObject[] players;
-    private float moveScaleX = 4f;
-    private float moveScaleZ = 2.0f;
+    private float moveScaleX = 4.5f;
     public float defaultTransparency = 1f;
     public float fadeDuration = 3f;
     public GameObject player;
@@ -16,12 +15,12 @@ public class MushroomController : MonoBehaviour
     public ParticleSystem circleDust;
     [SerializeField] public Rigidbody rb;
 
-    public float closeDistance = 2;
+    public float closeDistance;
     public float moveSpeed = 0.5f;
     public Vector3 dropSpeed;
-    private float accelerationTime = 1f;
+    private float accelerationTime = 0.5f;
     
-    private Vector3 movement;
+    public Vector3 movement;
     private float timeLeft;
     
 
@@ -100,25 +99,24 @@ public class MushroomController : MonoBehaviour
 
     public void Move()
     {
-        bool ifOutscale = OutScale();
-        if (ifOutscale)
+        int closePlayer = ClosedToGnome();
+        timeLeft -= Time.deltaTime;
+        if (closePlayer != -1)
         {
+
+            Escape(players[closePlayer]);
+            moveSpeed = 3;
+            OutScale(true);
+        }
+        else
+        {
+            moveSpeed = 2;
+            OutScale(false);
             if (movement == Vector3.zero)
             {
                 movement = new Vector3(Random.Range(-1f, 1f), 0.0f, Random.Range(-1f, 1f));
             }
             timeLeft = accelerationTime;
-        }
-        else
-        {
-            timeLeft -= Time.deltaTime;
-
-            int closePlayer = ClosedToGnome();
-            if (closePlayer != -1)
-            {
-
-                Escape(players[closePlayer]);
-            }
 
             if (timeLeft <= 0)
             {
@@ -131,12 +129,10 @@ public class MushroomController : MonoBehaviour
                 timeLeft = accelerationTime;
             }
         }
-       
-
 
 
     }
-    public bool OutScale()
+    public bool OutScale(bool ifClosed)
     {
         float x = transform.position.x;
         float z = transform.position.z;
@@ -145,23 +141,54 @@ public class MushroomController : MonoBehaviour
         bool outcome = false;
         if (x < -moveScaleX)
         {
-            movementX = movementX < 0 ? -movementX : movementX;
+            if (ifClosed)
+            {
+                movementX = 0;
+            }
+            else
+            {
+                movementX = movementX < 0 ? -movementX : movementX;
+            }
+            
             outcome = true;
         }
         else if ( x > moveScaleX)
         {
-            movementX = movementX < 0 ? movementX : -movementX;
+            if (ifClosed)
+            {
+                movementX = 0;
+            }
+            else
+            {
+                movementX = movementX < 0 ? movementX : -movementX;
+            }
+           
             outcome = true;
         }
 
-        if (z < -moveScaleZ)
+        if (z < -2.2f)
         {
-            movementZ = movementZ <0? -movementZ:movementZ;
+            if (ifClosed)
+            {
+                movementZ = 0;
+            }
+            else
+            {
+                movementZ = movementZ < 0 ? -movementZ : movementZ;
+            }
             outcome = true;
         }
-        else if (  z > moveScaleZ)
+        else if (  z > 2.2f)
         {
-            movementZ = movementZ < 0 ? movementZ : -movementZ;
+            if (ifClosed)
+            {
+                movementZ = 0;
+            }
+            else
+            {
+                movementZ = movementZ < 0 ? movementZ : -movementZ;
+            }
+            
             outcome = true;
         }
         movement = new Vector3(movementX, 0, movementZ);
@@ -169,14 +196,15 @@ public class MushroomController : MonoBehaviour
     }
     public void OnCollisionEnter(Collision s)
     {
-        if (isOnGround)
-        {
-            movement = -movement;
-           
-        }
+        Debug.Log(s.gameObject.name);
         if(s.gameObject.tag == "Ground")
 		{
             AudioManager.PlayMushroomManAudioClip(MushroomManAudioStates.Landed, mushroomManAudioSource);
+            return;
+        }
+        if(s.gameObject.tag != "wall")
+        {
+            movement = -movement;
         }
     }
 
@@ -194,13 +222,18 @@ public class MushroomController : MonoBehaviour
         float minDistance = 999;
         for (int i = 0; i < players.Length; i++)
         {
-            float distance = Vector2.Distance(transform.position, players[i].transform.position);
+            float distance = Vector3.Distance(transform.position, players[i].transform.position);
             if ( distance < closeDistance && distance < minDistance)
             {
                 minDistance = distance;
                 closest = i;
             }
         }
+        //if (closest != -1)
+        //{
+        //    Debug.Log(transform.position+" "+player[closest].transform.positio+" "+ minDistance+" "+closeDistance);
+            
+        //}
         return closest;
     }
 }

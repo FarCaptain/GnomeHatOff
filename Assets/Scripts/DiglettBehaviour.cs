@@ -13,8 +13,10 @@ public class DiglettBehaviour : Hazard
     //public float warnTime;
 
     public float diglettSpeed;
+    //public float initialDistance;
+    //public float stopTrackingDistance;
     public float trackingPathLength;
-    public float stopTrackingDistance;
+    public List<Transform> spawners = new List<Transform>();
 
     public List<Transform> players = new List<Transform>();
 
@@ -31,6 +33,7 @@ public class DiglettBehaviour : Hazard
 
     private int targetedPlayerIndex;
     private bool keepTrack;
+    private float coveredPathLength = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -72,9 +75,21 @@ public class DiglettBehaviour : Hazard
                 Vector3 playerPos = players[targetedPlayerIndex].position;
                 // ToDo. might need bias to avoid bug
 
-                float rad = Random.Range(0f, 2f * Mathf.PI);
-                Vector3 shift = new Vector3(trackingPathLength * Mathf.Cos(rad), 0f, trackingPathLength * Mathf.Sin(rad));
-                transform.position = playerPos + shift;
+                // find the farthest spawnPoint
+                Vector3 spawnPos = transform.position;
+                float maxDis = 0f;
+                for(int i = 0; i < spawners.Count; i++)
+                {
+                    float dis = Vector3.Distance(spawners[i].position, playerPos);
+                    if(dis > maxDis)
+                    {
+                        maxDis = dis;
+                        spawnPos = spawners[i].position;
+                    }
+                }
+                transform.position = spawnPos;
+
+                
 
                 navMeshAgent.destination = playerPos;
                 navMeshAgent.speed = diglettSpeed;
@@ -87,15 +102,22 @@ public class DiglettBehaviour : Hazard
             Vector3 playerPos = players[targetedPlayerIndex].position;
 
             // keep following the player if it is not close enough
-            if (keepTrack && Vector3.Distance(playerPos, transform.position) < stopTrackingDistance)
+            //if (keepTrack && Vector3.Distance(playerPos, transform.position) < stopTrackingDistance)
+            if (keepTrack && coveredPathLength >= trackingPathLength)
+            {
+                coveredPathLength = 0f;
                 keepTrack = false;
+            }
 
-            if(keepTrack)
+            if (keepTrack)
+            {
                 navMeshAgent.destination = playerPos;
+                coveredPathLength += Time.deltaTime * navMeshAgent.speed;
+            }
 
             float dist = navMeshAgent.remainingDistance;
             //&& navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete
-            if (dist != Mathf.Infinity  && navMeshAgent.remainingDistance < 0.15f)
+            if (dist != Mathf.Infinity  && dist < 0.15f)
             {
                 state = (int)diglettStates.Stay;
                 stayTimer.ResetTimer();
@@ -120,4 +142,9 @@ public class DiglettBehaviour : Hazard
             }
         }
     }
+    //void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = new Color(1f, 0f, 0f, 0.5f);
+    //    Gizmos.DrawSphere(transform.localPosition + playerPos, initialDistance);
+    //}
 }

@@ -668,10 +668,10 @@ GameObject:
   - component: {fileID: 3452146370785749638}
   - component: {fileID: 1993336045482525912}
   - component: {fileID: 1194880276440648521}
+  - component: {fileID: 9008320117451896627}
   - component: {fileID: 347020995950931954}
   - component: {fileID: 5154856036340132846}
   - component: {fileID: 255995053195774679}
-  - component: {fileID: 9008320117451896627}
   m_Layer: 9
   m_Name: Gnome Red
   m_TagString: Player
@@ -729,6 +729,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.12, y: 0.27, z: 0.12}
   m_Center: {x: 0, y: 0.12, z: 0}
+--- !u!135 &9008320117451896627
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5154856036340132840}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.23
+  m_Center: {x: 0, y: 0.05, z: 0}
 --- !u!82 &347020995950931954
 AudioSource:
   m_ObjectHideFlags: 0
@@ -872,23 +885,10 @@ MonoBehaviour:
   bumpForce: 10
   superBounceMass: 10
   superBump: 0
-  superBumpMaxTime: 4
+  superBumpMaxTime: 5
   playerBoxCollider: {fileID: 0}
   FlashingTime: 0.08
   TimeInterval: 0.1
---- !u!135 &9008320117451896627
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5154856036340132840}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.23
-  m_Center: {x: 0, y: 0.05, z: 0}
 --- !u!1 &5459964894992216789
 GameObject:
   m_ObjectHideFlags: 0

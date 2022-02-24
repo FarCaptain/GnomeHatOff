@@ -59,6 +59,7 @@ public class Player : MonoBehaviour
 	{
 		
 	}
+
 	private void OnTriggerEnter(Collider other)
 	{
 		if(other.gameObject.tag=="Player")
@@ -73,12 +74,14 @@ public class Player : MonoBehaviour
 
 	private void OnTriggerExit(Collider other)
 	{
+        playerMovement.canMove = true;
         if (other.gameObject.tag == "Player")
         {
             if (players.Contains(other.gameObject))
             {
                 players[players.Count - 1].GetComponent<BoxCollider>().material = null;
                 players.Remove(other.gameObject);
+ 
             }
         }
     }
@@ -92,10 +95,14 @@ public class Player : MonoBehaviour
             return;
 		}
 
-        if(collision.gameObject.tag=="Player" && collision.gameObject.GetComponent<Player>().superBump==true)
+        if(collision.gameObject.tag=="Player")
 		{
-            playerRigidBody.AddForce(-transform.forward * bumpForce, ForceMode.Impulse);
-		}
+            playerMovement.canMove = false;
+            if(collision.gameObject.GetComponent<Player>().superBump == true)
+			{
+                playerRigidBody.AddForce(-transform.forward * bumpForce, ForceMode.Impulse);
+            }
+        }
 
 		if (collision.gameObject.tag.Contains("Knockback"))
         {

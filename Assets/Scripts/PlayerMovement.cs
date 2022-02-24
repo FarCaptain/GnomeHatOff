@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
            
 
             Vector3 speed = move * keyboardSpeed;
-            if (speed != Vector3.zero)
+            if (speed != Vector3.zero && canMove==true)
             {
                 gameObject.transform.forward = speed;
                 Move(speed * Time.deltaTime);
@@ -100,10 +100,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move(Vector3 motion)
     {
-        if (canMove == false)
-		{
-            return;
-		}
         rigidBody.velocity = motion;
         //Debug.Log(motion);
     }

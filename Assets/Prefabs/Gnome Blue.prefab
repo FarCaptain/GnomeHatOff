@@ -5147,7 +5147,7 @@ MonoBehaviour:
   bumpForce: 10
   superBounceMass: 10
   superBump: 0
-  superBumpMaxTime: 4
+  superBumpMaxTime: 5
   playerBoxCollider: {fileID: 0}
   FlashingTime: 0.08
   TimeInterval: 0.1

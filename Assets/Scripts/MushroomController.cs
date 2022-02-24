@@ -15,12 +15,17 @@ public class MushroomController : MonoBehaviour
     public ParticleSystem circleDust;
     [SerializeField] public Rigidbody rb;
 
-    public float closeDistance;
-    public float moveSpeed = 0.5f;
     public Vector3 dropSpeed;
+    public float closeDistance;
+    private float moveSpeed;
+    public float highSpeed;
+    public float lowSpeed;
+    public float catchTime;
     private float accelerationTime = 0.5f;
     
-    public Vector3 movement;
+    private float bornTime;
+    
+    private Vector3 movement;
     private float timeLeft;
     
 
@@ -28,10 +33,10 @@ public class MushroomController : MonoBehaviour
     float headTop;
 
     public bool hatFadeEnabled = true;
-    private MeshCollider collider;
     private AudioSource mushroomManAudioSource;
     void Start()
     {
+        bornTime = 0;
         players = GameObject.FindGameObjectsWithTag("Player");
         mushroomManAudioSource = GetComponent<AudioSource>();
         AudioManager.PlayMushroomManAudioClip(MushroomManAudioStates.Falling, mushroomManAudioSource);
@@ -55,8 +60,12 @@ public class MushroomController : MonoBehaviour
 
     void FixedUpdate()
     {
-     
 
+        bornTime += Time.fixedDeltaTime;
+        if(bornTime > catchTime)
+        {
+            moveSpeed = lowSpeed;
+        }
         if (hatFadeEnabled && transform.position.y < headTop)
         {
 
@@ -72,6 +81,7 @@ public class MushroomController : MonoBehaviour
         {
            
             Move();
+            Debug.Log(moveSpeed);
             rb.velocity = (movement.normalized * moveSpeed);
         }
         
@@ -105,12 +115,14 @@ public class MushroomController : MonoBehaviour
         {
 
             Escape(players[closePlayer]);
-            moveSpeed = 3;
+            if(bornTime < catchTime)
+            moveSpeed = highSpeed+1;
             OutScale(true);
         }
         else
         {
-            moveSpeed = 2;
+            if (bornTime < catchTime)
+                moveSpeed = highSpeed;
             OutScale(false);
             if (movement == Vector3.zero)
             {

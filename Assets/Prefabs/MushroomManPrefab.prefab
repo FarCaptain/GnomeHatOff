@@ -164,10 +164,11 @@ MonoBehaviour:
   hatSpawn: {fileID: 0}
   circleDust: {fileID: 777350855108792525}
   rb: {fileID: 3699136397595582899}
+  dropSpeed: {x: 0, y: 6, z: 0}
   closeDistance: 2
-  moveSpeed: 2
-  dropSpeed: {x: 0, y: 10, z: 0}
-  movement: {x: 0, y: 0, z: 0}
+  highSpeed: 2
+  lowSpeed: 0.5
+  catchTime: 15
   hatFadeEnabled: 1
 --- !u!82 &2598964022959836559
 AudioSource:

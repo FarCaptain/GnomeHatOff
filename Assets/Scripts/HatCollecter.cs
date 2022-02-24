@@ -23,9 +23,11 @@ public class HatCollecter : MonoBehaviour
     public bool isdamaged = false;
     Color[] hatColors = new Color[4];
     AudioSource playerAudioSource;
+    Player playerScript;
     private void Start()
     {
         playerAudioSource = GetComponentInParent<AudioSource>();
+        playerScript = GetComponentInParent<Player>();
         ColorUtility.TryParseHtmlString("#3768A7", out hatColors[0]);
         ColorUtility.TryParseHtmlString("#7637A7", out hatColors[1]);
         ColorUtility.TryParseHtmlString("#A7A037", out hatColors[2]);
@@ -72,14 +74,14 @@ public class HatCollecter : MonoBehaviour
         }
         if (other.tag == "Mushroom")
         {
-            
-          
-              for(int i=hatCount; i < 9; i++)
-                {
-                    GameObject hat = Instantiate(hatPrefab, hatTop.transform.position, Quaternion.identity);
-                    hat.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = hatColors[Random.Range(0, hatColors.Length - 1)];
-                    AddHat(hat);
-                }
+            for(int i=hatCount; i < 9; i++)
+            {
+                GameObject hat = Instantiate(hatPrefab, hatTop.transform.position, Quaternion.identity);
+                hat.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = hatColors[Random.Range(0, hatColors.Length - 1)];
+                AddHat(hat);
+            }
+            playerScript.SuperBounce();
+
             other.GetComponent<MushroomController>().hatShadowDestroy();
             Destroy(other.gameObject);
             updateCollecter();

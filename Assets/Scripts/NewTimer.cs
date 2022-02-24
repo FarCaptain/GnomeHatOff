@@ -84,6 +84,7 @@ public class NewTimer : MonoBehaviour
                 timerRunning = false;
                 timerStart = false;
                 currentTime = 0;
+                timerCompletionRate = 0;
 			}
 		}
     }

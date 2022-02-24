@@ -10,20 +10,36 @@ public class Player : MonoBehaviour
 
     [Header("Damage Variables")]
     [SerializeField] float iFrameMaxTime = 2f;
+
+    [Header("Character Bumping Variables")]
+    [SerializeField] PhysicMaterial knockbackMaterial;
+
+    [Header("Super Bump Variables")]
+    [SerializeField] float bumpForce = 10f;
+    [SerializeField] float superBounceMass = 10f;
+    [HideInInspector] public bool superBump = false;
+    [SerializeField] float superBumpMaxTime = 3f;
+
     //Cached Player Components
     Rigidbody playerRigidBody;
     PlayerMovement playerMovement;
     HatCollecter playerHatCollecter;
     NewTimer stealHatIFrame;
+    NewTimer superBumpTimer;
     AudioSource playerAudioSource;
+    [HideInInspector]
+    public BoxCollider playerBoxCollider;
 
+    //REMOVE IF NEEDED
+    static List<GameObject> players = new List<GameObject>();
     void Start()
     { 
         playerRigidBody = gameObject.GetComponent<Rigidbody>();
         playerMovement = gameObject.GetComponent<PlayerMovement>();
         playerHatCollecter = gameObject.GetComponentInChildren<HatCollecter>();
         playerAudioSource = GetComponent<AudioSource>();
- 
+        playerBoxCollider = GetComponent<BoxCollider>();
+
         stealHatIFrame = gameObject.AddComponent<NewTimer>();
         stealHatIFrame.MaxTime = iFrameMaxTime;
     }
@@ -31,16 +47,54 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(superBumpTimer!=null && superBumpTimer.TimerStart==false)
+		{
+            superBump = false;
+            playerRigidBody.mass = 1f;
+            Destroy(superBumpTimer);
+        }
     }
 
-    private void OnCollisionEnter(Collision collision)
+	private void FixedUpdate()
+	{
+		
+	}
+	private void OnTriggerEnter(Collider other)
+	{
+		if(other.gameObject.tag=="Player")
+		{
+            if (!players.Contains(other.gameObject))
+            {
+                players.Add(other.gameObject);
+                players[players.Count - 1].GetComponent<BoxCollider>().material = knockbackMaterial;
+            }
+        }
+	}
+
+	private void OnTriggerExit(Collider other)
+	{
+        if (other.gameObject.tag == "Player")
+        {
+            if (players.Contains(other.gameObject))
+            {
+                players[players.Count - 1].GetComponent<BoxCollider>().material = null;
+                players.Remove(other.gameObject);
+            }
+        }
+    }
+
+	private void OnCollisionEnter(Collision collision)
     {
         /// Guard Statment
         /// Always make sure player can move before applying any debuff on them
         if(playerMovement.canMove == false)
 		{
             return;
+		}
+
+        if(collision.gameObject.tag=="Player" && collision.gameObject.GetComponent<Player>().superBump==true)
+		{
+            playerRigidBody.AddForce(-transform.forward * bumpForce, ForceMode.Impulse);
 		}
 
 		if (collision.gameObject.tag.Contains("Knockback"))
@@ -71,7 +125,8 @@ public class Player : MonoBehaviour
                 }
 			}
 		}
-    }
+	}
+
 	private void SetMaxHatsToStealBasedOnType(Hazard hazardObject)
 	{
         switch(hazardObject.typeOfHatStealChosen)
@@ -172,5 +227,15 @@ public class Player : MonoBehaviour
         }
         gameObject.layer = LayerMask.NameToLayer(defaultLayerName);
         GetComponentInChildren<HatCollecter>().isdamaged = false;
+    }
+
+    public void SuperBounce()
+	{
+        superBump = true;
+        playerRigidBody.mass = superBounceMass;
+
+        superBumpTimer = gameObject.AddComponent<NewTimer>();
+        superBumpTimer.MaxTime = superBumpMaxTime;
+        superBumpTimer.TimerStart = true;
     }
 }

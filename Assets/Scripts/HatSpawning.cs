@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using TMPro;
 
 public class HatSpawning : MonoBehaviour
@@ -101,6 +102,15 @@ public class HatSpawning : MonoBehaviour
     public void SpawnHat()
     {
         Vector3 pos = transform.localPosition + center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2), Random.Range(-size.z / 2, size.z / 2));
+
+        NavMeshTriangulation triangulation = NavMesh.CalculateTriangulation();
+        int vertexIndex = Random.Range(0, triangulation.vertices.Length);
+
+        NavMeshHit hit;
+        //NavMesh.SamplePosition(pos, out hit, 6f, 1 << NavMesh.GetNavMeshLayerFromName("Default"));
+        NavMesh.SamplePosition(pos, out hit, 50f, 1);
+        pos = new Vector3(hit.position.x, pos.y, hit.position.z);
+
         GameObject hat = Instantiate(hatPrefab, pos, Quaternion.identity);
         hat.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = hatColors[Random.Range(0, hatColors.Length - 1)];
         generateShadow(pos, hat, "HatFade");

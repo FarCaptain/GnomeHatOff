@@ -13,9 +13,10 @@ public class DiglettBehaviour : Hazard
     //public float warnTime;
 
     public float diglettSpeed;
-    public float initialDistance;
+    //public float initialDistance;
     //public float stopTrackingDistance;
     public float trackingPathLength;
+    public List<Transform> spawners = new List<Transform>();
 
     public List<Transform> players = new List<Transform>();
 
@@ -33,9 +34,6 @@ public class DiglettBehaviour : Hazard
     private int targetedPlayerIndex;
     private bool keepTrack;
     private float coveredPathLength = 0f;
-
-    //test
-    private Vector3 playerPos;
 
     // Start is called before the first frame update
     void Start()
@@ -74,12 +72,22 @@ public class DiglettBehaviour : Hazard
 
                 // target players in turn
                 targetedPlayerIndex = (targetedPlayerIndex + 1) % players.Count;
-                playerPos = players[targetedPlayerIndex].position;
+                Vector3 playerPos = players[targetedPlayerIndex].position;
                 // ToDo. might need bias to avoid bug
 
-                float rad = Random.Range(0f, 2f * Mathf.PI);
-                Vector3 shift = new Vector3(initialDistance * Mathf.Cos(rad), 0f, initialDistance * Mathf.Sin(rad));
-                transform.position = playerPos + shift;
+                // find the farthest spawnPoint
+                Vector3 spawnPos = transform.position;
+                float maxDis = 0f;
+                for(int i = 0; i < spawners.Count; i++)
+                {
+                    float dis = Vector3.Distance(spawners[i].position, playerPos);
+                    if(dis > maxDis)
+                    {
+                        maxDis = dis;
+                        spawnPos = spawners[i].position;
+                    }
+                }
+                transform.position = spawnPos;
 
                 
 
@@ -134,9 +142,9 @@ public class DiglettBehaviour : Hazard
             }
         }
     }
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = new Color(1f, 0f, 0f, 0.5f);
-        Gizmos.DrawSphere(transform.localPosition + playerPos, initialDistance);
-    }
+    //void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = new Color(1f, 0f, 0f, 0.5f);
+    //    Gizmos.DrawSphere(transform.localPosition + playerPos, initialDistance);
+    //}
 }

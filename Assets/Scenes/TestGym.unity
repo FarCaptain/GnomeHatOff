@@ -7526,8 +7526,28 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2852957453135122760, guid: d1117047cbf63b34e8d61ba71cc3be26,
         type: 3}
+      propertyPath: diglettSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852957453135122760, guid: d1117047cbf63b34e8d61ba71cc3be26,
+        type: 3}
+      propertyPath: initialDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852957453135122760, guid: d1117047cbf63b34e8d61ba71cc3be26,
+        type: 3}
+      propertyPath: trackingPathLength
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852957453135122760, guid: d1117047cbf63b34e8d61ba71cc3be26,
+        type: 3}
       propertyPath: knockBackForceAmount
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852957453135122760, guid: d1117047cbf63b34e8d61ba71cc3be26,
+        type: 3}
+      propertyPath: stopTrackingDistance
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2852957453135122760, guid: d1117047cbf63b34e8d61ba71cc3be26,
         type: 3}

@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] string defaultLayerName;
     [SerializeField] string iFramesLayerName;
 
+    public int playerIndex;
     [Header("Damage Variables")]
     [SerializeField] float iFrameMaxTime = 2f;
 

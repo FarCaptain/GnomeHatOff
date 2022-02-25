@@ -69,7 +69,7 @@ public class HatSpawning : MonoBehaviour
         if (timeInterval > timeGap)
         {
             int ifMushroom = Random.Range(0, 100);
-            if(ifMushroom < 30 && !isHatRush)
+            if(ifMushroom < 5 && !isHatRush)
             {
                 timeGap = Random.Range(minGap, maxGap);
                 if (mushroomOneTime < 1&& mushroomCount<mushroomMaxCount)

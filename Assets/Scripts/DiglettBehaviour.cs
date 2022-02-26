@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 
 public class DiglettBehaviour : Hazard
 {
@@ -28,8 +29,10 @@ public class DiglettBehaviour : Hazard
     private int state;
 
     public ParticleSystem dust;
+    public VisualEffect poof;
     private NavMeshAgent navMeshAgent;
     public Transform digletModel;
+
 
     private int targetedPlayerIndex;
     private bool keepTrack;
@@ -54,7 +57,7 @@ public class DiglettBehaviour : Hazard
 
         Vector3 pos = new Vector3(-2f, 0f, 2f);
         transform.position = pos;
-        digletModel.position = new Vector3(pos.x, -1.5f, pos.z);
+        digletModel.position = new Vector3(pos.x, -2f, pos.z);
 
         navMeshAgent = GetComponent<NavMeshAgent>();
         targetedPlayerIndex = Random.Range(0, players.Count);
@@ -67,8 +70,6 @@ public class DiglettBehaviour : Hazard
             if (hideTimer.TimerStart == false)
             {
                 state = (int)diglettStates.Warn;
-                //warnTimer.ResetTimer();
-                //warnTimer.TimerStart = true;
 
                 // target players in turn
                 targetedPlayerIndex = (targetedPlayerIndex + 1) % players.Count;
@@ -88,8 +89,6 @@ public class DiglettBehaviour : Hazard
                     }
                 }
                 transform.position = spawnPos;
-
-                
 
                 navMeshAgent.destination = playerPos;
                 navMeshAgent.speed = diglettSpeed;
@@ -123,6 +122,7 @@ public class DiglettBehaviour : Hazard
                 stayTimer.ResetTimer();
                 stayTimer.TimerStart = true;
 
+                poof.Play();
                 // Emerging
                 Vector3 pos = transform.position;
                 digletModel.position = new Vector3(pos.x, 0f, pos.z);
@@ -138,7 +138,7 @@ public class DiglettBehaviour : Hazard
                 hideTimer.TimerStart = true;
 
                 Vector3 pos = transform.position;
-                digletModel.position = new Vector3(pos.x, -1.5f, pos.z);
+                digletModel.position = new Vector3(pos.x, -2f, pos.z);
             }
         }
     }

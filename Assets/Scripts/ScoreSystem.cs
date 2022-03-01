@@ -76,7 +76,8 @@ public class ScoreSystem : MonoBehaviour
         for(int i=0; i < PlayerAmount; i++)
         {
             GameObject go_score = Instantiate(scorePrefab, scoreBoard);
-            go_score.GetComponent<Image>().sprite = Resources.Load<Sprite>("Texture/Score_"+i);
+            Sprite s = Resources.Load<Sprite>("Texture/Score_" + i);
+            go_score.GetComponent<Image>().sprite = s;
             go_playerScores.Add(i, go_score);
             playerScores.Add(i, 0);
         }

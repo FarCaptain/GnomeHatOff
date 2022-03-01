@@ -5,13 +5,12 @@ using UnityEngine;
 public enum HatAudioStates { Deposit, Destroyed, Collected };
 public enum PlayerAudioStates { Damaged};
 public enum LogAudioStates { Rolling, Shaking };
-<<<<<<< HEAD
+
 
 public enum DigletAudioStates { Raise, Despawn};
-public enum MushroomManAudioStates {Falling, Landed };
-=======
+
 public enum MushroomManAudioStates {Falling, Landed, Collected };
->>>>>>> 9c335d1b5a826f8bb0cd043c340aa26ecc3d03dd
+
 public enum GameGeneralAudioStates {RoundBegin, RoundEnd, HatRushBegin }
 //public enum GeneralGameAudioStates { };
 public class AudioManager : MonoBehaviour

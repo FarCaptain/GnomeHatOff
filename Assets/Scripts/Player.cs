@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     [SerializeField] float superBounceMass = 10f;
     [HideInInspector] public bool superBump = false;
     [SerializeField] float superBumpMaxTime = 3f;
+    [SerializeField] ParticleSystem superBumpVFX;
 
     //Cached Player Components
     Rigidbody playerRigidBody;
@@ -52,7 +53,8 @@ public class Player : MonoBehaviour
 		{
             superBump = false;
             playerRigidBody.mass = 1f;
-            Destroy(superBumpTimer);
+            superBumpVFX.Stop();
+            Destroy(superBumpTimer);    
         }
     }
 
@@ -241,7 +243,7 @@ public class Player : MonoBehaviour
 	{
         superBump = true;
         playerRigidBody.mass = superBounceMass;
-
+        superBumpVFX.Play();
         superBumpTimer = gameObject.AddComponent<NewTimer>();
         superBumpTimer.MaxTime = superBumpMaxTime;
         superBumpTimer.TimerStart = true;

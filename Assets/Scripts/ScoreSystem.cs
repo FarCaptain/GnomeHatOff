@@ -44,6 +44,7 @@ public class ScoreSystem : MonoBehaviour
     private Dictionary<int, GameObject> go_playerScores;
     public int PlayerAmount;
     public Transform scoreBoard;
+    public MainGameController gameManager;
     #endregion
 
     public ParticleSystem[] fires = new ParticleSystem[2];
@@ -59,9 +60,8 @@ public class ScoreSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
 	{
-
-
-		for (int id = 0; id < 2; id++)
+        PlayerAmount = gameManager.COM.Length;
+        for (int id = 0; id < 2; id++)
 			for (int i = 0; i < fires[id].transform.childCount; i++)
 				initFireScale[id, i] = fires[id].transform.GetChild(i).transform.localScale;
 

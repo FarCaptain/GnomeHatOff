@@ -14,7 +14,6 @@ public class MushroomController : MonoBehaviour
     public HatSpawning hatSpawn;
     public ParticleSystem circleDust;
 
-    private Animator animator;
     [SerializeField] public Rigidbody rb;
 
     public Vector3 dropSpeed;
@@ -46,7 +45,6 @@ public class MushroomController : MonoBehaviour
         hatSpawn = GameObject.Find("HatSpawner").GetComponent<HatSpawning>();
         player = GameObject.Find("Gnome_0");
         rb.velocity = -dropSpeed;
-        animator = GetComponent<Animator>();
 
         // TODO: Adjust for loop code
         for (int i = 0; i < player.transform.childCount; i++)
@@ -93,7 +91,6 @@ public class MushroomController : MonoBehaviour
 
     void SetOnGround()
     {
-        animator.SetBool("Onground", true);
         isOnGround = true;
     }
 
@@ -224,7 +221,6 @@ public class MushroomController : MonoBehaviour
     }
     public void Caught()
     {
-        animator.SetTrigger("collected");
         Destroy(gameObject,0.5f);
     }
     private void Escape(GameObject player)

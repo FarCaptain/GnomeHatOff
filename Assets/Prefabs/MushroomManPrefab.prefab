@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8931429352399930299}
   - component: {fileID: 3699136397595582899}
-  - component: {fileID: 7242772443565964478}
   - component: {fileID: 628989735726594583}
   - component: {fileID: 2598964022959836559}
+  - component: {fileID: 3515372221573245531}
   m_Layer: 8
   m_Name: MushroomManPrefab
   m_TagString: Mushroom
@@ -52,20 +52,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!64 &7242772443565964478
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8122557488957217025}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2297425034801156755, guid: a63f150013434424b92f93aad4497fab, type: 3}
 --- !u!114 &628989735726594583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +173,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &3515372221573245531
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8122557488957217025}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.05639229, y: 0.036999036, z: 0.050518274}
+  m_Center: {x: 0.005041409, y: 0.017250633, z: -0.000447011}
 --- !u!1001 &579672415979018591
 PrefabInstance:
   m_ObjectHideFlags: 0

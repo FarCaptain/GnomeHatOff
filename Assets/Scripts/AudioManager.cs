@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum HatAudioStates { Destroyed, Collected };
+public enum HatAudioStates { Deposit, Destroyed, Collected };
 public enum PlayerAudioStates { Damaged};
 public enum LogAudioStates { Rolling, Shaking };
 public enum MushroomManAudioStates {Falling, Landed };
@@ -59,8 +59,9 @@ public class AudioManager : MonoBehaviour
 
     private static void PopulateHatAudioClipsLibrary()
 	{
-        hatAudioClipsLibrary.Add(HatAudioStates.Destroyed, (AudioClip)hatAudioClips[0]);
-        hatAudioClipsLibrary.Add(HatAudioStates.Collected, (AudioClip)hatAudioClips[1]);
+        hatAudioClipsLibrary.Add(HatAudioStates.Deposit, (AudioClip)hatAudioClips[0]);
+        hatAudioClipsLibrary.Add(HatAudioStates.Destroyed, (AudioClip)hatAudioClips[1]);
+        hatAudioClipsLibrary.Add(HatAudioStates.Collected, (AudioClip)hatAudioClips[2]);
     }
 
     private static void PopulatePlayerAudioClipsList()

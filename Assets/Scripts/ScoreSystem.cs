@@ -6,6 +6,8 @@ using TMPro;
 
 public class ScoreSystem : MonoBehaviour
 {
+    [SerializeField] 
+    public AudioSource audio;
     [Header("Points Display Objects")]
   
     [SerializeField] GameObject bonusPointsPopupDisplay;
@@ -67,6 +69,7 @@ public class ScoreSystem : MonoBehaviour
 
 		InitializeFadeAndScaleTimer();
 
+        audio = GetComponentInParent<AudioSource>();
         #region more than 2 players
         playerScores = new Dictionary<int, int>();
         go_playerScores = new Dictionary<int, GameObject>();
@@ -236,6 +239,7 @@ public class ScoreSystem : MonoBehaviour
             HatCollecter hatcollecter = player.GetComponentInChildren<HatCollecter>();
             if (hatcollecter.hatCount > 0 && hatcollecter.hatdrop == true)
             {
+                AudioManager.PlayHatAudioClip(HatAudioStates.Deposit, audio);
                 hatcollecter.hatdrop = false;
                 // TODO: Perhpas adjust how we can reference different players (not an issue now since we only have 2)
                 int bonusPoints = hatcollecter.hatCount + getBonusPoints(player.gameObject);

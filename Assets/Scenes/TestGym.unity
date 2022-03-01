@@ -1290,8 +1290,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 023f1573839090141b164dda2426800f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minTimeBetweenSpawns: 7
-  maxTimeBetweenSpawns: 10
+  minTimeBetweenSpawns: 15
+  maxTimeBetweenSpawns: 20
   numberOfActiveSpawners: 2
   logSpawnTimer: {fileID: 0}
 --- !u!1 &95512632

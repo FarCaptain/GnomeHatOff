@@ -27,6 +27,7 @@ public class HatCollecter : MonoBehaviour
     private void Start()
     {
         playerAudioSource = GetComponentInParent<AudioSource>();
+        
         playerScript = GetComponentInParent<Player>();
         ColorUtility.TryParseHtmlString("#3768A7", out hatColors[0]);
         ColorUtility.TryParseHtmlString("#7637A7", out hatColors[1]);
@@ -59,7 +60,11 @@ public class HatCollecter : MonoBehaviour
             {
                 if(hatCount < 9)
                 {
-                  
+                    if (playerAudioSource.isPlaying == false)
+                    {
+                        AudioManager.PlayHatAudioClip(HatAudioStates.Collected, playerAudioSource);
+                    }
+
                     AddHat(other.gameObject);
                 }
                 else
@@ -74,16 +79,21 @@ public class HatCollecter : MonoBehaviour
         }
         if (other.tag == "Mushroom")
         {
-            for(int i=hatCount; i < 9; i++)
+            if (playerAudioSource.isPlaying == false)
+            {
+                AudioManager.PlayMushroomManAudioClip(MushroomManAudioStates.Collected, playerAudioSource);
+            }
+            
+            for (int i=hatCount; i < 9; i++)
             {
                 GameObject hat = Instantiate(hatPrefab, hatTop.transform.position, Quaternion.identity);
                 hat.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = hatColors[Random.Range(0, hatColors.Length - 1)];
                 AddHat(hat);
             }
             playerScript.SuperBounce();
-
+            other.GetComponent<MushroomController>().Caught();
             other.GetComponent<MushroomController>().hatShadowDestroy();
-            Destroy(other.gameObject);
+            
             updateCollecter();
             
         }
@@ -111,10 +121,7 @@ public class HatCollecter : MonoBehaviour
 
     private void AddHat(GameObject hat)
     {
-        if(playerAudioSource.isPlaying==false)
-		{
-            AudioManager.PlayHatAudioClip(HatAudioStates.Collected, playerAudioSource);
-        }
+        
         hatCount += 1;
         hat.GetComponent<HatFade>().hatCollectedByPlayer = true;
         Vector3 hatPos = hatTop.transform.position;

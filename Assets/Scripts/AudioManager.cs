@@ -5,7 +5,7 @@ using UnityEngine;
 public enum HatAudioStates { Destroyed, Collected };
 public enum PlayerAudioStates { Damaged};
 public enum LogAudioStates { Rolling, Shaking };
-public enum MushroomManAudioStates {Falling, Landed };
+public enum MushroomManAudioStates {Falling, Landed, Collected };
 public enum GameGeneralAudioStates {RoundBegin, RoundEnd, HatRushBegin }
 //public enum GeneralGameAudioStates { };
 public class AudioManager : MonoBehaviour
@@ -93,6 +93,7 @@ public class AudioManager : MonoBehaviour
     {
         mushroomManAudioClipsLibrary.Add(MushroomManAudioStates.Falling, (AudioClip)mushroomManAudioClips[0]);
         mushroomManAudioClipsLibrary.Add(MushroomManAudioStates.Landed, (AudioClip)mushroomManAudioClips[1]);
+        mushroomManAudioClipsLibrary.Add(MushroomManAudioStates.Collected, (AudioClip)mushroomManAudioClips[1]);
     }
 
     private static void PopulateGameGeneralAudioClipsList()

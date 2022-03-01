@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Hisham_UI_Stuff/Scenes/SplashScreen.unity
+    guid: beb84ffd6d0c2b94f97f6ebf02888ff9
+  - enabled: 1
+    path: Assets/Hisham_UI_Stuff/Scenes/StartMenu.unity
+    guid: e5261e40041bccb4db636bfeea91c646
   m_configObjects: {}

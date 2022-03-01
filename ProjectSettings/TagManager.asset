@@ -46,7 +46,7 @@ TagManager:
   - 
   - 
   - PP
-  - 
+  - Ignore_shadow
   m_SortingLayers:
   - name: Default
     uniqueID: 0

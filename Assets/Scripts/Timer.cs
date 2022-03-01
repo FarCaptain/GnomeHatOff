@@ -13,7 +13,7 @@ public class Timer : MonoBehaviour
     private TextMeshProUGUI timerText;
     public static float timeRemaining = 60;      // measured in seconds
     private bool isTimerRunning = false;
-    public bool timerPaused = false;
+    [HideInInspector] public bool timerPaused = false;
 
     public ScoreSystem scoreSystem;
 

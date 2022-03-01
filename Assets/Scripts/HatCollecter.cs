@@ -64,7 +64,6 @@ public class HatCollecter : MonoBehaviour
                     {
                         AudioManager.PlayHatAudioClip(HatAudioStates.Collected, playerAudioSource);
                     }
-
                     AddHat(other.gameObject);
                 }
                 else
@@ -136,6 +135,9 @@ public class HatCollecter : MonoBehaviour
         hat.transform.parent = gnome.transform;
         hat.gameObject.transform.position = hatPos;
         hatTop.transform.position = hatPos;
+
+        sparks.gameObject.transform.position = hatPos;
+        drawSparks();
 
         //decrease speed of Gnome
         PlayerMovement movement = GetComponentInParent<PlayerMovement>();

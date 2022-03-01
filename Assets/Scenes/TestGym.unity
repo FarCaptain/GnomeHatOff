@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -382,7 +382,7 @@ PrefabInstance:
     - target: {fileID: 2848886441423072765, guid: b0a006b4d90729b4dae845579e0ffe10,
         type: 3}
       propertyPath: timerPaused
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4498700531454450086, guid: b0a006b4d90729b4dae845579e0ffe10,
         type: 3}
@@ -1290,8 +1290,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 023f1573839090141b164dda2426800f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minTimeBetweenSpawns: 7
-  maxTimeBetweenSpawns: 10
+  minTimeBetweenSpawns: 15
+  maxTimeBetweenSpawns: 20
   numberOfActiveSpawners: 2
   logSpawnTimer: {fileID: 0}
 --- !u!1 &95512632

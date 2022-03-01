@@ -5,6 +5,8 @@ using UnityEngine;
 public enum HatAudioStates { Deposit, Destroyed, Collected };
 public enum PlayerAudioStates { Damaged};
 public enum LogAudioStates { Rolling, Shaking };
+
+public enum DigletAudioStates { Raise, Despawn};
 public enum MushroomManAudioStates {Falling, Landed };
 public enum GameGeneralAudioStates {RoundBegin, RoundEnd, HatRushBegin }
 //public enum GeneralGameAudioStates { };
@@ -13,19 +15,22 @@ public class AudioManager : MonoBehaviour
     static Object[] hatAudioClips;
     static Object[] playerAudioClips;
     static Object[] logAudioClips;
+    static Object[] DigletAudioClips;
     static Object[] mushroomManAudioClips;
     static Object[] gameGeneralAudioClips;
 
     static AudioSource hatAudioSource;
     static AudioSource playerAudioSource;
     static AudioSource logAudioSource;
+    static AudioSource DigletAudioSource;
     static AudioSource mushroomManAudioSource;
     static AudioSource gameGeneralSFXAudioSource;
 
     static Dictionary<HatAudioStates, AudioClip> hatAudioClipsLibrary = new Dictionary<HatAudioStates, AudioClip>();
     static Dictionary<PlayerAudioStates, AudioClip> playerAudioClipsLibrary = new Dictionary<PlayerAudioStates, AudioClip>();
     static Dictionary<LogAudioStates, AudioClip> logAudioClipsLibrary = new Dictionary<LogAudioStates, AudioClip>();
-	static Dictionary<MushroomManAudioStates, AudioClip> mushroomManAudioClipsLibrary = new Dictionary<MushroomManAudioStates, AudioClip>();
+    static Dictionary<DigletAudioStates, AudioClip> DigletAudioClipsLibrary = new Dictionary<DigletAudioStates, AudioClip>();
+    static Dictionary<MushroomManAudioStates, AudioClip> mushroomManAudioClipsLibrary = new Dictionary<MushroomManAudioStates, AudioClip>();
     static Dictionary<GameGeneralAudioStates, AudioClip> gameGeneralAudioClipsLibrary = new Dictionary<GameGeneralAudioStates, AudioClip>();
 
     private void Awake()
@@ -38,6 +43,9 @@ public class AudioManager : MonoBehaviour
 
         PopulateLogAudioClipsList();
         PopulateLogAudioClipsLibrary();
+
+        PopulateDigletAudioClipsList();
+        PopulateDigletAudioClipsLibrary();
 
         PopulateMushroomManAudioClipsList();
         PopulateMushroomManAudioClipsLibrary();
@@ -85,6 +93,16 @@ public class AudioManager : MonoBehaviour
         logAudioClipsLibrary.Add(LogAudioStates.Shaking, (AudioClip)logAudioClips[1]);
     }
 
+    private static void PopulateDigletAudioClipsList()
+    {
+        DigletAudioClips = Resources.LoadAll("Audio/SFX/Diglet", typeof(AudioClip));
+    }
+
+    private static void PopulateDigletAudioClipsLibrary()
+    {
+        DigletAudioClipsLibrary.Add(DigletAudioStates.Despawn, (AudioClip)DigletAudioClips[0]);
+        DigletAudioClipsLibrary.Add(DigletAudioStates.Raise, (AudioClip)DigletAudioClips[1]);
+    }
     private static void PopulateMushroomManAudioClipsList()
     {
         mushroomManAudioClips = Resources.LoadAll("Audio/SFX/MushroomMan", typeof(AudioClip));
@@ -136,6 +154,13 @@ public class AudioManager : MonoBehaviour
         logAudioSource.PlayOneShot(clipToPlay);
     }
 
+
+    public static void PlayDigletAudioClip(DigletAudioStates audioState, AudioSource audio)
+    {
+        DigletAudioSource = audio;
+        AudioClip clipToPlay = DigletAudioClipsLibrary[audioState];
+        DigletAudioSource.PlayOneShot(clipToPlay);
+    }
     public static void PlayMushroomManAudioClip(MushroomManAudioStates audioState, AudioSource audio)
     {
         mushroomManAudioSource = audio;

@@ -6,6 +6,8 @@ using UnityEngine.VFX;
 
 public class DiglettBehaviour : Hazard
 {
+
+    AudioSource audio;
     [Header("")]
     public float minHideTime;
     public float maxHideTime;
@@ -41,6 +43,7 @@ public class DiglettBehaviour : Hazard
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponentInParent<AudioSource>();
         //hide - warn - stay
         stayTimer =gameObject.AddComponent<NewTimer>();
         hideTimer = gameObject.AddComponent<NewTimer>();
@@ -98,6 +101,7 @@ public class DiglettBehaviour : Hazard
         }
         else if (state == (int)diglettStates.Warn)
         {
+            
             Vector3 playerPos = players[targetedPlayerIndex].position;
 
             // keep following the player if it is not close enough
@@ -123,6 +127,7 @@ public class DiglettBehaviour : Hazard
                 stayTimer.TimerStart = true;
 
                 poof.Play();
+                AudioManager.PlayDigletAudioClip(DigletAudioStates.Raise, audio);  // emereging audio
                 // Emerging
                 Vector3 pos = transform.position;
                 digletModel.position = new Vector3(pos.x, 0f, pos.z);
@@ -134,6 +139,7 @@ public class DiglettBehaviour : Hazard
             if (stayTimer.TimerStart == false)
             {
                 state = (int)diglettStates.Hide;
+                AudioManager.PlayDigletAudioClip(DigletAudioStates.Despawn, audio);
                 hideTimer.ResetTimer();
                 hideTimer.TimerStart = true;
 

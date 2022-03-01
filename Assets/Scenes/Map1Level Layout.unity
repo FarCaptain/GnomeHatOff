@@ -337,17 +337,37 @@ PrefabInstance:
         type: 3}
       propertyPath: player0
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 76353149}
     - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
         type: 3}
       propertyPath: player1
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 340767079}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: scoreBoard
+      value: 
+      objectReference: {fileID: 1759407765}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: scoreText0
+      value: 
+      objectReference: {fileID: 1759407764}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: scoreText1
+      value: 
+      objectReference: {fileID: 1759407764}
     - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
         type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1284960302}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: PlayerAmount
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
         type: 3}
       propertyPath: pointsPopupDisplay
@@ -5970,6 +5990,12 @@ Transform:
   m_Father: {fileID: 328222850}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &340767079 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5154856036340132840, guid: 4569103a97551e245b460df25ea57d2a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1829175648}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &345318745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29279,6 +29305,18 @@ Transform:
   m_Father: {fileID: 505694985}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1759407764 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4507443793974441840, guid: b0a006b4d90729b4dae845579e0ffe10,
+    type: 3}
+  m_PrefabInstance: {fileID: 20805993}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1759407765 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4498700531454450086, guid: b0a006b4d90729b4dae845579e0ffe10,
+    type: 3}
+  m_PrefabInstance: {fileID: 20805993}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1768601177
 PrefabInstance:
   m_ObjectHideFlags: 0

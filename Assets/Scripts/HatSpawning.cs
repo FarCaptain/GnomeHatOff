@@ -19,12 +19,15 @@ public class HatSpawning : MonoBehaviour
     public Vector3 scale_mushroom;
     public float minGap = 0.3f;
     public float maxGap = 2.0f;
+    
     public float hatRushTime = 30f;
     public float hatRushMinGap = 0.2f;
 
     private int mushroomCount = 0;
     public int mushroomMaxCount;
     public int mushroomOneTime = 0;
+    private float mushroomSpawnTime = 0;
+    private float mushroomTime= 0;
     float timeInterval = 0f;
     bool isHatRush = false;
 
@@ -36,8 +39,9 @@ public class HatSpawning : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mushroomTime = 0;
         timeGap = Random.Range( 0.6f, 3.5f);
-
+        mushroomSpawnTime = Random.Range(20, 40);
         ColorUtility.TryParseHtmlString("#3768A7",out hatColors[0]);
         ColorUtility.TryParseHtmlString("#7637A7", out hatColors[1]);
         ColorUtility.TryParseHtmlString("#A7A037", out hatColors[2]);
@@ -53,6 +57,7 @@ public class HatSpawning : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        mushroomTime += Time.deltaTime;
         // HAT RUSH!!!!
         if (!isHatRush && Timer.timeRemaining < hatRushTime)
         {
@@ -65,26 +70,24 @@ public class HatSpawning : MonoBehaviour
             
         timeInterval += Time.deltaTime;
 
-        
+        if(mushroomTime > mushroomSpawnTime)
+        {
+            timeGap = Random.Range(minGap, maxGap);
+            if (mushroomOneTime < 1 && mushroomCount < mushroomMaxCount)
+            {
+                SpawnMushroomMan();
+                mushroomOneTime++;
+                mushroomCount++;
+            }
+            mushroomTime = 0;
+
+        }
         if (timeInterval > timeGap)
         {
-            int ifMushroom = Random.Range(0, 100);
-            if(ifMushroom < 5 && !isHatRush)
-            {
-                timeGap = Random.Range(minGap, maxGap);
-                if (mushroomOneTime < 1&& mushroomCount<mushroomMaxCount)
-                {
-                    SpawnMushroomMan();
-                    mushroomOneTime++;
-                    mushroomCount++;
-                }
-                    
-            }
-            else
-            {
-                timeGap = isHatRush ? accumulatedSpeed = Mathf.Max(accumulatedSpeed - (deltaDashChange * timeGap), hatRushMinGap) : Random.Range(minGap, maxGap);
-                SpawnHat();
-            }
+           
+            timeGap = isHatRush ? accumulatedSpeed = Mathf.Max(accumulatedSpeed - (deltaDashChange * timeGap), hatRushMinGap) : Random.Range(minGap, maxGap);
+            SpawnHat();
+          
             
             timeInterval = 0f;
         }

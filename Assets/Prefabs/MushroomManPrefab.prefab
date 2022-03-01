@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 7242772443565964478}
   - component: {fileID: 628989735726594583}
   - component: {fileID: 2598964022959836559}
+  - component: {fileID: -1143510565291990034}
   m_Layer: 8
   m_Name: MushroomManPrefab
   m_TagString: Mushroom
@@ -266,6 +267,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &-1143510565291990034
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8122557488957217025}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 347303f191d9fbf429aefbf8abc3ae56, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &579672415979018591
 PrefabInstance:
   m_ObjectHideFlags: 0

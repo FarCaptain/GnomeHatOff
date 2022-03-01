@@ -230,10 +230,20 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2387890581698596129, guid: 5d4bcdfd3ec1a70438f37db19b7a74e6,
+        type: 3}
+      propertyPath: m_TagString
+      value: DamageAndStealHatAndKnockback
+      objectReference: {fileID: 0}
     - target: {fileID: 2387890582076397520, guid: 5d4bcdfd3ec1a70438f37db19b7a74e6,
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2387890582076397520, guid: 5d4bcdfd3ec1a70438f37db19b7a74e6,
+        type: 3}
+      propertyPath: m_TagString
+      value: DamageAndStealHatAndKnockback
       objectReference: {fileID: 0}
     - target: {fileID: 3282183581033207578, guid: 5d4bcdfd3ec1a70438f37db19b7a74e6,
         type: 3}
@@ -325,6 +335,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 9053355064982376897, guid: 5d4bcdfd3ec1a70438f37db19b7a74e6,
+        type: 3}
+      propertyPath: m_TagString
+      value: DamageAndStealHatAndKnockback
+      objectReference: {fileID: 0}
     - target: {fileID: 9053355065063555256, guid: 5d4bcdfd3ec1a70438f37db19b7a74e6,
         type: 3}
       propertyPath: m_Layer
@@ -344,6 +359,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9053355065650261395, guid: 5d4bcdfd3ec1a70438f37db19b7a74e6,
+        type: 3}
+      propertyPath: m_TagString
+      value: DamageAndStealHatAndKnockback
       objectReference: {fileID: 0}
     - target: {fileID: 9053355065673923239, guid: 5d4bcdfd3ec1a70438f37db19b7a74e6,
         type: 3}
@@ -404,6 +424,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9053355066825342467, guid: 5d4bcdfd3ec1a70438f37db19b7a74e6,
+        type: 3}
+      propertyPath: m_TagString
+      value: DamageAndStealHatAndKnockback
       objectReference: {fileID: 0}
     - target: {fileID: 9053355066825342468, guid: 5d4bcdfd3ec1a70438f37db19b7a74e6,
         type: 3}

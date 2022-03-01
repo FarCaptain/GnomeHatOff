@@ -60,7 +60,6 @@ public class MushroomController : MonoBehaviour
 
     void FixedUpdate()
     {
-
         bornTime += Time.fixedDeltaTime;
         if(bornTime > catchTime)
         {
@@ -109,6 +108,7 @@ public class MushroomController : MonoBehaviour
 
     public void Move()
     {
+        
         int closePlayer = ClosedToGnome();
         timeLeft -= Time.deltaTime;
         if (closePlayer != -1)
@@ -141,9 +141,11 @@ public class MushroomController : MonoBehaviour
                 timeLeft = accelerationTime;
             }
         }
-
-
+        Vector3 newDirection = Vector3.Normalize(rb.velocity);
+        transform.rotation = Quaternion.LookRotation(newDirection);
     }
+
+
     public bool OutScale(bool ifClosed)
     {
         float x = transform.position.x;
@@ -221,7 +223,7 @@ public class MushroomController : MonoBehaviour
     }
     public void Caught()
     {
-        Destroy(gameObject,0.5f);
+        Destroy(gameObject);
     }
     private void Escape(GameObject player)
     {

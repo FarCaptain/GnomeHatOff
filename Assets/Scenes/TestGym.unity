@@ -10224,6 +10224,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 255995053195774679, guid: 4569103a97551e245b460df25ea57d2a,
         type: 3}
+      propertyPath: playerIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 255995053195774679, guid: 4569103a97551e245b460df25ea57d2a,
+        type: 3}
       propertyPath: superBumpVFX
       value: 
       objectReference: {fileID: 1403807433}

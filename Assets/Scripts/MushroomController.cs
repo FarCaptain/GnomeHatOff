@@ -14,7 +14,6 @@ public class MushroomController : MonoBehaviour
     public HatSpawning hatSpawn;
     public ParticleSystem circleDust;
 
-    private Animator animator;
     [SerializeField] public Rigidbody rb;
 
     public Vector3 dropSpeed;
@@ -46,7 +45,6 @@ public class MushroomController : MonoBehaviour
         hatSpawn = GameObject.Find("HatSpawner").GetComponent<HatSpawning>();
         player = GameObject.Find("Gnome_0");
         rb.velocity = -dropSpeed;
-        animator = GetComponent<Animator>();
 
         // TODO: Adjust for loop code
         for (int i = 0; i < player.transform.childCount; i++)
@@ -62,7 +60,6 @@ public class MushroomController : MonoBehaviour
 
     void FixedUpdate()
     {
-
         bornTime += Time.fixedDeltaTime;
         if(bornTime > catchTime)
         {
@@ -93,7 +90,6 @@ public class MushroomController : MonoBehaviour
 
     void SetOnGround()
     {
-        animator.SetBool("Onground", true);
         isOnGround = true;
     }
 
@@ -112,6 +108,7 @@ public class MushroomController : MonoBehaviour
 
     public void Move()
     {
+        
         int closePlayer = ClosedToGnome();
         timeLeft -= Time.deltaTime;
         if (closePlayer != -1)
@@ -144,9 +141,11 @@ public class MushroomController : MonoBehaviour
                 timeLeft = accelerationTime;
             }
         }
-
-
+        Vector3 newDirection = Vector3.Normalize(rb.velocity);
+        transform.rotation = Quaternion.LookRotation(newDirection);
     }
+
+
     public bool OutScale(bool ifClosed)
     {
         float x = transform.position.x;
@@ -224,8 +223,7 @@ public class MushroomController : MonoBehaviour
     }
     public void Caught()
     {
-        animator.SetTrigger("collected");
-        Destroy(gameObject,0.5f);
+        Destroy(gameObject);
     }
     private void Escape(GameObject player)
     {

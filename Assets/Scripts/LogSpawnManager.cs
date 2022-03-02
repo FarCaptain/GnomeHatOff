@@ -15,7 +15,7 @@ public class LogSpawnManager : MonoBehaviour
     {
         PopulateLogPileList();
         InitializeLogSpawnTimer();
-        ActivateSpawner();
+        //ActivateSpawner();
     }
 
     // Update is called once per frame
@@ -36,6 +36,8 @@ public class LogSpawnManager : MonoBehaviour
     private void InitializeLogSpawnTimer()
     {
         logSpawnTimer = gameObject.AddComponent<NewTimer>();
+        logSpawnTimer.MaxTime = Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns);
+        logSpawnTimer.TimerStart = true;
     }
    
     public void ActivateSpawner()

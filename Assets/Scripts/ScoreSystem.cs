@@ -318,8 +318,6 @@ public class ScoreSystem : MonoBehaviour
 	{
 
 	}
-
- 
     
     private void AddScore(GameObject player, int score, int hatCount)
     {

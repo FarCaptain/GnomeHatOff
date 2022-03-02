@@ -16,17 +16,18 @@ public class MainGameController : MonoBehaviour
     private int playerAmount;
     public GameObject Arduino;
     public string[] COM;
-    Player[] playerfetch;
+    GameObject[] playerfetch;
 
     // Start is called before the first frame update
 
     private void Awake()
     {
-        playerfetch = FindObjectsOfType<Player>();
+        playerfetch = GameObject.FindGameObjectsWithTag("Player");
         players = new GameObject[playerfetch.Length];
+        Debug.Log("PlayerCount " + playerfetch.Length);
         for (int i = 0; i < playerfetch.Length; i++)
         {
-            players[i] = playerfetch[i].gameObject;
+            players[i] = playerfetch[i];
             players[i].GetComponent<PlayerMovement>().playerIndex = i;
             playerMovements.Add(players[i].GetComponent<PlayerMovement>());
             GameObject arduino =  Instantiate(Arduino, players[i].gameObject.transform);

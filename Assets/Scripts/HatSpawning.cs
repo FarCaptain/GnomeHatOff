@@ -139,7 +139,6 @@ public class HatSpawning : MonoBehaviour
     {
         Vector3 pos = transform.localPosition + center + new Vector3(Random.Range(-4.5f, 4.5f), Random.Range(-scale_mushroom.y / 2, scale_mushroom.y / 2), Random.Range(-2.36f, 2.59f));
         GameObject hat = Instantiate(mushroomManPrefab, pos, Quaternion.identity);
-        hat.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = Color.black;
         generateShadow(pos, hat, "MushroomController");
        
     }

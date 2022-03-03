@@ -21,6 +21,9 @@ public class Player : MonoBehaviour
     [HideInInspector] public bool superBump = false;
     [SerializeField] float superBumpMaxTime = 3f;
     [SerializeField] ParticleSystem superBumpVFX;
+    float superBumpVFXPulseTimer;
+    ParticleSystem.MainModule vfxMainModule;
+    bool reversePulse = false;
 
     //Cached Player Components
     Rigidbody playerRigidBody;
@@ -35,7 +38,8 @@ public class Player : MonoBehaviour
     //REMOVE IF NEEDED
     static List<GameObject> players = new List<GameObject>();
     void Start()
-    { 
+    {
+        vfxMainModule = superBumpVFX.main;
         playerRigidBody = gameObject.GetComponent<Rigidbody>();
         playerMovement = gameObject.GetComponent<PlayerMovement>();
         playerHatCollecter = gameObject.GetComponentInChildren<HatCollecter>();
@@ -48,15 +52,39 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if(superBumpTimer!=null && superBumpTimer.TimerStart==false)
+	{
+		if (superBumpTimer != null && superBumpTimer.TimerStart == false)
 		{
-            superBump = false;
-            playerRigidBody.mass = 1f;
-            superBumpVFX.Stop();
-            Destroy(superBumpTimer);    
-        }
-    }
+			superBump = false;
+			playerRigidBody.mass = 1f;
+			superBumpVFX.Stop();
+			Destroy(superBumpTimer);
+		}
+
+		MakeSuperBumpVFXPulse();
+	}
+
+	private void MakeSuperBumpVFXPulse()
+	{
+		if (superBumpTimer != null)
+		{
+			superBumpVFXPulseTimer += Time.deltaTime;
+			if (superBumpVFXPulseTimer >= 1)
+			{
+				reversePulse = !reversePulse;
+				superBumpVFXPulseTimer = 0;
+			}
+		}
+
+		if (reversePulse == false)
+		{
+			vfxMainModule.startSize = Mathf.Lerp(1f, 1.5f, superBumpVFXPulseTimer / 1f);
+		}
+		else
+		{
+			vfxMainModule.startSize = Mathf.Lerp(1.5f, 1f, superBumpVFXPulseTimer / 1f);
+		}
+	}
 
 	private void FixedUpdate()
 	{
@@ -241,6 +269,7 @@ public class Player : MonoBehaviour
 
     public void SuperBounce()
 	{
+        superBumpVFXPulseTimer = 0;
         superBump = true;
         playerRigidBody.mass = superBounceMass;
         superBumpVFX.Play();

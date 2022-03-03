@@ -82,6 +82,7 @@ public class ScoreSystem : MonoBehaviour
             go_score.GetComponent<Image>().sprite = s;
             go_playerScores.Add(i, go_score);
             playerScores.Add(i, 0);
+            Debug.Log("DebugLog - PlayerAmount: " + PlayerAmount);
         }
         #endregion
     }
@@ -262,6 +263,7 @@ public class ScoreSystem : MonoBehaviour
 
             if (hatcollecter.hatdrop)
             {
+                Debug.Log("DebugLog - PlayerDrop: " + player.gameObject.name);
                 AudioManager.PlayHatAudioClip(HatAudioStates.Deposit, audio);
                 hatcollecter.hatdrop = false;
                 // TODO: Perhpas adjust how we can reference different players (not an issue now since we only have 2)
@@ -360,7 +362,7 @@ public class ScoreSystem : MonoBehaviour
         int player_index = player.GetComponent<Player>().playerIndex;
 
         int newScore = playerScores[player_index] + score;
-        Debug.Log(newScore);
+        Debug.Log("DebugLog - " + player.name +" Index: " + player_index);
         playerScores.Remove(player_index);
         playerScores.Add(player_index, newScore);
 

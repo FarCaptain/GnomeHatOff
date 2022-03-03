@@ -8,13 +8,14 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    public CharacterController controller;
+    public bool canSlide;
     public float MinthresholdFB = 2f;
     public float MinthresholdLR = 2f;
 
     public float MaxthresholdFB = 4f;
     public float MaxthresholdLR = 4f;
 
+    public float slideFactor;
     public float maxSpeed;
     public float minSpeed;
     [Header("The decrease of max speed each hat gives you")]
@@ -100,8 +101,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move(Vector3 motion)
     {
-        rigidBody.velocity = motion;
-        //Debug.Log(motion);
+        if (canSlide)
+            rigidBody.AddForce(motion * slideFactor);
+        else
+            rigidBody.velocity = motion;
     }
 
     public void Move(float xaxis, float yaxis,float zaxis)

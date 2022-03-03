@@ -61,7 +61,7 @@ public class HatFade : MonoBehaviour
             pos.y = 0.15f;
 
             circleDust.Play();
-            AudioManager.PlayHatAudioClip(HatAudioStates.Destroyed, hatAudioSource);
+            //AudioManager.PlayHatAudioClip(HatAudioStates.Destroyed, hatAudioSource);
             Destroy(circleDust, 1f);
             hatFadeEnabled = false;
         }

@@ -26063,7 +26063,7 @@ PrefabInstance:
     - target: {fileID: 2160207582918544954, guid: 8f89570d960e32e409bfa00067f6e876,
         type: 3}
       propertyPath: numberOfActiveSpawners
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2160207582918544956, guid: 8f89570d960e32e409bfa00067f6e876,
         type: 3}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HatCollecter : MonoBehaviour
 {
@@ -18,12 +19,20 @@ public class HatCollecter : MonoBehaviour
     public Vector3 initColliderSize;
     public Vector3 initColliderCenter;
     public bool hatdrop = false;
+    public bool isTouchingWell = false;
+
+    // stay for some time to drop the hat
+    public NewTimer hatDropTimer;
+    public float hatDropDuration;
 
     public Stack<GameObject> hatStack = new Stack<GameObject>();
     public bool isdamaged = false;
+    private Image barImage;
+
     Color[] hatColors = new Color[4];
     AudioSource playerAudioSource;
     Player playerScript;
+
     private void Start()
     {
         playerAudioSource = GetComponentInParent<AudioSource>();
@@ -45,11 +54,26 @@ public class HatCollecter : MonoBehaviour
         initHatHeight = hatTop.transform.position.y;
         initColliderSize = GetComponent<BoxCollider>().size;
         initColliderCenter = GetComponent<BoxCollider>().center;
+
+        //init the hatdrop timer
+        hatDropTimer = gameObject.AddComponent<NewTimer>();
+        hatDropTimer.MaxTime = hatDropDuration;
+
+        
     }
 
     private void Update()
     {
+        Image barImage = GetComponentInChildren<Image>();
         //Debug.Log(hatdrop);
+        if (hatDropTimer.TimerRunning)
+        {
+            barImage.fillAmount = hatDropTimer.TimerCompletionRate;
+        }
+        else
+        {
+            barImage.fillAmount = 0;
+        }
     }
 
     public void OnTriggerEnter(Collider other)

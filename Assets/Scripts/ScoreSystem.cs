@@ -54,7 +54,6 @@ public class ScoreSystem : MonoBehaviour
 
     private NewTimer hatDropDisplayScaleTimer;
     private NewTimer hatDropDisplayFadeTimer;
-    
 
 
     private BonusPointsIndicator[] bonusPointIndicatorsInScene;
@@ -237,7 +236,31 @@ public class ScoreSystem : MonoBehaviour
         if(player.tag == "Player")
         {
             HatCollecter hatcollecter = player.GetComponentInChildren<HatCollecter>();
-            if (hatcollecter.hatCount > 0 && hatcollecter.hatdrop == true)
+
+            if (hatcollecter.hatCount == 0)
+                return;
+
+            NewTimer hatDropTimer = hatcollecter.hatDropTimer;
+
+            if (hatDropTimer.TimerStart == false)
+            {
+                hatDropTimer.TimerStart = true;
+                if (hatcollecter.isTouchingWell)
+                {
+                    // time's up, drop the hats
+                    hatcollecter.hatdrop = true;
+                    hatcollecter.isTouchingWell = false;
+                    hatDropTimer.TimerRunning = false;
+                    hatDropTimer.TimerStart = false;
+
+                }
+                else
+                {
+                    hatcollecter.isTouchingWell = true; // starts to get in the well
+                }
+            }
+
+            if (hatcollecter.hatdrop)
             {
                 AudioManager.PlayHatAudioClip(HatAudioStates.Deposit, audio);
                 hatcollecter.hatdrop = false;
@@ -299,6 +322,19 @@ public class ScoreSystem : MonoBehaviour
                     hatcollecter.updateCollecter();
                 }
             }
+        }
+    }
+
+    public void OnTriggerExit(Collider player)
+    {
+        if (player.tag == "Player")
+        {
+            HatCollecter hatcollecter = player.GetComponentInChildren<HatCollecter>();
+
+            hatcollecter.isTouchingWell = false;
+            hatcollecter.hatDropTimer.ResetTimer();
+            hatcollecter.hatDropTimer.TimerStart = false;
+            hatcollecter.hatDropTimer.TimerRunning = false;
         }
     }
 

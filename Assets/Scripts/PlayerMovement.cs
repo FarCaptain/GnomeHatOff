@@ -175,7 +175,7 @@ public class PlayerMovement : MonoBehaviour
     public void jumpset(bool value)
     {
 
-        GetComponentInChildren<HatCollecter>().hatdrop = value;
+        //GetComponentInChildren<HatCollecter>().hatdrop = value;
     }
 
 }

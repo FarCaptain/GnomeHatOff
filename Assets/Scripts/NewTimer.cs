@@ -78,7 +78,7 @@ public class NewTimer : MonoBehaviour
 		{
             timerRunning = true;
             currentTime += Time.deltaTime;
-            timerCompletionRate = Mathf.Sin(currentTime / maxTime);
+            timerCompletionRate = Mathf.Clamp01(currentTime / maxTime);
             if(currentTime>=maxTime)
 			{
                 timerRunning = false;

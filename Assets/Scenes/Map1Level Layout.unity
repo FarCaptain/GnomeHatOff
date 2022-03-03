@@ -370,6 +370,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
         type: 3}
+      propertyPath: hatDropDuration
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: dropTimerEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
       propertyPath: pointsPopupDisplay
       value: 
       objectReference: {fileID: 3289768302961792009, guid: 7b0b62390b1acb64d8af2d58d9cd5076,
@@ -22649,6 +22659,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2568850845096396127, guid: 0af16847889ebed4da19d6838573a8f5,
         type: 3}
+      propertyPath: COM.Array.data[0]
+      value: COM9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2568850845096396127, guid: 0af16847889ebed4da19d6838573a8f5,
+        type: 3}
+      propertyPath: COM.Array.data[1]
+      value: COM12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2568850845096396127, guid: 0af16847889ebed4da19d6838573a8f5,
+        type: 3}
+      propertyPath: COM.Array.data[2]
+      value: COM14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2568850845096396127, guid: 0af16847889ebed4da19d6838573a8f5,
+        type: 3}
       propertyPath: COM.Array.data[3]
       value: COM4
       objectReference: {fileID: 0}
@@ -30628,6 +30653,11 @@ PrefabInstance:
       propertyPath: superBumpVFX
       value: 
       objectReference: {fileID: 1990088738}
+    - target: {fileID: 2289610358873209232, guid: 4569103a97551e245b460df25ea57d2a,
+        type: 3}
+      propertyPath: hatDropDuration
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3452146370785749638, guid: 4569103a97551e245b460df25ea57d2a,
         type: 3}
       propertyPath: m_RootOrder
@@ -36109,6 +36139,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1351224391847534519, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: hatDropDuration
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3593979466627239089, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
       propertyPath: m_Name
@@ -36813,6 +36848,11 @@ PrefabInstance:
       propertyPath: superBumpVFX
       value: 
       objectReference: {fileID: 408971357}
+    - target: {fileID: 2289610358873209232, guid: 4569103a97551e245b460df25ea57d2a,
+        type: 3}
+      propertyPath: hatDropDuration
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3452146370785749638, guid: 4569103a97551e245b460df25ea57d2a,
         type: 3}
       propertyPath: m_RootOrder

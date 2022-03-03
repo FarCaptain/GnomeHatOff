@@ -64,18 +64,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10a4df9b46be8c47849a5e057ac6021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultTransparency: 1
-  fadeDuration: 3
+  defaultTransparency: 2
+  fadeDuration: 2
   player: {fileID: 0}
   shadowPrefab: {fileID: 0}
   hatSpawn: {fileID: 0}
   circleDust: {fileID: 777350855108792525}
   rb: {fileID: 3699136397595582899}
   dropSpeed: {x: 0, y: 6, z: 0}
-  closeDistance: 2
-  highSpeed: 2
-  lowSpeed: 0.5
-  catchTime: 15
+  closeDistance: 1.5
+  highSpeed: 2.5
+  lowSpeed: 1
+  catchTime: 10
   hatFadeEnabled: 1
 --- !u!82 &2598964022959836559
 AudioSource:

@@ -370,16 +370,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
         type: 3}
-      propertyPath: hatDropDuration
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
-        type: 3}
-      propertyPath: dropTimerEnabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
-        type: 3}
       propertyPath: pointsPopupDisplay
       value: 
       objectReference: {fileID: 3289768302961792009, guid: 7b0b62390b1acb64d8af2d58d9cd5076,
@@ -4001,8 +3991,28 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5884457963943430964, guid: dab6f10639b7d4d4889305fea3198ec3,
         type: 3}
+      propertyPath: stayTime
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884457963943430964, guid: dab6f10639b7d4d4889305fea3198ec3,
+        type: 3}
+      propertyPath: maxHideTime
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884457963943430964, guid: dab6f10639b7d4d4889305fea3198ec3,
+        type: 3}
+      propertyPath: minHideTime
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884457963943430964, guid: dab6f10639b7d4d4889305fea3198ec3,
+        type: 3}
       propertyPath: players.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884457963943430964, guid: dab6f10639b7d4d4889305fea3198ec3,
+        type: 3}
+      propertyPath: typeOfHatStealChosen
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5884457963943430964, guid: dab6f10639b7d4d4889305fea3198ec3,
         type: 3}
@@ -22659,21 +22669,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2568850845096396127, guid: 0af16847889ebed4da19d6838573a8f5,
         type: 3}
-      propertyPath: COM.Array.data[0]
-      value: COM9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2568850845096396127, guid: 0af16847889ebed4da19d6838573a8f5,
-        type: 3}
-      propertyPath: COM.Array.data[1]
-      value: COM12
-      objectReference: {fileID: 0}
-    - target: {fileID: 2568850845096396127, guid: 0af16847889ebed4da19d6838573a8f5,
-        type: 3}
-      propertyPath: COM.Array.data[2]
-      value: COM14
-      objectReference: {fileID: 0}
-    - target: {fileID: 2568850845096396127, guid: 0af16847889ebed4da19d6838573a8f5,
-        type: 3}
       propertyPath: COM.Array.data[3]
       value: COM4
       objectReference: {fileID: 0}
@@ -26049,6 +26044,11 @@ PrefabInstance:
         type: 3}
       propertyPath: minTimeBetweenSpawns
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2160207582918544954, guid: 8f89570d960e32e409bfa00067f6e876,
+        type: 3}
+      propertyPath: numberOfActiveSpawners
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2160207582918544956, guid: 8f89570d960e32e409bfa00067f6e876,
         type: 3}
@@ -30653,11 +30653,6 @@ PrefabInstance:
       propertyPath: superBumpVFX
       value: 
       objectReference: {fileID: 1990088738}
-    - target: {fileID: 2289610358873209232, guid: 4569103a97551e245b460df25ea57d2a,
-        type: 3}
-      propertyPath: hatDropDuration
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 3452146370785749638, guid: 4569103a97551e245b460df25ea57d2a,
         type: 3}
       propertyPath: m_RootOrder
@@ -30717,6 +30712,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gnome_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5154856036340132846, guid: 4569103a97551e245b460df25ea57d2a,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 5154856036340132846, guid: 4569103a97551e245b460df25ea57d2a,
         type: 3}
@@ -36139,11 +36139,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1351224391847534519, guid: cdc8e89d69cc6564c87384009a43f4b7,
-        type: 3}
-      propertyPath: hatDropDuration
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 3593979466627239089, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
       propertyPath: m_Name
@@ -36203,6 +36198,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835091648898173498, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 7712702464142486567, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
@@ -36848,11 +36848,6 @@ PrefabInstance:
       propertyPath: superBumpVFX
       value: 
       objectReference: {fileID: 408971357}
-    - target: {fileID: 2289610358873209232, guid: 4569103a97551e245b460df25ea57d2a,
-        type: 3}
-      propertyPath: hatDropDuration
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 3452146370785749638, guid: 4569103a97551e245b460df25ea57d2a,
         type: 3}
       propertyPath: m_RootOrder
@@ -36912,6 +36907,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gnome_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5154856036340132846, guid: 4569103a97551e245b460df25ea57d2a,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 5154856036340132846, guid: 4569103a97551e245b460df25ea57d2a,
         type: 3}

@@ -137,7 +137,28 @@ public class HatSpawning : MonoBehaviour
 
     void SpawnMushroomMan()
     {
-        Vector3 pos = transform.localPosition + center + new Vector3(Random.Range(-4.5f, 4.5f), Random.Range(-scale_mushroom.y / 2, scale_mushroom.y / 2), Random.Range(-2.36f, 2.59f));
+        int i = Random.Range(-10, 10);
+        float pos_x;
+        float pos_z;
+        if(i <= 0)
+         {
+            pos_x = Random.Range(-4.5f / 2, -1.15f);
+        }
+        else
+        {
+            pos_x = Random.Range(1.15f, 4.5f);
+        }
+        int j = Random.Range(-10, 10);
+        if (j <= 0)
+        {
+            pos_z = Random.Range(-2.36f / 2, -1.10f);
+        }
+        else
+        {
+            pos_z = Random.Range(1.15f, 2.59f);
+        }
+        Vector3 pos = transform.localPosition + center + new Vector3(pos_x, Random.Range(-scale_mushroom.y / 2, scale_mushroom.y / 2), pos_z);
+        //Vector3 pos = transform.localPosition + center + new Vector3(Random.Range(-4.5f, 4.5f), Random.Range(-scale_mushroom.y / 2, scale_mushroom.y / 2), Random.Range(-2.36f, 2.59f));
         GameObject hat = Instantiate(mushroomManPrefab, pos, Quaternion.identity);
         generateShadow(pos, hat, "MushroomController");
        

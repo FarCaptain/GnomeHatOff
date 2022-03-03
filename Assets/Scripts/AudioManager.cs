@@ -9,7 +9,7 @@ public enum LogAudioStates { Rolling, Shaking };
 
 public enum DigletAudioStates { Raise, Despawn};
 
-public enum MushroomManAudioStates {Falling, Landed, Collected };
+public enum MushroomManAudioStates { Collected,Falling, Landed };
 
 public enum GameGeneralAudioStates {RoundBegin, RoundEnd, HatRushBegin }
 //public enum GeneralGameAudioStates { };
@@ -113,9 +113,9 @@ public class AudioManager : MonoBehaviour
 
     private static void PopulateMushroomManAudioClipsLibrary()
     {
-        mushroomManAudioClipsLibrary.Add(MushroomManAudioStates.Falling, (AudioClip)mushroomManAudioClips[0]);
-        mushroomManAudioClipsLibrary.Add(MushroomManAudioStates.Landed, (AudioClip)mushroomManAudioClips[1]);
-        mushroomManAudioClipsLibrary.Add(MushroomManAudioStates.Collected, (AudioClip)mushroomManAudioClips[1]);
+        mushroomManAudioClipsLibrary.Add(MushroomManAudioStates.Falling, (AudioClip)mushroomManAudioClips[1]);
+        mushroomManAudioClipsLibrary.Add(MushroomManAudioStates.Landed, (AudioClip)mushroomManAudioClips[2]);
+        mushroomManAudioClipsLibrary.Add(MushroomManAudioStates.Collected, (AudioClip)mushroomManAudioClips[0]);
     }
 
     private static void PopulateGameGeneralAudioClipsList()

@@ -15,6 +15,7 @@ public class MushroomController : MonoBehaviour
     public ParticleSystem circleDust;
 
     [SerializeField] public Rigidbody rb;
+    [SerializeField] Animator mushroomManAnimator;
 
     public Vector3 dropSpeed;
     public float closeDistance;
@@ -78,7 +79,7 @@ public class MushroomController : MonoBehaviour
         //On ground
         if (isOnGround)
         {
-           
+            mushroomManAnimator.SetTrigger("mushroomManOnGround");
             Move();
             Debug.Log(moveSpeed);
             rb.velocity = (movement.normalized * moveSpeed);

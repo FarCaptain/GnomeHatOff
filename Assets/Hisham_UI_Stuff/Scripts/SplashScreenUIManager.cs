@@ -102,7 +102,7 @@ public class SplashScreenUIManager : MonoBehaviour
 
     private void ActivateFader()
 	{
-        if (titleTextAnimator.GetCurrentAnimatorStateInfo(0).IsName("Exit") && titleTextAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f && fader.activeSelf==false)
+        if (titleTextAnimator.GetCurrentAnimatorStateInfo(0).IsName("Exit") && titleTextAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
         {
             fader.SetActive(true);
             faderAnimator.SetBool("isFadingIn", false);

@@ -18,6 +18,11 @@ public class LevelSelectionManager : MonoBehaviour
     [Header("VideoPlayers")]
     [SerializeField] GameObject[] videoPlayers;
 
+    [Header("Fader Animator")]
+    [SerializeField] Animator faderAnimator;
+
+    enum Buttons { None, Play, Back}
+    Buttons buttonClicked = Buttons.None;
     private int mapCount;
     private int currentIndex = 0;
     void Start()
@@ -28,27 +33,23 @@ public class LevelSelectionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+        TransitionToScene();
     }
 
-    private int CustomModulo(int currentIndex, int totalCount)
+    private void TransitionToScene()
 	{
-        int modulo = 0;
-        modulo = currentIndex % totalCount;
-        if(modulo<0)
+        if(faderAnimator.GetCurrentAnimatorStateInfo(0).IsName("FadeOut") && faderAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime>=1f)
 		{
-            while(modulo<0)
-			{
-                modulo = modulo + totalCount;
+            switch (buttonClicked)
+            {
+                case Buttons.Play:
+                    SelectLevel();
+                    break;
+                case Buttons.Back:
+                    SceneManager.LoadScene(1);
+                    break;
             }
-            return modulo;
-           
-		}
-        else
-		{
-            return modulo;
         }
-       
 	}
     private void ChangeMapDisplayComponents(int alterationNumber)
     {
@@ -61,6 +62,26 @@ public class LevelSelectionManager : MonoBehaviour
         mapTitle.text = mapNames[index];
         videoPlayers[index].SetActive(true);
         currentIndex = currentIndex + (alterationNumber);
+    }
+
+    private int CustomModulo(int currentIndex, int totalCount)
+    {
+        int modulo = 0;
+        modulo = currentIndex % totalCount;
+        if (modulo < 0)
+        {
+            while (modulo < 0)
+            {
+                modulo = modulo + totalCount;
+            }
+            return modulo;
+
+        }
+        else
+        {
+            return modulo;
+        }
+
     }
 
     public void IncrementMapDisplay()
@@ -88,5 +109,17 @@ public class LevelSelectionManager : MonoBehaviour
             SceneManager.LoadScene(5);
         }
 	}
+
+    public void PlayButtonClicked()
+	{
+        faderAnimator.SetBool("isFadingIn", false);
+        buttonClicked = Buttons.Play;
+    }
+
+    public void BackButtonClicked()
+	{
+        faderAnimator.SetBool("isFadingIn", false);
+        buttonClicked = Buttons.Back;
+    }
 
 }

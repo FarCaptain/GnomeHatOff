@@ -27,5 +27,10 @@ public class UIDevModeDebug : MonoBehaviour
 		{
             SceneManager.LoadScene(2);
 		}
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+		{
+            SceneManager.LoadScene(1);
+		}
     }
 }

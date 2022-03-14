@@ -7,19 +7,59 @@ using UnityEngine.UI;
 
 public class StartMenuUIManager : MonoBehaviour
 {
-    [SerializeField] float buttonInitialXPos;
-    [SerializeField] float buttonFinalXPos;
-    [SerializeField] GameObject fader;
+
+    [SerializeField] Animator faderAnimator;
     [SerializeField] Animator responsiveModelAnimator;
+    [SerializeField] Animator platformAnimator;
+
+    [Header("Scrolling background Parameters")]
+    [SerializeField] RawImage backgroundImage;
+    [SerializeField] float xSpeed, ySpeed;
+
+    enum Buttons {None, QuickStart, LevelSelect, Options, Quit};
+    Buttons buttonClicked = Buttons.None;
     void Start()
     {
-        fader.GetComponent<Animator>().SetBool("isFadingIn", true);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        ScrollBackgroundInfinitely();
+        ActivateFaderToGame();
+        TransitionToScene();
+    }
+
+    private void ScrollBackgroundInfinitely()
+    {
+        backgroundImage.uvRect = new Rect(backgroundImage.uvRect.position + new Vector2(xSpeed, ySpeed) * Time.deltaTime, backgroundImage.uvRect.size);
+    }
+
+    private void ActivateFaderToGame()
+    {
+        if(responsiveModelAnimator.GetCurrentAnimatorStateInfo(0).IsName("OnClick(Launched)") && responsiveModelAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime>=1f)
+		{
+            faderAnimator.SetBool("isFadingIn", false);
+            platformAnimator.SetTrigger("platformFadeOut");
+            buttonClicked = Buttons.QuickStart;
+        }
+    }
+
+    private void TransitionToScene()
+	{
+        if (faderAnimator.GetCurrentAnimatorStateInfo(0).IsName("FadeOut") && faderAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        {
+			switch (buttonClicked)
+			{
+                case Buttons.QuickStart:
+                    SceneManager.LoadScene(3);
+                    break;
+                case Buttons.LevelSelect:
+                    SceneManager.LoadScene(2);
+                    break;
+			}
+        }
     }
 
     public void ActivateOnHoverAnimation()
@@ -37,27 +77,21 @@ public class StartMenuUIManager : MonoBehaviour
         responsiveModelAnimator.SetTrigger("startButtonClicked");
 	}
 
-    public void ButtonHoverTransform()
-	{
-        GameObject buttonHoveredOver = EventSystem.current.currentSelectedGameObject;
-		if (buttonHoveredOver.GetComponent<Button>())
-		{
-            buttonHoveredOver.GetComponent<RectTransform>().localPosition = new Vector2(buttonFinalXPos, buttonHoveredOver.GetComponent<RectTransform>().localPosition.y);
-		}
-	}
-
-    public void ButtonIdleTransform()
-	{
-        GameObject buttonHoveredOver = EventSystem.current.currentSelectedGameObject;
-        if (buttonHoveredOver.GetComponent<Button>())
-        {
-            buttonHoveredOver.GetComponent<RectTransform>().localPosition = new Vector2(buttonInitialXPos, buttonHoveredOver.GetComponent<RectTransform>().localPosition.y);
-        }
-    }
-
     public void GoToLevelSelect()
 	{
-        SceneManager.LoadScene(2);
+        faderAnimator.SetBool("isFadingIn", false);
+        platformAnimator.SetTrigger("platformFadeOut");
+        responsiveModelAnimator.SetTrigger("modelFadeOut");
+        buttonClicked = Buttons.LevelSelect;
+    }
+
+    public void QuitGame()
+	{
+        Application.Quit();
+        if (Debug.isDebugBuild)
+        {
+            UnityEditor.EditorApplication.isPlaying = false;
+        }
 	}
 
 

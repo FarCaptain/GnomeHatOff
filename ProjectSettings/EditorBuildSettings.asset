@@ -11,4 +11,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Hisham_UI_Stuff/Scenes/StartMenu.unity
     guid: e5261e40041bccb4db636bfeea91c646
+  - enabled: 1
+    path: Assets/Hisham_UI_Stuff/Scenes/LevelSelection.unity
+    guid: 59b2c0023ca05ba48adb8388ef2783c5
+  - enabled: 1
+    path: Assets/Scenes/Map1Level Layout.unity
+    guid: a7a585abf903424498d6bf5fb1d60888
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/TestGym.unity
+    guid: 3d7da7bbd705b914288d48a5a839687b
   m_configObjects: {}

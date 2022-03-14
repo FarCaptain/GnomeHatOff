@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StartMenuUIManager : MonoBehaviour
@@ -53,6 +54,11 @@ public class StartMenuUIManager : MonoBehaviour
             buttonHoveredOver.GetComponent<RectTransform>().localPosition = new Vector2(buttonInitialXPos, buttonHoveredOver.GetComponent<RectTransform>().localPosition.y);
         }
     }
+
+    public void GoToLevelSelect()
+	{
+        SceneManager.LoadScene(2);
+	}
 
 
 }

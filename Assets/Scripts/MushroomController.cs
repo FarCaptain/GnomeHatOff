@@ -75,18 +75,21 @@ public class MushroomController : MonoBehaviour
             hatFadeEnabled = false;
             Invoke("SetOnGround", 0.1f);
         }
-
-        //On ground
+       
         if (isOnGround)
         {
-            mushroomManAnimator.SetTrigger("mushroomManOnGround");
-            Move();
-            Debug.Log(moveSpeed);
-            rb.velocity = (movement.normalized * moveSpeed);
-        }
-        
-        
-        
+            if (isGrabbed)
+            {
+                return;
+            }
+            else
+			{
+                mushroomManAnimator.SetTrigger("mushroomManOnGround");
+                Move();
+                Debug.Log(moveSpeed);
+                rb.velocity = (movement.normalized * moveSpeed);
+            }
+        } 
     }
 
 	private void Update()
@@ -127,14 +130,6 @@ public class MushroomController : MonoBehaviour
 
     public void Move()
     {
-
-        //Gaurd Statement
-        if(isGrabbed)
-		{
-            return;
-		}
-
-
         int closePlayer = ClosedToGnome();
         timeLeft -= Time.deltaTime;
         if (closePlayer != -1)

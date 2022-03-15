@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
 
         // keeps object from flying off (might be removable)
         Vector3 pos = gameObject.transform.position;
-        gameObject.transform.position = new Vector3(pos.x, 0.1f, pos.z);
+      //  gameObject.transform.position = new Vector3(pos.x, 0.1f, pos.z);
     }
 
     private void Move(Vector3 motion)

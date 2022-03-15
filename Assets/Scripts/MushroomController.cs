@@ -244,6 +244,7 @@ public class MushroomController : MonoBehaviour
     }
     public void Caught()
     {
+        rb.velocity = Vector3.zero;
         isGrabbed = true;
         mushroomManAnimator.SetTrigger("mushroomManGrabbed");
     }

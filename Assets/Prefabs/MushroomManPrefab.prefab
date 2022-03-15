@@ -165,12 +165,14 @@ MonoBehaviour:
   circleDust: {fileID: 777350855108792525}
   rb: {fileID: 3699136397595582899}
   mushroomManAnimator: {fileID: 388696782181577139}
+  magnetizationSpeed: 2.5
   dropSpeed: {x: 0, y: 6, z: 0}
   closeDistance: 1.5
   highSpeed: 2.5
   lowSpeed: 1
   catchTime: 10
   hatFadeEnabled: 1
+  playerHit: {fileID: 0}
 --- !u!82 &2598964022959836559
 AudioSource:
   m_ObjectHideFlags: 0

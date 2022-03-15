@@ -114,6 +114,7 @@ public class HatCollecter : MonoBehaviour
             //    AddHat(hat);
             //}
             playerScript.SuperBounce();
+            other.GetComponent<MushroomController>().playerHit = transform.parent.gameObject;
             other.GetComponent<MushroomController>().Caught();
             other.GetComponent<MushroomController>().hatShadowDestroy();
             

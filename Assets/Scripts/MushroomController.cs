@@ -29,7 +29,7 @@ public class MushroomController : MonoBehaviour
     
     private Vector3 movement;
     private float timeLeft;
-    
+    private bool isGrabbed = false;
 
     bool isOnGround = false;
     float headTop;
@@ -75,18 +75,39 @@ public class MushroomController : MonoBehaviour
             hatFadeEnabled = false;
             Invoke("SetOnGround", 0.1f);
         }
-
-        //On ground
+       
         if (isOnGround)
         {
-            mushroomManAnimator.SetTrigger("mushroomManOnGround");
-            Move();
-            Debug.Log(moveSpeed);
-            rb.velocity = (movement.normalized * moveSpeed);
+            if (isGrabbed)
+            {
+                return;
+            }
+            else
+			{
+                mushroomManAnimator.SetTrigger("mushroomManOnGround");
+                Move();
+                Debug.Log(moveSpeed);
+                rb.velocity = (movement.normalized * moveSpeed);
+            }
+        } 
+    }
+
+	private void Update()
+	{
+        if (HasAnimationStopped(mushroomManAnimator, "Anim_MushroomMan_Grabbed") == true)
+		{
+            Destroy(gameObject);
         }
-        
-        
-        
+
+    }
+
+    bool HasAnimationStopped(Animator anim, string stateName)
+    {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName(stateName) &&
+                anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+            return true;
+        else
+            return false;
     }
 
     void SetOnGround()
@@ -109,7 +130,6 @@ public class MushroomController : MonoBehaviour
 
     public void Move()
     {
-        
         int closePlayer = ClosedToGnome();
         timeLeft -= Time.deltaTime;
         if (closePlayer != -1)
@@ -224,7 +244,9 @@ public class MushroomController : MonoBehaviour
     }
     public void Caught()
     {
-        Destroy(gameObject);
+        rb.velocity = Vector3.zero;
+        isGrabbed = true;
+        mushroomManAnimator.SetTrigger("mushroomManGrabbed");
     }
     private void Escape(GameObject player)
     {

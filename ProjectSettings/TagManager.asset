@@ -27,7 +27,7 @@ TagManager:
   - Moveables
   - Damage
   - IFrames
-  - Well
+  - 
   - 
   - 
   - 
@@ -46,7 +46,7 @@ TagManager:
   - 
   - 
   - PP
-  - 
+  - Ignore_shadow
   m_SortingLayers:
   - name: Default
     uniqueID: 0

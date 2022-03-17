@@ -70,7 +70,7 @@ public class HatSpawning : MonoBehaviour
             
         timeInterval += Time.deltaTime;
 
-        if(mushroomTime > mushroomSpawnTime)
+        if(mushroomTime > mushroomSpawnTime && mushroomManPrefab)
         {
             timeGap = Random.Range(minGap, maxGap);
             if (mushroomOneTime < 1 && mushroomCount < mushroomMaxCount)

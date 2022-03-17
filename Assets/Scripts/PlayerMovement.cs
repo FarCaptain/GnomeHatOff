@@ -104,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
         
         if (speed != Vector3.zero && canMove == true)
         {
-            if(speed.x!=0||speed.y!=0)
+            if(speed!=new Vector3(0,-200,0))
             {
                 gameObject.transform.forward = new Vector3(speed.x, 0, speed.z);
                

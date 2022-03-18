@@ -140,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isDrop)
         {
-            speed.y = -200f;
+            speed = new Vector3(0, -200, 0);
         }
         
         if (speed != Vector3.zero && canMove == true)

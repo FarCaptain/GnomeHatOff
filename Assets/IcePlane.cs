@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿#define automatically
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class IcePlane : MonoBehaviour
 {
-    
+
     public float time;
     public float speed;
     public Vector2Int size;
@@ -16,6 +18,7 @@ public class IcePlane : MonoBehaviour
     int currentStage;
     float scale;
     SortedList<float, List<Ice>> planeMap;
+    GameObject[] iceList;
     // Start is called before the first frame update
     void Start()
     {
@@ -72,6 +75,7 @@ public class IcePlane : MonoBehaviour
 
     void InitiatePlane()
     {
+#if automatically
         for(int i =-size.x; i <= size.x; i++)
         {
             for (int j = -size.y; j <= size.y; j++)
@@ -97,6 +101,8 @@ public class IcePlane : MonoBehaviour
         minDis = planeMap.Keys[0];
         scale = (maxDis - minDis) / shrinkStage;
         
-
+#else
+        iceList = GameObject.FindGameObjectsWithTag("Ground");
+#endif
     }
 }

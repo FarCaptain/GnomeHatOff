@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float xval;
 
-
+    public GameObject SealSocket;
 
     Vector3 initPos = new Vector3(0,0,0);       // new default position for controller when calibrated
     
@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
         isDrop = false;
 
 
-
+        
     }
 
     void FixedUpdate()

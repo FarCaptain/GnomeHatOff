@@ -40,15 +40,18 @@ public class PlayerMovement : MonoBehaviour
     public float xval;
 
 
+
     Vector3 initPos = new Vector3(0,0,0);       // new default position for controller when calibrated
     
     [HideInInspector]
     public bool canMove = true;
 
+    bool isDrop;
+    Vector3 speed;
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-
+        isDrop = false;
 
 
 
@@ -59,44 +62,63 @@ public class PlayerMovement : MonoBehaviour
 
         // used for calibration
 
+        float vel_y = rigidBody.velocity.y;
 
-
-
-            Vector3 move = Vector3.zero;
-            if(playerIndex == 0)
-            {
-                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
-                {
-                    float x = Input.GetAxis("Horizontal1");
-                    float z = Input.GetAxis("Vertical1");
-                    move = new Vector3(x, 0f, z);
-                }
-            }
+        if (vel_y < -0.001&&!isDrop)
+        {
+            isDrop = true;
            
-            else if(playerIndex == 1)
+        }
+        Vector3 move = Vector3.zero;
+        if (playerIndex == 0)
+        {
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
             {
-                if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
-                {
-                    float x = Input.GetAxis("Horizontal");
-                    float z = Input.GetAxis("Vertical");
-                    move = new Vector3(x, 0f, z);
-                }
-            }
-           
 
-            Vector3 speed = move * keyboardSpeed;
-            if (speed != Vector3.zero && canMove==true)
+
+                float x = Input.GetAxis("Horizontal1");
+                float z = Input.GetAxis("Vertical1");
+
+                move = new Vector3(x, 0f, z);
+                speed = move * keyboardSpeed;
+
+            }
+        }
+
+        else if (playerIndex == 1)
+        {
+            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
             {
-                gameObject.transform.forward = speed;
-                Move(speed * Time.deltaTime);
-                drawRunDust();
+                float x = Input.GetAxis("Horizontal");
+                float z = Input.GetAxis("Vertical");
+                move = new Vector3(x, 0f, z);
+                speed = move * keyboardSpeed;
             }
+        }
 
-           
+
+        if (isDrop)
+        {
+            speed.y = -200f;
+        }
+        
+        if (speed != Vector3.zero && canMove == true)
+        {
+            if(speed!=new Vector3(0,-200,0))
+            {
+                gameObject.transform.forward = new Vector3(speed.x, 0, speed.z);
+               
+            }
+            
+            Move(speed * Time.deltaTime);
+            drawRunDust();
+        }
+
+
 
         // keeps object from flying off (might be removable)
         Vector3 pos = gameObject.transform.position;
-      //  gameObject.transform.position = new Vector3(pos.x, 0.1f, pos.z);
+      
     }
 
     private void Move(Vector3 motion)
@@ -142,18 +164,14 @@ public class PlayerMovement : MonoBehaviour
         // assigns direction
         speed_x *= Mathf.Sign(move.x);
         speed_z *= Mathf.Sign(move.z);
-        Vector3 speed = new Vector3(speed_x, 0f, speed_z);
+        speed = new Vector3(speed_x, 0f, speed_z);
         //Debug.Log(speed);
 
-        if (speed != Vector3.zero)
-        {
-            gameObject.transform.forward = speed;
-            drawRunDust();
-        }
-        Move(speed * Time.deltaTime);
-        Vector3 pos = gameObject.transform.position;
+
+      
+       // Vector3 pos = gameObject.transform.position;
         //Debug.Log(pos);
-        gameObject.transform.position = new Vector3(pos.x, 0.1f, pos.z);
+       // gameObject.transform.position = new Vector3(pos.x, 0.1f, pos.z);
     }
 
     private void drawRunDust()

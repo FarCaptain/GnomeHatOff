@@ -1424,7 +1424,7 @@ MonoBehaviour:
   responsiveModelAnimator: {fileID: 1091622429}
   platformAnimator: {fileID: 1097912947}
   backgroundImage: {fileID: 821228412}
-  xSpeed: 0.075
+  xSpeed: 0
   ySpeed: 0
 --- !u!1 &987372066
 GameObject:

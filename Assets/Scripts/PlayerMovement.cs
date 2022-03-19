@@ -48,27 +48,68 @@ public class PlayerMovement : MonoBehaviour
 
     bool isDrop;
     Vector3 speed;
+    float collisionTime;
+    float testCollisionTime;
+    
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
         isDrop = false;
-
+        collisionTime = 0;
+        testCollisionTime = 0;
 
 
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag.Equals("Ground")){
+            isDrop = false;
+            collisionTime += 0.01f;
+        }
+        
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag.Equals("Ground"))
+        {
+            isDrop = true;
+
+        }
+
+    }
     void FixedUpdate()
     {
+       
+       //isDrop = true;
+        BoxCollider boxCollider = GetComponent<BoxCollider>();
+        if (!isDrop)
+        {
+            testCollisionTime += Time.fixedDeltaTime;
+        }
+        
+        if(testCollisionTime > 0.1f)
+        {
+            if (collisionTime < 0.05)
+            {
+                isDrop = true;
+            }
+            else
+            {
+                collisionTime = 0;
+            }
+        }
 
         // used for calibration
 
         float vel_y = rigidBody.velocity.y;
 
-        if (vel_y < -0.001&&!isDrop)
-        {
-            isDrop = true;
+        //if (vel_y < -0.001&&!isDrop)
+        //{
+        //    isDrop = true;
            
-        }
+        //}
         Vector3 move = Vector3.zero;
         if (playerIndex == 0)
         {
@@ -99,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isDrop)
         {
-            speed.y = -200f;
+            speed = new Vector3(0, -200, 0);
         }
         
         if (speed != Vector3.zero && canMove == true)
@@ -173,6 +214,8 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log(pos);
        // gameObject.transform.position = new Vector3(pos.x, 0.1f, pos.z);
     }
+
+
 
     private void drawRunDust()
     {

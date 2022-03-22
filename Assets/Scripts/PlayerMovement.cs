@@ -45,7 +45,8 @@ public class PlayerMovement : MonoBehaviour
     
     [HideInInspector]
     public bool canMove = true;
-
+    int level;
+    //for map2
     bool isDrop;
     Vector3 speed;
     float collisionTime;
@@ -57,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
         isDrop = false;
         collisionTime = 0;
         testCollisionTime = 0;
-
+        level = GameObject.Find("GameManager").GetComponent<MainGameController>().level;
 
     }
 
@@ -89,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
             testCollisionTime += Time.fixedDeltaTime;
         }
         
-        if(testCollisionTime > 0.1f)
+        if(level==2&& testCollisionTime > 0.1f)
         {
             if (collisionTime < 0.05)
             {

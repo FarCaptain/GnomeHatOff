@@ -9,6 +9,7 @@ enum GameStatus
 }
 public class MainGameController : MonoBehaviour
 {
+    public int level;
     private GameStatus status = GameStatus.Ready;
     [HideInInspector]
     public GameObject[] players;

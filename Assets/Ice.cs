@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Ice : MonoBehaviour
 {
+    private int health = 3;
+
+    [SerializeField]
+    private Material halfCrack;
+    [SerializeField]
+    private Material fullCrack;
+
     bool isSink;
     Animation animation;
     GameObject go_Ice;
@@ -18,17 +25,13 @@ public class Ice : MonoBehaviour
         animation = GetComponent<Animation>();
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
    
     private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.tag.Equals("Damage"))
+        {
+            Crack();
+        }
         if (other.tag.Equals("Player"))
         {
             if (go_Ice != null)
@@ -50,6 +53,24 @@ public class Ice : MonoBehaviour
 
         }
     }
+    public void Crack()
+    {
+        health--;
+
+        switch (health)
+        {
+            case 2:
+                GetComponentInChildren<MeshRenderer>().material = halfCrack;
+                break;
+            case 1:
+                GetComponentInChildren<MeshRenderer>().material = fullCrack;
+                break;
+            case 0:
+                DestroyGameObject();
+                break;
+        }
+    }
+
     public void Melt()
     {
         float waitTime = Random.Range(0, 1.5f);
@@ -82,6 +103,7 @@ public class Ice : MonoBehaviour
         
     }
 
+    // TODO: Possible shatter animation
     void DestroyGameObject()
     {
         Destroy(gameObject);

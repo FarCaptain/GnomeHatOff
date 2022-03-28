@@ -125,6 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f94cbd60857af384d969e3424b05586d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  halfCrack: {fileID: 2100000, guid: 2e88aa8e71d25a840a213f392850cb26, type: 2}
+  fullCrack: {fileID: 2100000, guid: db720ddb6b49fd24cad0d294aef2ecef, type: 2}
 --- !u!111 &4903938258859287873
 Animation:
   m_ObjectHideFlags: 0

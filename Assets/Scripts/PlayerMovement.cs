@@ -187,14 +187,14 @@ public class PlayerMovement : MonoBehaviour
         else if (Mathf.Abs(move.x) >= MaxthresholdLR)
             speed_x = currentMaxSpeed;
         else
-            speed_x = map(Mathf.Abs(move.x));
+            speed_x = map(Mathf.Abs(move.x), MaxthresholdLR);
 
         if (Mathf.Abs(move.z) <= MinthresholdFB)
             speed_z = 0f;
         else if (Mathf.Abs(move.z) >= MaxthresholdFB)
             speed_z = currentMaxSpeed;
         else
-            speed_z = map(Mathf.Abs(move.z));
+            speed_z = map(Mathf.Abs(move.z), MaxthresholdFB);
 
         // assigns direction
         speed_x *= Mathf.Sign(move.x);
@@ -218,9 +218,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //map arduino values between our thresholds to our maxSpeed
-    private float map(float arduinoInput)
+    private float map(float arduinoInput, float threshold)
     {
-        float factor = maxSpeed / MaxthresholdFB;
+        float factor = maxSpeed / threshold;
         float mapEquation = arduinoInput * factor;
         //Debug.Log("map value: " + mapVal);
         return mapEquation;

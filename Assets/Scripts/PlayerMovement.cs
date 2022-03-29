@@ -47,36 +47,37 @@ public class PlayerMovement : MonoBehaviour
     public bool canMove = true;
     int level;
     //for map2
-    bool isDrop;
+    public bool isDrop;
     Vector3 speed;
-    float collisionTime;
+    public float collisionTime;
     float testCollisionTime;
-    
+    Vector3 dropSpeed;
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
         isDrop = false;
-        collisionTime = 0;
+        collisionTime = 1;
         testCollisionTime = 0;
         level = GameObject.Find("GameManager").GetComponent<MainGameController>().level;
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.tag.Equals("Ground")){
-            isDrop = false;
-            collisionTime += 0.01f;
-        }
-    }
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.tag.Equals("Ground")){
+    //        isDrop = false;
+    //        collisionTime += 0.01f;
+    //    }
+    //}
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag.Equals("Ground"))
-        {
-            isDrop = true;
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.tag.Equals("Ground"))
+    //    {
+    //        isDrop = true;
 
-        }
-    }
+    //    }
+    //}
     void FixedUpdate()
     {
        
@@ -91,10 +92,15 @@ public class PlayerMovement : MonoBehaviour
         {
             if (collisionTime < 0.05)
             {
+                testCollisionTime = 0;
                 isDrop = true;
+                Debug.Log("sss" + speed);
+                dropSpeed = 0.1f*speed + new Vector3(0, -200, 0);
+               
             }
             else
             {
+                testCollisionTime = 0;
                 collisionTime = 0;
             }
         }
@@ -135,12 +141,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (isDrop)
         {
-            speed = new Vector3(0, -200, 0);
+            
+            speed = dropSpeed;
         }
         
         if (speed != Vector3.zero && canMove == true)
         {
-            if (speed != new Vector3(0, -200, 0))
+            if (speed.y != -200)
             {
                 gameObject.transform.forward = new Vector3(speed.x, 0, speed.z);
 

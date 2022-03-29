@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 7025628681413301444}
   - component: {fileID: 7025628681413301445}
   - component: {fileID: 7025628681413301446}
-  - component: {fileID: 7025628681413301447}
+  - component: {fileID: -4561140109779112505}
+  - component: {fileID: 2143129697677356138}
   m_Layer: 0
   m_Name: SnowBoulder
-  m_TagString: Damage
+  m_TagString: Knockback
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 5918377874590281035, guid: ca87bdd4cabf7104db27b732c8a58d53, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88,13 +89,13 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7025628681413301440}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5842cdee1f16afd44ac000d15cba7300, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &7025628681413301447
+--- !u!54 &-4561140109779112505
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,3 +111,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2143129697677356138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025628681413301440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6374a43714da35439624f71a191cf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hit: 0

@@ -16,7 +16,7 @@ public class MainGameController : MonoBehaviour
     private List<PlayerMovement> playerMovements = new List<PlayerMovement>();
     private int playerAmount;
     public GameObject Arduino;
-    public string[] COM;
+    public List<string> COM;
     GameObject[] playerfetch;
 
     // Start is called before the first frame update

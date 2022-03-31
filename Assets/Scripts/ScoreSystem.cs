@@ -61,7 +61,7 @@ public class ScoreSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
 	{
-        PlayerAmount = gameManager.COM.Length;
+        PlayerAmount = gameManager.COM.Count;
         for (int id = 0; id < 2; id++)
 			for (int i = 0; i < fires[id].transform.childCount; i++)
 				initFireScale[id, i] = fires[id].transform.GetChild(i).transform.localScale;

@@ -8,7 +8,7 @@ public class IcePlane : MonoBehaviour
 {
 
     public float time;
-    public float speed;
+    public float iceSize;
     public Vector2Int size;
     float t = 0;
     GameObject ice;
@@ -22,7 +22,7 @@ public class IcePlane : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ice = Resources.Load<GameObject>("ice");
+        ice = Resources.Load<GameObject>("Ice/Ice");
         planeMap = new SortedList<float, List<Ice>>();
         currentStage = 0;
         InitiatePlane();
@@ -57,7 +57,8 @@ public class IcePlane : MonoBehaviour
                     int count = list.Count;
                     for (int i = 0; i < count; i++)
                     {
-                        list[i].Melt();
+                        if(list[i]!=null)
+                            list[i].Melt();
                     }
                     planeMap.RemoveAt(j);
                 }
@@ -76,12 +77,24 @@ public class IcePlane : MonoBehaviour
     void InitiatePlane()
     {
 #if automatically
-        for(int i =-size.x; i <= size.x; i++)
+        int check = 0;
+        for(float i =-size.x*0.797f*iceSize; i <= size.x * 0.797f * iceSize; i+=0.797f * iceSize)
         {
-            for (int j = -size.y; j <= size.y; j++)
+            check++;
+            float initPos;
+            if (check % 2 == 0)
             {
-                GameObject go_ice = Instantiate(ice, new Vector3(i,0,j), Quaternion
+                initPos = -size.y* 2.763f * iceSize;
+            }
+            else
+            {
+                initPos = -size.y* 2.763f * iceSize + 1.379f * iceSize;
+            }
+            for (float j = initPos; j <= size.y* 2.763f * iceSize; j+=2.763f * iceSize)
+            {
+                GameObject go_ice = Instantiate(ice, new Vector3(j,0,i), Quaternion
                     .identity, transform);
+                go_ice.transform.localScale*=iceSize;
                 float distance = Vector3.Distance(go_ice.transform.position, transform.position);
                 if (planeMap.ContainsKey(distance))
                 {

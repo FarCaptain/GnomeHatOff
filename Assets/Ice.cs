@@ -15,13 +15,14 @@ public class Ice : MonoBehaviour
     Animation animation;
     GameObject go_Ice;
     bool isInitialized = false;
+    Material iceMat;
+    GameObject go_IceMat;
     // Start is called before the first frame update
     void Start()
     {
         isSink = false;
-
-        go_Ice = transform.Find("Ice").gameObject;
-        Debug.Log("ice" + go_Ice);
+        go_IceMat = transform.Find("Ice/pasted__group7/pasted__pasted__pCylinder2/polySurface11").gameObject; 
+       
         animation = GetComponent<Animation>();
         
     }
@@ -30,6 +31,7 @@ public class Ice : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Knockback"))
         {
+            Debug.Log("HIT");
             if (!collision.gameObject.GetComponent<Snowball>().Hit)
             {
                 Crack();
@@ -113,7 +115,7 @@ public class Ice : MonoBehaviour
     {
         
         animation.Play("IceMelting");
-        Invoke("DestroyGameObject", 2);
+        Invoke("DestroyGameObject", 3.5f);
         
     }
 

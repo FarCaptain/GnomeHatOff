@@ -49,23 +49,23 @@ public class SnowballSpawner : MonoBehaviour
         switch (i)
         {
             case 0: 
-                x = Random.Range(minForce, maxForce); 
-                z = Random.Range(minForce, maxForce);
+                x = -Random.Range(minForce, maxForce); 
+                z = -Random.Range(minForce, maxForce);
                 break;
             case 1:
                 x = Random.Range(minForce, maxForce);
-                z = Random.Range(minForce, maxForce);
+                z = -Random.Range(minForce, maxForce);
                 break;
             case 2:
                 x = Random.Range(minForce, maxForce);
                 z = Random.Range(minForce, maxForce);
                 break;
             case 3:
-                x = Random.Range(minForce, maxForce);
+                x = -Random.Range(minForce, maxForce);
                 z = Random.Range(minForce, maxForce);
                 break;
         }
-        return new Vector3(x,dropVelocity*-100,z);
+        return new Vector3(x,dropVelocity*-20,z);
     }
 
 

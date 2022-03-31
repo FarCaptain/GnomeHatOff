@@ -4776,10 +4776,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a372f0401919f843aa336f0eceb5000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 5
+  time: 15
   speed: 0
-  size: {x: 5, y: 5}
-  shrinkStage: 5
+  size: {x: 4, y: 4}
+  shrinkStage: 3
 --- !u!4 &608096858
 Transform:
   m_ObjectHideFlags: 0
@@ -15920,7 +15920,7 @@ GameObject:
   - component: {fileID: 2024855613}
   - component: {fileID: 2024855614}
   m_Layer: 0
-  m_Name: CrackingTest
+  m_Name: SnowballSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15934,7 +15934,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024855612}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 7.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 652655284}
@@ -15961,13 +15961,13 @@ MonoBehaviour:
   - {fileID: 30907586}
   - {fileID: 25009772}
   - {fileID: 370528440}
-  minSpawnTime: 1
-  maxSpawnTime: 3
-  minForce: 200
-  maxForce: 300
+  minSpawnTime: 3
+  maxSpawnTime: 5
+  minForce: 800
+  maxForce: 2200
   go_Snowball: {fileID: 7025628681413301440, guid: d683a170dca18684f9ae7bd6ceaf1dd9,
     type: 3}
-  dropVelocity: 3
+  dropVelocity: 12
 --- !u!1 &2042136435
 GameObject:
   m_ObjectHideFlags: 0
@@ -16997,6 +16997,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gnome_0
       objectReference: {fileID: 0}
+    - target: {fileID: 3593979466627239089, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3593979466627239089, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4178385842741187957, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4227668271868745227, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
       propertyPath: m_RootOrder
@@ -17072,6 +17087,21 @@ PrefabInstance:
       propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5943361334100308877, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 7769019640235066243, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.18127458
+      objectReference: {fileID: 0}
+    - target: {fileID: 7769019640235066243, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -0.03436274
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdc8e89d69cc6564c87384009a43f4b7, type: 3}
 --- !u!1001 &3265288509545475204
@@ -17104,7 +17134,7 @@ PrefabInstance:
     - target: {fileID: 3265288508040520156, guid: 318cadf814c17b34ba8fa247fde638a8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.9
+      value: -5.352
       objectReference: {fileID: 0}
     - target: {fileID: 3265288508040520156, guid: 318cadf814c17b34ba8fa247fde638a8,
         type: 3}

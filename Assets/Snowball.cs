@@ -14,7 +14,7 @@ public class Snowball : MonoBehaviour
 
     public void AddForce(Vector3 force)
     {
-        GetComponent<Rigidbody>().AddForce(new Vector3(50, -300, 50));
+        GetComponent<Rigidbody>().AddForce(force);
         GetComponent<Rigidbody>().useGravity = true;
     }
     // Update is called once per frame

@@ -52,51 +52,50 @@ public class PlayerMovement : MonoBehaviour
     public float collisionTime;
     float testCollisionTime;
     Vector3 dropSpeed;
-
+    public bool knocked;
+    bool disabled;
     void Start()
     {
+        disabled = false;
+        knocked = false;
         rigidBody = GetComponent<Rigidbody>();
         isDrop = false;
         collisionTime = 1;
         testCollisionTime = 0;
         level = GameObject.Find("GameManager").GetComponent<MainGameController>().level;
+        
     }
 
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.tag.Equals("Ground")){
-    //        isDrop = false;
-    //        collisionTime += 0.01f;
-    //    }
-    //}
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.tag.Equals("Ground"))
-    //    {
-    //        isDrop = true;
 
-    //    }
-    //}
+
+    void Heal()
+    {
+        knocked = false;
+    }
+
+
     void FixedUpdate()
     {
        
-       //isDrop = true;
+        if(!isDrop && disabled)
+        {
+            return;
+        }
         BoxCollider boxCollider = GetComponent<BoxCollider>();
         if (!isDrop)
         {
             testCollisionTime += Time.fixedDeltaTime;
         }
-        
-        if(level==2&& testCollisionTime > 0.1f)
+     
+        if (level==2&& testCollisionTime > 0.1f)
         {
             if (collisionTime < 0.05)
             {
                 testCollisionTime = 0;
                 isDrop = true;
-                Debug.Log("sss" + speed);
+                Respawn(3);
                 dropSpeed = 0.1f*speed + new Vector3(0, -200, 0);
-               
             }
             else
             {
@@ -108,12 +107,8 @@ public class PlayerMovement : MonoBehaviour
         // used for calibration
 
         float vel_y = rigidBody.velocity.y;
+        
 
-        //if (vel_y < -0.001&&!isDrop)
-        //{
-        //    isDrop = true;
-           
-        //}
         Vector3 move = Vector3.zero;
         if (playerIndex == 0)
         {
@@ -143,8 +138,9 @@ public class PlayerMovement : MonoBehaviour
         {
             
             speed = dropSpeed;
+
         }
-        
+
         if (speed != Vector3.zero && canMove == true)
         {
             if (speed.y != -200)
@@ -244,4 +240,21 @@ public class PlayerMovement : MonoBehaviour
         //GetComponentInChildren<HatCollecter>().hatdrop = value;
     }
 
+    //the player will be respawned in time seconds
+    public void Respawn(float time)
+    {
+        disabled = true;
+        Invoke("RespawnPlayer", time);
+    }
+
+    void RespawnPlayer()
+    {
+       
+        speed = Vector3.zero;
+        transform.position = Vector3.zero;
+        disabled = false;
+        isDrop = false;
+        collisionTime = 1;
+    }
+   
 }

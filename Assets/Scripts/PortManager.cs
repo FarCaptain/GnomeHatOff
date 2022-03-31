@@ -15,7 +15,7 @@ public class PortManager : MonoBehaviour
     private int baudrate = 9600;
 
     private NewTimer connectComTimer;
-    private MainGameController gameController;
+    public MainGameController gameController;
 
     public GameObject gnomePurple;
     public GameObject gnomeRed;
@@ -34,8 +34,9 @@ public class PortManager : MonoBehaviour
 
         getConnectedPorts();
 
-        gameController = gameObject.AddComponent<MainGameController>();
+        gameController = GetComponent<MainGameController>();
         gameController.Arduino = arduino;
+        gameController.COM.Clear();
     }
 
     // Update is called once per frame
@@ -58,11 +59,10 @@ public class PortManager : MonoBehaviour
                 string[] dataRaw = dataString.Split(splitChar);
                 if (dataRaw.Length == 3 && dataRaw[0] != "")
                 {
-                    arduinoPorts.Add(ports[i]);
-                    print("IIIII" + ports[i]);
+                    gameController.COM.Add(streams[i].PortName);
 
-                    streams[i].Close();
-                    streams[i].Dispose();
+                    //streams[i].Close();
+                    //streams[i].Dispose();
                     //TODO. Needs the value from the arduino to identify the hat
                     // Now just doing it in some order
                     distributeCharacter(i);
@@ -113,12 +113,14 @@ public class PortManager : MonoBehaviour
                 break;
         }
         GameObject gnome = Instantiate(gnomePrefab, pos, Quaternion.identity);
-        
+        gameController.players.Add(gnome);
+        gameController.RegisterPlayerController(gameController.players.Count - 1);
+
     }
 
     SerialPort connectionEstablish(int portIndex)
     {
-        SerialPort stream = new SerialPort("\\\\.\\" + ports[portIndex], baudrate);
+        SerialPort stream = new SerialPort(ports[portIndex], baudrate);
         try
         {
             stream.ReadTimeout = 10;

@@ -289,6 +289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 763459170}
   - component: {fileID: 763459171}
+  - component: {fileID: 763459172}
   m_Layer: 0
   m_Name: GnomeSpawner
   m_TagString: Untagged
@@ -322,6 +323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 917d603cb225c8f46bb18fda9da16214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 0}
   gnomePurple: {fileID: 8193825713539788829, guid: 029bab860d12bae42b81d612cd472925,
     type: 3}
   gnomeRed: {fileID: 5154856036340132840, guid: 4569103a97551e245b460df25ea57d2a,
@@ -330,6 +332,23 @@ MonoBehaviour:
     type: 3}
   gnomeBlue: {fileID: 3593979466627239089, guid: cdc8e89d69cc6564c87384009a43f4b7,
     type: 3}
+  arduino: {fileID: 1392186386500188249, guid: ccdf3579562fba6409cc0428635520d8, type: 3}
+--- !u!114 &763459172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763459169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77ca5a8a556bccc4d9ae0a19623fb8cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 0
+  players: []
+  Arduino: {fileID: 0}
+  COM: []
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

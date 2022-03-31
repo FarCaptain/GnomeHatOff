@@ -60,7 +60,7 @@ public class PortManager : MonoBehaviour
 
                 char splitChar = ',';
                 string[] dataRaw = dataString.Split(splitChar);
-                if (dataRaw.Length == 3 && dataRaw[0] != "")
+                if (dataRaw.Length == 2 && dataRaw[0] != "")
                 {
                     gameController.COM.Add(streams[i].PortName);
 

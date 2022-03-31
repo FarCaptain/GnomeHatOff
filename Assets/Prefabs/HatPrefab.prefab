@@ -85,6 +85,8 @@ MonoBehaviour:
   circleDust: {fileID: 6842651306954289397}
   hatFadeEnabled: 1
   hatCollectedByPlayer: 0
+  dropAnimationDuration: 5
+  pauseBetweenDropAnimations: 0
 --- !u!82 &9199296803561114643
 AudioSource:
   m_ObjectHideFlags: 0

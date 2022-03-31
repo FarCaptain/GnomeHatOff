@@ -315,7 +315,8 @@ public class ScoreSystem : MonoBehaviour
                 {
                     // the Procedural animation here
                     GameObject hat = hatcollecter.hatStack.Pop();
-                    Destroy(hat);
+                    hat.GetComponent<HatFade>().RegisterDropAnimation(transform.position);
+                    //Destroy(hat);
                 }
 
                 //reset the collision on the gnome

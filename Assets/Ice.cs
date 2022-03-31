@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class Ice : MonoBehaviour
 {
-    private int health = 3;
+    private int health;
 
     [SerializeField]
-    private Material halfCrack;
-    [SerializeField]
-    private Material fullCrack;
+    private Material[] meltMaterials;
+    int stageNum;
 
     bool isSink;
     Animation animation;
     GameObject go_Ice;
     bool isInitialized = false;
+    Material iceMat;
+    GameObject go_IceMat;
     // Start is called before the first frame update
     void Start()
     {
+        stageNum = meltMaterials.Length;
+        health = 0;
         isSink = false;
-
-        go_Ice = transform.Find("Ice").gameObject;
-        Debug.Log("ice" + go_Ice);
+        go_IceMat = transform.Find("Ice/pasted__group7/pasted__pasted__pCylinder2/polySurface11").gameObject; 
+       
         animation = GetComponent<Animation>();
         
     }
@@ -30,12 +32,12 @@ public class Ice : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Knockback"))
         {
+            Debug.Log("HIT");
             if (!collision.gameObject.GetComponent<Snowball>().Hit)
             {
                 Crack();
                 collision.gameObject.GetComponent<Snowball>().Hit = true;
             }
-            
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -64,22 +66,19 @@ public class Ice : MonoBehaviour
     }
     public void Crack()
     {
-        health--;
-
-        switch (health)
+        if (health == stageNum)
         {
-            case 2:
-                GetComponentInChildren<MeshRenderer>().material = halfCrack;
-                Invoke("Crack", 1);
-                break;
-            case 1:
-                GetComponentInChildren<MeshRenderer>().material = fullCrack;
-                Invoke("Crack", 1);
-                break;
-            case 0:
-                DestroyGameObject();
-                break;
+            DestroyGameObject();
+            return;
         }
+            
+        
+        go_IceMat.GetComponent<MeshRenderer>().material = meltMaterials[health];
+        health++;
+        Invoke("Crack", 1);
+     
+
+
 
 
     }
@@ -113,7 +112,7 @@ public class Ice : MonoBehaviour
     {
         
         animation.Play("IceMelting");
-        Invoke("DestroyGameObject", 2);
+        Invoke("DestroyGameObject", 3.5f);
         
     }
 

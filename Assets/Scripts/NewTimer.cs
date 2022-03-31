@@ -9,6 +9,7 @@ public class NewTimer : MonoBehaviour
     private bool timerRunning=false;
     private bool timerStart;
     private float timerCompletionRate;
+    private bool reverseTimer=false;
 
     public float MaxTime
 	{
@@ -66,6 +67,18 @@ public class NewTimer : MonoBehaviour
 		}
 	}
 
+    public bool ReverseTimer
+	{
+        get
+		{
+            return reverseTimer;
+		}
+        set
+		{
+            reverseTimer = value;
+		}
+	}
+
     void Start()
     {
         
@@ -77,16 +90,31 @@ public class NewTimer : MonoBehaviour
         if(timerStart)
 		{
             timerRunning = true;
-            currentTime += Time.deltaTime;
-            timerCompletionRate = Mathf.Clamp01(currentTime / maxTime);
-            if(currentTime>=maxTime)
+            if (reverseTimer==false)
 			{
-                timerRunning = false;
-                timerStart = false;
-                currentTime = 0;
-                timerCompletionRate = 0;
-			}
-		}
+                currentTime += Time.deltaTime;
+                if (currentTime >= maxTime)
+                {
+                    timerRunning = false;
+                    timerStart = false;
+                    currentTime = 0;
+                    timerCompletionRate = 0;
+                }
+            }
+            else if (reverseTimer == true)
+            {
+                currentTime -= Time.deltaTime;
+                if(currentTime<=0)
+				{
+                    timerRunning = false;
+                    timerStart = false;
+                    currentTime = 0;
+                    timerCompletionRate = 0;
+                }
+            }
+            timerCompletionRate = Mathf.Clamp01(currentTime / maxTime);
+        }
+        
     }
 
     public void ResetTimer()

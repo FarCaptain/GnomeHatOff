@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 using System.IO.Ports;
 using System.Management;
 using System;
@@ -24,6 +25,8 @@ public class PortManager : MonoBehaviour
 
     public GameObject arduino;
 
+    public VisualEffect poof;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +37,7 @@ public class PortManager : MonoBehaviour
 
         getConnectedPorts();
 
-        gameController = GetComponent<MainGameController>();
+        gameController = GameObject.Find("GameManager").GetComponent<MainGameController>();
         gameController.Arduino = arduino;
         gameController.COM.Clear();
     }
@@ -94,7 +97,6 @@ public class PortManager : MonoBehaviour
     void distributeCharacter(int temp)
     {
         // TODO. uses the respawn effect
-        Vector3 pos = new Vector3(0f, 1f, 0f);
         GameObject gnomePrefab;
 
         switch(temp)
@@ -112,9 +114,15 @@ public class PortManager : MonoBehaviour
                 gnomePrefab = gnomeBlue;
                 break;
         }
-        GameObject gnome = Instantiate(gnomePrefab, pos, Quaternion.identity);
-        gameController.players.Add(gnome);
+        Vector3 pos = gnomePrefab.transform.position;
+        poof.transform.position = pos;
+        poof.Play();
+        gnomePrefab.SetActive(true);
+
+        gameController.players.Add(gnomePrefab);
         gameController.RegisterPlayerController(gameController.players.Count - 1);
+
+        //Destroy(poofEffect);
 
     }
 

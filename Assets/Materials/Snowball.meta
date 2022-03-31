@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< refs/remotes/origin/main
 guid: d2477114755371a4cbdafdf8d281d873
+=======
+guid: c75e92ee8e015d746bd1eade4502e914
+>>>>>>> Snowball and textures
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

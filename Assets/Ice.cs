@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Ice : MonoBehaviour
 {
-    private int health = 3;
+    private int health;
 
     [SerializeField]
-    private Material halfCrack;
-    [SerializeField]
-    private Material fullCrack;
+    private Material[] meltMaterials;
+    int stageNum;
 
     bool isSink;
     Animation animation;
@@ -20,6 +19,8 @@ public class Ice : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stageNum = meltMaterials.Length;
+        health = 0;
         isSink = false;
         go_IceMat = transform.Find("Ice/pasted__group7/pasted__pasted__pCylinder2/polySurface11").gameObject; 
        
@@ -37,7 +38,6 @@ public class Ice : MonoBehaviour
                 Crack();
                 collision.gameObject.GetComponent<Snowball>().Hit = true;
             }
-            
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -66,22 +66,19 @@ public class Ice : MonoBehaviour
     }
     public void Crack()
     {
-        health--;
-
-        switch (health)
+        if (health == stageNum)
         {
-            case 2:
-                GetComponentInChildren<MeshRenderer>().material = halfCrack;
-                Invoke("Crack", 1);
-                break;
-            case 1:
-                GetComponentInChildren<MeshRenderer>().material = fullCrack;
-                Invoke("Crack", 1);
-                break;
-            case 0:
-                DestroyGameObject();
-                break;
+            DestroyGameObject();
+            return;
         }
+            
+        
+        go_IceMat.GetComponent<MeshRenderer>().material = meltMaterials[health];
+        health++;
+        Invoke("Crack", 1);
+     
+
+
 
 
     }

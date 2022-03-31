@@ -25,18 +25,27 @@ public class Ice : MonoBehaviour
         animation = GetComponent<Animation>();
         
     }
-   
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag.Equals("Knockback"))
+        {
+            if (!collision.gameObject.GetComponent<Snowball>().Hit)
+            {
+                Crack();
+                collision.gameObject.GetComponent<Snowball>().Hit = true;
+            }
+            
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Equals("Damage"))
-        {
-            Crack();
-        }
+       
         if (other.tag.Equals("Player"))
         {
             if (go_Ice != null)
             {
-                Down();
+               // Down();
             }
           
         }
@@ -48,7 +57,7 @@ public class Ice : MonoBehaviour
         {
             if (go_Ice != null)
             {
-                Up();
+              //  Up();
             }
 
         }
@@ -61,16 +70,21 @@ public class Ice : MonoBehaviour
         {
             case 2:
                 GetComponentInChildren<MeshRenderer>().material = halfCrack;
+                Invoke("Crack", 1);
                 break;
             case 1:
                 GetComponentInChildren<MeshRenderer>().material = fullCrack;
+                Invoke("Crack", 1);
                 break;
             case 0:
                 DestroyGameObject();
                 break;
         }
+
+
     }
 
+   
     public void Melt()
     {
         float waitTime = Random.Range(0, 1.5f);

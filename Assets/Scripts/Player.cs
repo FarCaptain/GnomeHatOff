@@ -137,7 +137,16 @@ public class Player : MonoBehaviour
 
 		if (collision.gameObject.tag.Contains("Knockback"))
         {
-            StartCoroutine(KnockbackPlayer(collision.gameObject.GetComponentInParent<Hazard>()));
+            Hazard hazard = collision.gameObject.GetComponentInParent<Hazard>();
+            if (hazard != null)
+            {
+                StartCoroutine(KnockbackPlayer(hazard));
+            }
+            else
+            {
+                StartCoroutine(KnockbackPlayer(collision.gameObject.GetComponent<Hazard>()));
+            }
+           
         }
 
         if (collision.gameObject.tag.Contains("Damage") && stealHatIFrame.TimerStart == false)
@@ -204,6 +213,7 @@ public class Player : MonoBehaviour
         playerMovement.canMove = false;
         Vector3 directionOfKnockback = -transform.forward;
         directionOfKnockback = SelectRandomHorizontalDirection(directionOfKnockback);
+        Debug.Log("knockdirection:" + directionOfKnockback);
         playerRigidBody.AddForce(directionOfKnockback * hazardObject.knockBackForceAmount, ForceMode.Impulse);
         yield return new WaitForSecondsRealtime(hazardObject.KnockBackTime);
         playerMovement.canMove = true;

@@ -63,10 +63,7 @@ public class PlayerMovement : MonoBehaviour
         collisionTime = 1;
         testCollisionTime = 0;
         level = GameObject.Find("GameManager").GetComponent<MainGameController>().level;
-        if (level == 2)
-        {
-            rigidBody.constraints = RigidbodyConstraints.FreezePositionY;
-        }
+        
     }
 
 
@@ -97,7 +94,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 testCollisionTime = 0;
                 isDrop = true;
-                rigidBody.constraints = ~RigidbodyConstraints.FreezePositionY;
                 Respawn(3);
                 dropSpeed = 0.1f*speed + new Vector3(0, -200, 0);
             }
@@ -253,14 +249,12 @@ public class PlayerMovement : MonoBehaviour
 
     void RespawnPlayer()
     {
-        rigidBody.constraints = RigidbodyConstraints.FreezePositionY;
+       
         speed = Vector3.zero;
         transform.position = Vector3.zero;
         disabled = false;
         isDrop = false;
+        collisionTime = 1;
     }
-    //void ActivatePlayer()
-    //{
-    //    disabled = false;
-    //}
+   
 }

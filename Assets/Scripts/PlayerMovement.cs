@@ -52,9 +52,10 @@ public class PlayerMovement : MonoBehaviour
     public float collisionTime;
     float testCollisionTime;
     Vector3 dropSpeed;
-
+    public bool knocked;
     void Start()
     {
+        knocked = false;
         rigidBody = GetComponent<Rigidbody>();
         isDrop = false;
         collisionTime = 1;
@@ -62,13 +63,13 @@ public class PlayerMovement : MonoBehaviour
         level = GameObject.Find("GameManager").GetComponent<MainGameController>().level;
     }
 
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.tag.Equals("Ground")){
-    //        isDrop = false;
-    //        collisionTime += 0.01f;
-    //    }
-    //}
+
+
+
+    void Heal()
+    {
+        knocked = false;
+    }
 
     //private void OnTriggerExit(Collider other)
     //{
@@ -80,8 +81,12 @@ public class PlayerMovement : MonoBehaviour
     //}
     void FixedUpdate()
     {
-       
-       //isDrop = true;
+        if (knocked)
+        {
+            
+            return;
+         }
+        //isDrop = true;
         BoxCollider boxCollider = GetComponent<BoxCollider>();
         if (!isDrop)
         {

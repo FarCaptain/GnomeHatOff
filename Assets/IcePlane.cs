@@ -57,7 +57,8 @@ public class IcePlane : MonoBehaviour
                     int count = list.Count;
                     for (int i = 0; i < count; i++)
                     {
-                        list[i].Melt();
+                        if(list[i]!=null)
+                            list[i].Melt();
                     }
                     planeMap.RemoveAt(j);
                 }

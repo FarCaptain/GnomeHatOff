@@ -137,7 +137,16 @@ public class Player : MonoBehaviour
 
 		if (collision.gameObject.tag.Contains("Knockback"))
         {
-            StartCoroutine(KnockbackPlayer(collision.gameObject.GetComponentInParent<Hazard>()));
+            Hazard hazard = collision.gameObject.GetComponentInParent<Hazard>();
+            if (hazard != null)
+            {
+                StartCoroutine(KnockbackPlayer(hazard));
+            }
+            else
+            {
+                StartCoroutine(KnockbackPlayer(collision.gameObject.GetComponent<Hazard>()));
+            }
+           
         }
 
         if (collision.gameObject.tag.Contains("Damage") && stealHatIFrame.TimerStart == false)

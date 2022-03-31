@@ -10,7 +10,15 @@ public class ColliderCheck : MonoBehaviour
     {
         
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag.Equals("Knockback"))
+        {
+            if (!player.isDrop)
+                player.knocked = true;
 
+        }
+    }
     private void OnTriggerStay(Collider other)
     {
         if (other.tag.Equals("Ground"))

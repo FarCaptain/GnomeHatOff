@@ -70,16 +70,21 @@ public class Ice : MonoBehaviour
         {
             case 2:
                 GetComponentInChildren<MeshRenderer>().material = halfCrack;
+                Invoke("Crack", 1);
                 break;
             case 1:
                 GetComponentInChildren<MeshRenderer>().material = fullCrack;
+                Invoke("Crack", 1);
                 break;
             case 0:
                 DestroyGameObject();
                 break;
         }
+
+
     }
 
+   
     public void Melt()
     {
         float waitTime = Random.Range(0, 1.5f);

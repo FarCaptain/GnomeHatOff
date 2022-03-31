@@ -54,11 +54,9 @@ public class HatFade : MonoBehaviour
         if (hatFadeEnabled && transform.position.y < headTop)
         {
             FadeT(0.0f);
-     
+
             Destroy(gameObject, 2f);
             hatShadowDestroy();
-            Vector3 pos = transform.position;
-            pos.y = 0.15f;
 
             circleDust.Play();
             //AudioManager.PlayHatAudioClip(HatAudioStates.Destroyed, hatAudioSource);
@@ -94,7 +92,7 @@ public class HatFade : MonoBehaviour
 
     void ApplyTransparency()
     {
-        transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material.color *= new Color(1.0f, 1.0f, 1.0f, currentTransparency);
+        GetComponentInChildren<MeshRenderer>().material.color *= new Color(1.0f, 1.0f, 1.0f, currentTransparency);
     }
 
     public void SetT(float newT)

@@ -4781,10 +4781,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a372f0401919f843aa336f0eceb5000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 15
+  time: 5
   iceSize: 1.2
   size: {x: 3, y: 2}
   shrinkStage: 3
+  shrinkStopStage: 2
 --- !u!4 &608096858
 Transform:
   m_ObjectHideFlags: 0
@@ -15954,8 +15955,8 @@ MonoBehaviour:
   - {fileID: 30907586}
   - {fileID: 25009772}
   - {fileID: 370528440}
-  minSpawnTime: 3
-  maxSpawnTime: 5
+  minSpawnTime: 90
+  maxSpawnTime: 100
   minForce: 800
   maxForce: 2200
   go_Snowball: {fileID: 7025628681413301440, guid: d683a170dca18684f9ae7bd6ceaf1dd9,

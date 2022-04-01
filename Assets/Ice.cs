@@ -112,7 +112,7 @@ public class Ice : MonoBehaviour
     {
         
         animation.Play("IceMelting");
-        Invoke("DestroyGameObject", 3.5f);
+        Invoke("DestroyGameObject", 5f);
         
     }
 

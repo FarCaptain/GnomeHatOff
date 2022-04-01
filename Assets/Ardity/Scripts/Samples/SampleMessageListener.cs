@@ -29,8 +29,8 @@ public class SampleMessageListener : MonoBehaviour
         dataRaw = msg.Split(splitChar);
         if (dataRaw.Length == 3 && dataRaw[0] != " ")
         {
-            float xaxis = float.Parse(dataRaw[0]);
-            float zaxis = float.Parse(dataRaw[1]);
+            float xaxis = float.Parse(dataRaw[1]);
+            float zaxis = float.Parse(dataRaw[2]);
             string RFID = dataRaw[2];
             Game.RecieveSignal(Playerindex, xaxis, 0, zaxis, RFID);
             //Debug.Log("PlayerIndex: " + Playerindex + "/" +  xaxis + "," + zaxis);

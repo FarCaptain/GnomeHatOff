@@ -25,7 +25,7 @@ public class PortManager : MonoBehaviour
 
     public GameObject arduino;
 
-    public VisualEffect poof;
+    public VisualEffect poofPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +60,7 @@ public class PortManager : MonoBehaviour
 
                 char splitChar = ',';
                 string[] dataRaw = dataString.Split(splitChar);
-                if (dataRaw.Length == 2 && dataRaw[0] != "")
+                if (dataRaw.Length == 3 && dataRaw[0] != "")
                 {
                     gameController.COM.Add(streams[i].PortName);
 
@@ -68,7 +68,7 @@ public class PortManager : MonoBehaviour
                     //streams[i].Dispose();
                     //TODO. Needs the value from the arduino to identify the hat
                     // Now just doing it in some order
-                    distributeCharacter(i);
+                    distributeCharacter(dataRaw[0]);
 
                     streams.RemoveAt(i--);
                 }
@@ -94,20 +94,20 @@ public class PortManager : MonoBehaviour
         }
     }
 
-    void distributeCharacter(int temp)
+    void distributeCharacter(string temp)
     {
         // TODO. uses the respawn effect
         GameObject gnomePrefab;
 
         switch(temp)
         {
-            case 0:
+            case "G":
                 gnomePrefab = gnomePurple;
                 break;
-            case 1:
+            case "R":
                 gnomePrefab = gnomeRed;
                 break;
-            case 2:
+            case "Y":
                 gnomePrefab = gnomeYellow;
                 break;
             default:
@@ -115,8 +115,10 @@ public class PortManager : MonoBehaviour
                 break;
         }
         Vector3 pos = gnomePrefab.transform.position;
-        poof.transform.position = pos;
-        poof.Play();
+        VisualEffect poo = Instantiate(poofPrefab, pos, Quaternion.identity);
+        //poof.transform.position = pos;
+        //poof.Play();
+        poo.Play();
         gnomePrefab.SetActive(true);
 
         gameController.players.Add(gnomePrefab);

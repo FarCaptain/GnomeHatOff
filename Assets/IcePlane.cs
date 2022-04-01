@@ -15,6 +15,7 @@ public class IcePlane : MonoBehaviour
     float maxDis;
     float minDis;
     public int shrinkStage;
+    public int shrinkStopStage;
     int currentStage;
     float scale;
     SortedList<float, List<Ice>> planeMap;
@@ -25,6 +26,8 @@ public class IcePlane : MonoBehaviour
         ice = Resources.Load<GameObject>("Ice/Ice");
         planeMap = new SortedList<float, List<Ice>>();
         currentStage = 0;
+        shrinkStage += 1;
+        shrinkStopStage += 1;
         InitiatePlane();
     }
 
@@ -32,7 +35,7 @@ public class IcePlane : MonoBehaviour
     void Update()
     {
         t += Time.deltaTime;
-       
+
         if (t > time)
         {
             t = 0;
@@ -42,11 +45,11 @@ public class IcePlane : MonoBehaviour
 
     void Shrink()
     {
-        
+
         int length = planeMap.Count;
-        if (currentStage < shrinkStage -1 )
+        if (currentStage < shrinkStopStage - 1)
         {
-            
+
             float leftBoarder = maxDis - (currentStage + 1) * scale;
 
             for (int j = length - 1; j >= 0; j--)
@@ -57,7 +60,7 @@ public class IcePlane : MonoBehaviour
                     int count = list.Count;
                     for (int i = 0; i < count; i++)
                     {
-                        if(list[i]!=null)
+                        if (list[i] != null)
                             list[i].Melt();
                     }
                     planeMap.RemoveAt(j);
@@ -66,35 +69,35 @@ public class IcePlane : MonoBehaviour
                 {
                     break;
                 }
-                    
+
             }
         }
         currentStage++;
 
-        
+
     }
 
     void InitiatePlane()
     {
 #if automatically
         int check = 0;
-        for(float i =-size.x*0.797f*iceSize; i <= size.x * 0.797f * iceSize; i+=0.797f * iceSize)
+        for (float i = -size.x * 0.797f * iceSize + 0.797f * 0.5f * iceSize; i <= size.x * 0.797f * iceSize + 0.797f * 0.5f * iceSize; i += 0.797f * iceSize)
         {
             check++;
             float initPos;
             if (check % 2 == 0)
             {
-                initPos = -size.y* 2.763f * iceSize;
+                initPos = -size.y * 2.763f * iceSize + 2.763f * 0.5f * iceSize;
             }
             else
             {
-                initPos = -size.y* 2.763f * iceSize + 1.379f * iceSize;
+                initPos = -size.y * 2.763f * iceSize + 2.763f * 0.5f * iceSize + 1.379f * iceSize;
             }
-            for (float j = initPos; j <= size.y* 2.763f * iceSize; j+=2.763f * iceSize)
+            for (float j = initPos; j <= size.y * 2.763f * iceSize - 2.763f * 0.5f * iceSize; j += 2.763f * iceSize)
             {
-                GameObject go_ice = Instantiate(ice, new Vector3(j,0,i), Quaternion
+                GameObject go_ice = Instantiate(ice, new Vector3(j, 0, i), Quaternion
                     .identity, transform);
-                go_ice.transform.localScale*=iceSize;
+                go_ice.transform.localScale *= iceSize;
                 float distance = Vector3.Distance(go_ice.transform.position, transform.position);
                 if (planeMap.ContainsKey(distance))
                 {
@@ -113,7 +116,7 @@ public class IcePlane : MonoBehaviour
         maxDis = planeMap.Keys[length - 1];
         minDis = planeMap.Keys[0];
         scale = (maxDis - minDis) / shrinkStage;
-        
+
 #else
         iceList = GameObject.FindGameObjectsWithTag("Ground");
 #endif

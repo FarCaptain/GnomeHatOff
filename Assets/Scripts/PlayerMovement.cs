@@ -39,43 +39,81 @@ public class PlayerMovement : MonoBehaviour
 
     public float xval;
 
-    public GameObject SealSocket;
+
 
     Vector3 initPos = new Vector3(0,0,0);       // new default position for controller when calibrated
     
     [HideInInspector]
     public bool canMove = true;
-
-    bool isDrop;
+    int level;
+    //for map2
+    public bool isDrop;
     Vector3 speed;
+    public float collisionTime;
+    float testCollisionTime;
+    Vector3 dropSpeed;
+    public bool knocked;
+    bool disabled;
     void Start()
     {
+        disabled = false;
+        knocked = false;
         rigidBody = GetComponent<Rigidbody>();
         isDrop = false;
-
-
+        collisionTime = 1;
+        testCollisionTime = 0;
+        level = GameObject.Find("GameManager").GetComponent<MainGameController>().level;
         
     }
 
+
+
+
+    void Heal()
+    {
+        knocked = false;
+    }
+
+
     void FixedUpdate()
     {
+       
+        if(!isDrop && disabled)
+        {
+            return;
+        }
+        BoxCollider boxCollider = GetComponent<BoxCollider>();
+        if (!isDrop)
+        {
+            testCollisionTime += Time.fixedDeltaTime;
+        }
+     
+        if (level==2&& testCollisionTime > 0.1f)
+        {
+            if (collisionTime < 0.05)
+            {
+                testCollisionTime = 0;
+                isDrop = true;
+                Respawn(3);
+                dropSpeed = 0.1f*speed + new Vector3(0, -200, 0);
+            }
+            else
+            {
+                testCollisionTime = 0;
+                collisionTime = 0;
+            }
+        }
 
         // used for calibration
 
         float vel_y = rigidBody.velocity.y;
+        
 
-        if (vel_y < -0.001&&!isDrop)
-        {
-            isDrop = true;
-           
-        }
         Vector3 move = Vector3.zero;
         if (playerIndex == 0)
         {
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
             {
-
-
                 float x = Input.GetAxis("Horizontal1");
                 float z = Input.GetAxis("Vertical1");
 
@@ -96,29 +134,28 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-
         if (isDrop)
         {
-            speed.y = -200f;
+            
+            speed = dropSpeed;
+
         }
-        
+
         if (speed != Vector3.zero && canMove == true)
         {
-            if(speed!=new Vector3(0,-200,0))
+            if (speed.y != -200)
             {
                 gameObject.transform.forward = new Vector3(speed.x, 0, speed.z);
-               
+
             }
-            
+
             Move(speed * Time.deltaTime);
             drawRunDust();
         }
-
-
-
-        // keeps object from flying off (might be removable)
-        Vector3 pos = gameObject.transform.position;
-      
+        else if (speed.x == 0 && speed.z == 0 && canSlide == false && canMove == true)
+        {
+            rigidBody.velocity = Vector3.zero;
+        }
     }
 
     private void Move(Vector3 motion)
@@ -137,9 +174,10 @@ public class PlayerMovement : MonoBehaviour
         }
         float xval = xaxis - initPos.x;
         float yval = yaxis - initPos.y;
-        float zval = zaxis - initPos.y;
+        float zval = zaxis - initPos.z;
 
         Vector3 move = new Vector3(xval, 0f, zval);
+        Debug.Log("DebugLog - ReceivingVector: " + move);
 
         float currentMaxSpeed = maxSpeed;
         if (maxSpeed - hatBurden >= minSpeed)
@@ -152,27 +190,27 @@ public class PlayerMovement : MonoBehaviour
         else if (Mathf.Abs(move.x) >= MaxthresholdLR)
             speed_x = currentMaxSpeed;
         else
-            speed_x = map(Mathf.Abs(move.x), MinthresholdLR, MaxthresholdLR, minSpeed, currentMaxSpeed);
+            speed_x = map(Mathf.Abs(move.x), MaxthresholdLR);
 
         if (Mathf.Abs(move.z) <= MinthresholdFB)
             speed_z = 0f;
         else if (Mathf.Abs(move.z) >= MaxthresholdFB)
             speed_z = currentMaxSpeed;
         else
-            speed_z = map(Mathf.Abs(move.z), MinthresholdFB, MaxthresholdFB, minSpeed, currentMaxSpeed);
+            speed_z = map(Mathf.Abs(move.z), MaxthresholdFB);
 
         // assigns direction
         speed_x *= Mathf.Sign(move.x);
         speed_z *= Mathf.Sign(move.z);
         speed = new Vector3(speed_x, 0f, speed_z);
-        //Debug.Log(speed);
+        //Debug.Log("DebugLog - Speed: " + speed);
 
-
-      
-       // Vector3 pos = gameObject.transform.position;
+        // Vector3 pos = gameObject.transform.position;
         //Debug.Log(pos);
-       // gameObject.transform.position = new Vector3(pos.x, 0.1f, pos.z);
+        // gameObject.transform.position = new Vector3(pos.x, 0.1f, pos.z);
     }
+
+
 
     private void drawRunDust()
     {
@@ -182,10 +220,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //map changes the range of a1,a2 to b1,b1
-    private float map(float s, float a1, float a2, float b1, float b2)
+    //map arduino values between our thresholds to our maxSpeed
+    private float map(float arduinoInput, float threshold)
     {
-        return (s - a1) * (b2 - b1) / (a2 - a1) + b1;
+        float factor = maxSpeed / threshold;
+        float mapEquation = arduinoInput * factor;
+        //Debug.Log("map value: " + mapVal);
+        return mapEquation;
     }
 
     public void SetOffset(Vector3 i_offset)
@@ -199,4 +240,21 @@ public class PlayerMovement : MonoBehaviour
         //GetComponentInChildren<HatCollecter>().hatdrop = value;
     }
 
+    //the player will be respawned in time seconds
+    public void Respawn(float time)
+    {
+        disabled = true;
+        Invoke("RespawnPlayer", time);
+    }
+
+    void RespawnPlayer()
+    {
+       
+        speed = Vector3.zero;
+        transform.position = Vector3.zero;
+        disabled = false;
+        isDrop = false;
+        collisionTime = 1;
+    }
+   
 }

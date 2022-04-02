@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     public bool canMove = true;
     int level;
     //for map2
+    public GameObject SealSocket;
     public bool isDrop;
     Vector3 speed;
     public float collisionTime;

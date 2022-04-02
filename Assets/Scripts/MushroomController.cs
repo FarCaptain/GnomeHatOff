@@ -16,6 +16,7 @@ public class MushroomController : MonoBehaviour
 
     [SerializeField] public Rigidbody rb;
     [SerializeField] Animator mushroomManAnimator;
+    [SerializeField] float magnetizationSpeed;
 
     public Vector3 dropSpeed;
     public float closeDistance;
@@ -36,6 +37,7 @@ public class MushroomController : MonoBehaviour
 
     public bool hatFadeEnabled = true;
     private AudioSource mushroomManAudioSource;
+    public GameObject playerHit;
     void Start()
     {
         bornTime = 0;
@@ -98,7 +100,13 @@ public class MushroomController : MonoBehaviour
 		{
             Destroy(gameObject);
         }
+        else if (HasAnimationStopped(mushroomManAnimator, "Anim_MushroomMan_Grabbed") == false && isGrabbed == true)
+		{
+            print(playerHit.name);
+            rb.isKinematic = true;
+            transform.position = Vector3.MoveTowards(transform.position, playerHit.transform.position, magnetizationSpeed*Time.deltaTime);
 
+        }
     }
 
     bool HasAnimationStopped(Animator anim, string stateName)

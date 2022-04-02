@@ -15,10 +15,12 @@ public class ComportUI : MonoBehaviour
     public TMP_InputField comport3;
     public void setcomports()
     {
-        MG.COM = new string[3];
-        MG.COM[0] = comport1.text;
-        MG.COM[1] = comport2.text;
-        MG.COM[2] = comport3.text;
+        //MG.COM = new string[3];
+        MG.COM.Clear();
+        MG.COM.Add(comport1.text);
+        MG.COM.Add(comport2.text);
+        MG.COM.Add(comport3.text);
+
         Canvas.SetActive(false);
         MG.gameObject.SetActive(true);
         FindObjectOfType<Timer>().timerPaused = false;

@@ -61,7 +61,7 @@ public class ScoreSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
 	{
-        PlayerAmount = gameManager.COM.Length;
+        PlayerAmount = gameManager.COM.Count;
         for (int id = 0; id < 2; id++)
 			for (int i = 0; i < fires[id].transform.childCount; i++)
 				initFireScale[id, i] = fires[id].transform.GetChild(i).transform.localScale;
@@ -286,7 +286,6 @@ public class ScoreSystem : MonoBehaviour
                 #endregion
 
 
-
                 //if (player.name == "Gnome_0")
                 //{
                 //    playerScore0 += bonusPoints;
@@ -314,9 +313,11 @@ public class ScoreSystem : MonoBehaviour
 
                 while (hatcollecter.hatStack.Count != 0)
                 {
-                    Destroy(hatcollecter.hatStack.Pop());
+                    // the Procedural animation here
+                    GameObject hat = hatcollecter.hatStack.Pop();
+                    hat.GetComponent<HatFade>().RegisterDropAnimation(transform.position);
+                    //Destroy(hat);
                 }
-                
 
                 //reset the collision on the gnome
                 if (hatcollecter.hatTop.transform.position.y != hatcollecter.initHatHeight)

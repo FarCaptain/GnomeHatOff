@@ -141,7 +141,7 @@ public class SealBehavior : MonoBehaviour
         {
             collected = true;
             NavAgent.enabled = false;
-            //Sealsocket = other.gameObject.GetComponent<PlayerMovement>().SealSocket;
+            Sealsocket = other.gameObject.GetComponent<PlayerMovement>().SealSocket;
             gameObject.transform.parent = other.gameObject.transform;
             gameObject.transform.localPosition = Sealsocket.transform.localPosition;
         }

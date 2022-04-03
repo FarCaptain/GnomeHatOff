@@ -55,6 +55,9 @@ public class PlayerMovement : MonoBehaviour
     float testCollisionTime;
     Vector3 dropSpeed;
     public bool knocked;
+
+    [SerializeField]
+    Transform respawnPos;
     bool disabled;
     void Start()
     {
@@ -257,7 +260,7 @@ public class PlayerMovement : MonoBehaviour
     {
        
         speed = Vector3.zero;
-        transform.position = Vector3.zero;
+        transform.position = respawnPos.transform.position;
         disabled = false;
         isDrop = false;
         collisionTime = 1;

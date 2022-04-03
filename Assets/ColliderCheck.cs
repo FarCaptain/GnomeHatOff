@@ -21,7 +21,7 @@ public class ColliderCheck : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag.Equals("Ground")||other.tag.Equals("Knockback"))
+        if (other.tag.Equals("Ground")||other.tag.Equals("Knockback") || other.tag.Equals("Player") || other.tag.Equals("Seal"))
         {
             player.isDrop = false;
             player.collisionTime += 0.01f;

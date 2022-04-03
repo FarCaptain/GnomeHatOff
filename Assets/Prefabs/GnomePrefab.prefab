@@ -413,6 +413,9 @@ MonoBehaviour:
   keyboardSpeed: 210
   xval: 0
   canMove: 1
+  isDrop: 0
+  collisionTime: 0
+  knocked: 0
 --- !u!114 &7712702464142486567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,7 +636,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6015d71073d0de245b086b71e225a1d6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a376e640d3665e1409e0920c595b7cc4, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1

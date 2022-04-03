@@ -39,6 +39,11 @@ public class PlayerMovement : MonoBehaviour
 
     public float xval;
 
+    [Header("Auto Jump Variables")]
+    [SerializeField] float jumpForce;
+    [SerializeField] float fallForce;
+    [SerializeField] bool isOnGround = true;
+
 
 
     Vector3 initPos = new Vector3(0,0,0);       // new default position for controller when calibrated
@@ -62,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         isDrop = false;
         collisionTime = 1;
         testCollisionTime = 0;
-        level = GameObject.Find("GameManager").GetComponent<MainGameController>().level;
+        //level = GameObject.Find("GameManager").GetComponent<MainGameController>().level;
         
     }
 
@@ -75,9 +80,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    void FixedUpdate()
+	void FixedUpdate()
     {
-       
+        
         if(!isDrop && disabled)
         {
             return;

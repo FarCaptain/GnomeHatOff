@@ -12,7 +12,7 @@ public class UIController : MonoBehaviour
     }
     public void StartGame()
     {
-        SceneManager.LoadScene("Map1Level Layout");
+        SceneManager.LoadScene("Map1Level2 Layout");
 
     }
 }

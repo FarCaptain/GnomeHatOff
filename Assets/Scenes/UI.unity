@@ -247,7 +247,7 @@ Animation:
   m_GameObject: {fileID: 45040331}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: fdf3dfc1b93863f4bb20094fd328a6d4, type: 2}
   m_Animations:
   - {fileID: 0}
   m_WrapMode: 0
@@ -1728,9 +1728,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5c5ae6a7f054a2743bd0289456de5806, type: 2}
-  m_sharedMaterial: {fileID: -4023716096966422391, guid: 5c5ae6a7f054a2743bd0289456de5806,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2093,14 +2092,14 @@ RectTransform:
   m_GameObject: {fileID: 937790703}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.8333626, y: 0.68901026, z: 0.68901026}
+  m_LocalScale: {x: 1.5691017, y: 0.58969635, z: 0.58969635}
   m_Children: []
   m_Father: {fileID: 180568740}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -3.1}
+  m_AnchoredPosition: {x: 0, y: -2.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &937790705
@@ -2124,9 +2123,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Options
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5c5ae6a7f054a2743bd0289456de5806, type: 2}
-  m_sharedMaterial: {fileID: -4023716096966422391, guid: 5c5ae6a7f054a2743bd0289456de5806,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3554,14 +3552,14 @@ RectTransform:
   m_GameObject: {fileID: 1800932259}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.491752, y: 0.94, z: 0.94}
+  m_LocalScale: {x: 1.9514257, y: 0.68461347, z: 0.68461347}
   m_Children: []
   m_Father: {fileID: 427658310}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -3.7}
+  m_AnchoredPosition: {x: 0, y: -3}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1800932261
@@ -3587,9 +3585,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5c5ae6a7f054a2743bd0289456de5806, type: 2}
-  m_sharedMaterial: {fileID: -4023716096966422391, guid: 5c5ae6a7f054a2743bd0289456de5806,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3965,14 +3962,14 @@ RectTransform:
   m_GameObject: {fileID: 1903544394}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.895607, y: 0.89764, z: 0.89764}
+  m_LocalScale: {x: 2.1727643, y: 0.7091356, z: 0.7091356}
   m_Children: []
   m_Father: {fileID: 558236423}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -3.83}
+  m_AnchoredPosition: {x: 0, y: -2.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1903544396
@@ -3996,9 +3993,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Start
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5c5ae6a7f054a2743bd0289456de5806, type: 2}
-  m_sharedMaterial: {fileID: -4023716096966422391, guid: 5c5ae6a7f054a2743bd0289456de5806,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

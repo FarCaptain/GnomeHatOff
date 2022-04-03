@@ -88,6 +88,7 @@ public class SealBehavior : MonoBehaviour
         }
         else if(collected && PowerupTimer<=0)
         {
+            gameObject.transform.GetComponentInParent<PlayerMovement>().hasSeal = false;
             gameObject.GetComponent<BoxCollider>().enabled = true;
             gameObject.transform.GetComponentInParent<PlayerMovement>().canMove = false;
             if (!ReachedIsland)
@@ -144,7 +145,8 @@ public class SealBehavior : MonoBehaviour
         if (other.gameObject.tag == "Player" && CirclingTimer <= 0)
         {
             collected = true;
-            NavAgent.enabled = false;
+            other.gameObject.GetComponent<PlayerMovement>().hasSeal = true;
+           NavAgent.enabled = false;
             gameObject.GetComponent<BoxCollider>().enabled = false;
             Sealsocket = other.gameObject.GetComponent<PlayerMovement>().SealSocket;
             gameObject.transform.parent = other.gameObject.transform;

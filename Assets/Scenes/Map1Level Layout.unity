@@ -22606,7 +22606,7 @@ PrefabInstance:
     - target: {fileID: 2568850845096396127, guid: 0af16847889ebed4da19d6838573a8f5,
         type: 3}
       propertyPath: COM.Array.data[1]
-      value: COM12
+      value: COM21
       objectReference: {fileID: 0}
     - target: {fileID: 2568850845096396127, guid: 0af16847889ebed4da19d6838573a8f5,
         type: 3}
@@ -36078,6 +36078,11 @@ PrefabInstance:
         type: 3}
       propertyPath: maxSpeed
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835091648898173498, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: constantSpeed
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4835091648898173498, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}

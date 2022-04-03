@@ -16,6 +16,7 @@ TagManager:
   - Ground
   - Undefined
   - PlayerCollider
+  - Seal
   layers:
   - Default
   - TransparentFX

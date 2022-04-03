@@ -43,7 +43,10 @@ public class SealBehavior : MonoBehaviour
                 {
                     destinationset = true;
                     Transform Destination = points[counter].transform;
-                    NavAgent.destination = Destination.position;
+                    NavAgent.ResetPath();
+                    Debug.Log(NavAgent.SetDestination(Destination.position));
+
+                    //NavAgent.destination = ;
                     if (counter >= points.Length - 1)
                     {
                         counter = 1;
@@ -85,6 +88,7 @@ public class SealBehavior : MonoBehaviour
         }
         else if(collected && PowerupTimer<=0)
         {
+            gameObject.GetComponent<BoxCollider>().enabled = true;
             gameObject.transform.GetComponentInParent<PlayerMovement>().canMove = false;
             if (!ReachedIsland)
             {
@@ -141,6 +145,7 @@ public class SealBehavior : MonoBehaviour
         {
             collected = true;
             NavAgent.enabled = false;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
             Sealsocket = other.gameObject.GetComponent<PlayerMovement>().SealSocket;
             gameObject.transform.parent = other.gameObject.transform;
             gameObject.transform.localPosition = Sealsocket.transform.localPosition;

@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float slideFactor;
     public float maxSpeed;
-    public float minSpeed;
+    public float constantSpeed = 100;
     [Header("The decrease of max speed each hat gives you")]
     public float hatBurden = 0;
     public float speedDecreaseEachHat;
@@ -45,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     
     [HideInInspector]
     public bool canMove = true;
+    public bool isBumping = false;
     int level;
     //for map2
     public bool isDrop;
@@ -152,7 +153,8 @@ public class PlayerMovement : MonoBehaviour
             Move(speed * Time.deltaTime);
             drawRunDust();
         }
-        else if (speed.x == 0 && speed.z == 0 && canSlide == false && canMove == true)
+
+        if (speed.x == 0 && speed.z == 0 && canSlide == false && canMove == true)
         {
             rigidBody.velocity = Vector3.zero;
         }
@@ -176,11 +178,12 @@ public class PlayerMovement : MonoBehaviour
         float yval = yaxis - initPos.y;
         float zval = zaxis - initPos.z;
 
-        Vector3 move = new Vector3(xval, 0f, zval);
+        //inverted inputs to accomodate physical controller position
+        Vector3 move = new Vector3(zval, 0f, xval * -1);
         Debug.Log("DebugLog - ReceivingVector: " + move);
 
         float currentMaxSpeed = maxSpeed;
-        if (maxSpeed - hatBurden >= minSpeed)
+        if (maxSpeed - hatBurden >= 0)
             currentMaxSpeed = maxSpeed - hatBurden;
 
         // adjusts speed according to our thresholds for an acceleration effect
@@ -190,14 +193,16 @@ public class PlayerMovement : MonoBehaviour
         else if (Mathf.Abs(move.x) >= MaxthresholdLR)
             speed_x = currentMaxSpeed;
         else
-            speed_x = map(Mathf.Abs(move.x), MaxthresholdLR);
+            speed_x = constantSpeed;
+        //speed_x = map(Mathf.Abs(move.x), MaxthresholdLR);
 
         if (Mathf.Abs(move.z) <= MinthresholdFB)
             speed_z = 0f;
         else if (Mathf.Abs(move.z) >= MaxthresholdFB)
             speed_z = currentMaxSpeed;
         else
-            speed_z = map(Mathf.Abs(move.z), MaxthresholdFB);
+            speed_z = constantSpeed;
+            //speed_z = map(Mathf.Abs(move.z), MaxthresholdFB);
 
         // assigns direction
         speed_x *= Mathf.Sign(move.x);

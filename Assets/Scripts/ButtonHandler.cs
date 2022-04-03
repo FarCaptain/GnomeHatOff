@@ -17,6 +17,7 @@ public class ButtonHandler : MonoBehaviour
 
     NewTimer selectionTimer;
     public List<UISelector> UISelectors = new List<UISelector>();
+    private bool optionSelected=false;
     void Start()
     {
         selectionTimer = gameObject.AddComponent<NewTimer>();
@@ -49,9 +50,15 @@ public class ButtonHandler : MonoBehaviour
             selectionConfirmation.fillAmount = selectionTimer.TimerCompletionRate;
         }
 
-        if(selectionConfirmation.fillAmount>=1)
+        if(selectionConfirmation.fillAmount>=1 && !optionSelected)
 		{
             OnClicked.Invoke();
+            optionSelected = true;
+		}
+
+        if(selectionConfirmation.fillAmount<1)
+		{
+            optionSelected = false;
 		}
 
         

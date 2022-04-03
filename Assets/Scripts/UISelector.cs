@@ -19,7 +19,7 @@ public class UISelector : MonoBehaviour
         Physics.Raycast(playerRay, out hit, 100f);
         if (hit.collider!=null)
 		{
-            if(hit.collider.gameObject.GetComponent<ButtonHandler>())
+            if (hit.collider.gameObject.GetComponent<ButtonHandler>())
 			{
                 hit.collider.gameObject.GetComponent<ButtonHandler>().playerOver=true;
                 objectHit = hit.collider.gameObject;
@@ -31,6 +31,7 @@ public class UISelector : MonoBehaviour
         }
         else
 		{
+           
             if(objectHit!=null)
 			{
                 if (objectHit.GetComponent<ButtonHandler>().UISelectors.Contains(this))

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scenes/IceMapLayout.meta
 guid: 26cbab89ad26d6640bc987c0a23493d4
+=======
+guid: ff27b08e0d53cee4b859e4d196359cf4
+>>>>>>> 6b3cff1a3f2bf05d761e5a54fd10db1c3127ce92:Assets/Animations/LevelSelectionDisplay.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement ;
 using TMPro;
 
 public class UITestManager : MonoBehaviour
@@ -22,7 +23,13 @@ public class UITestManager : MonoBehaviour
 
     public void Button1Event()
 	{
-        confirmationText.text = buttonTexts[0].text;
+        StartCoroutine(WaitAndLoad(1));
+	}
+    IEnumerator WaitAndLoad(int sceneIndex)
+	{
+        confirmationText.text = "LEVEL SELECT LOADING";
+        yield return new WaitForSecondsRealtime(1f);
+        SceneManager.LoadScene(1);
 	}
     public void Button2Event()
     {

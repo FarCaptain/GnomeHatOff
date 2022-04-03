@@ -44,6 +44,8 @@ public class SealBehavior : MonoBehaviour
                     destinationset = true;
                     Transform Destination = points[counter].transform;
                     NavAgent.destination = Destination.position;
+                    Debug.Log("Actual " + Destination.position);
+                    Debug.Log("NavAgent" + NavAgent.destination );
                     if (counter >= points.Length - 1)
                     {
                         counter = 1;

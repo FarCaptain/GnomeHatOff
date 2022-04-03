@@ -44,6 +44,7 @@ public class ScoreSystem : MonoBehaviour
     #region more than 2 players
     static Dictionary<int, int> playerScores;
     private Dictionary<int, GameObject> go_playerScores;
+    public Transform[] scoreBoardPosition;
     public int PlayerAmount;
     public Transform scoreBoard;
     public MainGameController gameManager;
@@ -77,7 +78,7 @@ public class ScoreSystem : MonoBehaviour
         //Initiate scoreboard
         for(int i=0; i < PlayerAmount; i++)
         {
-            GameObject go_score = Instantiate(scorePrefab, scoreBoard);
+            GameObject go_score = Instantiate(scorePrefab, scoreBoardPosition[i]);
             Sprite s = Resources.Load<Sprite>("Texture/Score_" + i);
             go_score.GetComponent<Image>().sprite = s;
             go_playerScores.Add(i, go_score);

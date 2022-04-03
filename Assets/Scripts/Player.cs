@@ -86,11 +86,6 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	private void FixedUpdate()
-	{
-		
-	}
-
 	private void OnTriggerEnter(Collider other)
 	{
 		if(other.gameObject.tag=="Player")
@@ -128,7 +123,7 @@ public class Player : MonoBehaviour
 
         if(collision.gameObject.tag=="Player")
 		{
-            playerMovement.canMove = false;
+            //playerMovement.canMove = false;
             if(collision.gameObject.GetComponent<Player>().superBump == true)
 			{
                 playerRigidBody.AddForce(-transform.forward * bumpForce, ForceMode.Impulse);
@@ -174,7 +169,7 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	private void SetMaxHatsToStealBasedOnType(Hazard hazardObject)
+    private void SetMaxHatsToStealBasedOnType(Hazard hazardObject)
 	{
         switch(hazardObject.typeOfHatStealChosen)
 		{

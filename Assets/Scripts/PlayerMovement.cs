@@ -55,12 +55,13 @@ public class PlayerMovement : MonoBehaviour
     float testCollisionTime;
     Vector3 dropSpeed;
     public bool knocked;
-
+    public bool hasSeal;
     [SerializeField]
     Transform respawnPos;
     bool disabled;
     void Start()
     {
+        hasSeal = false;
         disabled = false;
         knocked = false;
         rigidBody = GetComponent<Rigidbody>();
@@ -88,14 +89,14 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         BoxCollider boxCollider = GetComponent<BoxCollider>();
-        if (!isDrop)
+        if (!isDrop && !hasSeal)
         {
             testCollisionTime += Time.fixedDeltaTime;
         }
      
         if (level==2&& testCollisionTime > 0.1f)
         {
-            if (collisionTime < 0.05)
+            if (collisionTime < 0.05 && !hasSeal)
             {
                 testCollisionTime = 0;
                 isDrop = true;

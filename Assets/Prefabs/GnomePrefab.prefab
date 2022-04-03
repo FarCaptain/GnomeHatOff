@@ -397,13 +397,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canSlide: 0
-  MinthresholdFB: 2
-  MinthresholdLR: 2
-  MaxthresholdFB: 4
-  MaxthresholdLR: 4
+  MinthresholdFB: 1
+  MinthresholdLR: 1
+  MaxthresholdFB: 2
+  MaxthresholdLR: 2
   slideFactor: 0
-  maxSpeed: 500
-  minSpeed: 0
+  maxSpeed: 200
+  constantSpeed: 100
   hatBurden: 0
   speedDecreaseEachHat: 0
   playerIndex: 0
@@ -413,6 +413,7 @@ MonoBehaviour:
   keyboardSpeed: 210
   xval: 0
   canMove: 1
+  isBumping: 0
   isDrop: 0
   collisionTime: 0
   knocked: 0

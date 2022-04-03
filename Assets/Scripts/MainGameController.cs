@@ -59,7 +59,7 @@ public class MainGameController : MonoBehaviour
         arduino.GetComponentInChildren<SampleMessageListener>().Game = this;
     }
 
-    public void RecieveSignal(int playerIndex, float x, float y, float z, string RFID)
+    public void RecieveSignal(int playerIndex, float x, float y, float z)
     {
         //        Debug.Log(playerIndex + x + z + RFID);
         switch (status)
@@ -69,11 +69,6 @@ public class MainGameController : MonoBehaviour
                 break;
             case GameStatus.Playing:
                 playerMovements[playerIndex].Move(x, y, z);
-                if (RFID == "False")
-                {
-                    playerMovements[playerIndex].jumpset(true);
-                }
-
                 break;
         }
     }

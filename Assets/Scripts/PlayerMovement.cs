@@ -154,7 +154,12 @@ public class PlayerMovement : MonoBehaviour
                 gameObject.transform.forward = new Vector3(speed.x, 0, speed.z);
 
             }
-
+            
+            if (Mathf.Abs(speed.x) > constantSpeed && Mathf.Abs(speed.z) > constantSpeed)
+            {
+                speed.x = maxSpeed * 0.75f * Mathf.Sign(speed.x);
+                speed.z = maxSpeed * 0.75f * Mathf.Sign(speed.z);
+            }
             Move(speed * Time.deltaTime);
             drawRunDust();
         }

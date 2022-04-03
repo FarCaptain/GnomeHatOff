@@ -9,33 +9,27 @@ enum GameStatus
 }
 public class MainGameController : MonoBehaviour
 {
+    public int level;
     private GameStatus status = GameStatus.Ready;
     [HideInInspector]
-    public GameObject[] players;
+    public List<GameObject> players;
     private List<PlayerMovement> playerMovements = new List<PlayerMovement>();
     private int playerAmount;
     public GameObject Arduino;
-    public string[] COM;
+    public List<string> COM;
     GameObject[] playerfetch;
 
     // Start is called before the first frame update
 
     private void Awake()
     {
+        players.Clear();
         playerfetch = GameObject.FindGameObjectsWithTag("Player");
-        players = new GameObject[playerfetch.Length];
         Debug.Log("PlayerCount " + playerfetch.Length);
         for (int i = 0; i < playerfetch.Length; i++)
         {
-            players[i] = playerfetch[i];
-            players[i].GetComponent<PlayerMovement>().playerIndex = i;
-            playerMovements.Add(players[i].GetComponent<PlayerMovement>());
-            GameObject arduino =  Instantiate(Arduino, players[i].gameObject.transform);
-            arduino.GetComponent<SerialController>().portName = COM[i];
-            arduino.GetComponent<SerialController>().enabled = true;
-            arduino.GetComponentInChildren<SampleMessageListener>().Playerindex = i;
-            arduino.GetComponentInChildren<SampleMessageListener>().Game = this;
-         
+            players.Add(playerfetch[i]);
+            RegisterPlayerController(i);
         }
     }
     void Start()
@@ -52,6 +46,17 @@ public class MainGameController : MonoBehaviour
             status = GameStatus.Playing;
 
         }
+    }
+
+    public void RegisterPlayerController(int playerIndex)
+    {
+        players[playerIndex].GetComponent<PlayerMovement>().playerIndex = playerIndex;
+        playerMovements.Add(players[playerIndex].GetComponent<PlayerMovement>());
+        GameObject arduino = Instantiate(Arduino, players[playerIndex].gameObject.transform);
+        arduino.GetComponent<SerialController>().portName = COM[playerIndex];
+        arduino.GetComponent<SerialController>().enabled = true;
+        arduino.GetComponentInChildren<SampleMessageListener>().Playerindex = playerIndex;
+        arduino.GetComponentInChildren<SampleMessageListener>().Game = this;
     }
 
     public void RecieveSignal(int playerIndex, float x, float y, float z, string RFID)

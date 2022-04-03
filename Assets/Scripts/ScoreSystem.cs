@@ -44,6 +44,7 @@ public class ScoreSystem : MonoBehaviour
     #region more than 2 players
     static Dictionary<int, int> playerScores;
     private Dictionary<int, GameObject> go_playerScores;
+    public Transform[] scoreBoardPosition;
     public int PlayerAmount;
     public Transform scoreBoard;
     public MainGameController gameManager;
@@ -61,7 +62,7 @@ public class ScoreSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
 	{
-        PlayerAmount = gameManager.COM.Length;
+        PlayerAmount = gameManager.COM.Count;
         for (int id = 0; id < 2; id++)
 			for (int i = 0; i < fires[id].transform.childCount; i++)
 				initFireScale[id, i] = fires[id].transform.GetChild(i).transform.localScale;
@@ -77,7 +78,7 @@ public class ScoreSystem : MonoBehaviour
         //Initiate scoreboard
         for(int i=0; i < PlayerAmount; i++)
         {
-            GameObject go_score = Instantiate(scorePrefab, scoreBoard);
+            GameObject go_score = Instantiate(scorePrefab, scoreBoardPosition[i]);
             Sprite s = Resources.Load<Sprite>("Texture/Score_" + i);
             go_score.GetComponent<Image>().sprite = s;
             go_playerScores.Add(i, go_score);
@@ -286,7 +287,6 @@ public class ScoreSystem : MonoBehaviour
                 #endregion
 
 
-
                 //if (player.name == "Gnome_0")
                 //{
                 //    playerScore0 += bonusPoints;
@@ -314,9 +314,11 @@ public class ScoreSystem : MonoBehaviour
 
                 while (hatcollecter.hatStack.Count != 0)
                 {
-                    Destroy(hatcollecter.hatStack.Pop());
+                    // the Procedural animation here
+                    GameObject hat = hatcollecter.hatStack.Pop();
+                    hat.GetComponent<HatFade>().RegisterDropAnimation(transform.position);
+                    //Destroy(hat);
                 }
-                
 
                 //reset the collision on the gnome
                 if (hatcollecter.hatTop.transform.position.y != hatcollecter.initHatHeight)

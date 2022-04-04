@@ -7,7 +7,7 @@ enum GameStatus
     Ready,
     Playing,
 }
-public class MainGameController : MonoBehaviour
+public class MainGameController : GenericSingleton<MainGameController>
 {
     public int level;
     private GameStatus status = GameStatus.Ready;

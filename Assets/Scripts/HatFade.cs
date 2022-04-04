@@ -7,17 +7,16 @@ public class HatFade : MonoBehaviour
     private AudioSource hatAudioSource;
     public float defaultTransparency = 1f;
     public float fadeDuration = 3f;
-    public GameObject player;
     public GameObject shadowPrefab;
 
     public ParticleSystem circleDust;
+    public float headTop;
 
     float currentTransparency;
     float toFadeTo;
     float tempDist;
     bool isFadingUp;
     bool isFadingDown;
-    float headTop;
 
     public bool hatFadeEnabled = true;
     public bool hatCollectedByPlayer = false;
@@ -35,19 +34,6 @@ public class HatFade : MonoBehaviour
         hatAudioSource = GetComponent<AudioSource>();
         currentTransparency = defaultTransparency;
         ApplyTransparency();
-
-        player = GameObject.Find("Gnome_0");
-
-        // TODO: Adjust for loop code
-        for (int i = 0; i < player.transform.childCount; i++)
-        {
-            // inefficient, way to do on resources?
-            if (player.transform.GetChild(i).name == "HeadTop")
-            {
-                headTop = player.transform.GetChild(i).transform.position.y;
-                break;
-            }
-        }
 
         pauseTimer = gameObject.AddComponent<NewTimer>();
         pauseTimer.TimerStart = false;

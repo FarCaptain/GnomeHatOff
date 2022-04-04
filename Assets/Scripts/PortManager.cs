@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 using System.IO.Ports;
+using InTheHand.Net.Sockets;
+using InTheHand.Net;
 using System.Management;
 using System;
 
@@ -14,7 +16,7 @@ public class PortManager : MonoBehaviour
 
     private List<string> arduinoPorts = new List<string>();
     private int baudrate = 9600;
-    private int maxPlayerCount = 4;
+    private int maxPlayerCount = 0;
 
     private NewTimer connectComTimer;
     public MainGameController gameController;
@@ -31,7 +33,8 @@ public class PortManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        BluetoothClient client = new BluetoothClient();
+
         ports = SerialPort.GetPortNames();
         connectComTimer = gameObject.AddComponent<NewTimer>();
         connectComTimer.MaxTime = 10f;
@@ -42,6 +45,16 @@ public class PortManager : MonoBehaviour
         gameController = GameObject.Find("GameManager").GetComponent<MainGameController>();
         gameController.Arduino = arduino;
         gameController.COM.Clear();
+
+        // all connected devices
+        var devices = client.DiscoverDevices();
+        foreach (BluetoothDeviceInfo device in devices)
+        {
+            if (device.DeviceName == "BLUEHAT" || device.DeviceName == "YELLOWHAT" || device.DeviceName == "GREENHAT" ||
+                (device.DeviceName == "HC-05" && device.DeviceAddress == BluetoothAddress.Parse("98D371FDB05D")))
+                maxPlayerCount++;
+            //print(item.DeviceName + "::" + blueAddress);
+        }
     }
 
     // Update is called once per frame

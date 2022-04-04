@@ -42,7 +42,8 @@ public class PortManager : MonoBehaviour
 
         getConnectedPorts();
 
-        gameController = GameObject.Find("GameManager").GetComponent<MainGameController>();
+        //gameController = GameObject.Find("GameManager").GetComponent<MainGameController>();
+        gameController = MainGameController.Instance;
         gameController.Arduino = arduino;
         gameController.COM.Clear();
 

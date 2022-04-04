@@ -14,6 +14,7 @@ public class PortManager : MonoBehaviour
 
     private List<string> arduinoPorts = new List<string>();
     private int baudrate = 9600;
+    private int maxPlayerCount = 4;
 
     private NewTimer connectComTimer;
     public MainGameController gameController;
@@ -30,6 +31,7 @@ public class PortManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         ports = SerialPort.GetPortNames();
         connectComTimer = gameObject.AddComponent<NewTimer>();
         connectComTimer.MaxTime = 10f;
@@ -48,36 +50,39 @@ public class PortManager : MonoBehaviour
         // TODO. dynamically update the connection state
         //if (connectComTimer.TimerStart)
         //{
-        for (int i = 0; i < streams.Count; i++)
+        if (gameController.COM.Count < maxPlayerCount)
         {
-            string dataString = "null received";
-            try
+            for (int i = 0; i < streams.Count; i++)
             {
-                dataString = streams[i].ReadLine();
-
-                if (dataString != "null received")
-                    print("");
-
-                char splitChar = ',';
-                string[] dataRaw = dataString.Split(splitChar);
-                if (dataRaw.Length == 3 && dataRaw[0] != "")
+                string dataString = "null received";
+                try
                 {
-                    gameController.COM.Add(streams[i].PortName);
+                    dataString = streams[i].ReadLine();
 
-                    //streams[i].Close();
-                    //streams[i].Dispose();
-                    //TODO. Needs the value from the arduino to identify the hat
-                    // Now just doing it in some order
-                    distributeCharacter(dataRaw[0]);
+                    if (dataString != "null received")
+                        print("");
 
-                    streams.RemoveAt(i--);
+                    char splitChar = ',';
+                    string[] dataRaw = dataString.Split(splitChar);
+                    if (dataRaw.Length == 3 && dataRaw[0] != "")
+                    {
+                        gameController.COM.Add(streams[i].PortName);
+
+                        //streams[i].Close();
+                        //streams[i].Dispose();
+                        //TODO. Needs the value from the arduino to identify the hat
+                        // Now just doing it in some order
+                        distributeCharacter(dataRaw[0]);
+
+                        streams.RemoveAt(i--);
+                    }
+
+                    // and then we need to give the COM numbers to Ardity
                 }
-
-                // and then we need to give the COM numbers to Ardity
-            }
-            catch (System.Exception ioe)
-            {
-                Debug.Log("IOException: " + ioe.Message);
+                catch (System.Exception ioe)
+                {
+                    Debug.Log("IOException: " + ioe.Message);
+                }
             }
         }
     }

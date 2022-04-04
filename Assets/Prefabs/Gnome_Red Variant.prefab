@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 3593979466627239089, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
       propertyPath: m_Name
-      value: Gnome_Red
+      value: Gnome_Red Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4227668271868745227, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
@@ -70,7 +70,7 @@ PrefabInstance:
     - target: {fileID: 4835091648898173498, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
       propertyPath: playerIndex
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5007022443929240464, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}

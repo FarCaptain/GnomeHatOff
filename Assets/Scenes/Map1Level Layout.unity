@@ -20450,11 +20450,6 @@ PrefabInstance:
       propertyPath: hatRushMessage
       value: 
       objectReference: {fileID: 711133231}
-    - target: {fileID: 20594180178891553, guid: dd5cbef4725c5454b95c1af72f2bbe40,
-        type: 3}
-      propertyPath: mushroomManPrefab
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 20594180178891566, guid: dd5cbef4725c5454b95c1af72f2bbe40,
         type: 3}
       propertyPath: m_RootOrder

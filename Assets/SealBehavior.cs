@@ -13,6 +13,7 @@ public class SealBehavior : MonoBehaviour
     int counter = 1;
     Transform[] points;
     Transform[] IceAnchors;
+    Transform des;
     public float CirclingTimer = 8;
     public float PowerupTimer = 8;
     bool destinationset = false;
@@ -22,6 +23,7 @@ public class SealBehavior : MonoBehaviour
     private bool ApproachIce = false;
     private bool ReachedIsland = false;
     private GameObject Sealsocket;
+    public GameObject fence;
     void Start()
     {
         points = CustomNavMesh.GetComponentsInChildren<Transform>();
@@ -89,8 +91,8 @@ public class SealBehavior : MonoBehaviour
         else if(collected && PowerupTimer<=0)
         {
             gameObject.transform.GetComponentInParent<PlayerMovement>().hasSeal = false;
-            gameObject.GetComponent<BoxCollider>().enabled = true;
-            gameObject.transform.GetComponentInParent<PlayerMovement>().canMove = false;
+
+            gameObject.transform.GetComponentInParent<PlayerMovement>().isMoving = true;
             if (!ReachedIsland)
             {
                 Vector3 NearestIceAnchorPosition = new Vector3(10, 10, 10);
@@ -101,6 +103,7 @@ public class SealBehavior : MonoBehaviour
                     {
                         NearestIceAnchorPosition = gameObject.transform.parent.position - point.position;
                         FinalDestination = point.position;
+                        des = point;
                     }
                 }
                 gameObject.transform.parent.position = Vector3.MoveTowards(gameObject.transform.parent.position, FinalDestination, SealReturnToIslandSpeed * Time.deltaTime);
@@ -111,17 +114,25 @@ public class SealBehavior : MonoBehaviour
             }
             else if(ReachedIsland)
             {
-                gameObject.transform.GetComponentInParent<PlayerMovement>().canMove = true;
+                gameObject.transform.GetComponentInParent<PlayerMovement>().isMoving = false;
+                
                 gameObject.transform.parent = null;
                 ReachedIsland = false;
                 collected = false;
                 ApproachIce = false;
                 NavAgent.enabled = true;
                 PowerupTimer = ResetPowerupTimer;
+                gameObject.transform.GetComponentInParent<PlayerMovement>().transform.position = des.Find("Point").transform.position;
+                gameObject.transform.GetComponentInParent<PlayerMovement>().collisionTime = 1;
+                Invoke("EnableCollider", 1);
             }
         }
     }
-
+    void EnableCollider()
+    {
+        gameObject.GetComponent<BoxCollider>().enabled = true;
+        gameObject.transform.GetComponentInParent<PlayerMovement>().moveInWater = false;
+    }
     private void FixedUpdate()
     {
         if(!collected)
@@ -144,10 +155,12 @@ public class SealBehavior : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && CirclingTimer <= 0)
         {
+            //fence.SetActive(false);
             collected = true;
             other.gameObject.GetComponent<PlayerMovement>().hasSeal = true;
-           NavAgent.enabled = false;
+            NavAgent.enabled = false;
             gameObject.GetComponent<BoxCollider>().enabled = false;
+            other.gameObject.transform.position = this.transform.position;
             Sealsocket = other.gameObject.GetComponent<PlayerMovement>().SealSocket;
             gameObject.transform.parent = other.gameObject.transform;
             gameObject.transform.localPosition = Sealsocket.transform.localPosition;

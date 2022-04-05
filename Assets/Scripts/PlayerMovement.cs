@@ -39,10 +39,11 @@ public class PlayerMovement : MonoBehaviour
 
     public float xval;
 
-
+    
 
     Vector3 initPos = new Vector3(0, 0, 0);       // new default position for controller when calibrated
 
+    public bool isMoving = false;
     [HideInInspector]
     public bool canMove = true;
     public bool isBumping = false;
@@ -50,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     //for map2
     public GameObject SealSocket;
     public bool isDrop;
-    Vector3 speed;
+    public Vector3 speed;
     public float collisionTime;
     float testCollisionTime;
     Vector3 dropSpeed;
@@ -87,6 +88,11 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+
+        if (canMove == false || isMoving)
+        {
+            return;
+        }
         if (hasSeal)
         {
             moveInWater = true;
@@ -97,14 +103,14 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         BoxCollider boxCollider = GetComponent<BoxCollider>();
-        if (!isDrop && !moveInWater)
+        if (!isDrop )
         {
             testCollisionTime += Time.fixedDeltaTime;
         }
 
         if (level == 2 && testCollisionTime > 0.1f)
         {
-            if (collisionTime < 0.05 && !moveInWater)
+            if (collisionTime < 0.05&&!hasSeal && !moveInWater)
             {
                 testCollisionTime = 0;
                 isDrop = true;
@@ -183,7 +189,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move(float xaxis, float yaxis, float zaxis)
     {
-        if (canMove == false)
+        
+        if (canMove == false||isMoving)
         {
             return;
         }

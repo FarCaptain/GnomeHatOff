@@ -16,8 +16,9 @@ public class ColliderCheck : MonoBehaviour
         {
             if (!player.isDrop)
                 player.knocked = true;
-
+           
         }
+       
     }
     private void OnTriggerStay(Collider other)
     {
@@ -49,4 +50,5 @@ public class ColliderCheck : MonoBehaviour
             GetComponent<BoxCollider>().isTrigger = true;
         }
     }
+    
 }

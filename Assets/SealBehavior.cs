@@ -114,24 +114,25 @@ public class SealBehavior : MonoBehaviour
             }
             else if(ReachedIsland)
             {
-                gameObject.transform.GetComponentInParent<PlayerMovement>().isMoving = false;
                 
+                PlayerMovement player = gameObject.transform.GetComponentInParent<PlayerMovement>();
+                player.isMoving = false;
                 gameObject.transform.parent = null;
                 ReachedIsland = false;
                 collected = false;
                 ApproachIce = false;
                 NavAgent.enabled = true;
                 PowerupTimer = ResetPowerupTimer;
-                gameObject.transform.GetComponentInParent<PlayerMovement>().transform.position = des.Find("Point").transform.position;
-                gameObject.transform.GetComponentInParent<PlayerMovement>().collisionTime = 1;
-                Invoke("EnableCollider", 1);
+                player.transform.position = des.Find("Point").transform.position;
+                player.collisionTime = 1;
+                gameObject.GetComponent<BoxCollider>().enabled = true;
+                player.moveInWater = false;
             }
         }
     }
     void EnableCollider()
     {
-        gameObject.GetComponent<BoxCollider>().enabled = true;
-        gameObject.transform.GetComponentInParent<PlayerMovement>().moveInWater = false;
+        
     }
     private void FixedUpdate()
     {

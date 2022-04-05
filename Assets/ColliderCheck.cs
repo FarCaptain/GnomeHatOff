@@ -40,6 +40,13 @@ public class ColliderCheck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (player.hasSeal)
+        {
+            GetComponent<BoxCollider>().isTrigger = false;
+        }
+        else
+        {
+            GetComponent<BoxCollider>().isTrigger = true;
+        }
     }
 }

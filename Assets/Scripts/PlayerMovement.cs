@@ -23,11 +23,11 @@ public class PlayerMovement : MonoBehaviour
     public float speedDecreaseEachHat;
 
     public int playerIndex = 0;
-    
+
     // to filter the value we get from the gyroscope
     public int delayedFrames;
     private int remainingFrames;
-  
+
     private Rigidbody rigidBody;
 
     public ParticleSystem runDust;
@@ -39,15 +39,10 @@ public class PlayerMovement : MonoBehaviour
 
     public float xval;
 
-    [Header("Auto Jump Variables")]
-    [SerializeField] float jumpForce;
-    [SerializeField] float fallForce;
-    [SerializeField] bool isOnGround = true;
 
 
+    Vector3 initPos = new Vector3(0, 0, 0);       // new default position for controller when calibrated
 
-    Vector3 initPos = new Vector3(0,0,0);       // new default position for controller when calibrated
-    
     [HideInInspector]
     public bool canMove = true;
     public bool isBumping = false;
@@ -64,8 +59,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     Transform respawnPos;
     bool disabled;
+
+    public bool moveInWater;
+    public bool moveOnIce;
     void Start()
     {
+
         hasSeal = false;
         disabled = false;
         knocked = false;
@@ -74,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
         collisionTime = 1;
         testCollisionTime = 0;
         level = GameObject.Find("GameManager").GetComponent<MainGameController>().level;
-        
+
     }
 
 
@@ -86,27 +85,31 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-	void FixedUpdate()
+    void FixedUpdate()
     {
-        
-        if(!isDrop && disabled)
+        if (hasSeal)
+        {
+            moveInWater = true;
+            moveOnIce = false;
+        }
+        if (!isDrop && disabled)
         {
             return;
         }
         BoxCollider boxCollider = GetComponent<BoxCollider>();
-        if (!isDrop && !hasSeal)
+        if (!isDrop && !moveInWater)
         {
             testCollisionTime += Time.fixedDeltaTime;
         }
-     
-        if (level==2&& testCollisionTime > 0.1f)
+
+        if (level == 2 && testCollisionTime > 0.1f)
         {
-            if (collisionTime < 0.05 && !hasSeal)
+            if (collisionTime < 0.05 && !moveInWater)
             {
                 testCollisionTime = 0;
                 isDrop = true;
                 Respawn(3);
-                dropSpeed = 0.1f*speed + new Vector3(0, -200, 0);
+                dropSpeed = 0.1f * speed + new Vector3(0, -200, 0);
             }
             else
             {
@@ -118,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
         // used for calibration
 
         float vel_y = rigidBody.velocity.y;
-        
+
 
         Vector3 move = Vector3.zero;
         if (playerIndex == 0)
@@ -147,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isDrop)
         {
-            
+
             speed = dropSpeed;
 
         }
@@ -159,12 +162,7 @@ public class PlayerMovement : MonoBehaviour
                 gameObject.transform.forward = new Vector3(speed.x, 0, speed.z);
 
             }
-            
-            if (Mathf.Abs(speed.x) > constantSpeed && Mathf.Abs(speed.z) > constantSpeed)
-            {
-                speed.x = maxSpeed * 0.75f * Mathf.Sign(speed.x);
-                speed.z = maxSpeed * 0.75f * Mathf.Sign(speed.z);
-            }
+
             Move(speed * Time.deltaTime);
             drawRunDust();
         }
@@ -183,7 +181,7 @@ public class PlayerMovement : MonoBehaviour
             rigidBody.velocity = motion;
     }
 
-    public void Move(float xaxis, float yaxis,float zaxis)
+    public void Move(float xaxis, float yaxis, float zaxis)
     {
         if (canMove == false)
         {
@@ -217,7 +215,7 @@ public class PlayerMovement : MonoBehaviour
             speed_z = currentMaxSpeed;
         else
             speed_z = constantSpeed;
-            //speed_z = map(Mathf.Abs(move.z), MaxthresholdFB);
+        //speed_z = map(Mathf.Abs(move.z), MaxthresholdFB);
 
         // assigns direction
         speed_x *= Mathf.Sign(move.x);
@@ -269,12 +267,12 @@ public class PlayerMovement : MonoBehaviour
 
     void RespawnPlayer()
     {
-       
+
         speed = Vector3.zero;
         transform.position = respawnPos.transform.position;
         disabled = false;
         isDrop = false;
         collisionTime = 1;
     }
-   
+
 }

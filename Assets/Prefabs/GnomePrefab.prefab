@@ -397,14 +397,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26d5701d3b68b2444a7938a281cf50fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canSlide: 0
-  MinthresholdFB: 2
-  MinthresholdLR: 2
-  MaxthresholdFB: 4
-  MaxthresholdLR: 4
-  slideFactor: 0
-  maxSpeed: 500
-  constantSpeed: 100
+  canSlide: 1
+  MinthresholdFB: 1.2
+  MinthresholdLR: 1.2
+  MaxthresholdFB: 2.3
+  MaxthresholdLR: 2.3
+  slideFactor: 0.75
+  maxSpeed: 150
+  constantSpeed: 60
   hatBurden: 0
   speedDecreaseEachHat: 0
   playerIndex: 0
@@ -419,6 +419,10 @@ MonoBehaviour:
   isDrop: 0
   collisionTime: 0
   knocked: 0
+  hasSeal: 0
+  respawnPos: {fileID: 0}
+  moveInWater: 0
+  moveOnIce: 0
 --- !u!114 &7712702464142486567
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class HatFade : MonoBehaviour
     private AudioSource hatAudioSource;
     public float defaultTransparency = 1f;
     public float fadeDuration = 3f;
+    public float groundDuration = 2f;
     public GameObject shadowPrefab;
 
     public ParticleSystem circleDust;
@@ -16,7 +17,7 @@ public class HatFade : MonoBehaviour
     float toFadeTo;
     float tempDist;
     bool isFadingUp;
-    bool isFadingDown;
+    public bool isFadingDown;
 
     public bool hatFadeEnabled = true;
     public bool hatCollectedByPlayer = false;
@@ -45,9 +46,9 @@ public class HatFade : MonoBehaviour
         /// Fading
         if (hatFadeEnabled && transform.position.y < headTop)
         {
-            FadeT(0.0f);
 
-            Destroy(gameObject, 2f);
+            StartCoroutine(FadeT(0.0f));
+            
             hatShadowDestroy();
 
             circleDust.Play();
@@ -111,18 +112,24 @@ public class HatFade : MonoBehaviour
         currentTransparency = newT;
         ApplyTransparency();
     }
-    public void FadeT(float newT)
+    public IEnumerator FadeT(float newT)
     {
-        toFadeTo = newT;
-        if (currentTransparency < toFadeTo)
+        yield return new WaitForSeconds(groundDuration);
+        if (hatCollectedByPlayer == false)
         {
-            tempDist = toFadeTo - currentTransparency;
-            isFadingUp = true;
-        }
-        else
-        {
-            tempDist = currentTransparency - toFadeTo;
-            isFadingDown = true;
+            toFadeTo = newT;
+            if (currentTransparency < toFadeTo)
+            {
+                tempDist = toFadeTo - currentTransparency;
+                isFadingUp = true;
+            }
+            else
+            {
+                tempDist = currentTransparency - toFadeTo;
+                isFadingDown = true;
+            }
+
+            Destroy(gameObject, fadeDuration);
         }
     }
 

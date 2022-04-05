@@ -26,7 +26,7 @@ public class PortManager : MonoBehaviour
     public GameObject gnomeYellow;
     public GameObject gnomeBlue;
 
-    public GameObject arduino;
+    //public GameObject arduino;
 
     public VisualEffect poofPrefab;
 
@@ -44,7 +44,7 @@ public class PortManager : MonoBehaviour
 
         //gameController = GameObject.Find("GameManager").GetComponent<MainGameController>();
         gameController = MainGameController.Instance;
-        gameController.Arduino = arduino;
+        //gameController.Arduino = arduino;
         gameController.COM.Clear();
 
         // all connected devices

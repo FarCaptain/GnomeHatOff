@@ -12,11 +12,12 @@ public class MainGameController : GenericSingleton<MainGameController>
     public int level;
     private GameStatus status = GameStatus.Ready;
     [HideInInspector]
-    public List<GameObject> players;
+    public List<GameObject> players = new List<GameObject>();
     private List<PlayerMovement> playerMovements = new List<PlayerMovement>();
     private int playerAmount;
+
     public GameObject Arduino;
-    public List<string> COM;
+    public List<string> COM = new List<string>();
     GameObject[] playerfetch;
 
     // Start is called before the first frame update
@@ -24,12 +25,20 @@ public class MainGameController : GenericSingleton<MainGameController>
     private void Awake()
     {
         players.Clear();
-        playerfetch = GameObject.FindGameObjectsWithTag("Player");
-        Debug.Log("PlayerCount " + playerfetch.Length);
-        for (int i = 0; i < playerfetch.Length; i++)
+
+        // We have to have a Arduino Prefab there, when game Controller is intantiated
+        Arduino = GameObject.Find("Arduino");
+
+        // when we need prepared players, rather then active them automatically
+        if (COM.Count > 0)
         {
-            players.Add(playerfetch[i]);
-            RegisterPlayerController(i);
+            playerfetch = GameObject.FindGameObjectsWithTag("Player");
+            Debug.Log("PlayerCount " + playerfetch.Length);
+            for (int i = 0; i < playerfetch.Length; i++)
+            {
+                players.Add(playerfetch[i]);
+                RegisterPlayerController(i);
+            }
         }
     }
     void Start()
@@ -53,6 +62,7 @@ public class MainGameController : GenericSingleton<MainGameController>
         players[playerIndex].GetComponent<PlayerMovement>().playerIndex = playerIndex;
         playerMovements.Add(players[playerIndex].GetComponent<PlayerMovement>());
         GameObject arduino = Instantiate(Arduino, players[playerIndex].gameObject.transform);
+        arduino.transform.parent = transform;
         arduino.GetComponent<SerialController>().portName = COM[playerIndex];
         arduino.GetComponent<SerialController>().enabled = true;
         arduino.GetComponentInChildren<SampleMessageListener>().Playerindex = playerIndex;

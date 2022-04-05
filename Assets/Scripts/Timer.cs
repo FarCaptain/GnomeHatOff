@@ -11,14 +11,15 @@ public class Timer : MonoBehaviour
 {
     private Scene currentScene;
     private TextMeshProUGUI timerText;
-    public static float timeRemaining = 90;      // measured in seconds
+    public static float timeRemaining = 60;      // measured in seconds
     private bool isTimerRunning = false;
-    public bool timerPaused = false;
+    [HideInInspector] public bool timerPaused = false;
 
     public ScoreSystem scoreSystem;
 
     void Start()
     {
+        AudioManager.PlayGeneralGameAudioClip(GameGeneralAudioStates.RoundBegin);
         currentScene = SceneManager.GetActiveScene();
         timerText = gameObject.GetComponent<TextMeshProUGUI>();
         isTimerRunning = true;

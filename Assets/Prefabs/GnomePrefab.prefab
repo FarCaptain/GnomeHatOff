@@ -404,6 +404,7 @@ MonoBehaviour:
   MaxthresholdLR: 2
   slideFactor: 0
   maxSpeed: 200
+  percentOfMaxSpeed: 0.75
   constantSpeed: 100
   hatBurden: 0
   speedDecreaseEachHat: 0

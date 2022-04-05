@@ -333,6 +333,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2848886440049431370, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
         type: 3}
       propertyPath: player0

@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float slideFactor;
     public float maxSpeed;
+    public float percentOfMaxSpeed;
     public float constantSpeed = 100;
     [Header("The decrease of max speed each hat gives you")]
     public float hatBurden = 0;
@@ -163,6 +164,11 @@ public class PlayerMovement : MonoBehaviour
 
             }
 
+            if (speed.x > constantSpeed && speed.y > constantSpeed)
+            {
+                speed.x = maxSpeed * percentOfMaxSpeed;
+                speed.y = maxSpeed * percentOfMaxSpeed;
+            }
             Move(speed * Time.deltaTime);
             drawRunDust();
         }

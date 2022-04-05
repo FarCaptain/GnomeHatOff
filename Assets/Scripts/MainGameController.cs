@@ -9,18 +9,32 @@ enum GameStatus
 }
 public class MainGameController : MonoBehaviour
 {
+    public int level;
     private GameStatus status = GameStatus.Ready;
-    public GameObject[] players;
+    [HideInInspector]
+    public List<GameObject> players;
     private List<PlayerMovement> playerMovements = new List<PlayerMovement>();
     private int playerAmount;
+    public GameObject Arduino;
+    public List<string> COM;
+    GameObject[] playerfetch;
+
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        players.Clear();
+        playerfetch = GameObject.FindGameObjectsWithTag("Player");
+        Debug.Log("PlayerCount " + playerfetch.Length);
+        for (int i = 0; i < playerfetch.Length; i++)
+        {
+            players.Add(playerfetch[i]);
+            RegisterPlayerController(i);
+        }
+    }
     void Start()
     {
-        playerAmount = players.Length;
-        for(int i=0; i < playerAmount; i++)
-        {
-            playerMovements.Add(players[i].GetComponent<PlayerMovement>());
-        }
+
     }
 
     // Update is called once per frame
@@ -34,21 +48,27 @@ public class MainGameController : MonoBehaviour
         }
     }
 
-    public void RecieveSignal(int playerIndex, float x, float y, float z, string RFID)
+    public void RegisterPlayerController(int playerIndex)
     {
-        Debug.Log(RFID);
+        players[playerIndex].GetComponent<PlayerMovement>().playerIndex = playerIndex;
+        playerMovements.Add(players[playerIndex].GetComponent<PlayerMovement>());
+        GameObject arduino = Instantiate(Arduino, players[playerIndex].gameObject.transform);
+        arduino.GetComponent<SerialController>().portName = COM[playerIndex];
+        arduino.GetComponent<SerialController>().enabled = true;
+        arduino.GetComponentInChildren<SampleMessageListener>().Playerindex = playerIndex;
+        arduino.GetComponentInChildren<SampleMessageListener>().Game = this;
+    }
+
+    public void RecieveSignal(int playerIndex, float x, float y, float z)
+    {
+        //        Debug.Log(playerIndex + x + z + RFID);
         switch (status)
         {
             case GameStatus.Ready:
-                playerMovements[playerIndex].SetOffset(new Vector3(x,y,z));
+                playerMovements[playerIndex].SetOffset(new Vector3(x, y, z));
                 break;
             case GameStatus.Playing:
                 playerMovements[playerIndex].Move(x, y, z);
-                if (RFID == "False")
-                {
-                    playerMovements[playerIndex].jumpset(true);
-                }
-
                 break;
         }
     }

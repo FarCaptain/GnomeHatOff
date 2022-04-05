@@ -17,7 +17,7 @@ public class Log : Hazard
 	[Header("Landing Variables")]
 	[SerializeField] float fallAmount = 0.5f;
 
-	private bool hasLanded = false;
+    private bool hasLanded = false;
 
 	[Header("Log Debris VFX")]
 	[SerializeField] ParticleSystem logDebrisVFX;
@@ -25,23 +25,23 @@ public class Log : Hazard
 	private AudioSource logAudioSource;
 	private GameObject originLog;
 
-	void Start()
-	{
+    void Start()
+    {
 		logAudioSource = GetComponent<AudioSource>();
-		AudioManager.PlayLogAudioClip(LogAudioStates.Rolling, logAudioSource);
-	}
+        AudioManager.PlayLogAudioClip(LogAudioStates.Rolling, logAudioSource);
+    }
 
-	// Update is called once per frame
-	void Update()
+    // Update is called once per frame
+    void Update()
 	{
 		LandLog();
-		transform.Rotate(new Vector3(-rotationSpeed * Time.deltaTime, 0, 0));
+		transform.Rotate(new Vector3(-rotationSpeed * Time.deltaTime,0, 0));
 		MoveLog();
 	}
 
 	private void LateUpdate()
 	{
-
+		
 	}
 
 	private void LandLog()
@@ -67,7 +67,7 @@ public class Log : Hazard
 
 	void SpawnLogDebrisVFX()
 	{
-		if (logDebrisVFX.isPlaying == false)
+		if(logDebrisVFX.isPlaying == false)
 		{
 			logDebrisVFX = Instantiate<ParticleSystem>(logDebrisVFX, transform.position, Quaternion.identity);
 			logDebrisVFX.Play();
@@ -76,15 +76,15 @@ public class Log : Hazard
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.name == "LogDestroyer")
+		if(other.gameObject.name == "LogDestroyer")
 		{
 			originLog.SetActive(true);
-			Destroy(gameObject);
+            Destroy(gameObject);
 		}
-		if (other.gameObject.tag == "Ground")
+        if(other.gameObject.tag=="Ground")
 		{
-			hasLanded = true;
-		}
+            hasLanded = true;
+        }
 	}
 
 	public void GetOriginLog(GameObject spawnLocationObject)

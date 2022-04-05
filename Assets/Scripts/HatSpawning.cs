@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using TMPro;
 
 public class HatSpawning : MonoBehaviour
@@ -15,12 +16,18 @@ public class HatSpawning : MonoBehaviour
 
     public Vector3 center;
     public Vector3 size;
+    public Vector3 scale_mushroom;
     public float minGap = 0.3f;
     public float maxGap = 2.0f;
+    
     public float hatRushTime = 30f;
     public float hatRushMinGap = 0.2f;
 
-    public int mushroomCount = 0;
+    private int mushroomCount = 0;
+    public int mushroomMaxCount;
+    public int mushroomOneTime = 0;
+    private float mushroomSpawnTime = 0;
+    private float mushroomTime= 0;
     float timeInterval = 0f;
     bool isHatRush = false;
 
@@ -32,8 +39,9 @@ public class HatSpawning : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mushroomTime = 0;
         timeGap = Random.Range( 0.6f, 3.5f);
-
+        mushroomSpawnTime = Random.Range(20, 40);
         ColorUtility.TryParseHtmlString("#3768A7",out hatColors[0]);
         ColorUtility.TryParseHtmlString("#7637A7", out hatColors[1]);
         ColorUtility.TryParseHtmlString("#A7A037", out hatColors[2]);
@@ -49,36 +57,37 @@ public class HatSpawning : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        mushroomTime += Time.deltaTime;
         // HAT RUSH!!!!
         if (!isHatRush && Timer.timeRemaining < hatRushTime)
         {
             isHatRush = true;
             timerText.color = Color.red;
             hatRushMessage.SetActive(true);
+            AudioManager.PlayGeneralGameAudioClip(GameGeneralAudioStates.HatRushBegin);
             hatRushAnim.Play("FadeAnimation");
         }
             
         timeInterval += Time.deltaTime;
 
-        
+        if(mushroomTime > mushroomSpawnTime && mushroomManPrefab)
+        {
+            timeGap = Random.Range(minGap, maxGap);
+            if (mushroomOneTime < 1 && mushroomCount < mushroomMaxCount)
+            {
+                SpawnMushroomMan();
+                mushroomOneTime++;
+                mushroomCount++;
+            }
+            mushroomTime = 0;
+
+        }
         if (timeInterval > timeGap)
         {
-            int ifMushroom = Random.Range(0, 100);
-            if(ifMushroom < 30 && !isHatRush)
-            {
-                timeGap = Random.Range(minGap, maxGap);
-                if (mushroomCount < 2)
-                {
-                    SpawnMushroomMan();
-                    mushroomCount++;
-                }
-                    
-            }
-            else
-            {
-                timeGap = isHatRush ? accumulatedSpeed = Mathf.Max(accumulatedSpeed - (deltaDashChange * timeGap), hatRushMinGap) : Random.Range(minGap, maxGap);
-                SpawnHat();
-            }
+           
+            timeGap = isHatRush ? accumulatedSpeed = Mathf.Max(accumulatedSpeed - (deltaDashChange * timeGap), hatRushMinGap) : Random.Range(minGap, maxGap);
+            SpawnHat();
+          
             
             timeInterval = 0f;
         }
@@ -86,11 +95,8 @@ public class HatSpawning : MonoBehaviour
         //test
         if (Input.GetKeyDown(KeyCode.K))
         {
-            if (mushroomCount < 2)
-            {
                 SpawnMushroomMan();
-                mushroomCount++;
-            }
+               
             
         }
         
@@ -99,6 +105,15 @@ public class HatSpawning : MonoBehaviour
     public void SpawnHat()
     {
         Vector3 pos = transform.localPosition + center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2), Random.Range(-size.z / 2, size.z / 2));
+
+        NavMeshTriangulation triangulation = NavMesh.CalculateTriangulation();
+        int vertexIndex = Random.Range(0, triangulation.vertices.Length);
+
+        NavMeshHit hit;
+        //NavMesh.SamplePosition(pos, out hit, 6f, 1 << NavMesh.GetNavMeshLayerFromName("Default"));
+        NavMesh.SamplePosition(pos, out hit, 50f, 1);
+        pos = new Vector3(hit.position.x, pos.y, hit.position.z);
+
         GameObject hat = Instantiate(hatPrefab, pos, Quaternion.identity);
         hat.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = hatColors[Random.Range(0, hatColors.Length - 1)];
         generateShadow(pos, hat, "HatFade");
@@ -122,9 +137,29 @@ public class HatSpawning : MonoBehaviour
 
     void SpawnMushroomMan()
     {
-        Vector3 pos = transform.localPosition + center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2), Random.Range(-size.z / 2, size.z / 2));
+        int i = Random.Range(-10, 10);
+        float pos_x;
+        float pos_z;
+        if(i <= 0)
+         {
+            pos_x = Random.Range(-4.5f / 2, -1.15f);
+        }
+        else
+        {
+            pos_x = Random.Range(1.15f, 4.5f);
+        }
+        int j = Random.Range(-10, 10);
+        if (j <= 0)
+        {
+            pos_z = Random.Range(-2.36f / 2, -1.10f);
+        }
+        else
+        {
+            pos_z = Random.Range(1.15f, 2.59f);
+        }
+        Vector3 pos = transform.localPosition + center + new Vector3(pos_x, Random.Range(-scale_mushroom.y / 2, scale_mushroom.y / 2), pos_z);
+        //Vector3 pos = transform.localPosition + center + new Vector3(Random.Range(-4.5f, 4.5f), Random.Range(-scale_mushroom.y / 2, scale_mushroom.y / 2), Random.Range(-2.36f, 2.59f));
         GameObject hat = Instantiate(mushroomManPrefab, pos, Quaternion.identity);
-        hat.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = Color.black;
         generateShadow(pos, hat, "MushroomController");
        
     }

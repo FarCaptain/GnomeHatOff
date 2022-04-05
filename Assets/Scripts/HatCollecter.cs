@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HatCollecter : MonoBehaviour
 {
@@ -18,14 +19,25 @@ public class HatCollecter : MonoBehaviour
     public Vector3 initColliderSize;
     public Vector3 initColliderCenter;
     public bool hatdrop = false;
+    public bool isTouchingWell = false;
+
+    // stay for some time to drop the hat
+    public NewTimer hatDropTimer;
+    public float hatDropDuration;
 
     public Stack<GameObject> hatStack = new Stack<GameObject>();
     public bool isdamaged = false;
+    private Image barImage;
+
     Color[] hatColors = new Color[4];
     AudioSource playerAudioSource;
+    Player playerScript;
+
     private void Start()
     {
         playerAudioSource = GetComponentInParent<AudioSource>();
+        
+        playerScript = GetComponentInParent<Player>();
         ColorUtility.TryParseHtmlString("#3768A7", out hatColors[0]);
         ColorUtility.TryParseHtmlString("#7637A7", out hatColors[1]);
         ColorUtility.TryParseHtmlString("#A7A037", out hatColors[2]);
@@ -42,11 +54,26 @@ public class HatCollecter : MonoBehaviour
         initHatHeight = hatTop.transform.position.y;
         initColliderSize = GetComponent<BoxCollider>().size;
         initColliderCenter = GetComponent<BoxCollider>().center;
+
+        //init the hatdrop timer
+        hatDropTimer = gameObject.AddComponent<NewTimer>();
+        hatDropTimer.MaxTime = hatDropDuration;
+
+        
     }
 
     private void Update()
     {
+        Image barImage = GetComponentInChildren<Image>();
         //Debug.Log(hatdrop);
+        if (hatDropTimer.TimerRunning)
+        {
+            barImage.fillAmount = hatDropTimer.TimerCompletionRate;
+        }
+        else
+        {
+            barImage.fillAmount = 0;
+        }
     }
 
     public void OnTriggerEnter(Collider other)
@@ -57,7 +84,10 @@ public class HatCollecter : MonoBehaviour
             {
                 if(hatCount < 9)
                 {
-                  
+                    if (playerAudioSource.isPlaying == false)
+                    {
+                        AudioManager.PlayHatAudioClip(HatAudioStates.Collected, playerAudioSource);
+                    }
                     AddHat(other.gameObject);
                 }
                 else
@@ -72,17 +102,23 @@ public class HatCollecter : MonoBehaviour
         }
         if (other.tag == "Mushroom")
         {
+            if (playerAudioSource.isPlaying == false)
+            {
+                AudioManager.PlayMushroomManAudioClip(MushroomManAudioStates.Collected, playerAudioSource);
+            }
             
-          
-              for(int i=hatCount; i < 9; i++)
-                {
-                    GameObject hat = Instantiate(hatPrefab, hatTop.transform.position, Quaternion.identity);
-                    hat.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = hatColors[Random.Range(0, hatColors.Length - 1)];
-                    AddHat(hat);
-                }
+            //for (int i=hatCount; i < 9; i++)
+            //{
+            //    GameObject hat = Instantiate(hatPrefab, hatTop.transform.position, Quaternion.identity);
+            //    hat.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = hatColors[Random.Range(0, hatColors.Length - 1)];
+            //    AddHat(hat);
+            //}
+            playerScript.SuperBounce();
+            other.GetComponent<MushroomController>().playerHit = transform.parent.gameObject;
+            other.GetComponent<MushroomController>().Caught();
             other.GetComponent<MushroomController>().hatShadowDestroy();
-            Destroy(other.gameObject);
-            updateCollecter();
+            
+            //updateCollecter();
             
         }
     }
@@ -109,10 +145,7 @@ public class HatCollecter : MonoBehaviour
 
     private void AddHat(GameObject hat)
     {
-        if(playerAudioSource.isPlaying==false)
-		{
-            AudioManager.PlayHatAudioClip(HatAudioStates.Collected, playerAudioSource);
-        }
+        
         hatCount += 1;
         hat.GetComponent<HatFade>().hatCollectedByPlayer = true;
         Vector3 hatPos = hatTop.transform.position;
@@ -127,6 +160,9 @@ public class HatCollecter : MonoBehaviour
         hat.transform.parent = gnome.transform;
         hat.gameObject.transform.position = hatPos;
         hatTop.transform.position = hatPos;
+
+        sparks.gameObject.transform.position = hatPos;
+        drawSparks();
 
         //decrease speed of Gnome
         PlayerMovement movement = GetComponentInParent<PlayerMovement>();

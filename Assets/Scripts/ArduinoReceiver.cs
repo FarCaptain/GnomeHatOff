@@ -92,12 +92,11 @@ public class ArduinoReceiver : MonoBehaviour
                         dataString = streams[i].ReadLine();
                         char splitChar = ',';
                         dataRaw = dataString.Split(splitChar);
-                        if (dataRaw.Length == 3 && dataRaw[0] != "")
+                        if (dataRaw.Length == 2 && dataRaw[0] != "")
                         {
-                            float xaxis = float.Parse(dataRaw[0]);
-                            float zaxis = float.Parse(dataRaw[1]);
-                            string jump = dataRaw[2];
-                            Game.RecieveSignal(i, xaxis, 0, zaxis,jump);
+                            float xaxis = float.Parse(dataRaw[1]);
+                            float zaxis = float.Parse(dataRaw[2]);
+                            Game.RecieveSignal(i, xaxis, 0, zaxis);
                         }
                     }
                     catch (System.Exception ioe)

@@ -7,20 +7,27 @@ public class HatFade : MonoBehaviour
     private AudioSource hatAudioSource;
     public float defaultTransparency = 1f;
     public float fadeDuration = 3f;
-    public GameObject player;
     public GameObject shadowPrefab;
 
     public ParticleSystem circleDust;
+    public float headTop;
 
     float currentTransparency;
     float toFadeTo;
     float tempDist;
     bool isFadingUp;
     bool isFadingDown;
-    float headTop;
 
     public bool hatFadeEnabled = true;
     public bool hatCollectedByPlayer = false;
+
+    // drop Animation
+    private bool dropAnimationOn = false;
+    private Vector3 dropAnimationEnd;
+    private float dropAnimationTime = 0f;
+    private NewTimer pauseTimer;
+    public float dropAnimationDuration;
+    public float pauseBetweenDropAnimations;
 
     void Start()
     {
@@ -28,40 +35,23 @@ public class HatFade : MonoBehaviour
         currentTransparency = defaultTransparency;
         ApplyTransparency();
 
-        player = GameObject.Find("Gnome_0");
-
-        // TODO: Adjust for loop code
-        for (int i = 0; i < player.transform.childCount; i++)
-        {
-            // inefficient, way to do on resources?
-            if (player.transform.GetChild(i).name == "HeadTop")
-            {
-                headTop = player.transform.GetChild(i).transform.position.y;
-                break;
-            }
-        }
+        pauseTimer = gameObject.AddComponent<NewTimer>();
+        pauseTimer.TimerStart = false;
     }
 
     void FixedUpdate()
     {
-        //if (players.Length > 0)// && transform.localPosition.y < players[0].transform.localPosition.y
-        //{
-        //    for(int i = 0; i < players.Length; i ++)
-        //        Physics.IgnoreCollision(GetComponent<MeshCollider>(), players[i].GetComponent<BoxCollider>());
 
-        //}
-
+        /// Fading
         if (hatFadeEnabled && transform.position.y < headTop)
         {
             FadeT(0.0f);
-     
+
             Destroy(gameObject, 2f);
             hatShadowDestroy();
-            Vector3 pos = transform.position;
-            pos.y = 0.15f;
 
             circleDust.Play();
-            AudioManager.PlayHatAudioClip(HatAudioStates.Destroyed, hatAudioSource);
+            //AudioManager.PlayHatAudioClip(HatAudioStates.Destroyed, hatAudioSource);
             Destroy(circleDust, 1f);
             hatFadeEnabled = false;
         }
@@ -90,11 +80,30 @@ public class HatFade : MonoBehaviour
                 isFadingDown = false;
             }
         }
+
+        /// Drop Animation
+        if(dropAnimationOn && pauseTimer.TimerStart == false)
+        {
+            // interpolation
+            Vector3 pos = Vector3.Lerp(transform.position, dropAnimationEnd, dropAnimationTime/ dropAnimationDuration);
+            dropAnimationTime += Time.deltaTime;
+
+            transform.position = pos;
+
+            // get to the end
+            if(dropAnimationTime == dropAnimationDuration)
+            {
+                // reset things
+                dropAnimationTime = 0f;
+                dropAnimationOn = false;
+                dropAnimationEnd = Vector3.zero;
+            }
+        }
     }
 
     void ApplyTransparency()
     {
-        transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material.color *= new Color(1.0f, 1.0f, 1.0f, currentTransparency);
+        GetComponentInChildren<MeshRenderer>().material.color *= new Color(1.0f, 1.0f, 1.0f, currentTransparency);
     }
 
     public void SetT(float newT)
@@ -115,6 +124,19 @@ public class HatFade : MonoBehaviour
             tempDist = currentTransparency - toFadeTo;
             isFadingDown = true;
         }
+    }
+
+    public void RegisterDropAnimation(Vector3 ed)
+    {
+        if (dropAnimationOn)
+            return;
+
+        transform.parent = null;
+        dropAnimationOn = true;
+        dropAnimationEnd = ed;
+
+        pauseTimer.MaxTime = pauseBetweenDropAnimations;
+        pauseTimer.TimerStart = true;
     }
 
     public void hatFadeDisable()

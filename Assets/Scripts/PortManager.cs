@@ -18,13 +18,12 @@ public class PortManager : MonoBehaviour
     private int baudrate = 9600;
     private int maxPlayerCount = 0;
 
-    private NewTimer connectComTimer;
     public MainGameController gameController;
 
-    public GameObject gnomePurple;
-    public GameObject gnomeRed;
-    public GameObject gnomeYellow;
-    public GameObject gnomeBlue;
+    public GameObject gnomeRedPrefab;
+    public GameObject gnomeYellowPrefab;
+    public GameObject gnomeBluePrefab;
+    public GameObject gnomePurplePrefab;
 
     //public GameObject arduino;
 
@@ -36,14 +35,11 @@ public class PortManager : MonoBehaviour
         BluetoothClient client = new BluetoothClient();
 
         ports = SerialPort.GetPortNames();
-        connectComTimer = gameObject.AddComponent<NewTimer>();
-        connectComTimer.MaxTime = 10f;
-        connectComTimer.TimerStart = true;
 
         getConnectedPorts();
 
         //gameController = GameObject.Find("GameManager").GetComponent<MainGameController>();
-        gameController = MainGameController.Instance;
+        gameController = MainGameController.instance;
         //gameController.Arduino = arduino;
         gameController.COM.Clear();
 
@@ -85,7 +81,6 @@ public class PortManager : MonoBehaviour
                         //streams[i].Close();
                         //streams[i].Dispose();
                         //TODO. Needs the value from the arduino to identify the hat
-                        // Now just doing it in some order
                         distributeCharacter(dataRaw[0]);
 
                         streams.RemoveAt(i--);
@@ -121,30 +116,30 @@ public class PortManager : MonoBehaviour
         switch(temp)
         {
             case "G":
-                gnomePrefab = gnomePurple;
+                gnomePrefab = gnomePurplePrefab;
                 break;
             case "R":
-                gnomePrefab = gnomeRed;
+                gnomePrefab = gnomeRedPrefab;
                 break;
             case "Y":
-                gnomePrefab = gnomeYellow;
+                gnomePrefab = gnomeYellowPrefab;
                 break;
             default:
-                gnomePrefab = gnomeBlue;
+                gnomePrefab = gnomeBluePrefab;
                 break;
         }
-        Vector3 pos = gnomePrefab.transform.position;
+        float tst = UnityEngine.Random.Range(-15f, 15f);
+        float tst1 = UnityEngine.Random.Range(-15f, 15f);
+        Vector3 pos = new Vector3(tst, 0f, tst1);//gnomeSpawner.transform.position;
         VisualEffect poo = Instantiate(poofPrefab, pos, Quaternion.identity);
-        //poof.transform.position = pos;
-        //poof.Play();
         poo.Play();
-        gnomePrefab.SetActive(true);
+        //gnomePrefab.SetActive(true);
 
-        gameController.players.Add(gnomePrefab);
+        gameController.players.Add(Instantiate(gnomePrefab, pos, Quaternion.identity));
+        DontDestroyOnLoad(gameController.players[gameController.players.Count - 1].transform.gameObject);
         gameController.RegisterPlayerController(gameController.players.Count - 1);
 
         //Destroy(poofEffect);
-
     }
 
     SerialPort connectionEstablish(int portIndex)

@@ -31,7 +31,7 @@ public class GenericSingleton<T> : MonoBehaviour where T : Component
         {
             // check type
             instance = this as T;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(instance);
         }
         else
         {

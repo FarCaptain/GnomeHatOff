@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
         isDrop = false;
         collisionTime = 1;
         testCollisionTime = 0;
-        level = MainGameController.Instance.level;
+        level = MainGameController.instance.level;
     }
 
 

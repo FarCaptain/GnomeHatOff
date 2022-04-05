@@ -62,10 +62,14 @@ public class ScoreSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
 	{
+        gameManager = MainGameController.instance;
         PlayerAmount = gameManager.COM.Count;
         for (int id = 0; id < 2; id++)
 			for (int i = 0; i < fires[id].transform.childCount; i++)
 				initFireScale[id, i] = fires[id].transform.GetChild(i).transform.localScale;
+
+        // initial the Player Points
+        
 
 		InitializeFadeAndScaleTimer();
 
@@ -362,7 +366,6 @@ public class ScoreSystem : MonoBehaviour
     private void AddScore(GameObject player, int score, int hatCount)
     {
         int player_index = player.GetComponent<Player>().playerIndex;
-
         int newScore = playerScores[player_index] + score;
         Debug.Log("DebugLog - " + player.name +" Index: " + player_index);
         playerScores.Remove(player_index);

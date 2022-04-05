@@ -1,17 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 enum GameStatus
 {
     Ready,
     Playing,
 }
-public class MainGameController : GenericSingleton<MainGameController>
+public class MainGameController : MonoBehaviour
 {
+    // this is a Singleton
+    public static MainGameController instance;
+
     public int level;
     private GameStatus status = GameStatus.Ready;
     [HideInInspector]
+    // grab from port Manager
     public List<GameObject> players = new List<GameObject>();
     private List<PlayerMovement> playerMovements = new List<PlayerMovement>();
     private int playerAmount;
@@ -20,17 +25,29 @@ public class MainGameController : GenericSingleton<MainGameController>
     public List<string> COM = new List<string>();
     GameObject[] playerfetch;
 
+    public bool manualMode = false;
+
     // Start is called before the first frame update
 
-    private void Awake()
+    public void Awake()
     {
+        if(instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
         players.Clear();
 
         // We have to have a Arduino Prefab there, when game Controller is intantiated
         Arduino = GameObject.Find("Arduino");
 
         // when we need prepared players, rather then active them automatically
-        if (COM.Count > 0)
+        if ( manualMode )
         {
             playerfetch = GameObject.FindGameObjectsWithTag("Player");
             Debug.Log("PlayerCount " + playerfetch.Length);
@@ -41,6 +58,26 @@ public class MainGameController : GenericSingleton<MainGameController>
             }
         }
     }
+
+    void OnSceneLoaded(Scene scene)
+    {
+        if (manualMode)
+            return;
+
+        // get the level on Game Controller according to scene Name
+        Debug.Log("OnSceneLoaded: " + scene.name);
+
+        // LevelSelect set the players in PortManager
+        if (level == -1)
+            return;
+
+        //instantiate all players
+        foreach( GameObject gnome in players )
+        {
+            //gnome.reset();
+        }
+    }
+
     void Start()
     {
 
@@ -62,7 +99,6 @@ public class MainGameController : GenericSingleton<MainGameController>
         players[playerIndex].GetComponent<PlayerMovement>().playerIndex = playerIndex;
         playerMovements.Add(players[playerIndex].GetComponent<PlayerMovement>());
         GameObject arduino = Instantiate(Arduino, players[playerIndex].gameObject.transform);
-        arduino.transform.parent = transform;
         arduino.GetComponent<SerialController>().portName = COM[playerIndex];
         arduino.GetComponent<SerialController>().enabled = true;
         arduino.GetComponentInChildren<SampleMessageListener>().Playerindex = playerIndex;

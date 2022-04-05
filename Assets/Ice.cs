@@ -25,48 +25,16 @@ public class Ice : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stageNum = meltMaterials.Length;
-        health = 0;
-        isSink = false;
 
-        hasPlayerOn = false;
+        health = 2;
+
+
         go_IceMat = transform.Find("Ice/pasted__group7/pasted__pasted__pCylinder2/polySurface11").gameObject;
-        playerOnMeltTime = 0;
+
         animation = GetComponent<Animation>();
-        stage = 0;
+
     }
 
-    private void FixedUpdate()
-    {
-        if (isHit && hasPlayerOn)
-        {
-            health += 2 * Time.fixedDeltaTime;
-        }
-        else if (hasPlayerOn && !isHit)
-        {
-            health += Time.fixedDeltaTime;
-        }
-        else if (!hasPlayerOn && isHit)
-        {
-            health += Time.fixedDeltaTime;
-        }
-        else
-        {
-
-            health = health - Time.fixedDeltaTime >= 0 ? health - Time.fixedDeltaTime : 0;
-
-        }
-        
-        stage = (int)Math.Floor(health / meltTime);
-        if (stage >= stageNum)
-        {
-            DestroyGameObject();
-            return;
-        }
-
-
-        go_IceMat.GetComponent<MeshRenderer>().material = meltMaterials[stage];
-    }
 
 
     private void OnCollisionEnter(Collision collision)
@@ -76,9 +44,14 @@ public class Ice : MonoBehaviour
 
             if (!collision.gameObject.GetComponent<Snowball>().Hit)
             {
-                //Crack();
-                isHit = true;
                 collision.gameObject.GetComponent<Snowball>().Hit = true;
+                if (health > 1)
+                {
+                    health = 1;
+                    go_IceMat.GetComponent<MeshRenderer>().material = meltMaterials[1];
+                }
+
+
             }
         }
     }
@@ -87,7 +60,15 @@ public class Ice : MonoBehaviour
 
         if (other.tag.Equals("PlayerCollider"))
         {
-            hasPlayerOn = true;
+            if (health == 1)
+            {
+                PlayMeltAnimation();
+    
+                Invoke("DestroyGameObject", 1);
+                health = 0;
+                go_IceMat.GetComponent<MeshRenderer>().material = meltMaterials[2];
+            }
+
 
 
         }
@@ -98,38 +79,20 @@ public class Ice : MonoBehaviour
 
         if (other.tag.Equals("PlayerCollider"))
         {
-            hasPlayerOn = true;
+            if (health == 1)
+            {
+                PlayMeltAnimation();
 
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-
-        if (other.tag.Equals("PlayerCollider"))
-        {
-            hasPlayerOn = false;
+                Invoke("DestroyGameObject", 1);
+                health = 0;
+                go_IceMat.GetComponent<MeshRenderer>().material = meltMaterials[2];
+            }
 
 
         }
     }
-    public void Crack()
-    {
-        if (health == stageNum)
-        {
-            DestroyGameObject();
-            return;
-        }
 
 
-        //go_IceMat.GetComponent<MeshRenderer>().material = meltMaterials[health];
-        health++;
-        Invoke("Crack", 1);
-
-
-
-
-
-    }
 
 
     public void Melt()
@@ -138,24 +101,7 @@ public class Ice : MonoBehaviour
         Invoke("PlayMeltAnimation", waitTime);
 
     }
-    public void Down()
-    {
-        if (!isSink)
-        {
-            go_Ice.transform.localPosition = new Vector3(0, -0.1f, 0);
-            animation.Play("IceDown");
-            isSink = true;
-        }
-    }
-    public void Up()
-    {
-        if (isSink)
-        {
-            go_Ice.transform.localPosition = new Vector3(0, 0, 0);
-            animation.Play("IceUp");
-            isSink = false;
-        }
-    }
+
     void PlayMeltAnimation()
     {
 

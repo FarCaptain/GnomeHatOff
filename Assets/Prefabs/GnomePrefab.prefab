@@ -74,7 +74,7 @@ MonoBehaviour:
   hatdrop: 0
   isTouchingWell: 0
   hatDropTimer: {fileID: 0}
-  hatDropDuration: 2
+  hatDropDuration: 1.5
   isdamaged: 0
 --- !u!82 &5186585242481114742
 AudioSource:
@@ -397,9 +397,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26d5701d3b68b2444a7938a281cf50fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canSlide: 1
-  MinthresholdFB: 1.2
-  MinthresholdLR: 1.2
+  canSlide: 0
+  MinthresholdFB: 1.5
+  MinthresholdLR: 1.5
   MaxthresholdFB: 2.3
   MaxthresholdLR: 2.3
   slideFactor: 0.75

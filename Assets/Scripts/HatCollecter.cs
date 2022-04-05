@@ -22,7 +22,9 @@ public class HatCollecter : MonoBehaviour
     public bool isTouchingWell = false;
 
     // stay for some time to drop the hat
+
     public NewTimer hatDropTimer;
+    [SerializeField]
     public float hatDropDuration;
 
     public Stack<GameObject> hatStack = new Stack<GameObject>();

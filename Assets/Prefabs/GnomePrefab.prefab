@@ -74,7 +74,7 @@ MonoBehaviour:
   hatdrop: 0
   isTouchingWell: 0
   hatDropTimer: {fileID: 0}
-  hatDropDuration: 2
+  hatDropDuration: 1.5
   isdamaged: 0
 --- !u!82 &5186585242481114742
 AudioSource:
@@ -398,13 +398,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canSlide: 0
-  MinthresholdFB: 2
-  MinthresholdLR: 2
-  MaxthresholdFB: 4
-  MaxthresholdLR: 4
-  slideFactor: 0
-  maxSpeed: 500
-  constantSpeed: 100
+  MinthresholdFB: 1.5
+  MinthresholdLR: 1.5
+  MaxthresholdFB: 2.3
+  MaxthresholdLR: 2.3
+  slideFactor: 0.75
+  maxSpeed: 150
+  constantSpeed: 60
   hatBurden: 0
   speedDecreaseEachHat: 0
   playerIndex: 0
@@ -419,6 +419,10 @@ MonoBehaviour:
   isDrop: 0
   collisionTime: 0
   knocked: 0
+  hasSeal: 0
+  respawnPos: {fileID: 0}
+  moveInWater: 0
+  moveOnIce: 0
 --- !u!114 &7712702464142486567
 MonoBehaviour:
   m_ObjectHideFlags: 0

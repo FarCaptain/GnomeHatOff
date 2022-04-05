@@ -169,6 +169,12 @@ public class PlayerMovement : MonoBehaviour
 
             }
 
+            if (speed.x > constantSpeed && speed.z > constantSpeed)
+            {
+                speed.x = maxSpeed * 0.75f;
+                speed.z = maxSpeed * 0.75f;
+            }
+
             Move(speed * Time.deltaTime);
             drawRunDust();
         }

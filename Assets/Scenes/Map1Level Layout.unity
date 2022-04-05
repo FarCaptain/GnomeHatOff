@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4468903, g: 0.4967748, b: 0.5750001, a: 1}
+  m_IndirectSpecularColor: {r: 0.43729624, g: 0.4850647, b: 0.5653363, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -22155,22 +22155,22 @@ PrefabInstance:
     - target: {fileID: 2568850845096396127, guid: 0af16847889ebed4da19d6838573a8f5,
         type: 3}
       propertyPath: COM.Array.data[0]
-      value: COM17
+      value: COM10
       objectReference: {fileID: 0}
     - target: {fileID: 2568850845096396127, guid: 0af16847889ebed4da19d6838573a8f5,
         type: 3}
       propertyPath: COM.Array.data[1]
-      value: COM21
+      value: COM6
       objectReference: {fileID: 0}
     - target: {fileID: 2568850845096396127, guid: 0af16847889ebed4da19d6838573a8f5,
         type: 3}
       propertyPath: COM.Array.data[2]
-      value: COM15
+      value: COM5
       objectReference: {fileID: 0}
     - target: {fileID: 2568850845096396127, guid: 0af16847889ebed4da19d6838573a8f5,
         type: 3}
       propertyPath: COM.Array.data[3]
-      value: COM18
+      value: COM16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0af16847889ebed4da19d6838573a8f5, type: 3}
@@ -35325,6 +35325,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gnome_blue
       objectReference: {fileID: 0}
+    - target: {fileID: 5618670615264863039, guid: ec9600dfbf4877b45bf9f03081b11f36,
+        type: 3}
+      propertyPath: canSlide
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5618670615264863039, guid: ec9600dfbf4877b45bf9f03081b11f36,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 5618670615264863039, guid: ec9600dfbf4877b45bf9f03081b11f36,
+        type: 3}
+      propertyPath: slideFactor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5618670615264863039, guid: ec9600dfbf4877b45bf9f03081b11f36,
+        type: 3}
+      propertyPath: constantSpeed
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 5618670615264863039, guid: ec9600dfbf4877b45bf9f03081b11f36,
+        type: 3}
+      propertyPath: MaxthresholdFB
+      value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5618670615264863039, guid: ec9600dfbf4877b45bf9f03081b11f36,
+        type: 3}
+      propertyPath: MaxthresholdLR
+      value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5618670615264863039, guid: ec9600dfbf4877b45bf9f03081b11f36,
+        type: 3}
+      propertyPath: MinthresholdFB
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5618670615264863039, guid: ec9600dfbf4877b45bf9f03081b11f36,
+        type: 3}
+      propertyPath: MinthresholdLR
+      value: 1.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec9600dfbf4877b45bf9f03081b11f36, type: 3}
 --- !u!1001 &1078324645922150613
@@ -35704,6 +35744,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gnome_Yellow
       objectReference: {fileID: 0}
+    - target: {fileID: 7878635103166366878, guid: 1f9998dcf3f1c494ca695eb8ce7b71f7,
+        type: 3}
+      propertyPath: canSlide
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878635103166366878, guid: 1f9998dcf3f1c494ca695eb8ce7b71f7,
+        type: 3}
+      propertyPath: slideFactor
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f9998dcf3f1c494ca695eb8ce7b71f7, type: 3}
 --- !u!1001 &3659839878208931329
@@ -35863,6 +35913,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 279850761260535367, guid: cc98039baef1ce14aab9d8259e3f25fa,
+        type: 3}
+      propertyPath: canSlide
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 279850761260535367, guid: cc98039baef1ce14aab9d8259e3f25fa,
+        type: 3}
+      propertyPath: slideFactor
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8150364944795912396, guid: cc98039baef1ce14aab9d8259e3f25fa,
         type: 3}
       propertyPath: m_Name
@@ -35932,6 +35992,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 77776385293952713, guid: 33f48ae4f3d136f4888f74668d31ada7,
+        type: 3}
+      propertyPath: canSlide
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 77776385293952713, guid: 33f48ae4f3d136f4888f74668d31ada7,
+        type: 3}
+      propertyPath: slideFactor
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8353476099963478082, guid: 33f48ae4f3d136f4888f74668d31ada7,
         type: 3}
       propertyPath: m_Name

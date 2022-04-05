@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 7460995463974118362}
   - component: {fileID: 4835091648898173498}
   - component: {fileID: 7712702464142486567}
+  - component: {fileID: 7251435636013606063}
   m_Layer: 9
   m_Name: GnomePrefab
   m_TagString: Player
@@ -414,9 +415,14 @@ MonoBehaviour:
   xval: 0
   canMove: 1
   isBumping: 0
+  SealSocket: {fileID: 0}
   isDrop: 0
   collisionTime: 0
   knocked: 0
+  hasSeal: 0
+  respawnPos: {fileID: 0}
+  moveInWater: 0
+  moveOnIce: 0
 --- !u!114 &7712702464142486567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,6 +448,18 @@ MonoBehaviour:
   playerBoxCollider: {fileID: 0}
   FlashingTime: 0.08
   TimeInterval: 0.1
+--- !u!114 &7251435636013606063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3593979466627239089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdbb07898af3664fb9a196fe7862dc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &5926540398650522765
 Animator:
   serializedVersion: 3

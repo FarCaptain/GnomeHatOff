@@ -18,6 +18,8 @@ public class PortManager : MonoBehaviour
     private int baudrate = 9600;
     private int maxPlayerCount = 0;
 
+    private GameObject gnomeSpawners;
+
     public MainGameController gameController;
 
     public GameObject gnomeRedPrefab;
@@ -50,8 +52,10 @@ public class PortManager : MonoBehaviour
             if (device.DeviceName == "BLUEHAT" || device.DeviceName == "YELLOWHAT" || device.DeviceName == "GREENHAT" ||
                 (device.DeviceName == "HC-05" && device.DeviceAddress == BluetoothAddress.Parse("98D371FDB05D")))
                 maxPlayerCount++;
-            //print(item.DeviceName + "::" + blueAddress);
+            print(device.DeviceName + "::");
         }
+
+        gnomeSpawners = GameObject.Find("GnomeSpawners");
     }
 
     // Update is called once per frame
@@ -117,20 +121,26 @@ public class PortManager : MonoBehaviour
         {
             case "G":
                 gnomePrefab = gnomePurplePrefab;
+                gnomePurplePrefab = null;
                 break;
             case "R":
                 gnomePrefab = gnomeRedPrefab;
+                gnomeRedPrefab = null;
                 break;
             case "Y":
                 gnomePrefab = gnomeYellowPrefab;
+                gnomeYellowPrefab = null;
                 break;
             default:
                 gnomePrefab = gnomeBluePrefab;
+                gnomeBluePrefab = null;
                 break;
         }
-        float tst = UnityEngine.Random.Range(-15f, 15f);
-        float tst1 = UnityEngine.Random.Range(-15f, 15f);
-        Vector3 pos = new Vector3(tst, 0f, tst1);//gnomeSpawner.transform.position;
+
+        if (gnomePrefab == null) return;
+        
+        Vector3 pos = gnomeSpawners.transform.GetChild(gameController.players.Count).position;
+        pos.y = 0f;
         VisualEffect poo = Instantiate(poofPrefab, pos, Quaternion.identity);
         poo.Play();
         //gnomePrefab.SetActive(true);

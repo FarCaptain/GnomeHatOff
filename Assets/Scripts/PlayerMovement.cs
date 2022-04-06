@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float slideFactor;
     public float maxSpeed;
+    public float percentOfMaxSpeed;
     public float constantSpeed = 100;
     [Header("The decrease of max speed each hat gives you")]
     public float hatBurden = 0;
@@ -39,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float xval;
 
-    
+
 
     Vector3 initPos = new Vector3(0, 0, 0);       // new default position for controller when calibrated
 
@@ -103,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         BoxCollider boxCollider = GetComponent<BoxCollider>();
-        if (!isDrop )
+        if (!isDrop && !moveInWater)
         {
             testCollisionTime += Time.fixedDeltaTime;
         }
@@ -171,8 +172,8 @@ public class PlayerMovement : MonoBehaviour
 
             if (speed.x > constantSpeed && speed.z > constantSpeed)
             {
-                speed.x = maxSpeed * 0.75f;
-                speed.z = maxSpeed * 0.75f;
+                speed.x = maxSpeed * percentOfMaxSpeed;
+                speed.z = maxSpeed * percentOfMaxSpeed;
             }
 
             Move(speed * Time.deltaTime);
@@ -195,7 +196,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move(float xaxis, float yaxis, float zaxis)
     {
-        
+
         if (canMove == false||isMoving)
         {
             return;

@@ -48,9 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meltMaterials:
   - {fileID: 2100000, guid: 4285ba9aaed062040814345d47a85a48, type: 2}
-  - {fileID: 2100000, guid: 1f2d33bf445224a4f8d7af5e44fcf5f6, type: 2}
   - {fileID: 2100000, guid: aa093f1f5a8adf84f9681a0b3df9ab8f, type: 2}
-  - {fileID: 2100000, guid: cdb28ddaabebf074cbd98c763657dfbd, type: 2}
   - {fileID: 2100000, guid: 81f9305fe0d81cb4aa1d8f94ed64c3c0, type: 2}
   meltTime: 1
 --- !u!111 &4903938258859287873

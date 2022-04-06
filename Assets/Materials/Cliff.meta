@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Materials/Cliff.meta
 guid: 689add07f72d4364492ffc52e3d1ec82
 folderAsset: yes
+=======
+guid: 7d165b08ed7c0c04fb323c45b78f3774
+>>>>>>> main:Assets/Scenes/SplashScreen.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

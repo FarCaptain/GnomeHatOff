@@ -38,9 +38,9 @@ public class SealBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.position = new Vector3(gameObject.transform.position.x, AdjustYPosition, gameObject.transform.position.z);
         if (!collected)
         {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, AdjustYPosition, gameObject.transform.position.z);
             if (!ApproachIce)
             {
                 float RemainingDistance = NavAgent.remainingDistance;
@@ -122,7 +122,7 @@ public class SealBehavior : MonoBehaviour
                 player.isMoving = false;
                 gameObject.transform.parent = null;
                 ReachedIsland = false;
-                collected = false;
+                //collected = false;
                 ApproachIce = false;
                 NavAgent.enabled = true;
                 PowerupTimer = ResetPowerupTimer;
@@ -130,8 +130,25 @@ public class SealBehavior : MonoBehaviour
                 player.collisionTime = 1;
                 gameObject.GetComponent<BoxCollider>().enabled = true;
                 player.moveInWater = false;
+                FindNearestPoint();
             }
         }
+    }
+
+    void FindNearestPoint()
+    {
+        Vector3 NearestPosition = new Vector3(10, 10, 10);
+        Vector3 FinalDestination = new Vector3(0, 0, 0);
+        foreach (Transform point in points)
+        {
+            if ((gameObject.transform.position - point.position).magnitude < NearestPosition.magnitude)
+            {
+                NearestPosition = gameObject.transform.position - point.position;
+                FinalDestination = point.position;
+                //des = point;
+            }
+        }
+        collected = false;
     }
     void EnableCollider()
     {
@@ -140,7 +157,8 @@ public class SealBehavior : MonoBehaviour
     private void FixedUpdate()
     {
         if(!collected)
-        { 
+        {
+            
             CirclingTimer -= Time.deltaTime;
             if(CirclingTimer<=0)
             {
@@ -150,6 +168,7 @@ public class SealBehavior : MonoBehaviour
         }
         else if (collected)
         {
+            gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
             CirclingTimer = ResetCirclingTimer;
             PowerupTimer -= Time.deltaTime;
         }
@@ -168,7 +187,8 @@ public class SealBehavior : MonoBehaviour
             Sealsocket = other.gameObject.GetComponent<PlayerMovement>().SealSocket;
             gameObject.transform.parent = other.gameObject.transform;
             gameObject.transform.localPosition = Sealsocket.transform.localPosition;
-            gameObject.transform.localRotation = Quaternion.Euler(0, 90, 0);
+
+            gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
     }
 }

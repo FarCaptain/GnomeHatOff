@@ -89,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        
 
         if (canMove == false || isMoving)
         {

@@ -3262,6 +3262,18 @@ Transform:
   m_Father: {fileID: 918028723}
   m_RootOrder: 48
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &288085366 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2848886441423072755, guid: b0a006b4d90729b4dae845579e0ffe10,
+    type: 3}
+  m_PrefabInstance: {fileID: 20805993}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &289360245
 GameObject:
   m_ObjectHideFlags: 0
@@ -12908,17 +12920,17 @@ PrefabInstance:
         type: 3}
       propertyPath: timerText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 288085366}
     - target: {fileID: 20594180178891553, guid: dd5cbef4725c5454b95c1af72f2bbe40,
         type: 3}
       propertyPath: hatRushAnim
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1618126268}
     - target: {fileID: 20594180178891553, guid: dd5cbef4725c5454b95c1af72f2bbe40,
         type: 3}
       propertyPath: hatRushMessage
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1618126266}
     - target: {fileID: 20594180178891553, guid: dd5cbef4725c5454b95c1af72f2bbe40,
         type: 3}
       propertyPath: mushroomManPrefab
@@ -17122,6 +17134,18 @@ Transform:
   m_Father: {fileID: 918028723}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1618126266 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 711133231, guid: b0a006b4d90729b4dae845579e0ffe10,
+    type: 3}
+  m_PrefabInstance: {fileID: 20805993}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1618126268 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 711133235, guid: b0a006b4d90729b4dae845579e0ffe10,
+    type: 3}
+  m_PrefabInstance: {fileID: 20805993}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1618465917
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24207,6 +24231,11 @@ PrefabInstance:
       propertyPath: m_RenderPostProcessing
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3265288508040520158, guid: 318cadf814c17b34ba8fa247fde638a8,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3e754fca966944242a99680881f57892, type: 3}
     - target: {fileID: 3265288508040520159, guid: 318cadf814c17b34ba8fa247fde638a8,
         type: 3}
       propertyPath: players.Array.data[0]

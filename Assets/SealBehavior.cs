@@ -22,7 +22,11 @@ public class SealBehavior : MonoBehaviour
     private float ResetPowerupTimer;
     private bool ApproachIce = false;
     private bool ReachedIsland = false;
+    private bool once = false;
+    private bool FindNearestPointCheck = false;
     private GameObject Sealsocket;
+    private Vector3 NearestPosition;
+    private Vector3 FinalDestination;
     public GameObject fence;
     public float AdjustYPosition = 0;
     void Start()
@@ -93,10 +97,13 @@ public class SealBehavior : MonoBehaviour
         }
         else if(collected && PowerupTimer<=0)
         {
-            gameObject.transform.GetComponentInParent<PlayerMovement>().hasSeal = false;
+            if(gameObject.transform.GetComponentInParent<PlayerMovement>())
+            {
+                gameObject.transform.GetComponentInParent<PlayerMovement>().hasSeal = false;
+                gameObject.transform.GetComponentInParent<PlayerMovement>().isMoving = true;
+            }
 
-            gameObject.transform.GetComponentInParent<PlayerMovement>().isMoving = true;
-            if (!ReachedIsland)
+            if (!ReachedIsland && !FindNearestPointCheck)
             {
                 Vector3 NearestIceAnchorPosition = new Vector3(10, 10, 10);
                 Vector3 FinalDestination = new Vector3(0, 0, 0);
@@ -115,7 +122,7 @@ public class SealBehavior : MonoBehaviour
                     ReachedIsland = true;
                 }
             }
-            else if(ReachedIsland)
+            else if(ReachedIsland && !FindNearestPointCheck)
             {
                 
                 PlayerMovement player = gameObject.transform.GetComponentInParent<PlayerMovement>();
@@ -125,11 +132,16 @@ public class SealBehavior : MonoBehaviour
                 //collected = false;
                 ApproachIce = false;
                 NavAgent.enabled = true;
-                PowerupTimer = ResetPowerupTimer;
+                
                 player.transform.position = des.Find("Point").transform.position;
                 player.collisionTime = 1;
                 gameObject.GetComponent<BoxCollider>().enabled = true;
                 player.moveInWater = false;
+                FindNearestPoint();
+                FindNearestPointCheck = true;
+            }
+            else if(FindNearestPointCheck)
+            {
                 FindNearestPoint();
             }
         }
@@ -137,18 +149,38 @@ public class SealBehavior : MonoBehaviour
 
     void FindNearestPoint()
     {
-        Vector3 NearestPosition = new Vector3(10, 10, 10);
-        Vector3 FinalDestination = new Vector3(0, 0, 0);
+        if (!once)
+        {
+        NearestPosition = new Vector3(10, 10, 10);
+        FinalDestination = new Vector3(0, 0, 0);
         foreach (Transform point in points)
         {
             if ((gameObject.transform.position - point.position).magnitude < NearestPosition.magnitude)
             {
                 NearestPosition = gameObject.transform.position - point.position;
                 FinalDestination = point.position;
-                //des = point;
             }
         }
-        collected = false;
+            NavAgent.SetDestination(FinalDestination);
+            once = true;
+        }
+        if ((gameObject.transform.position.x - FinalDestination.x) <= 0.25 && (gameObject.transform.position.z - FinalDestination.z) <= 0.25)
+        {
+            //ReachedIsland = false;
+            collected = false;
+            once = false;
+            FindNearestPointCheck = false;
+            PowerupTimer = ResetPowerupTimer;
+            for(int i = 0; i < points.Length; i++)
+            {
+                if(points[i].position == FinalDestination)
+                {
+                    counter = i;
+                    break;
+                }
+            }
+        }
+
     }
     void EnableCollider()
     {

@@ -320,6 +320,11 @@ PrefabInstance:
       objectReference: {fileID: 1284960302}
     - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
         type: 3}
+      propertyPath: PlayerAmount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848886440049431414, guid: b0a006b4d90729b4dae845579e0ffe10,
+        type: 3}
       propertyPath: fires.Array.data[0]
       value: 
       objectReference: {fileID: 1607646050}
@@ -688,7 +693,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &44167010
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1392,7 +1397,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &101670109
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2634,7 +2639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &158418738
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2730,7 +2735,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &162489470
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2975,7 +2980,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &189390994
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3424,7 +3429,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &220500159
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3730,7 +3735,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &235599735
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3916,7 +3921,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &242742129
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4289,7 +4294,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &260868849
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4473,7 +4478,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &271933926
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4894,7 +4899,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &284798061
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5001,7 +5006,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &296996207
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6174,7 +6179,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &375380895
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6483,7 +6488,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &390279495
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6609,7 +6614,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &413896611
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6974,7 +6979,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &448694946
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7294,7 +7299,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &461461995
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7609,7 +7614,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &473315945
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8037,7 +8042,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &492030214
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8511,7 +8516,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &505438129
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8606,7 +8611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &505694982
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8866,7 +8871,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &511673524
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8960,7 +8965,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &522232061
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10069,7 +10074,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &575195823
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10571,7 +10576,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &614239781
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10666,7 +10671,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &620432763
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10762,7 +10767,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &622506478
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11349,7 +11354,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &652337337
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11544,7 +11549,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &670999966
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12255,7 +12260,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &712874077
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12796,7 +12801,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &736109401
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12996,7 +13001,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &752641187
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13954,7 +13959,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &813041775
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14200,7 +14205,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &822728043
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14535,7 +14540,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &838228898
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15139,7 +15144,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &873965311
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15353,7 +15358,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &911483377
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15603,7 +15608,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &924800170
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16262,7 +16267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &971840862
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16570,7 +16575,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &984759377
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16702,7 +16707,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1003809318
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16826,7 +16831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1006506853
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18190,7 +18195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1102961787
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18406,7 +18411,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1110404911
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18621,7 +18626,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1118127698
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18716,7 +18721,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1129905670
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19056,7 +19061,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1139527475
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19360,7 +19365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1167699249
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19455,7 +19460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1172806225
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19581,7 +19586,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1186153536
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19707,7 +19712,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1186467025
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19803,7 +19808,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1189543637
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20616,7 +20621,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1246670774
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20871,7 +20876,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1250602577
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -21116,7 +21121,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1265493644
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -21211,7 +21216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1267985553
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -21727,7 +21732,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1296710513
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -22535,7 +22540,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1332337993
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -22877,7 +22882,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1347533838
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -23009,7 +23014,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1387763291
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -23594,7 +23599,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1415220744
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -24050,7 +24055,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1441990289
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -24146,7 +24151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1442763750
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -24242,7 +24247,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1458079370
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -24567,7 +24572,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1480692504
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -24813,7 +24818,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1502045396
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -25345,7 +25350,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1543016440
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -25441,7 +25446,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1549451487
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -26260,7 +26265,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1608803216
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -26499,7 +26504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1621643698
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -26979,7 +26984,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1647146760
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -27978,7 +27983,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1693950933
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -28203,7 +28208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1715043937
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -28548,7 +28553,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1737230584
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -29124,7 +29129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1786899755
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -29219,7 +29224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1789063425
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -29604,7 +29609,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1807609355
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -29774,7 +29779,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1820216469
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -30140,7 +30145,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1839283387
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -30325,7 +30330,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1840862311
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -30421,7 +30426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1841562431
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -30800,7 +30805,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1853988291
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -30895,7 +30900,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1865825198
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -30990,7 +30995,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1867622543
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -31086,7 +31091,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1873781106
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -31580,7 +31585,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1927188698
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -31675,7 +31680,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1927444416
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -31900,7 +31905,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1933128755
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -32195,7 +32200,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1937575566
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -32425,7 +32430,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1950656814
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -32520,7 +32525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1951061843
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -32813,7 +32818,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1953151032
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -32908,7 +32913,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1955068044
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -33124,7 +33129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1978455937
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -33309,7 +33314,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1987257090
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -33794,7 +33799,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &2042136436
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -34039,7 +34044,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &2065172034
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -34405,7 +34410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &2090383341
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -34591,7 +34596,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &2103875433
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -34881,7 +34886,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &2127485144
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -35801,6 +35806,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7878635103166366878, guid: 1f9998dcf3f1c494ca695eb8ce7b71f7,
         type: 3}
+      propertyPath: playerIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878635103166366878, guid: 1f9998dcf3f1c494ca695eb8ce7b71f7,
+        type: 3}
       propertyPath: slideFactor
       value: 0
       objectReference: {fileID: 0}
@@ -35970,6 +35980,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 279850761260535367, guid: cc98039baef1ce14aab9d8259e3f25fa,
         type: 3}
+      propertyPath: playerIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 279850761260535367, guid: cc98039baef1ce14aab9d8259e3f25fa,
+        type: 3}
       propertyPath: slideFactor
       value: 0
       objectReference: {fileID: 0}
@@ -36046,6 +36061,11 @@ PrefabInstance:
         type: 3}
       propertyPath: canSlide
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 77776385293952713, guid: 33f48ae4f3d136f4888f74668d31ada7,
+        type: 3}
+      propertyPath: playerIndex
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 77776385293952713, guid: 33f48ae4f3d136f4888f74668d31ada7,
         type: 3}

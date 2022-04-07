@@ -404,6 +404,7 @@ MonoBehaviour:
   MaxthresholdLR: 2.3
   slideFactor: 0.75
   maxSpeed: 150
+  percentOfMaxSpeed: 0
   constantSpeed: 60
   hatBurden: 0
   speedDecreaseEachHat: 0
@@ -413,10 +414,12 @@ MonoBehaviour:
   shownSpeed: {x: 0, y: 0, z: 0}
   keyboardSpeed: 210
   xval: 0
+  isMoving: 0
   canMove: 1
   isBumping: 0
   SealSocket: {fileID: 0}
   isDrop: 0
+  speed: {x: 0, y: 0, z: 0}
   collisionTime: 0
   knocked: 0
   hasSeal: 0
@@ -572,7 +575,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6151119993173280829}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.052, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4227668271868745227}

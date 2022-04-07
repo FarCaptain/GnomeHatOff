@@ -24,8 +24,10 @@ public class SealBehavior : MonoBehaviour
     private bool ReachedIsland = false;
     private GameObject Sealsocket;
     public GameObject fence;
+    public float AdjustYPosition = 0;
     void Start()
     {
+        
         points = CustomNavMesh.GetComponentsInChildren<Transform>();
         IceAnchors = CustomIceAnchors.GetComponentsInChildren<Transform>();
         NavAgent = GetComponent<NavMeshAgent>();
@@ -36,7 +38,8 @@ public class SealBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!collected)
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x, AdjustYPosition, gameObject.transform.position.z);
+        if (!collected)
         {
             if (!ApproachIce)
             {
@@ -165,6 +168,7 @@ public class SealBehavior : MonoBehaviour
             Sealsocket = other.gameObject.GetComponent<PlayerMovement>().SealSocket;
             gameObject.transform.parent = other.gameObject.transform;
             gameObject.transform.localPosition = Sealsocket.transform.localPosition;
+            gameObject.transform.localRotation = Quaternion.Euler(0, 90, 0);
         }
     }
 }

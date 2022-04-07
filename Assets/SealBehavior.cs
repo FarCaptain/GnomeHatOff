@@ -211,6 +211,7 @@ public class SealBehavior : MonoBehaviour
         if (other.gameObject.tag == "Player" && CirclingTimer <= 0)
         {
             //fence.SetActive(false);
+            other.gameObject.GetComponent<PlayerMovement>().canSlide = false;
             collected = true;
             other.gameObject.GetComponent<PlayerMovement>().hasSeal = true;
             NavAgent.enabled = false;

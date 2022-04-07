@@ -6359,6 +6359,16 @@ PrefabInstance:
       propertyPath: level
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2568850845096396127, guid: 0af16847889ebed4da19d6838573a8f5,
+        type: 3}
+      propertyPath: COM.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2568850845096396127, guid: 0af16847889ebed4da19d6838573a8f5,
+        type: 3}
+      propertyPath: COM.Array.data[3]
+      value: COM4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0af16847889ebed4da19d6838573a8f5, type: 3}
 --- !u!1 &536304982
@@ -13018,17 +13028,17 @@ PrefabInstance:
         type: 3}
       propertyPath: timerText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2848886441437533338}
     - target: {fileID: 20594180178891553, guid: dd5cbef4725c5454b95c1af72f2bbe40,
         type: 3}
       propertyPath: hatRushAnim
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 727609690}
     - target: {fileID: 20594180178891553, guid: dd5cbef4725c5454b95c1af72f2bbe40,
         type: 3}
       propertyPath: hatRushMessage
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 727609670}
     - target: {fileID: 20594180178891553, guid: dd5cbef4725c5454b95c1af72f2bbe40,
         type: 3}
       propertyPath: mushroomManPrefab
@@ -25171,6 +25181,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5618670615264863039, guid: ec9600dfbf4877b45bf9f03081b11f36,
         type: 3}
+      propertyPath: canSlide
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5618670615264863039, guid: ec9600dfbf4877b45bf9f03081b11f36,
+        type: 3}
       propertyPath: respawnPos
       value: 
       objectReference: {fileID: 1699309438}
@@ -26050,6 +26065,11 @@ PrefabInstance:
       propertyPath: m_RenderPostProcessing
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3265288508040520158, guid: 318cadf814c17b34ba8fa247fde638a8,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3e754fca966944242a99680881f57892, type: 3}
     - target: {fileID: 3265288508040520159, guid: 318cadf814c17b34ba8fa247fde638a8,
         type: 3}
       propertyPath: players.Array.data[0]
@@ -26289,6 +26309,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: PlayerCollider
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878635103166366878, guid: 1f9998dcf3f1c494ca695eb8ce7b71f7,
+        type: 3}
+      propertyPath: canSlide
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7878635103166366878, guid: 1f9998dcf3f1c494ca695eb8ce7b71f7,
         type: 3}
@@ -26578,6 +26603,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 279850761260535367, guid: cc98039baef1ce14aab9d8259e3f25fa,
         type: 3}
+      propertyPath: canSlide
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 279850761260535367, guid: cc98039baef1ce14aab9d8259e3f25fa,
+        type: 3}
       propertyPath: respawnPos
       value: 
       objectReference: {fileID: 142923561}
@@ -26672,6 +26702,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 77776385293952713, guid: 33f48ae4f3d136f4888f74668d31ada7,
         type: 3}
+      propertyPath: canSlide
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 77776385293952713, guid: 33f48ae4f3d136f4888f74668d31ada7,
+        type: 3}
       propertyPath: respawnPos
       value: 
       objectReference: {fileID: 582604191}
@@ -26688,7 +26723,7 @@ PrefabInstance:
     - target: {fileID: 8353476099963478082, guid: 33f48ae4f3d136f4888f74668d31ada7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8693727310705703672, guid: 33f48ae4f3d136f4888f74668d31ada7,
         type: 3}

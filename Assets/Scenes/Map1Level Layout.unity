@@ -20172,51 +20172,6 @@ PrefabInstance:
       propertyPath: mushroomManPrefab
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 20594180178891553, guid: dd5cbef4725c5454b95c1af72f2bbe40,
-        type: 3}
-      propertyPath: timeCurve.m_Curve.Array.data[4].time
-      value: 55
-      objectReference: {fileID: 0}
-    - target: {fileID: 20594180178891553, guid: dd5cbef4725c5454b95c1af72f2bbe40,
-        type: 3}
-      propertyPath: timeCurve.m_Curve.Array.data[0].value
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 20594180178891553, guid: dd5cbef4725c5454b95c1af72f2bbe40,
-        type: 3}
-      propertyPath: timeCurve.m_Curve.Array.data[1].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 20594180178891553, guid: dd5cbef4725c5454b95c1af72f2bbe40,
-        type: 3}
-      propertyPath: timeCurve.m_Curve.Array.data[2].value
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 20594180178891553, guid: dd5cbef4725c5454b95c1af72f2bbe40,
-        type: 3}
-      propertyPath: timeCurve.m_Curve.Array.data[3].value
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 20594180178891553, guid: dd5cbef4725c5454b95c1af72f2bbe40,
-        type: 3}
-      propertyPath: timeCurve.m_Curve.Array.data[0].inSlope
-      value: -0.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 20594180178891553, guid: dd5cbef4725c5454b95c1af72f2bbe40,
-        type: 3}
-      propertyPath: timeCurve.m_Curve.Array.data[1].inSlope
-      value: -0.0005107583
-      objectReference: {fileID: 0}
-    - target: {fileID: 20594180178891553, guid: dd5cbef4725c5454b95c1af72f2bbe40,
-        type: 3}
-      propertyPath: timeCurve.m_Curve.Array.data[0].outSlope
-      value: -0.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 20594180178891553, guid: dd5cbef4725c5454b95c1af72f2bbe40,
-        type: 3}
-      propertyPath: timeCurve.m_Curve.Array.data[1].outSlope
-      value: -0.0005107583
-      objectReference: {fileID: 0}
     - target: {fileID: 20594180178891566, guid: dd5cbef4725c5454b95c1af72f2bbe40,
         type: 3}
       propertyPath: m_RootOrder
@@ -35387,38 +35342,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5618670615264863039, guid: ec9600dfbf4877b45bf9f03081b11f36,
         type: 3}
-      propertyPath: maxSpeed
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 5618670615264863039, guid: ec9600dfbf4877b45bf9f03081b11f36,
-        type: 3}
       propertyPath: slideFactor
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5618670615264863039, guid: ec9600dfbf4877b45bf9f03081b11f36,
-        type: 3}
-      propertyPath: constantSpeed
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 5618670615264863039, guid: ec9600dfbf4877b45bf9f03081b11f36,
-        type: 3}
-      propertyPath: MaxthresholdFB
-      value: 2.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5618670615264863039, guid: ec9600dfbf4877b45bf9f03081b11f36,
-        type: 3}
-      propertyPath: MaxthresholdLR
-      value: 2.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5618670615264863039, guid: ec9600dfbf4877b45bf9f03081b11f36,
-        type: 3}
-      propertyPath: MinthresholdFB
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5618670615264863039, guid: ec9600dfbf4877b45bf9f03081b11f36,
-        type: 3}
-      propertyPath: MinthresholdLR
-      value: 1.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec9600dfbf4877b45bf9f03081b11f36, type: 3}

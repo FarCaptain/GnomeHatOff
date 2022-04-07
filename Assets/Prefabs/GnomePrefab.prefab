@@ -398,9 +398,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canSlide: 0
-  MinthresholdFB: 1.5
-  MinthresholdLR: 1.5
-  MaxthresholdFB: 2.3
+  MinthresholdFB: 1.1
+  MinthresholdLR: 1.2
+  MaxthresholdFB: 2
   MaxthresholdLR: 2.3
   slideFactor: 0.75
   maxSpeed: 150

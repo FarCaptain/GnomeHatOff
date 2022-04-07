@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     ParticleSystem.MainModule vfxMainModule;
     bool reversePulse = false;
 
+    private bool firstFrame = true;
+
     //Cached Player Components
     Rigidbody playerRigidBody;
     PlayerMovement playerMovement;
@@ -48,12 +50,21 @@ public class Player : MonoBehaviour
 
         stealHatIFrame = gameObject.AddComponent<NewTimer>();
         stealHatIFrame.MaxTime = iFrameMaxTime;
+
+        GetComponent<BoxCollider>().enabled = false;
     }
 
     // Update is called once per frame
     void Update()
 	{
-		if (superBumpTimer != null && superBumpTimer.TimerStart == false)
+        // hack to fix the floating when spawning it
+        // caused by the box collider
+        if (firstFrame)
+            firstFrame = true;
+        else if (GetComponent<BoxCollider>().enabled == false)
+            GetComponent<BoxCollider>().enabled = true;
+
+        if (superBumpTimer != null && superBumpTimer.TimerStart == false)
 		{
 			superBump = false;
 			playerRigidBody.mass = 1f;

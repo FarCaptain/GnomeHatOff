@@ -14,6 +14,8 @@ TagManager:
   - DamageAndStealHat
   - DamageAndStealHatAndKnockback
   - Ground
+  - Undefined
+  - PlayerCollider
   layers:
   - Default
   - TransparentFX
@@ -27,9 +29,9 @@ TagManager:
   - Moveables
   - Damage
   - IFrames
-  - 
-  - 
-  - 
+  - Plane
+  - Player
+  - UISelector
   - 
   - 
   - 

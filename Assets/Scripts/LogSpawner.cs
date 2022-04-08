@@ -11,11 +11,17 @@ public class LogSpawner : MonoBehaviour
     [SerializeField] GameObject logToSpawn;
     [SerializeField] GameObject spawnLocation;
     private Animator logPileAnimator;
+    private AudioSource logSpawnerAudioSource;
  
+    void Awake()
+	{
+        logSpawnerAudioSource = gameObject.GetComponent<AudioSource>();
+        logPileAnimator = gameObject.GetComponent<Animator>();
+    }
 
     void OnEnable()
 	{
-        logPileAnimator = gameObject.GetComponent<Animator>();
+        AudioManager.PlayLogAudioClip(LogAudioStates.Shaking, logSpawnerAudioSource);
         logPileAnimator.SetBool("spawnWarningPlaying", true);
         hasLogSpawned = false;
     }

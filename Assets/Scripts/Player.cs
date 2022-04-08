@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
         // hack to fix the floating when spawning it
         // caused by the box collider
         if (firstFrame)
-            firstFrame = true;
+            firstFrame = false;
         else if (GetComponent<BoxCollider>().enabled == false)
             GetComponent<BoxCollider>().enabled = true;
 

@@ -26,7 +26,6 @@ public class HatFade : MonoBehaviour
     private bool dropAnimationOn = false;
     private Vector3 dropAnimationEnd;
     private float dropAnimationTime = 0f;
-    private NewTimer pauseTimer;
     public float dropAnimationDuration;
     public float pauseBetweenDropAnimations;
 
@@ -35,9 +34,6 @@ public class HatFade : MonoBehaviour
         hatAudioSource = GetComponent<AudioSource>();
         currentTransparency = defaultTransparency;
         ApplyTransparency();
-
-        pauseTimer = gameObject.AddComponent<NewTimer>();
-        pauseTimer.TimerStart = false;
     }
 
     void FixedUpdate()
@@ -83,7 +79,7 @@ public class HatFade : MonoBehaviour
         }
 
         /// Drop Animation
-        if(dropAnimationOn && pauseTimer.TimerStart == false)
+        if(dropAnimationOn)
         {
             // interpolation
             Vector3 pos = Vector3.Lerp(transform.position, dropAnimationEnd, dropAnimationTime/ dropAnimationDuration);
@@ -92,12 +88,14 @@ public class HatFade : MonoBehaviour
             transform.position = pos;
 
             // get to the end
-            if(dropAnimationTime == dropAnimationDuration)
+            if(dropAnimationTime >= dropAnimationDuration || transform.position == dropAnimationEnd)
             {
                 // reset things
                 dropAnimationTime = 0f;
                 dropAnimationOn = false;
                 dropAnimationEnd = Vector3.zero;
+
+                Destroy(gameObject);
             }
         }
     }
@@ -135,15 +133,12 @@ public class HatFade : MonoBehaviour
 
     public void RegisterDropAnimation(Vector3 ed)
     {
-        if (dropAnimationOn)
-            return;
-
-        transform.parent = null;
-        dropAnimationOn = true;
-        dropAnimationEnd = ed;
-
-        pauseTimer.MaxTime = pauseBetweenDropAnimations;
-        pauseTimer.TimerStart = true;
+        if (dropAnimationOn == false)
+        {
+            transform.parent = null;
+            dropAnimationOn = true;
+            dropAnimationEnd = ed;
+        }
     }
 
     public void hatFadeDisable()

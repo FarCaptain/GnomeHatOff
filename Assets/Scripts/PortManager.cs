@@ -140,7 +140,7 @@ public class PortManager : MonoBehaviour
         if (gnomePrefab == null) return;
         
         Vector3 pos = gnomeSpawners.transform.GetChild(gameController.players.Count).position;
-        pos.y = 0f;
+        pos.y = 0.1f;
         VisualEffect poo = Instantiate(poofPrefab, pos, Quaternion.identity);
         poo.Play();
         //gnomePrefab.SetActive(true);

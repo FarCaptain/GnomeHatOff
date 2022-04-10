@@ -74,8 +74,7 @@ public class PlayerMovement : MonoBehaviour
         isDrop = false;
         collisionTime = 1;
         testCollisionTime = 0;
-        level = GameObject.Find("GameManager").GetComponent<MainGameController>().level;
-
+        level = MainGameController.instance.level;
     }
 
 

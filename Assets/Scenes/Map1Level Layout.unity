@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -35335,6 +35335,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gnome_blue
       objectReference: {fileID: 0}
+    - target: {fileID: 4539721140244604340, guid: ec9600dfbf4877b45bf9f03081b11f36,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5618670615264863039, guid: ec9600dfbf4877b45bf9f03081b11f36,
         type: 3}
       propertyPath: canSlide
@@ -35724,6 +35729,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gnome_Yellow
       objectReference: {fileID: 0}
+    - target: {fileID: 2283144239870263829, guid: 1f9998dcf3f1c494ca695eb8ce7b71f7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7878635103166366878, guid: 1f9998dcf3f1c494ca695eb8ce7b71f7,
         type: 3}
       propertyPath: canSlide
@@ -35918,6 +35928,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gnome_Red
       objectReference: {fileID: 0}
+    - target: {fileID: 8150364944795912396, guid: cc98039baef1ce14aab9d8259e3f25fa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8813607213909873270, guid: cc98039baef1ce14aab9d8259e3f25fa,
         type: 3}
       propertyPath: m_RootOrder
@@ -36001,6 +36016,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gnome_Purple
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353476099963478082, guid: 33f48ae4f3d136f4888f74668d31ada7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8693727310705703672, guid: 33f48ae4f3d136f4888f74668d31ada7,
         type: 3}

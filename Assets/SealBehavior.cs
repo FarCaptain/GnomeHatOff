@@ -29,6 +29,7 @@ public class SealBehavior : MonoBehaviour
     private Vector3 FinalDestination;
     public GameObject fence;
     public float AdjustYPosition = 0;
+    public Animator sealanimator;
     void Start()
     {
         
@@ -91,13 +92,15 @@ public class SealBehavior : MonoBehaviour
                 }
                 else if(destinationset && NavAgent.remainingDistance != Mathf.Infinity && NavAgent.remainingDistance < 0.15f)
                 {
+                    sealanimator.SetBool("moveentry", false);
+                    sealanimator.SetBool("clapentry", true);
                     NavAgent.SetDestination(gameObject.transform.position);
                 }
             }
         }
         else if(collected && PowerupTimer<=0)
         {
-
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, AdjustYPosition, gameObject.transform.position.z);
 
             if (!ReachedIsland && !FindNearestPointCheck)
             {
@@ -120,6 +123,7 @@ public class SealBehavior : MonoBehaviour
                     {
                         gameObject.transform.GetComponentInParent<PlayerMovement>().hasSeal = false;
                         gameObject.transform.GetComponentInParent<PlayerMovement>().isMoving = false;
+                        NavAgent.enabled = true;
                     }
                 }
             }
@@ -131,7 +135,7 @@ public class SealBehavior : MonoBehaviour
                 gameObject.transform.parent = null;
                 ReachedIsland = false;
                 ApproachIce = false;
-                NavAgent.enabled = true;
+                
                 
                 player.transform.position = des.Find("Point").transform.position;
                 player.isMoving = false;
@@ -151,6 +155,8 @@ public class SealBehavior : MonoBehaviour
 
     void FindNearestPoint()
     {
+        sealanimator.SetBool("moveentry", true);
+        sealanimator.SetBool("clapentry", false);
         if (!once)
         {
         NearestPosition = new Vector3(10, 10, 10);
@@ -205,6 +211,8 @@ public class SealBehavior : MonoBehaviour
             gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
             CirclingTimer = ResetCirclingTimer;
             PowerupTimer -= Time.deltaTime;
+            sealanimator.SetBool("moveentry", true);
+            sealanimator.SetBool("clapentry", false);
         }
     }
 

@@ -95,7 +95,7 @@ public class IcePlane : MonoBehaviour
             }
             for (float j = initPos; j <= size.y * 2.763f * iceSize - 2.763f * 0.5f * iceSize; j += 2.763f * iceSize)
             {
-                GameObject go_ice = Instantiate(ice, new Vector3(j, 0, i), Quaternion
+                GameObject go_ice = Instantiate(ice, new Vector3(j, -0.1f, i), Quaternion
                     .identity, transform);
                 go_ice.transform.localScale *= iceSize;
                 float distance = Vector3.Distance(go_ice.transform.position, transform.position);

@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 3593979466627239089, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
       propertyPath: m_Name
-      value: Gnome_blue
+      value: Gnome_blue Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4227668271868745227, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
@@ -66,36 +66,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4835091648898173498, guid: cdc8e89d69cc6564c87384009a43f4b7,
-        type: 3}
-      propertyPath: maxSpeed
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 4835091648898173498, guid: cdc8e89d69cc6564c87384009a43f4b7,
-        type: 3}
-      propertyPath: constantSpeed
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4835091648898173498, guid: cdc8e89d69cc6564c87384009a43f4b7,
-        type: 3}
-      propertyPath: MaxthresholdFB
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4835091648898173498, guid: cdc8e89d69cc6564c87384009a43f4b7,
-        type: 3}
-      propertyPath: MaxthresholdLR
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4835091648898173498, guid: cdc8e89d69cc6564c87384009a43f4b7,
-        type: 3}
-      propertyPath: MinthresholdFB
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4835091648898173498, guid: cdc8e89d69cc6564c87384009a43f4b7,
-        type: 3}
-      propertyPath: MinthresholdLR
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7058082682492436380, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}

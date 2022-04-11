@@ -16,6 +16,7 @@ TagManager:
   - Ground
   - Undefined
   - PlayerCollider
+  - Seal
   layers:
   - Default
   - TransparentFX
@@ -31,7 +32,7 @@ TagManager:
   - IFrames
   - Plane
   - Player
-  - UISelector
+  - 
   - 
   - 
   - 

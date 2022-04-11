@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float slideFactor;
     public float maxSpeed;
+    public float percentOfMaxSpeed;
     public float constantSpeed = 100;
     [Header("The decrease of max speed each hat gives you")]
     public float hatBurden = 0;
@@ -43,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 initPos = new Vector3(0, 0, 0);       // new default position for controller when calibrated
 
+    public bool isMoving = false;
     [HideInInspector]
     public bool canMove = true;
     public bool isBumping = false;
@@ -50,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
     //for map2
     public GameObject SealSocket;
     public bool isDrop;
-    Vector3 speed;
+    public Vector3 speed;
     public float collisionTime;
     float testCollisionTime;
     Vector3 dropSpeed;
@@ -64,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
     public bool moveOnIce;
     void Start()
     {
-        
+
         hasSeal = false;
         disabled = false;
         knocked = false;
@@ -72,8 +74,7 @@ public class PlayerMovement : MonoBehaviour
         isDrop = false;
         collisionTime = 1;
         testCollisionTime = 0;
-        level = GameObject.Find("GameManager").GetComponent<MainGameController>().level;
-
+        level = MainGameController.instance.level;
     }
 
 
@@ -87,6 +88,12 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        
+
+        if (canMove == false || isMoving)
+        {
+            return;
+        }
         if (hasSeal)
         {
             moveInWater = true;
@@ -104,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (level == 2 && testCollisionTime > 0.1f)
         {
-            if (collisionTime < 0.05 && !moveInWater)
+            if (collisionTime < 0.05&&!hasSeal && !moveInWater)
             {
                 testCollisionTime = 0;
                 isDrop = true;
@@ -163,6 +170,12 @@ public class PlayerMovement : MonoBehaviour
 
             }
 
+            if (speed.x > constantSpeed && speed.z > constantSpeed)
+            {
+                speed.x = maxSpeed * percentOfMaxSpeed;
+                speed.z = maxSpeed * percentOfMaxSpeed;
+            }
+
             Move(speed * Time.deltaTime);
             drawRunDust();
         }
@@ -183,7 +196,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move(float xaxis, float yaxis, float zaxis)
     {
-        if (canMove == false)
+
+        if (canMove == false||isMoving)
         {
             return;
         }

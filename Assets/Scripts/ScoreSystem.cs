@@ -62,6 +62,7 @@ public class ScoreSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
 	{
+        gameManager = MainGameController.instance;
         PlayerAmount = gameManager.COM.Count;
         for (int id = 0; id < 2; id++)
 			for (int i = 0; i < fires[id].transform.childCount; i++)
@@ -361,11 +362,15 @@ public class ScoreSystem : MonoBehaviour
     
     private void AddScore(GameObject player, int score, int hatCount)
     {
-        int player_index = player.GetComponent<Player>().playerIndex;
+        int player_index = player.GetComponent<PlayerMovement>().playerIndex;
+        Debug.Log("DebugLog - " + player.name + " Index: " + player_index);
 
-        int newScore = playerScores[player_index] + score;
-        Debug.Log("DebugLog - " + player.name +" Index: " + player_index);
-        playerScores.Remove(player_index);
+        int newScore = score;
+        if (playerScores.ContainsKey(player_index))
+        {
+            newScore = playerScores[player_index] + score;
+            playerScores.Remove(player_index);
+        }
         playerScores.Add(player_index, newScore);
 
         go_playerScores[player_index].transform.Find("Text").GetComponent<TMPro.TextMeshProUGUI>().text = newScore.ToString();

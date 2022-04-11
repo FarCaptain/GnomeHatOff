@@ -8,7 +8,7 @@ public class ColliderCheck : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -16,12 +16,13 @@ public class ColliderCheck : MonoBehaviour
         {
             if (!player.isDrop)
                 player.knocked = true;
-
+           
         }
+       
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag.Equals("Ground")||other.tag.Equals("Knockback"))
+        if (other.tag.Equals("Ground") || other.tag.Equals("Knockback"))
         {
             player.isDrop = false;
             player.collisionTime += 0.01f;
@@ -32,7 +33,7 @@ public class ColliderCheck : MonoBehaviour
     {
         if (other.tag.Equals("Ground"))
         {
-           
+
 
         }
     }
@@ -49,4 +50,5 @@ public class ColliderCheck : MonoBehaviour
             GetComponent<BoxCollider>().isTrigger = true;
         }
     }
+    
 }

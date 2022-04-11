@@ -63,7 +63,7 @@ public class Ice : MonoBehaviour
             if (health == 1)
             {
                 PlayMeltAnimation();
-    
+
                 Invoke("DestroyGameObject", 1);
                 health = 0;
                 go_IceMat.GetComponent<MeshRenderer>().material = meltMaterials[2];

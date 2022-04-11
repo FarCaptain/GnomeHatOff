@@ -25,6 +25,9 @@ public class Player : MonoBehaviour
     ParticleSystem.MainModule vfxMainModule;
     bool reversePulse = false;
 
+    private bool firstFrame = true;
+    private bool secondFrame = false;
+
     //Cached Player Components
     Rigidbody playerRigidBody;
     PlayerMovement playerMovement;
@@ -53,7 +56,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
 	{
-		if (superBumpTimer != null && superBumpTimer.TimerStart == false)
+        if (superBumpTimer != null && superBumpTimer.TimerStart == false)
 		{
 			superBump = false;
 			playerRigidBody.mass = 1f;
@@ -64,7 +67,7 @@ public class Player : MonoBehaviour
 		MakeSuperBumpVFXPulse();
 	}
 
-	private void MakeSuperBumpVFXPulse()
+    private void MakeSuperBumpVFXPulse()
 	{
 		if (superBumpTimer != null)
 		{

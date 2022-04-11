@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 enum GameStatus
 {
@@ -9,29 +10,74 @@ enum GameStatus
 }
 public class MainGameController : MonoBehaviour
 {
+    // this is a Singleton
+    public static MainGameController instance;
+
     public int level;
     private GameStatus status = GameStatus.Ready;
     [HideInInspector]
-    public List<GameObject> players;
+    // grab from port Manager
+    public List<GameObject> players = new List<GameObject>();
     private List<PlayerMovement> playerMovements = new List<PlayerMovement>();
     private int playerAmount;
+
     public GameObject Arduino;
-    public List<string> COM;
+    public List<string> COM = new List<string>();
     GameObject[] playerfetch;
+
+    public bool manualMode = false;
 
     // Start is called before the first frame update
 
-    private void Awake()
+    public void Awake()
     {
-        players.Clear();
-        playerfetch = GameObject.FindGameObjectsWithTag("Player");
-        Debug.Log("PlayerCount " + playerfetch.Length);
-        for (int i = 0; i < playerfetch.Length; i++)
+        if(instance != null)
         {
-            players.Add(playerfetch[i]);
-            RegisterPlayerController(i);
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        players.Clear();
+
+        // We have to have a Arduino Prefab there, when game Controller is intantiated
+        Arduino = GameObject.Find("Arduino");
+
+        // when we need prepared players, rather then active them automatically
+        if ( manualMode )
+        {
+            playerfetch = GameObject.FindGameObjectsWithTag("Player");
+            Debug.Log("PlayerCount " + playerfetch.Length);
+            for (int i = 0; i < playerfetch.Length; i++)
+            {
+                players.Add(playerfetch[i]);
+                RegisterPlayerController(i);
+            }
         }
     }
+
+    void OnSceneLoaded(Scene scene)
+    {
+        if (manualMode)
+            return;
+
+        // get the level on Game Controller according to scene Name
+        Debug.Log("OnSceneLoaded: " + scene.name);
+
+        // LevelSelect set the players in PortManager
+        if (level == -1)
+            return;
+
+        //instantiate all players
+        foreach( GameObject gnome in players )
+        {
+            //gnome.reset();
+        }
+    }
+
     void Start()
     {
 
@@ -51,6 +97,8 @@ public class MainGameController : MonoBehaviour
     public void RegisterPlayerController(int playerIndex)
     {
         players[playerIndex].GetComponent<PlayerMovement>().playerIndex = playerIndex;
+        //players[playerIndex].GetComponent<Player>().playerIndex = playerIndex;
+
         playerMovements.Add(players[playerIndex].GetComponent<PlayerMovement>());
         GameObject arduino = Instantiate(Arduino, players[playerIndex].gameObject.transform);
         arduino.GetComponent<SerialController>().portName = COM[playerIndex];
@@ -59,7 +107,7 @@ public class MainGameController : MonoBehaviour
         arduino.GetComponentInChildren<SampleMessageListener>().Game = this;
     }
 
-    public void RecieveSignal(int playerIndex, float x, float y, float z, string RFID)
+    public void RecieveSignal(int playerIndex, float x, float y, float z)
     {
         //        Debug.Log(playerIndex + x + z + RFID);
         switch (status)
@@ -69,11 +117,6 @@ public class MainGameController : MonoBehaviour
                 break;
             case GameStatus.Playing:
                 playerMovements[playerIndex].Move(x, y, z);
-                if (RFID == "False")
-                {
-                    playerMovements[playerIndex].jumpset(true);
-                }
-
                 break;
         }
     }

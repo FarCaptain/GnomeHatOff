@@ -22,7 +22,9 @@ public class HatCollecter : MonoBehaviour
     public bool isTouchingWell = false;
 
     // stay for some time to drop the hat
+
     public NewTimer hatDropTimer;
+    [SerializeField]
     public float hatDropDuration;
 
     public Stack<GameObject> hatStack = new Stack<GameObject>();
@@ -78,11 +80,12 @@ public class HatCollecter : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Hat" && isdamaged == false && other.gameObject.GetComponent<HatFade>().hatCollectedByPlayer==false)
+        HatFade hatFade = other.gameObject.GetComponent<HatFade>();
+        if (other.tag == "Hat" && isdamaged == false && hatFade.hatCollectedByPlayer==false)
         {
-            if (other.gameObject.transform.position.y > (headTop + 0.01f))
+            if (hatCount < 9)
             {
-                if(hatCount < 9)
+                if (hatFade.isFadingDown == false)
                 {
                     if (playerAudioSource.isPlaying == false)
                     {
@@ -90,15 +93,14 @@ public class HatCollecter : MonoBehaviour
                     }
                     AddHat(other.gameObject);
                 }
-                else
-                {
-                    Destroy(other.gameObject);
-                }
-                //print("Yeay! Hat Collected!" + (++count));
-               
-                
-                other.gameObject.GetComponent<HatFade>().hatShadowDestroy();
             }
+            else
+            {
+                Destroy(other.gameObject);
+            }
+            //print("Yeay! Hat Collected!" + (++count));
+
+            other.gameObject.GetComponent<HatFade>().hatShadowDestroy();
         }
         if (other.tag == "Mushroom")
         {

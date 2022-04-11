@@ -17,17 +17,18 @@ public class PlayerMovement : MonoBehaviour
 
     public float slideFactor;
     public float maxSpeed;
+    public float percentOfMaxSpeed;
     public float constantSpeed = 100;
     [Header("The decrease of max speed each hat gives you")]
     public float hatBurden = 0;
     public float speedDecreaseEachHat;
 
     public int playerIndex = 0;
-    
+
     // to filter the value we get from the gyroscope
     public int delayedFrames;
     private int remainingFrames;
-  
+
     private Rigidbody rigidBody;
 
     public ParticleSystem runDust;
@@ -41,8 +42,9 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    Vector3 initPos = new Vector3(0,0,0);       // new default position for controller when calibrated
-    
+    Vector3 initPos = new Vector3(0, 0, 0);       // new default position for controller when calibrated
+
+    public bool isMoving = false;
     [HideInInspector]
     public bool canMove = true;
     public bool isBumping = false;
@@ -50,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
     //for map2
     public GameObject SealSocket;
     public bool isDrop;
-    Vector3 speed;
+    public Vector3 speed;
     public float collisionTime;
     float testCollisionTime;
     Vector3 dropSpeed;
@@ -59,8 +61,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     Transform respawnPos;
     bool disabled;
+
+    public bool moveInWater;
+    public bool moveOnIce;
     void Start()
     {
+
         hasSeal = false;
         disabled = false;
         knocked = false;
@@ -68,8 +74,7 @@ public class PlayerMovement : MonoBehaviour
         isDrop = false;
         collisionTime = 1;
         testCollisionTime = 0;
-        level = GameObject.Find("GameManager").GetComponent<MainGameController>().level;
-        
+        level = MainGameController.instance.level;
     }
 
 
@@ -83,25 +88,35 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-       
-        if(!isDrop && disabled)
+        
+
+        if (canMove == false || isMoving)
+        {
+            return;
+        }
+        if (hasSeal)
+        {
+            moveInWater = true;
+            moveOnIce = false;
+        }
+        if (!isDrop && disabled)
         {
             return;
         }
         BoxCollider boxCollider = GetComponent<BoxCollider>();
-        if (!isDrop && !hasSeal)
+        if (!isDrop && !moveInWater)
         {
             testCollisionTime += Time.fixedDeltaTime;
         }
-     
-        if (level==2&& testCollisionTime > 0.1f)
+
+        if (level == 2 && testCollisionTime > 0.1f)
         {
-            if (collisionTime < 0.05 && !hasSeal)
+            if (collisionTime < 0.05&&!hasSeal && !moveInWater)
             {
                 testCollisionTime = 0;
                 isDrop = true;
                 Respawn(3);
-                dropSpeed = 0.1f*speed + new Vector3(0, -200, 0);
+                dropSpeed = 0.1f * speed + new Vector3(0, -200, 0);
             }
             else
             {
@@ -113,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
         // used for calibration
 
         float vel_y = rigidBody.velocity.y;
-        
+
 
         Vector3 move = Vector3.zero;
         if (playerIndex == 0)
@@ -142,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isDrop)
         {
-            
+
             speed = dropSpeed;
 
         }
@@ -153,6 +168,12 @@ public class PlayerMovement : MonoBehaviour
             {
                 gameObject.transform.forward = new Vector3(speed.x, 0, speed.z);
 
+            }
+
+            if (speed.x > constantSpeed && speed.z > constantSpeed)
+            {
+                speed.x = maxSpeed * percentOfMaxSpeed;
+                speed.z = maxSpeed * percentOfMaxSpeed;
             }
 
             Move(speed * Time.deltaTime);
@@ -173,9 +194,10 @@ public class PlayerMovement : MonoBehaviour
             rigidBody.velocity = motion;
     }
 
-    public void Move(float xaxis, float yaxis,float zaxis)
+    public void Move(float xaxis, float yaxis, float zaxis)
     {
-        if (canMove == false)
+
+        if (canMove == false||isMoving)
         {
             return;
         }
@@ -207,7 +229,7 @@ public class PlayerMovement : MonoBehaviour
             speed_z = currentMaxSpeed;
         else
             speed_z = constantSpeed;
-            //speed_z = map(Mathf.Abs(move.z), MaxthresholdFB);
+        //speed_z = map(Mathf.Abs(move.z), MaxthresholdFB);
 
         // assigns direction
         speed_x *= Mathf.Sign(move.x);
@@ -259,12 +281,12 @@ public class PlayerMovement : MonoBehaviour
 
     void RespawnPlayer()
     {
-       
+
         speed = Vector3.zero;
         transform.position = respawnPos.transform.position;
         disabled = false;
         isDrop = false;
         collisionTime = 1;
     }
-   
+
 }

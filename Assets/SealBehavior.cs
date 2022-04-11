@@ -13,6 +13,7 @@ public class SealBehavior : MonoBehaviour
     int counter = 1;
     Transform[] points;
     Transform[] IceAnchors;
+    Transform des;
     public float CirclingTimer = 8;
     public float PowerupTimer = 8;
     bool destinationset = false;
@@ -21,9 +22,16 @@ public class SealBehavior : MonoBehaviour
     private float ResetPowerupTimer;
     private bool ApproachIce = false;
     private bool ReachedIsland = false;
+    private bool once = false;
+    private bool FindNearestPointCheck = false;
     private GameObject Sealsocket;
+    private Vector3 NearestPosition;
+    private Vector3 FinalDestination;
+    public GameObject fence;
+    public float AdjustYPosition = 0;
     void Start()
     {
+        
         points = CustomNavMesh.GetComponentsInChildren<Transform>();
         IceAnchors = CustomIceAnchors.GetComponentsInChildren<Transform>();
         NavAgent = GetComponent<NavMeshAgent>();
@@ -34,8 +42,9 @@ public class SealBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!collected)
+        if (!collected)
         {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, AdjustYPosition, gameObject.transform.position.z);
             if (!ApproachIce)
             {
                 float RemainingDistance = NavAgent.remainingDistance;
@@ -88,10 +97,9 @@ public class SealBehavior : MonoBehaviour
         }
         else if(collected && PowerupTimer<=0)
         {
-            gameObject.transform.GetComponentInParent<PlayerMovement>().hasSeal = false;
-            gameObject.GetComponent<BoxCollider>().enabled = true;
-            gameObject.transform.GetComponentInParent<PlayerMovement>().canMove = false;
-            if (!ReachedIsland)
+
+
+            if (!ReachedIsland && !FindNearestPointCheck)
             {
                 Vector3 NearestIceAnchorPosition = new Vector3(10, 10, 10);
                 Vector3 FinalDestination = new Vector3(0, 0, 0);
@@ -101,31 +109,90 @@ public class SealBehavior : MonoBehaviour
                     {
                         NearestIceAnchorPosition = gameObject.transform.parent.position - point.position;
                         FinalDestination = point.position;
+                        des = point;
                     }
                 }
                 gameObject.transform.parent.position = Vector3.MoveTowards(gameObject.transform.parent.position, FinalDestination, SealReturnToIslandSpeed * Time.deltaTime);
                 if((gameObject.transform.parent.position - FinalDestination).magnitude < 0.5f)
                 {
                     ReachedIsland = true;
+                    if (gameObject.transform.GetComponentInParent<PlayerMovement>())
+                    {
+                        gameObject.transform.GetComponentInParent<PlayerMovement>().hasSeal = false;
+                        gameObject.transform.GetComponentInParent<PlayerMovement>().isMoving = false;
+                    }
                 }
             }
-            else if(ReachedIsland)
+            else if(ReachedIsland && !FindNearestPointCheck)
             {
-                gameObject.transform.GetComponentInParent<PlayerMovement>().canMove = true;
+                
+                PlayerMovement player = gameObject.transform.GetComponentInParent<PlayerMovement>();
+                
                 gameObject.transform.parent = null;
                 ReachedIsland = false;
-                collected = false;
                 ApproachIce = false;
                 NavAgent.enabled = true;
-                PowerupTimer = ResetPowerupTimer;
+                
+                player.transform.position = des.Find("Point").transform.position;
+                player.isMoving = false;
+                player.collisionTime = 1;
+                gameObject.GetComponent<BoxCollider>().enabled = true;
+                player.moveInWater = false;
+                FindNearestPoint();
+                FindNearestPointCheck = true;
+                //player.isMoving = true;
+            }
+            else if(FindNearestPointCheck)
+            {
+                FindNearestPoint();
             }
         }
     }
 
+    void FindNearestPoint()
+    {
+        if (!once)
+        {
+        NearestPosition = new Vector3(10, 10, 10);
+        FinalDestination = new Vector3(0, 0, 0);
+        foreach (Transform point in points)
+        {
+            if ((gameObject.transform.position - point.position).magnitude < NearestPosition.magnitude)
+            {
+                NearestPosition = gameObject.transform.position - point.position;
+                FinalDestination = point.position;
+            }
+        }
+            NavAgent.SetDestination(FinalDestination);
+            once = true;
+        }
+        if ((gameObject.transform.position.x - FinalDestination.x) <= 0.25 && (gameObject.transform.position.z - FinalDestination.z) <= 0.25)
+        {
+            //ReachedIsland = false;
+            collected = false;
+            once = false;
+            FindNearestPointCheck = false;
+            PowerupTimer = ResetPowerupTimer;
+            for(int i = 0; i < points.Length; i++)
+            {
+                if(points[i].position == FinalDestination)
+                {
+                    counter = i;
+                    break;
+                }
+            }
+        }
+
+    }
+    void EnableCollider()
+    {
+        
+    }
     private void FixedUpdate()
     {
         if(!collected)
-        { 
+        {
+            
             CirclingTimer -= Time.deltaTime;
             if(CirclingTimer<=0)
             {
@@ -135,6 +202,7 @@ public class SealBehavior : MonoBehaviour
         }
         else if (collected)
         {
+            gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
             CirclingTimer = ResetCirclingTimer;
             PowerupTimer -= Time.deltaTime;
         }
@@ -144,13 +212,18 @@ public class SealBehavior : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && CirclingTimer <= 0)
         {
+            //fence.SetActive(false);
+            other.gameObject.GetComponent<PlayerMovement>().canSlide = false;
             collected = true;
             other.gameObject.GetComponent<PlayerMovement>().hasSeal = true;
-           NavAgent.enabled = false;
+            NavAgent.enabled = false;
             gameObject.GetComponent<BoxCollider>().enabled = false;
+            other.gameObject.transform.position = this.transform.position;
             Sealsocket = other.gameObject.GetComponent<PlayerMovement>().SealSocket;
             gameObject.transform.parent = other.gameObject.transform;
             gameObject.transform.localPosition = Sealsocket.transform.localPosition;
+
+            gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
     }
 }

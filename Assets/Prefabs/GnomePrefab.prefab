@@ -74,7 +74,7 @@ MonoBehaviour:
   hatdrop: 0
   isTouchingWell: 0
   hatDropTimer: {fileID: 0}
-  hatDropDuration: 2
+  hatDropDuration: 1.5
   isdamaged: 0
 --- !u!82 &5186585242481114742
 AudioSource:
@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 7460995463974118362}
   - component: {fileID: 4835091648898173498}
   - component: {fileID: 7712702464142486567}
+  - component: {fileID: 3297053000211496809}
   m_Layer: 9
   m_Name: GnomePrefab
   m_TagString: Player
@@ -398,13 +399,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canSlide: 0
-  MinthresholdFB: 2
-  MinthresholdLR: 2
-  MaxthresholdFB: 4
-  MaxthresholdLR: 4
-  slideFactor: 0
-  maxSpeed: 500
-  constantSpeed: 100
+  MinthresholdFB: 1.1
+  MinthresholdLR: 1.2
+  MaxthresholdFB: 2
+  MaxthresholdLR: 2.3
+  slideFactor: 0.75
+  maxSpeed: 150
+  percentOfMaxSpeed: 0
+  constantSpeed: 60
   hatBurden: 0
   speedDecreaseEachHat: 0
   playerIndex: 0
@@ -413,12 +415,18 @@ MonoBehaviour:
   shownSpeed: {x: 0, y: 0, z: 0}
   keyboardSpeed: 210
   xval: 0
+  isMoving: 0
   canMove: 1
   isBumping: 0
-  SealSocket: {fileID: 0}
+  SealSocket: {fileID: 6151119993173280829}
   isDrop: 0
+  speed: {x: 0, y: 0, z: 0}
   collisionTime: 0
   knocked: 0
+  hasSeal: 0
+  respawnPos: {fileID: 0}
+  moveInWater: 0
+  moveOnIce: 0
 --- !u!114 &7712702464142486567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,6 +452,18 @@ MonoBehaviour:
   playerBoxCollider: {fileID: 0}
   FlashingTime: 0.08
   TimeInterval: 0.1
+--- !u!114 &3297053000211496809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3593979466627239089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdbb07898af3664fb9a196fe7862dc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &5926540398650522765
 Animator:
   serializedVersion: 3
@@ -568,7 +588,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6151119993173280829}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.029, y: -0.028, z: 0.066}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4227668271868745227}

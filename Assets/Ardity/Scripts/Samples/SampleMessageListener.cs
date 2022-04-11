@@ -31,8 +31,8 @@ public class SampleMessageListener : MonoBehaviour
         {
             float xaxis = float.Parse(dataRaw[1]);
             float zaxis = float.Parse(dataRaw[2]);
-            string RFID = dataRaw[2];
-            Game.RecieveSignal(Playerindex, xaxis, 0, zaxis, RFID);
+            
+            Game.RecieveSignal(Playerindex, xaxis, 0, zaxis);
             //Debug.Log("PlayerIndex: " + Playerindex + "/" +  xaxis + "," + zaxis);
         }
         if (dataRaw.Length == 2 && dataRaw[0] != " ")
@@ -40,7 +40,7 @@ public class SampleMessageListener : MonoBehaviour
             float xaxis = float.Parse(dataRaw[0]);
             float zaxis = float.Parse(dataRaw[1]);
             //string jump = dataRaw[2];
-            Game.RecieveSignal(Playerindex, xaxis, 0, zaxis, "True");
+            Game.RecieveSignal(Playerindex, xaxis, 0, zaxis);
         //    Debug.Log(Pla + xaxis + "," + zaxis);
         }
     }

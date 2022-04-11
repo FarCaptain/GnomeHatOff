@@ -52,12 +52,72 @@ MonoBehaviour:
   timerText: {fileID: 0}
   hatRushAnim: {fileID: 0}
   hatshadowDestroyTime: 7
+  timeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 2
+      inSlope: -0.04
+      outSlope: -0.04
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 25
+      value: 1
+      inSlope: -0.0005107583
+      outSlope: -0.0005107583
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 1
+    - serializedVersion: 3
+      time: 30
+      value: 0.5
+      inSlope: 0.0017350143
+      outSlope: 0.0017350143
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.47064954
+    - serializedVersion: 3
+      time: 50
+      value: 0.5
+      inSlope: -0.0007845786
+      outSlope: -0.0007845786
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 1
+    - serializedVersion: 3
+      time: 55
+      value: 4
+      inSlope: 0.023308082
+      outSlope: 0.023308082
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 1
+    - serializedVersion: 3
+      time: 60
+      value: 4
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   center: {x: 0, y: 0, z: 0}
   size: {x: 9, y: 0.1, z: 5}
   scale_mushroom: {x: 8, y: 0.1, z: 4}
   minGap: 1
   maxGap: 4
-  hatRushTime: 30
+  hatRushTime: 35
   hatRushMinGap: 0.3
   mushroomMaxCount: 3
   mushroomOneTime: 0

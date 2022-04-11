@@ -25,14 +25,14 @@ public class Ice : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      
+
         health = 2;
 
 
         go_IceMat = transform.Find("Ice/pasted__group7/pasted__pasted__pCylinder2/polySurface11").gameObject;
-    
+
         animation = GetComponent<Animation>();
-       
+
     }
 
 
@@ -44,12 +44,13 @@ public class Ice : MonoBehaviour
 
             if (!collision.gameObject.GetComponent<Snowball>().Hit)
             {
+                collision.gameObject.GetComponent<Snowball>().Hit = true;
                 if (health > 1)
                 {
                     health = 1;
                     go_IceMat.GetComponent<MeshRenderer>().material = meltMaterials[1];
                 }
-               
+
 
             }
         }
@@ -61,7 +62,9 @@ public class Ice : MonoBehaviour
         {
             if (health == 1)
             {
-                Invoke("DestroyGameObject", 2);
+                PlayMeltAnimation();
+
+                Invoke("DestroyGameObject", 1);
                 health = 0;
                 go_IceMat.GetComponent<MeshRenderer>().material = meltMaterials[2];
             }
@@ -78,15 +81,18 @@ public class Ice : MonoBehaviour
         {
             if (health == 1)
             {
+                PlayMeltAnimation();
+
+                Invoke("DestroyGameObject", 1);
                 health = 0;
                 go_IceMat.GetComponent<MeshRenderer>().material = meltMaterials[2];
             }
-           
+
 
         }
     }
 
-   
+
 
 
     public void Melt()
@@ -95,7 +101,7 @@ public class Ice : MonoBehaviour
         Invoke("PlayMeltAnimation", waitTime);
 
     }
-   
+
     void PlayMeltAnimation()
     {
 

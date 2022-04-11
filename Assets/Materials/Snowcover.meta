@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Materials/Snowcover.meta
 guid: 19f69fbc9fb6e834c8a66610ae1bbe0b
+=======
+guid: 07904a7ab765fa54994aefb2d63c4b93
+>>>>>>> 6b3cff1a3f2bf05d761e5a54fd10db1c3127ce92:Assets/Animations/Fader.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

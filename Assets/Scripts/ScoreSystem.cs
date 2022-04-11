@@ -59,7 +59,8 @@ public class ScoreSystem : MonoBehaviour
 
     private BonusPointsIndicator[] bonusPointIndicatorsInScene;
     private bool simultaneousBonusesBeingDisplayed = false;
-    // Start is called before the first frame update
+
+    // We'll enable this script once we already have players in game
     void Start()
 	{
         gameManager = MainGameController.instance;

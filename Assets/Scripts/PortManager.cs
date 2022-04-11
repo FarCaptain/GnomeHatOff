@@ -10,6 +10,8 @@ using System;
 
 public class PortManager : MonoBehaviour
 {
+    public static PortManager instance;
+
     static List<SerialPort> streams = new List<SerialPort>();
     private string[] ports;
     private List<string> connectedPorts;
@@ -30,6 +32,19 @@ public class PortManager : MonoBehaviour
     //public GameObject arduino;
 
     public VisualEffect poofPrefab;
+
+    public void Awake()
+    {
+        if(instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(this);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -96,6 +111,19 @@ public class PortManager : MonoBehaviour
                 {
                     Debug.Log("IOException: " + ioe.Message);
                 }
+            }
+        }
+        else
+        {
+            // all players are found
+            GameObject scoresystem = GameObject.Find("WholeScoreSystem");
+            if (scoresystem != null)
+            {
+                scoresystem.GetComponentInChildren<ScoreSystem>().enabled = true;
+            }
+            else
+            {
+                Debug.Log("No Score System");
             }
         }
     }

@@ -97,11 +97,7 @@ public class SealBehavior : MonoBehaviour
         }
         else if(collected && PowerupTimer<=0)
         {
-            if(gameObject.transform.GetComponentInParent<PlayerMovement>())
-            {
-                gameObject.transform.GetComponentInParent<PlayerMovement>().hasSeal = false;
-                gameObject.transform.GetComponentInParent<PlayerMovement>().isMoving = true;
-            }
+
 
             if (!ReachedIsland && !FindNearestPointCheck)
             {
@@ -120,25 +116,31 @@ public class SealBehavior : MonoBehaviour
                 if((gameObject.transform.parent.position - FinalDestination).magnitude < 0.5f)
                 {
                     ReachedIsland = true;
+                    if (gameObject.transform.GetComponentInParent<PlayerMovement>())
+                    {
+                        gameObject.transform.GetComponentInParent<PlayerMovement>().hasSeal = false;
+                        gameObject.transform.GetComponentInParent<PlayerMovement>().isMoving = false;
+                    }
                 }
             }
             else if(ReachedIsland && !FindNearestPointCheck)
             {
                 
                 PlayerMovement player = gameObject.transform.GetComponentInParent<PlayerMovement>();
-                player.isMoving = false;
+                
                 gameObject.transform.parent = null;
                 ReachedIsland = false;
-                //collected = false;
                 ApproachIce = false;
                 NavAgent.enabled = true;
                 
                 player.transform.position = des.Find("Point").transform.position;
+                player.isMoving = false;
                 player.collisionTime = 1;
                 gameObject.GetComponent<BoxCollider>().enabled = true;
                 player.moveInWater = false;
                 FindNearestPoint();
                 FindNearestPointCheck = true;
+                //player.isMoving = true;
             }
             else if(FindNearestPointCheck)
             {

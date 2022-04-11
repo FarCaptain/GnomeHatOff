@@ -42,9 +42,7 @@ public class MainGameController : MonoBehaviour
         }
 
         players.Clear();
-
-        // We have to have a Arduino Prefab there, when game Controller is intantiated
-        Arduino = GameObject.Find("Arduino");
+        
 
         // when we need prepared players, rather then active them automatically
         if ( manualMode )
@@ -57,6 +55,8 @@ public class MainGameController : MonoBehaviour
                 RegisterPlayerController(i);
             }
         }
+        else
+            Arduino = GameObject.Find("Arduino");       // We have to have a Arduino Prefab there, when game Controller is intantiated
     }
 
     void OnSceneLoaded(Scene scene)

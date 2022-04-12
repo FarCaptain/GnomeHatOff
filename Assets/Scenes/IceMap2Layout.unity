@@ -4597,7 +4597,7 @@ PrefabInstance:
     - target: {fileID: 4859410764642639268, guid: e473d9f906c532340a1d203c8f9a741d,
         type: 3}
       propertyPath: m_Name
-      value: seal_walk
+      value: seal_main
       objectReference: {fileID: 0}
     - target: {fileID: 4859410764642639274, guid: e473d9f906c532340a1d203c8f9a741d,
         type: 3}
@@ -4607,7 +4607,7 @@ PrefabInstance:
     - target: {fileID: 4859410764642639274, guid: e473d9f906c532340a1d203c8f9a741d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.4667306
+      value: 6.13
       objectReference: {fileID: 0}
     - target: {fileID: 4859410764642639274, guid: e473d9f906c532340a1d203c8f9a741d,
         type: 3}
@@ -4617,7 +4617,7 @@ PrefabInstance:
     - target: {fileID: 4859410764642639274, guid: e473d9f906c532340a1d203c8f9a741d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.2572291
+      value: -4.567
       objectReference: {fileID: 0}
     - target: {fileID: 4859410764642639274, guid: e473d9f906c532340a1d203c8f9a741d,
         type: 3}
@@ -23624,7 +23624,7 @@ MonoBehaviour:
   CirclingTimer: 5
   PowerupTimer: 6
   fence: {fileID: 328222849}
-  AdjustYPosition: -0.6
+  AdjustYPosition: -0.5
   sealanimator: {fileID: 421476379}
 --- !u!195 &2026371892
 NavMeshAgent:

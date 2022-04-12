@@ -33,6 +33,8 @@ public class PortManager : MonoBehaviour
 
     public VisualEffect poofPrefab;
 
+    public bool autoController;
+
     public void Awake()
     {
         if(instance != null)
@@ -49,37 +51,38 @@ public class PortManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        BluetoothClient client = new BluetoothClient();
 
-        ports = SerialPort.GetPortNames();
-
-        getConnectedPorts();
-
-        //gameController = GameObject.Find("GameManager").GetComponent<MainGameController>();
-        gameController = MainGameController.instance;
-        //gameController.Arduino = arduino;
-        gameController.COM.Clear();
-
-        // all connected devices
-        var devices = client.DiscoverDevices();
-        foreach (BluetoothDeviceInfo device in devices)
+        if (autoController)
         {
-            if (device.DeviceName == "BLUEHAT" || device.DeviceName == "YELLOWHAT" || device.DeviceName == "GREENHAT" ||
-                (device.DeviceName == "HC-05" && device.DeviceAddress == BluetoothAddress.Parse("98D371FDB05D")))
-                maxPlayerCount++;
-            print(device.DeviceName + "::");
-        }
+            BluetoothClient client = new BluetoothClient();
 
-        gnomeSpawners = GameObject.Find("GnomeSpawners");
+            ports = SerialPort.GetPortNames();
+
+            getConnectedPorts();
+
+            //gameController = GameObject.Find("GameManager").GetComponent<MainGameController>();
+            gameController = MainGameController.instance;
+            //gameController.Arduino = arduino;
+            gameController.COM.Clear();
+
+            // all connected devices
+            var devices = client.DiscoverDevices();
+            foreach (BluetoothDeviceInfo device in devices)
+            {
+                if (device.DeviceName == "BLUEHAT" || device.DeviceName == "YELLOWHAT" || device.DeviceName == "GREENHAT" ||
+                    (device.DeviceName == "HC-05" && device.DeviceAddress == BluetoothAddress.Parse("98D371FDB05D")))
+                    maxPlayerCount++;
+                print(device.DeviceName + "::");
+            }
+
+            gnomeSpawners = GameObject.Find("GnomeSpawners");
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         // TODO. dynamically update the connection state
-        //if (connectComTimer.TimerStart)
-        //{
-        if (gameController.COM.Count < maxPlayerCount)
+        if (autoController && gameController.COM.Count < maxPlayerCount)
         {
             for (int i = 0; i < streams.Count; i++)
             {
@@ -104,8 +107,6 @@ public class PortManager : MonoBehaviour
 
                         streams.RemoveAt(i--);
                     }
-
-                    // and then we need to give the COM numbers to Ardity
                 }
                 catch (System.Exception ioe)
                 {

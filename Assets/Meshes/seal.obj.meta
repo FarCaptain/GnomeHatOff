@@ -3,7 +3,22 @@ guid: 65b6a8438f85d0f4d8e6b73646bd0b30
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: harnessMat
+    second: {fileID: 2100000, guid: 7c5463bbddadbdd4f8473abaec64e45b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sealMat
+    second: {fileID: 2100000, guid: 3ae90aa34ec0e3b47b82d268a95b3627, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sledMat
+    second: {fileID: 2100000, guid: 571b916a59ccc9a479122f27bcb799f1, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

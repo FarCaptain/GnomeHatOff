@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class IcePlane : MonoBehaviour
 {
-
+    public static IcePlane instance;
     public float time;
     public float iceSize;
     public Vector2Int size;
@@ -19,10 +19,11 @@ public class IcePlane : MonoBehaviour
     int currentStage;
     float scale;
     SortedList<float, List<Ice>> planeMap;
-    GameObject[] iceList;
+    public Dictionary<int, Ice> iceSet;
     // Start is called before the first frame update
     void Start()
     {
+        iceSet = new Dictionary<int, Ice>();
         ice = Resources.Load<GameObject>("Ice/Ice");
         planeMap = new SortedList<float, List<Ice>>();
         currentStage = 0;
@@ -30,12 +31,22 @@ public class IcePlane : MonoBehaviour
         shrinkStopStage += 1;
         InitiatePlane();
     }
-
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
     // Update is called once per frame
     void Update()
     {
         t += Time.deltaTime;
-
+        Debug.Log(iceSet.Count);
         if (t > time)
         {
             t = 0;
@@ -60,8 +71,13 @@ public class IcePlane : MonoBehaviour
                     int count = list.Count;
                     for (int i = 0; i < count; i++)
                     {
+                        
                         if (list[i] != null)
+                        {
+                            iceSet.Remove(list[i].id);
                             list[i].Melt();
+                        }
+                            
                     }
                     planeMap.RemoveAt(j);
                 }
@@ -97,6 +113,9 @@ public class IcePlane : MonoBehaviour
             {
                 GameObject go_ice = Instantiate(ice, new Vector3(j, -0.1f, i), Quaternion
                     .identity, transform);
+                int count = iceSet.Count;
+                go_ice.GetComponent<Ice>().id = count + 1;
+                iceSet.Add(count+1,go_ice.GetComponent<Ice>());
                 go_ice.transform.localScale *= iceSize;
                 float distance = Vector3.Distance(go_ice.transform.position, transform.position);
                 if (planeMap.ContainsKey(distance))
@@ -120,5 +139,25 @@ public class IcePlane : MonoBehaviour
 #else
         iceList = GameObject.FindGameObjectsWithTag("Ground");
 #endif
+    }
+
+    public Vector3 GetRespawnPos()
+    {
+        int amount = iceSet.Count;
+        int random = Random.Range(0, amount);
+        if(amount <= 0)
+        {
+            return Vector3.zero;
+        }
+        while (true)
+        {
+            if (iceSet.ContainsKey(random))
+            {
+                return iceSet[random].transform.position+new Vector3(0,0.2f,0);
+            }
+
+        }
+
+        return Vector3.zero;
     }
 }

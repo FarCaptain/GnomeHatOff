@@ -6,14 +6,13 @@ using System;
 public class Ice : MonoBehaviour
 {
     private float health;
-
     [SerializeField]
     private Material[] meltMaterials;
     int stageNum;
-
+    public int id;
     public float meltTime;
     float playerOnMeltTime;
-    bool hasPlayerOn;
+    public bool hasPlayerOn;
     bool isSink;
     bool isHit;
     Animation animation;
@@ -28,14 +27,32 @@ public class Ice : MonoBehaviour
 
         health = 2;
 
-
+        meltTime = 2;
         go_IceMat = transform.Find("Ice/pasted__group7/pasted__pasted__pCylinder2/polySurface11").gameObject;
 
         animation = GetComponent<Animation>();
 
     }
 
+    private void Update()
+    {
+        if(playerOnMeltTime > meltTime)
+        {
+            PlayMeltAnimation();
 
+            Invoke("DestroyGameObject", 1);
+            health = 0;
+            go_IceMat.GetComponent<MeshRenderer>().material = meltMaterials[2];
+            playerOnMeltTime = 0;
+
+        }
+        else if(health==1 && hasPlayerOn)
+        {
+            playerOnMeltTime += Time.deltaTime;
+        }
+
+       
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -62,18 +79,25 @@ public class Ice : MonoBehaviour
         {
             if (health == 1)
             {
-                PlayMeltAnimation();
-
-                Invoke("DestroyGameObject", 1);
-                health = 0;
-                go_IceMat.GetComponent<MeshRenderer>().material = meltMaterials[2];
+                hasPlayerOn = true;
             }
 
 
 
         }
     }
+    private void OnTriggerExit(Collider other)
+    {
 
+        if (other.tag.Equals("PlayerCollider"))
+        {
+            
+                hasPlayerOn = false;
+            playerOnMeltTime = 0;
+
+
+        }
+    }
     private void OnTriggerStay(Collider other)
     {
 
@@ -81,11 +105,7 @@ public class Ice : MonoBehaviour
         {
             if (health == 1)
             {
-                PlayMeltAnimation();
-
-                Invoke("DestroyGameObject", 1);
-                health = 0;
-                go_IceMat.GetComponent<MeshRenderer>().material = meltMaterials[2];
+                hasPlayerOn = true;
             }
 
 
@@ -113,6 +133,8 @@ public class Ice : MonoBehaviour
     // TODO: Possible shatter animation
     void DestroyGameObject()
     {
+       
+        IcePlane.instance.iceSet.Remove(id);
         Destroy(gameObject);
     }
 }

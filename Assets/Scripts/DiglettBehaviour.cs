@@ -21,7 +21,7 @@ public class DiglettBehaviour : Hazard
     public float trackingPathLength;
     public List<Transform> spawners = new List<Transform>();
 
-    public List<Transform> players = new List<Transform>();
+    private List<Transform> players = new List<Transform>();
 
     private NewTimer stayTimer;
     private NewTimer hideTimer;
@@ -63,6 +63,7 @@ public class DiglettBehaviour : Hazard
         digletModel.position = new Vector3(pos.x, -2f, pos.z);
 
         navMeshAgent = GetComponent<NavMeshAgent>();
+        UpdatePlayers();
         targetedPlayerIndex = Random.Range(0, players.Count);
     }
 
@@ -75,6 +76,17 @@ public class DiglettBehaviour : Hazard
                 state = (int)diglettStates.Warn;
 
                 // target players in turn
+                if (players.Count == 0)
+                {
+                    UpdatePlayers();
+                    targetedPlayerIndex = Random.Range(0, players.Count);
+
+                    if (players.Count == 0)
+                    {
+                        Debug.LogError("[Diglett]Something Went wrong. Can't find the Players!");
+                        return;
+                    }
+                }
                 targetedPlayerIndex = (targetedPlayerIndex + 1) % players.Count;
                 Vector3 playerPos = players[targetedPlayerIndex].position;
                 // ToDo. might need bias to avoid bug
@@ -148,9 +160,13 @@ public class DiglettBehaviour : Hazard
             }
         }
     }
-    //void OnDrawGizmosSelected()
-    //{
-    //    Gizmos.color = new Color(1f, 0f, 0f, 0.5f);
-    //    Gizmos.DrawSphere(transform.localPosition + playerPos, initialDistance);
-    //}
+
+    private void UpdatePlayers()
+    {
+        players.Clear();
+        foreach ( GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            players.Add(player.transform);
+        }
+    }
 }

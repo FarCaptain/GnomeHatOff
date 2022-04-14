@@ -283,7 +283,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         speed = Vector3.zero;
-        transform.position = respawnPos.transform.position;
+        transform.position = IcePlane.instance.GetRespawnPos();
         disabled = false;
         isDrop = false;
         collisionTime = 1;

@@ -17,6 +17,7 @@ TagManager:
   - Undefined
   - PlayerCollider
   - Seal
+  - Water
   layers:
   - Default
   - TransparentFX

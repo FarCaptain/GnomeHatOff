@@ -153,7 +153,6 @@ public class IcePlane : MonoBehaviour
         {
             if (iceSet.ContainsKey(random))
             {
-                
                 return iceSet[random].transform.position;
             }
             random = Random.Range(0, amount);

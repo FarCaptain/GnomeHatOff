@@ -29,6 +29,11 @@ public class LevelSelectManager : MonoBehaviour
 
     [Header("Map Info Displays")]
     [SerializeField] GameObject[] mapInfoDisplays;
+
+    [Header("Gnome Lock In Parameters")]
+    [SerializeField] TextMeshProUGUI gnomeReadyText;
+    [SerializeField] LevelManager levelManager;
+    [SerializeField] GameObject[] lockInDisplays;
     enum Buttons { None, Play, Back }
     Buttons buttonClicked = Buttons.None;
     private int mapCount;
@@ -42,7 +47,9 @@ public class LevelSelectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(IsAnimationStateOver(faderAnimator,"FadeIn"))
+        gnomeReadyText.text = "Gnomes Ready: " + levelManager.lockedInPlayers;
+
+        if (IsAnimationStateOver(faderAnimator,"FadeIn"))
 		{
             levelSelectUIAnimators[0].SetTrigger("curtainOpen");
 
@@ -56,6 +63,14 @@ public class LevelSelectManager : MonoBehaviour
                 display.SetActive(true);
             }
         }
+
+        if(IsAnimationStateOver(levelSelectUIAnimators[1],"RemoteRiseUp"))
+		{
+            foreach(GameObject display in lockInDisplays)
+			{
+                display.SetActive(true);
+			}
+		}
 
         if(IsAnimationStateOver(faderAnimator, "FadeOut"))
         {
@@ -125,15 +140,15 @@ public class LevelSelectManager : MonoBehaviour
     {
         if (mapTitle.text == mapNames[0])
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(3);
         }
         else if (mapTitle.text == mapNames[1])
         {
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene(4);
         }
         else if (mapTitle.text == mapNames[2])
         {
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene(5);
         }
     }
 

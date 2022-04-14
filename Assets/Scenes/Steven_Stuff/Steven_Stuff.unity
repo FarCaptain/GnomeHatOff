@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -273,6 +273,75 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 28c6cd43edf7b6149b7e94ce2d752fff, type: 2}
+--- !u!1001 &126737086
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1222712837914054727, guid: c80e7c3723a92df45ba27806bfe273ee,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222712837914054727, guid: c80e7c3723a92df45ba27806bfe273ee,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222712837914054727, guid: c80e7c3723a92df45ba27806bfe273ee,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222712837914054727, guid: c80e7c3723a92df45ba27806bfe273ee,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.8494453
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222712837914054727, guid: c80e7c3723a92df45ba27806bfe273ee,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7776057
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222712837914054727, guid: c80e7c3723a92df45ba27806bfe273ee,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222712837914054727, guid: c80e7c3723a92df45ba27806bfe273ee,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222712837914054727, guid: c80e7c3723a92df45ba27806bfe273ee,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.6287523
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222712837914054727, guid: c80e7c3723a92df45ba27806bfe273ee,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222712837914054727, guid: c80e7c3723a92df45ba27806bfe273ee,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222712837914054727, guid: c80e7c3723a92df45ba27806bfe273ee,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -77.916
+      objectReference: {fileID: 0}
+    - target: {fileID: 4370179342325021923, guid: c80e7c3723a92df45ba27806bfe273ee,
+        type: 3}
+      propertyPath: m_Name
+      value: StageLight
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c80e7c3723a92df45ba27806bfe273ee, type: 3}
 --- !u!1001 &273437697
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -388,7 +457,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &557124306
 PrefabInstance:
@@ -641,7 +710,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 29.113, y: 180.00002, z: 0}
 --- !u!1 &1043423483
 GameObject:
@@ -735,7 +804,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1621399039
 PrefabInstance:
@@ -896,7 +965,7 @@ Transform:
   m_LocalScale: {x: 2.053, y: 2.053, z: 2.053}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 84.37501, y: -204.747, z: -206.857}
 --- !u!1001 &1877198605
 PrefabInstance:

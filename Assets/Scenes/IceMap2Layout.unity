@@ -4668,6 +4668,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: seal_walk
       objectReference: {fileID: 0}
+    - target: {fileID: 4859410764642639268, guid: e473d9f906c532340a1d203c8f9a741d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4859410764642639274, guid: e473d9f906c532340a1d203c8f9a741d,
         type: 3}
       propertyPath: m_RootOrder
@@ -21798,7 +21803,7 @@ GameObject:
   - component: {fileID: 1882135278}
   - component: {fileID: 1882135277}
   - component: {fileID: 1882135281}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Plane (1)
   m_TagString: Water
   m_Icon: {fileID: 0}
@@ -21888,7 +21893,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1882135276}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10.000001, y: 2.2204463e-16, z: 10.000001}
@@ -25454,7 +25459,7 @@ PrefabInstance:
     - target: {fileID: 4539721140244604340, guid: ec9600dfbf4877b45bf9f03081b11f36,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5618670615264863039, guid: ec9600dfbf4877b45bf9f03081b11f36,
         type: 3}
@@ -26921,7 +26926,7 @@ PrefabInstance:
     - target: {fileID: 8150364944795912396, guid: cc98039baef1ce14aab9d8259e3f25fa,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8813607213909873270, guid: cc98039baef1ce14aab9d8259e3f25fa,
         type: 3}
@@ -26931,7 +26936,7 @@ PrefabInstance:
     - target: {fileID: 8813607213909873270, guid: cc98039baef1ce14aab9d8259e3f25fa,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.7
+      value: 4.57
       objectReference: {fileID: 0}
     - target: {fileID: 8813607213909873270, guid: cc98039baef1ce14aab9d8259e3f25fa,
         type: 3}

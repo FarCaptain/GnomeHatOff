@@ -29,7 +29,7 @@ public class UITestManager : MonoBehaviour
 	{
         confirmationText.text = "LEVEL SELECT LOADING";
         yield return new WaitForSecondsRealtime(1f);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
 	}
     public void Button2Event()
     {

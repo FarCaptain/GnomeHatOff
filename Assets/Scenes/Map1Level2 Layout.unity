@@ -748,12 +748,6 @@ Transform:
   m_Father: {fileID: 1458079373}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!198 &30695054 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 640586605480487024, guid: dab6f10639b7d4d4889305fea3198ec3,
-    type: 3}
-  m_PrefabInstance: {fileID: 225347135}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &34786732
 GameObject:
   m_ObjectHideFlags: 0
@@ -4012,12 +4006,19 @@ PrefabInstance:
         type: 3}
       propertyPath: dust
       value: 
-      objectReference: {fileID: 30695054}
+      objectReference: {fileID: 1454681087637481589, guid: cff2f400b34bbec4d81078fc04275edc,
+        type: 3}
     - target: {fileID: 5884457963943430964, guid: dab6f10639b7d4d4889305fea3198ec3,
         type: 3}
       propertyPath: stayTime
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5884457963943430964, guid: dab6f10639b7d4d4889305fea3198ec3,
+        type: 3}
+      propertyPath: dustPrefab
+      value: 
+      objectReference: {fileID: 1454681087637481589, guid: cff2f400b34bbec4d81078fc04275edc,
+        type: 3}
     - target: {fileID: 5884457963943430964, guid: dab6f10639b7d4d4889305fea3198ec3,
         type: 3}
       propertyPath: maxHideTime

@@ -4,7 +4,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float xval;
 
+    public GameObject RespawnCountDown;
 
 
     Vector3 initPos = new Vector3(0, 0, 0);       // new default position for controller when calibrated
@@ -273,17 +274,33 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //the player will be respawned in time seconds
-    public void Respawn(float time)
+    public void Respawn(int time)
     {
+        Vector3 respawnPosition = IcePlane.instance.GetRespawnPos();
+         StartCoroutine(CountDown(time, respawnPosition));
         disabled = true;
-        Invoke("RespawnPlayer", time);
+        StartCoroutine(RespawnPlayer(time,respawnPosition));
+        
     }
-
-    void RespawnPlayer()
+    IEnumerator CountDown(int time, Vector3 i_position)
     {
-
+        RespawnCountDown.GetComponent<Text>().text = time.ToString();
+        RespawnCountDown.SetActive(true);
+        Vector2 screenPos = Camera.main.WorldToScreenPoint(i_position);
+        RespawnCountDown.GetComponent<RectTransform>().position= screenPos + new Vector2(0,150);
+        for(int i = time; i > 0; i--)
+        {
+            yield return new WaitForSeconds(1);
+            RespawnCountDown.GetComponent<Text>().text = (i-1).ToString();
+        }
+    }
+   
+    IEnumerator RespawnPlayer(int time, Vector3 i_position)
+    {
+        yield return new WaitForSeconds(time);
+        RespawnCountDown.SetActive(false);
         speed = Vector3.zero;
-        transform.position = IcePlane.instance.GetRespawnPos();
+        transform.position = i_position;
         disabled = false;
         isDrop = false;
         collisionTime = 1;

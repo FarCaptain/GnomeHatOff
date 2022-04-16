@@ -406,6 +406,21 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 9053355066440534747, guid: 5d4bcdfd3ec1a70438f37db19b7a74e6,
+        type: 3}
+      propertyPath: m_TagString
+      value: DamageAndStealHat
+      objectReference: {fileID: 0}
+    - target: {fileID: 9053355066440534749, guid: 5d4bcdfd3ec1a70438f37db19b7a74e6,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 9053355066440534749, guid: 5d4bcdfd3ec1a70438f37db19b7a74e6,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 13.17
+      objectReference: {fileID: 0}
     - target: {fileID: 9053355066699315933, guid: 5d4bcdfd3ec1a70438f37db19b7a74e6,
         type: 3}
       propertyPath: m_Layer

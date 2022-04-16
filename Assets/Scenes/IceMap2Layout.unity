@@ -15312,6 +15312,11 @@ PrefabInstance:
       propertyPath: m_Size.z
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4541712241080638858, guid: 46390f2600d141d40af1c792b45afd18,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4541712241080638863, guid: 46390f2600d141d40af1c792b45afd18,
         type: 3}
       propertyPath: m_RootOrder

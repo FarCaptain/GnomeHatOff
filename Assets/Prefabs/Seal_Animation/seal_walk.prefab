@@ -674,6 +674,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4859410765260945125}
   - component: {fileID: 4859410765260945130}
+  - component: {fileID: 7121714853091919474}
   m_Layer: 0
   m_Name: Seal
   m_TagString: Untagged
@@ -774,6 +775,19 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.035664782, y: 0.0030727237, z: 0.0003969893}
     m_Extent: {x: 0.18694817, y: 0.0931962, z: 0.2195813}
   m_DirtyAABB: 0
+--- !u!65 &7121714853091919474
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4859410765260945124}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.11, y: 0.18, z: 0.25}
+  m_Center: {x: 0.0007247499, y: 0.06160233, z: 0.0042466708}
 --- !u!1 &4859410765447854250
 GameObject:
   m_ObjectHideFlags: 0

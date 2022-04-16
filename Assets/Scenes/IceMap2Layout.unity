@@ -25199,6 +25199,11 @@ PrefabInstance:
       propertyPath: RespawnCountDown
       value: 
       objectReference: {fileID: 1358856609}
+    - target: {fileID: 6672991867226167944, guid: ec9600dfbf4877b45bf9f03081b11f36,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec9600dfbf4877b45bf9f03081b11f36, type: 3}
 --- !u!224 &637494573999948169
@@ -26459,6 +26464,11 @@ PrefabInstance:
       propertyPath: RespawnCountDown
       value: 
       objectReference: {fileID: 1768095772}
+    - target: {fileID: 8949837159489617193, guid: 1f9998dcf3f1c494ca695eb8ce7b71f7,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f9998dcf3f1c494ca695eb8ce7b71f7, type: 3}
 --- !u!114 &3896042862561590055
@@ -26760,6 +26770,11 @@ PrefabInstance:
       propertyPath: RespawnCountDown
       value: 
       objectReference: {fileID: 2088432556}
+    - target: {fileID: 1333214269529995248, guid: cc98039baef1ce14aab9d8259e3f25fa,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 3110459876170041342, guid: cc98039baef1ce14aab9d8259e3f25fa,
         type: 3}
       propertyPath: m_Size.y
@@ -26869,6 +26884,11 @@ PrefabInstance:
       propertyPath: RespawnCountDown
       value: 
       objectReference: {fileID: 425617515}
+    - target: {fileID: 1186395781888974718, guid: 33f48ae4f3d136f4888f74668d31ada7,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 6162717335463719817, guid: 33f48ae4f3d136f4888f74668d31ada7,
         type: 3}
       propertyPath: m_TagString

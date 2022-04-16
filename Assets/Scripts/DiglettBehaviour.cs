@@ -106,7 +106,7 @@ public class DiglettBehaviour : Hazard
                 }
                 transform.position = spawnPos;
 
-                navMeshAgent.destination = playerPos;
+                navMeshAgent.destination = playerPos + new Vector3(1f, 0f, 1f);
                 navMeshAgent.speed = diglettSpeed;
                 keepTrack = true;
                 dust = GameObject.Instantiate(dustPrefab, transform.position, Quaternion.identity);

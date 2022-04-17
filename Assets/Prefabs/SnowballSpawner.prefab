@@ -176,6 +176,6 @@ MonoBehaviour:
   maxSpawnTime: 5
   minForce: 800
   maxForce: 2200
-  go_Snowball: {fileID: 3878436602336209364, guid: bb97094ce50176b4e99699f6d98647b3,
+  go_Snowball: {fileID: 7025628681413301440, guid: d683a170dca18684f9ae7bd6ceaf1dd9,
     type: 3}
   dropVelocity: 12

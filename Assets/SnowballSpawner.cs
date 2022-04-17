@@ -39,7 +39,7 @@ public class SnowballSpawner : MonoBehaviour
     {
         Vector3 force = GetRandomForce(i);
         GameObject snowball = Instantiate<GameObject>(go_Snowball, initializePos[i]);
-        snowball.transform.Find("SnowBoulder").GetComponent<Snowball>().AddForce(force);
+        snowball.GetComponent<Snowball>().AddForce(force);
     }
 
     Vector3 GetRandomForce(int i)

@@ -118,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
                 isDrop = true;
                 Respawn(3);
                 dropSpeed = 0.1f * speed + new Vector3(0, -200, 0);
+                
             }
             else
             {
@@ -160,6 +161,7 @@ public class PlayerMovement : MonoBehaviour
         {
 
             speed = dropSpeed;
+            Debug.Log("hh");
 
         }
 

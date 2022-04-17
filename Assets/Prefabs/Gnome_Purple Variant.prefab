@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &7953796847364971993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6162717335463719817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1985a316077f47141b9ef9da9a564cce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 77776385293952713}
 --- !u!1001 &4759710010677964019
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7,10 +20,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1696658363055628154, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerCollider
+      objectReference: {fileID: 0}
     - target: {fileID: 3593979466627239089, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
       propertyPath: m_Name
-      value: Gnome_Purple
+      value: Gnome_Purple Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3593979466627239089, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
@@ -37,6 +55,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4835091648898173498, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: playerIndex
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5007022443929240464, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
       propertyPath: m_Color.b
@@ -51,6 +74,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.r
       value: 0.6117647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5943361334100308877, guid: cdc8e89d69cc6564c87384009a43f4b7,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 6924004367086165578, guid: cdc8e89d69cc6564c87384009a43f4b7,
         type: 3}
@@ -84,3 +112,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdc8e89d69cc6564c87384009a43f4b7, type: 3}
+--- !u!114 &77776385293952713 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4835091648898173498, guid: cdc8e89d69cc6564c87384009a43f4b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 4759710010677964019}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d5701d3b68b2444a7938a281cf50fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6162717335463719817 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1696658363055628154, guid: cdc8e89d69cc6564c87384009a43f4b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 4759710010677964019}
+  m_PrefabAsset: {fileID: 0}

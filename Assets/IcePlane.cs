@@ -10,6 +10,7 @@ public class IcePlane : MonoBehaviour
     public float time;
     public float iceSize;
     public Vector2Int size;
+    public bool manuallySet;
     float t = 0;
     GameObject ice;
     float maxDis;
@@ -24,12 +25,37 @@ public class IcePlane : MonoBehaviour
     void Start()
     {
         iceSet = new Dictionary<int, Ice>();
+        iceSet.Clear();
         ice = Resources.Load<GameObject>("Ice/Ice");
         planeMap = new SortedList<float, List<Ice>>();
         currentStage = 0;
         shrinkStage += 1;
         shrinkStopStage += 1;
-        InitiatePlane();
+        if (manuallySet)
+        {
+            GameObject[] ices = GameObject.FindGameObjectsWithTag("Ground");
+            int len = ices.Length;
+            int amount = 0;
+            for (int i = 0; i < len; i++)
+            {
+                Ice ice = ices[i].GetComponent<Ice>();
+                if (ice != null)
+                {
+                    
+                    iceSet.Add(amount++, ice);
+                   
+                }
+                
+                
+                
+            }
+            
+        }
+        else
+        {
+            InitiatePlane();
+        }
+        
     }
     private void Awake()
     {
@@ -46,8 +72,8 @@ public class IcePlane : MonoBehaviour
     void Update()
     {
         t += Time.deltaTime;
-        Debug.Log(iceSet.Count);
-        if (t > time)
+        
+        if (t > time && !manuallySet)
         {
             t = 0;
             Shrink();
@@ -95,7 +121,7 @@ public class IcePlane : MonoBehaviour
 
     void InitiatePlane()
     {
-#if automatically
+
         int check = 0;
         for (float i = -size.x * 0.797f * iceSize + 0.797f * 0.5f * iceSize; i <= size.x * 0.797f * iceSize + 0.797f * 0.5f * iceSize; i += 0.797f * iceSize)
         {
@@ -115,6 +141,7 @@ public class IcePlane : MonoBehaviour
                     .identity, transform);
                 int count = iceSet.Count;
                 go_ice.GetComponent<Ice>().id = count + 1;
+                Debug.Log("addd");
                 iceSet.Add(count+1,go_ice.GetComponent<Ice>());
                 go_ice.transform.localScale *= iceSize;
                 float distance = Vector3.Distance(go_ice.transform.position, transform.position);
@@ -136,9 +163,7 @@ public class IcePlane : MonoBehaviour
         minDis = planeMap.Keys[0];
         scale = (maxDis - minDis) / shrinkStage;
 
-#else
-        iceList = GameObject.FindGameObjectsWithTag("Ground");
-#endif
+
     }
 
     public Vector3 GetRespawnPos()
@@ -151,8 +176,9 @@ public class IcePlane : MonoBehaviour
         }
         while (true)
         {
-            if (iceSet.ContainsKey(random))
+            if (iceSet.ContainsKey(random) && iceSet[random]!=null)
             {
+                Debug.Log(random + " " + iceSet[random]);
                 return iceSet[random].transform.position;
             }
             random = Random.Range(0, amount);

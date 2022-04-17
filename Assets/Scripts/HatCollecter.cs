@@ -98,7 +98,6 @@ public class HatCollecter : MonoBehaviour
             {
                 Destroy(other.gameObject);
             }
-            //print("Yeay! Hat Collected!" + (++count));
 
             other.gameObject.GetComponent<HatFade>().hatShadowDestroy();
         }
@@ -155,12 +154,11 @@ public class HatCollecter : MonoBehaviour
         Destroy(hat.GetComponent<Rigidbody>());
         //other.gameObject.GetComponentInChildren<MeshRenderer>().material
 
-       
-        //hat.gameObject.GetInstanceID
         hatStack.Push(hat);
 
         hat.transform.parent = gnome.transform;
         hat.gameObject.transform.position = hatPos;
+        hat.gameObject.transform.rotation = Quaternion.identity;
         hatTop.transform.position = hatPos;
 
         sparks.gameObject.transform.position = hatPos;

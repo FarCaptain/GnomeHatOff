@@ -50,7 +50,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 4285ba9aaed062040814345d47a85a48, type: 2}
   - {fileID: 2100000, guid: aa093f1f5a8adf84f9681a0b3df9ab8f, type: 2}
   - {fileID: 2100000, guid: 81f9305fe0d81cb4aa1d8f94ed64c3c0, type: 2}
+  id: 0
   meltTime: 1
+  hasPlayerOn: 0
 --- !u!111 &4903938258859287873
 Animation:
   m_ObjectHideFlags: 0

@@ -30,7 +30,8 @@ public class DiglettBehaviour : Hazard
     private enum diglettStates {Hide, Warn, Stay};
     private int state;
 
-    public ParticleSystem dust;
+    public ParticleSystem dustPrefab;
+    private ParticleSystem dust;
     public VisualEffect poof;
     private NavMeshAgent navMeshAgent;
     public Transform digletModel;
@@ -105,16 +106,20 @@ public class DiglettBehaviour : Hazard
                 }
                 transform.position = spawnPos;
 
-                navMeshAgent.destination = playerPos;
+                navMeshAgent.destination = playerPos + new Vector3(1f, 0f, 1f);
                 navMeshAgent.speed = diglettSpeed;
                 keepTrack = true;
-                dust.Play();
+                dust = GameObject.Instantiate(dustPrefab, transform.position, Quaternion.identity);
             }
         }
         else if (state == (int)diglettStates.Warn)
         {
             
             Vector3 playerPos = players[targetedPlayerIndex].position;
+
+            dust.transform.position = new Vector3(transform.position.x, 0.01f, transform.position.z);
+            if (dust.isPlaying == false)
+                dust.Play();
 
             // keep following the player if it is not close enough
             //if (keepTrack && Vector3.Distance(playerPos, transform.position) < stopTrackingDistance)
@@ -143,6 +148,7 @@ public class DiglettBehaviour : Hazard
                 // Emerging
                 Vector3 pos = transform.position;
                 digletModel.position = new Vector3(pos.x, 0f, pos.z);
+                Destroy(dust);
                 dust.Stop();
             }
         }

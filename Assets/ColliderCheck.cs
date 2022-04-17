@@ -16,9 +16,9 @@ public class ColliderCheck : MonoBehaviour
         {
             if (!player.isDrop)
                 player.knocked = true;
-           
+
         }
-       
+
     }
     private void OnTriggerStay(Collider other)
     {
@@ -43,12 +43,15 @@ public class ColliderCheck : MonoBehaviour
     {
         if (player.hasSeal)
         {
-            GetComponent<BoxCollider>().isTrigger = false;
+            //GetComponent<BoxCollider>().isTrigger = false;
+            // Scale the collider into seal size
+            GetComponent<BoxCollider>().transform.localScale = new Vector3(1f, 1f, 1.5f);
         }
         else
         {
-            GetComponent<BoxCollider>().isTrigger = true;
+            //GetComponent<BoxCollider>().isTrigger = true;
+            GetComponent<BoxCollider>().transform.localScale = new Vector3(1f, 1f, 1f);
         }
     }
-    
+
 }

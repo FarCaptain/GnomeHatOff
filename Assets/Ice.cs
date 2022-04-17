@@ -126,6 +126,7 @@ public class Ice : MonoBehaviour
     {
 
         animation.Play("IceMelting");
+        IcePlane.instance.iceSet.Remove(id);
         Invoke("DestroyGameObject", 3.5f);
 
     }
@@ -134,7 +135,7 @@ public class Ice : MonoBehaviour
     void DestroyGameObject()
     {
        
-        IcePlane.instance.iceSet.Remove(id);
+        
         Destroy(gameObject);
     }
 }

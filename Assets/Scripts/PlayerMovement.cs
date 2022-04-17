@@ -171,16 +171,18 @@ public class PlayerMovement : MonoBehaviour
 
             }
 
-            if (speed.x > constantSpeed && speed.z > constantSpeed)
+            // nullifies an inherit property of vectors that results in faster diagonal movement speed
+            if (Mathf.Abs(speed.x) >= maxSpeed && Mathf.Abs(speed.z) >= maxSpeed)
             {
-                speed.x = maxSpeed * percentOfMaxSpeed;
-                speed.z = maxSpeed * percentOfMaxSpeed;
+                speed *= percentOfMaxSpeed;
+                
             }
 
             Move(speed * Time.deltaTime);
             drawRunDust();
         }
 
+        // stop gnome rigidbody from moving
         if (speed.x == 0 && speed.z == 0 && canSlide == false && canMove == true)
         {
             rigidBody.velocity = Vector3.zero;

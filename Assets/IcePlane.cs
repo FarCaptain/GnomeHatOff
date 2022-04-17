@@ -12,7 +12,6 @@ public class IcePlane : MonoBehaviour
     public Vector2Int size;
     public bool manuallySet;
     float t = 0;
-    GameObject ice;
     float maxDis;
     float minDis;
     public int shrinkStage;
@@ -21,12 +20,12 @@ public class IcePlane : MonoBehaviour
     float scale;
     SortedList<float, List<Ice>> planeMap;
     public Dictionary<int, Ice> iceSet;
+    public GameObject[] icePrefabs;
     // Start is called before the first frame update
     void Start()
     {
         iceSet = new Dictionary<int, Ice>();
         iceSet.Clear();
-        ice = Resources.Load<GameObject>("Ice/Ice");
         planeMap = new SortedList<float, List<Ice>>();
         currentStage = 0;
         shrinkStage += 1;
@@ -137,7 +136,8 @@ public class IcePlane : MonoBehaviour
             }
             for (float j = initPos; j <= size.y * 2.763f * iceSize - 2.763f * 0.5f * iceSize; j += 2.763f * iceSize)
             {
-                GameObject go_ice = Instantiate(ice, new Vector3(j, -0.1f, i), Quaternion
+                int index = Random.Range(0, 3);
+                GameObject go_ice = Instantiate(icePrefabs[index], new Vector3(j, -0.1f, i), Quaternion
                     .identity, transform);
                 int count = iceSet.Count;
                 go_ice.GetComponent<Ice>().id = count + 1;

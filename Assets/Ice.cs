@@ -20,7 +20,8 @@ public class Ice : MonoBehaviour
     bool isInitialized = false;
     Material iceMat;
     int stage;
-    GameObject go_IceMat;
+    public GameObject go_IceMat;
+  
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +29,7 @@ public class Ice : MonoBehaviour
         health = 2;
 
         meltTime = 2;
-        go_IceMat = transform.Find("Ice/pasted__group7/pasted__pasted__pCylinder2/polySurface11").gameObject;
+        //go_IceMat = transform.Find("Ice/pasted__group7/pasted__pasted__pCylinder2/polySurface11").gameObject;
 
         animation = GetComponent<Animation>();
 

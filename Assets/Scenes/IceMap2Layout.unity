@@ -20432,6 +20432,11 @@ MonoBehaviour:
   manuallySet: 0
   shrinkStage: 8
   shrinkStopStage: 3
+  icePrefabs:
+  - {fileID: 9193512310479219949, guid: d3be6b8a8fd28504295ed6dfa7f1d8f4, type: 3}
+  - {fileID: 6188673209798503432, guid: 1a8c4ad8033ccd242ae982fa5a1c0022, type: 3}
+  - {fileID: 4050656706997530960, guid: 713a690cb67c9824a8dd496573d2e48a, type: 3}
+  - {fileID: 1087365627772063374, guid: 19b5b0ab9eeece64ba0663437bd7b618, type: 3}
 --- !u!4 &1820004839
 Transform:
   m_ObjectHideFlags: 0

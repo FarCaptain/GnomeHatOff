@@ -20426,7 +20426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a372f0401919f843aa336f0eceb5000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 30
+  time: 60
   iceSize: 1.2
   size: {x: 4, y: 2}
   manuallySet: 0
@@ -26007,6 +26007,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3285387610674516499, guid: 9362f3151af23a742b41258805bf81b1,
+        type: 3}
+      propertyPath: m_Name
+      value: PurpleCd
+      objectReference: {fileID: 0}
     - target: {fileID: 3285387610851004937, guid: 9362f3151af23a742b41258805bf81b1,
         type: 3}
       propertyPath: m_Name
@@ -26116,6 +26121,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285387611586804697, guid: 9362f3151af23a742b41258805bf81b1,
+        type: 3}
+      propertyPath: m_Name
+      value: BlueCd
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285387612333656532, guid: 9362f3151af23a742b41258805bf81b1,
+        type: 3}
+      propertyPath: m_Name
+      value: RedCd
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285387612550085220, guid: 9362f3151af23a742b41258805bf81b1,
+        type: 3}
+      propertyPath: m_Name
+      value: YellowCd
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9362f3151af23a742b41258805bf81b1, type: 3}

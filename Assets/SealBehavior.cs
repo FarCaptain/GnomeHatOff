@@ -115,14 +115,20 @@ public class SealBehavior : MonoBehaviour
                         des = point;
                     }
                 }
+                gameObject.transform.GetComponentInParent<PlayerMovement>().enabled = false;
+/*                while((gameObject.transform.parent.position - FinalDestination).magnitude > 0.5f)
+                {*/
                 gameObject.transform.parent.position = Vector3.MoveTowards(gameObject.transform.parent.position, FinalDestination, SealReturnToIslandSpeed * Time.deltaTime);
-                if((gameObject.transform.parent.position - FinalDestination).magnitude < 0.5f)
+/*                }*/
+                
+                
+                if ((gameObject.transform.parent.position - FinalDestination).magnitude < 0.5f)
                 {
                     ReachedIsland = true;
                     if (gameObject.transform.GetComponentInParent<PlayerMovement>())
                     {
                         gameObject.transform.GetComponentInParent<PlayerMovement>().hasSeal = false;
-                        gameObject.transform.GetComponentInParent<PlayerMovement>().isMoving = false;
+                        //gameObject.transform.GetComponentInParent<PlayerMovement>().canMove = true;
                         NavAgent.enabled = true;
                     }
                 }
@@ -135,10 +141,9 @@ public class SealBehavior : MonoBehaviour
                 gameObject.transform.parent = null;
                 ReachedIsland = false;
                 ApproachIce = false;
-                
-                
+
+                player.enabled = true;
                 player.transform.position = des.Find("Point").transform.position;
-                player.isMoving = false;
                 player.collisionTime = 1;
                 gameObject.GetComponent<BoxCollider>().enabled = true;
                 player.moveInWater = false;
@@ -155,6 +160,7 @@ public class SealBehavior : MonoBehaviour
 
     void FindNearestPoint()
     {
+        NavAgent.enabled = true;
         sealanimator.SetBool("moveentry", true);
         sealanimator.SetBool("clapentry", false);
         if (!once)
@@ -172,10 +178,10 @@ public class SealBehavior : MonoBehaviour
             NavAgent.SetDestination(FinalDestination);
             once = true;
         }
-        if ((gameObject.transform.position.x - FinalDestination.x) <= 0.25 && (gameObject.transform.position.z - FinalDestination.z) <= 0.25)
+        if (Mathf.Abs(gameObject.transform.position.x - FinalDestination.x) <= 1 && Mathf.Abs(gameObject.transform.position.z - FinalDestination.z) <= 1)
         {
-            //ReachedIsland = false;
             collected = false;
+            ReachedIsland = false;
             once = false;
             FindNearestPointCheck = false;
             PowerupTimer = ResetPowerupTimer;

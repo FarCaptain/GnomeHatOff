@@ -7,7 +7,7 @@ public class HatFade : MonoBehaviour
     private AudioSource hatAudioSource;
     public float defaultTransparency = 1f;
     public float fadeDuration = 3f;
-    public float groundDuration = 2f;
+    public float groundDuration;
     public GameObject shadowPrefab;
 
     public ParticleSystem circleDust;
@@ -112,7 +112,8 @@ public class HatFade : MonoBehaviour
     }
     public IEnumerator FadeT(float newT)
     {
-        yield return new WaitForSeconds(groundDuration);
+        yield return new WaitForSeconds(30);
+
         if (hatCollectedByPlayer == false)
         {
             toFadeTo = newT;

@@ -45,7 +45,7 @@ public class ColliderCheck : MonoBehaviour
         {
             //GetComponent<BoxCollider>().isTrigger = false;
             // Scale the collider into seal size
-            GetComponent<BoxCollider>().transform.localScale = new Vector3(1f, 1f, 1.5f);
+            GetComponent<BoxCollider>().transform.localScale = new Vector3(1.5f, 1f, 4f);
         }
         else
         {

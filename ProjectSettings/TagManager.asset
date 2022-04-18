@@ -18,6 +18,7 @@ TagManager:
   - PlayerCollider
   - Seal
   - Water
+  - HatWaterCollider
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - IFrames
   - Plane
   - Player
-  - 
+  - WaterPlane
   - 
   - 
   - 

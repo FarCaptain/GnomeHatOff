@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3285387610674516502}
   - component: {fileID: 3285387610674516501}
   m_Layer: 5
-  m_Name: Text (3)
+  m_Name: PurpleCd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 3285387611586804700}
   - component: {fileID: 3285387611586804699}
   m_Layer: 5
-  m_Name: Text
+  m_Name: BlueCd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 3285387612333656535}
   - component: {fileID: 3285387612333656534}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: RedCd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 3285387612550085223}
   - component: {fileID: 3285387612550085222}
   m_Layer: 5
-  m_Name: Text (2)
+  m_Name: YellowCd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

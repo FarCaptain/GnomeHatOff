@@ -212,7 +212,7 @@ public class PlayerMovement : MonoBehaviour
 
         //inverted inputs to accomodate physical controller position
         Vector3 move = new Vector3(zval, 0f, xval * -1);
-        Debug.Log("DebugLog - ReceivingVector: " + move);
+        //Debug.Log("DebugLog - ReceivingVector: " + move);
 
         float currentMaxSpeed = maxSpeed;
         if (maxSpeed - hatBurden >= 0)

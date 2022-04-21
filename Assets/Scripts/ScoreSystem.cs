@@ -10,7 +10,7 @@ public class ScoreSystem : MonoBehaviour
     [SerializeField] Animator cameraAnimator;
     [SerializeField] Animator faderAnimator;
     [SerializeField] Animator wellAnimator;
-    [SerializeField] GameObject lockInPlatforms;
+    [SerializeField] GameObject scoreBoardUI;   
     [SerializeField] GameObject[] objectsToKillOnRoundOver;
     enum FaderStates { Inactive, FadeIn, FadeOut }
     private FaderStates currentFaderState;
@@ -382,16 +382,14 @@ public class ScoreSystem : MonoBehaviour
         if (IsAnimationStateOver(faderAnimator, "RoundOverFaderAnim", 1f) && currentFaderState == FaderStates.FadeIn)
         {
             wellAnimator.SetTrigger("roundOver");
-            foreach (KeyValuePair<int, int> entry in playerScores)
-            {
-                print("Gnome number " + entry.Key + " has score: " + entry.Value);
-            }
             currentFaderState = FaderStates.Inactive;
         }
 
         if(IsAnimationStateOver(wellAnimator, "WellTransposeDown",1f))
 		{
-            lockInPlatforms.SetActive(true);
+
+            scoreBoardUI.SetActive(true);
+            FindObjectOfType<ScoreboardCanvasUIManager>().playerScores = playerScores;
 		}
 	}
     

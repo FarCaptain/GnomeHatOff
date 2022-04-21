@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 enum GameStatus
 {
@@ -48,9 +49,11 @@ public class MainGameController : MonoBehaviour
         if ( manualMode )
         {
             playerfetch = GameObject.FindGameObjectsWithTag("Player");
+            playerfetch = playerfetch.OrderBy(go => go.GetComponent<PlayerMovement>().playerIndex).ToArray();
             Debug.Log("PlayerCount " + playerfetch.Length);
             for (int i = 0; i < playerfetch.Length; i++)
             {
+                Debug.Log("Name: " + playerfetch[i].name + ", Index: " + i);
                 players.Add(playerfetch[i]);
                 RegisterPlayerController(i);
             }

@@ -145,23 +145,28 @@ public class PortManager : MonoBehaviour
     {
         // TODO. uses the respawn effect
         GameObject gnomePrefab;
+        int index;
 
         switch(temp)
         {
             case "G":
                 gnomePrefab = gnomePurplePrefab;
+                index = 3;
                 gnomePurplePrefab = null;
                 break;
             case "R":
                 gnomePrefab = gnomeRedPrefab;
+                index = 1;
                 gnomeRedPrefab = null;
                 break;
             case "Y":
                 gnomePrefab = gnomeYellowPrefab;
+                index = 2;
                 gnomeYellowPrefab = null;
                 break;
             default:
                 gnomePrefab = gnomeBluePrefab;
+                index = 0;
                 gnomeBluePrefab = null;
                 break;
         }

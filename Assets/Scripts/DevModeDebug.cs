@@ -99,9 +99,9 @@ public class DevModeDebug : MonoBehaviour
 
 	private void GoBackToLevelSelect()
 	{
-/*		if(Input.GetKeyDown(KeyCode.Escape))
+		if(Input.GetKeyDown(KeyCode.Escape))
 		{
 			SceneManager.LoadScene(1);
-		}*/
+		}
 	}
 }

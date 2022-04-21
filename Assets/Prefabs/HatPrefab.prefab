@@ -80,7 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultTransparency: 1
   fadeDuration: 0.6
-  groundDuration: 10
+  groundDuration: 2
   shadowPrefab: {fileID: 0}
   circleDust: {fileID: 6842651306954289397}
   headTop: 0.5

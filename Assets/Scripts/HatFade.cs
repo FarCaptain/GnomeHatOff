@@ -112,7 +112,7 @@ public class HatFade : MonoBehaviour
     }
     public IEnumerator FadeT(float newT)
     {
-        yield return new WaitForSeconds(groundDuration);
+        yield return new WaitForSeconds(30);
 
         if (hatCollectedByPlayer == false)
         {

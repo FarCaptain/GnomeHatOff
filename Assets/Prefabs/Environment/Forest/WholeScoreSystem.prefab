@@ -623,6 +623,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraAnimator: {fileID: 0}
   faderAnimator: {fileID: 0}
+  wellAnimator: {fileID: 0}
+  lockInPlatforms: {fileID: 0}
+  objectsToKillOnRoundOver: []
   audio: {fileID: 0}
   bonusPointsPopupDisplay: {fileID: 3289768302961792009, guid: 7b0b62390b1acb64d8af2d58d9cd5076,
     type: 3}
@@ -1423,6 +1426,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7908821928426056117}
+  - component: {fileID: 3129046381418428647}
   m_Layer: 0
   m_Name: WholeScoreSystem
   m_TagString: Untagged
@@ -1447,6 +1451,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &3129046381418428647
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7284584433170233329}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fbc49ee6bab6d5842aed55aabaad0048, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8198050327880816280
 GameObject:
   m_ObjectHideFlags: 0

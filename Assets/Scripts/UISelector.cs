@@ -19,7 +19,6 @@ public class UISelector : MonoBehaviour
         Physics.Raycast(playerRay, out hit, 100f);
         if (hit.collider!=null)
 		{
-            print(hit.collider.gameObject.name);
             if (hit.collider.gameObject.GetComponent<ButtonHandler>())
 			{
                 hit.collider.gameObject.GetComponent<ButtonHandler>().playerOver=true;

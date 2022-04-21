@@ -45,11 +45,6 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        //Please Remove
-        if(Input.GetKeyDown(KeyCode.L))
-		{
-            scoreSystem.displayWinner();
-        }
         if (isTimerRunning)
         {
             if (timeRemaining > 0 && timerPaused == false)

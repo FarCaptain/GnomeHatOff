@@ -6,15 +6,6 @@ using TMPro;
 
 public class ScoreSystem : MonoBehaviour
 {
-
-    [SerializeField] Animator cameraAnimator;
-    [SerializeField] Animator faderAnimator;
-    [SerializeField] Animator wellAnimator;
-    [SerializeField] GameObject lockInPlatforms;
-    [SerializeField] GameObject[] objectsToKillOnRoundOver;
-    enum FaderStates { Inactive, FadeIn, FadeOut }
-    private FaderStates currentFaderState;
-
     [SerializeField] 
     public AudioSource audio;
     [Header("Points Display Objects")]
@@ -106,25 +97,24 @@ public class ScoreSystem : MonoBehaviour
 		hatDropDisplayScaleTimer.MaxTime = 2f;
 		hatDropDisplayFadeTimer.MaxTime = 1f;
 	}
+
 	public void displayWinner()
     {
-        cameraAnimator.SetBool("isCameraPanUp", true);
-        faderAnimator.SetTrigger("roundOver");
         winPanel.SetActive(true);
-        currentFaderState = FaderStates.FadeOut;
         AudioManager.PlayGeneralGameAudioClip(GameGeneralAudioStates.RoundEnd);
-        winText.text = "Round Over";
-        //int win_Index = 0;
-        //int maxScore = -1;
-        //for(int i = 0; i < PlayerAmount; i++)
-        //{
-        //    if (playerScores[i] > maxScore)
-        //    {
-        //        maxScore = playerScores[i];
-        //        win_Index = i;
-        //    }
-        //}
-        //winnerScoreText.text = "Score: " + maxScore;
+        int win_Index = 0;
+        int maxScore = -1;
+        for(int i = 0; i < PlayerAmount; i++)
+        {
+            if (playerScores[i] > maxScore)
+            {
+                maxScore = playerScores[i];
+                win_Index = i;
+            }
+        }
+        winText.text = "Player "+ win_Index+" Wins!!!";
+        winnerScoreText.text = "Score: " + maxScore;
+
     }
 
     /// <summary>
@@ -368,31 +358,7 @@ public class ScoreSystem : MonoBehaviour
 
 	private void Update()
 	{
-        if (IsAnimationStateOver(faderAnimator, "RoundOverFaderAnim", 0.5f) && currentFaderState == FaderStates.FadeOut)
-        {
-            winPanel.SetActive(false);
-            scoreBoard.gameObject.SetActive(false);
-            for (int i = 0; i < objectsToKillOnRoundOver.Length; i++)
-            {
-                objectsToKillOnRoundOver[i].SetActive(false);
-            }
-            currentFaderState = FaderStates.FadeIn;
-        }
 
-        if (IsAnimationStateOver(faderAnimator, "RoundOverFaderAnim", 1f) && currentFaderState == FaderStates.FadeIn)
-        {
-            wellAnimator.SetTrigger("roundOver");
-            foreach (KeyValuePair<int, int> entry in playerScores)
-            {
-                print("Gnome number " + entry.Key + " has score: " + entry.Value);
-            }
-            currentFaderState = FaderStates.Inactive;
-        }
-
-        if(IsAnimationStateOver(wellAnimator, "WellTransposeDown",1f))
-		{
-            lockInPlatforms.SetActive(true);
-		}
 	}
     
     private void AddScore(GameObject player, int score, int hatCount)
@@ -416,11 +382,5 @@ public class ScoreSystem : MonoBehaviour
         //revertChangesOnFire(player_index);
         //magnifyFire(player_index, getFireSize(player.gameObject));
         //fires[player_index].Play();
-    }
-
-    private bool IsAnimationStateOver(Animator animator, string animationStateName, float time)
-    {
-        return animator.GetCurrentAnimatorStateInfo(0).IsName(animationStateName)
-               && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= time;
     }
 }

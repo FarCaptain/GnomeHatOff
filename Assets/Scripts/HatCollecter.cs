@@ -107,15 +107,15 @@ public class HatCollecter : MonoBehaviour
             {
                 AudioManager.PlayMushroomManAudioClip(MushroomManAudioStates.Collected, playerAudioSource);
             }
-            
-            //for (int i=hatCount; i < 9; i++)
-            //{
-            //    GameObject hat = Instantiate(hatPrefab, hatTop.transform.position, Quaternion.identity);
-            //    hat.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = hatColors[Random.Range(0, hatColors.Length - 1)];
-            //    AddHat(hat);
-            //}
-            playerScript.SuperBounce();
-            other.GetComponent<MushroomController>().playerHit = transform.parent.gameObject;
+
+			for (int i = hatCount; i < 9; i++)
+			{
+				GameObject hat = Instantiate(hatPrefab, hatTop.transform.position, Quaternion.identity);
+				hat.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = hatColors[Random.Range(0, hatColors.Length - 1)];
+				AddHat(hat);
+			}
+			//playerScript.SuperBounce();
+			other.GetComponent<MushroomController>().playerHit = transform.parent.gameObject;
             other.GetComponent<MushroomController>().Caught();
             other.GetComponent<MushroomController>().hatShadowDestroy();
             

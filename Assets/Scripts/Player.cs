@@ -15,15 +15,15 @@ public class Player : MonoBehaviour
     [Header("Character Bumping Variables")]
     [SerializeField] PhysicMaterial knockbackMaterial;
 
-    [Header("Super Bump Variables")]
-    [SerializeField] float bumpForce = 10f;
-    [SerializeField] float superBounceMass = 10f;
-    [HideInInspector] public bool superBump = false;
-    [SerializeField] float superBumpMaxTime = 3f;
-    [SerializeField] ParticleSystem superBumpVFX;
-    float superBumpVFXPulseTimer;
-    ParticleSystem.MainModule vfxMainModule;
-    bool reversePulse = false;
+    //[Header("Super Bump Variables")]
+    //[SerializeField] float bumpForce = 10f;
+    //[SerializeField] float superBounceMass = 10f;
+    //[HideInInspector] public bool superBump = false;
+    //[SerializeField] float superBumpMaxTime = 3f;
+    //[SerializeField] ParticleSystem superBumpVFX;
+    //float superBumpVFXPulseTimer;
+    //ParticleSystem.MainModule vfxMainModule;
+    //bool reversePulse = false;
 
     private bool firstFrame = true;
     private bool secondFrame = false;
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     static List<GameObject> players = new List<GameObject>();
     void Start()
     {
-        vfxMainModule = superBumpVFX.main;
+        //vfxMainModule = superBumpVFX.main;
         playerRigidBody = gameObject.GetComponent<Rigidbody>();
         playerMovement = gameObject.GetComponent<PlayerMovement>();
         playerHatCollecter = gameObject.GetComponentInChildren<HatCollecter>();
@@ -56,38 +56,38 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
 	{
-        if (superBumpTimer != null && superBumpTimer.TimerStart == false)
-		{
-			superBump = false;
-			playerRigidBody.mass = 1f;
-			superBumpVFX.Stop();
-			Destroy(superBumpTimer);
-		}
+        //if (superBumpTimer != null && superBumpTimer.TimerStart == false)
+		//{
+		//	superBump = false;
+		//	playerRigidBody.mass = 1f;
+		//	superBumpVFX.Stop();
+		//	Destroy(superBumpTimer);
+		//}
 
-		MakeSuperBumpVFXPulse();
+		//MakeSuperBumpVFXPulse();
 	}
 
-    private void MakeSuperBumpVFXPulse()
-	{
-		if (superBumpTimer != null)
-		{
-			superBumpVFXPulseTimer += Time.deltaTime;
-			if (superBumpVFXPulseTimer >= 1)
-			{
-				reversePulse = !reversePulse;
-				superBumpVFXPulseTimer = 0;
-			}
-		}
+    //private void MakeSuperBumpVFXPulse()
+	//{
+	//	if (superBumpTimer != null)
+	//	{
+	//		superBumpVFXPulseTimer += Time.deltaTime;
+	//		if (superBumpVFXPulseTimer >= 1)
+	//		{
+	//			reversePulse = !reversePulse;
+	//			superBumpVFXPulseTimer = 0;
+	//		}
+	//	}
 
-		if (reversePulse == false)
-		{
-			vfxMainModule.startSize = Mathf.Lerp(1f, 1.5f, superBumpVFXPulseTimer / 1f);
-		}
-		else
-		{
-			vfxMainModule.startSize = Mathf.Lerp(1.5f, 1f, superBumpVFXPulseTimer / 1f);
-		}
-	}
+	//	if (reversePulse == false)
+	//	{
+	//		vfxMainModule.startSize = Mathf.Lerp(1f, 1.5f, superBumpVFXPulseTimer / 1f);
+	//	}
+	//	else
+	//	{
+	//		vfxMainModule.startSize = Mathf.Lerp(1.5f, 1f, superBumpVFXPulseTimer / 1f);
+	//	}
+	//}
 
 	private void OnTriggerEnter(Collider other)
 	{
@@ -124,14 +124,14 @@ public class Player : MonoBehaviour
             return;
 		}
 
-        if(collision.gameObject.tag=="Player")
-		{
-            //playerMovement.canMove = false;
-            if(collision.gameObject.GetComponent<Player>().superBump == true)
-			{
-                playerRigidBody.AddForce(-transform.forward * bumpForce, ForceMode.Impulse);
-            }
-        }
+  //      if(collision.gameObject.tag=="Player")
+		//{
+  //          //playerMovement.canMove = false;
+  //          if(collision.gameObject.GetComponent<Player>().superBump == true)
+		//	{
+  //              playerRigidBody.AddForce(-transform.forward * bumpForce, ForceMode.Impulse);
+  //          }
+  //      }
 
 		if (collision.gameObject.tag.Contains("Knockback"))
         {
@@ -275,14 +275,14 @@ public class Player : MonoBehaviour
         GetComponentInChildren<HatCollecter>().isdamaged = false;
     }
 
-    public void SuperBounce()
-	{
-        superBumpVFXPulseTimer = 0;
-        superBump = true;
-        playerRigidBody.mass = superBounceMass;
-        superBumpVFX.Play();
-        superBumpTimer = gameObject.AddComponent<NewTimer>();
-        superBumpTimer.MaxTime = superBumpMaxTime;
-        superBumpTimer.TimerStart = true;
-    }
+ //   public void SuperBounce()
+	//{
+ //       superBumpVFXPulseTimer = 0;
+ //       superBump = true;
+ //       playerRigidBody.mass = superBounceMass;
+ //       superBumpVFX.Play();
+ //       superBumpTimer = gameObject.AddComponent<NewTimer>();
+ //       superBumpTimer.MaxTime = superBumpMaxTime;
+ //       superBumpTimer.TimerStart = true;
+ //   }
 }

@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: e6241096fb7b7794eb7576dae6215fb8,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -4542,7 +4542,7 @@ GameObject:
   - component: {fileID: 248654844}
   m_Layer: 8
   m_Name: Loc4
-  m_TagString: Hat
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14796,7 +14796,7 @@ GameObject:
   - component: {fileID: 765149626}
   m_Layer: 8
   m_Name: Loc2
-  m_TagString: Hat
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24684,7 +24684,7 @@ GameObject:
   - component: {fileID: 1354202658}
   m_Layer: 8
   m_Name: Loc3
-  m_TagString: Hat
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38317,7 +38317,7 @@ GameObject:
   - component: {fileID: 3444832375989445023}
   m_Layer: 8
   m_Name: Loc1
-  m_TagString: Hat
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

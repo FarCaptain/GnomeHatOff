@@ -159,7 +159,7 @@ PrefabInstance:
     - target: {fileID: 4625309657243547731, guid: 2f77f0ee2e938244989310509d1f2498,
         type: 3}
       propertyPath: acceptedGnomeColor
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4625309658247718658, guid: 2f77f0ee2e938244989310509d1f2498,
         type: 3}
@@ -254,7 +254,7 @@ PrefabInstance:
     - target: {fileID: 4625309657243547731, guid: 2f77f0ee2e938244989310509d1f2498,
         type: 3}
       propertyPath: acceptedGnomeColor
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4625309658247718658, guid: 2f77f0ee2e938244989310509d1f2498,
         type: 3}

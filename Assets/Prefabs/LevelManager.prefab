@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockedInPlayers: 0
+  faderAnimator: {fileID: 1309726430171455310}
   OnPlayersLockedIn:
     m_PersistentCalls:
       m_Calls:
@@ -195,6 +196,12 @@ PrefabInstance:
 --- !u!224 &1309726430171455305 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1080552671726424645, guid: 23e6c95fc257af34d8be52dfe4302518,
+    type: 3}
+  m_PrefabInstance: {fileID: 2077269736052559116}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1309726430171455310 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1080552671726424642, guid: 23e6c95fc257af34d8be52dfe4302518,
     type: 3}
   m_PrefabInstance: {fileID: 2077269736052559116}
   m_PrefabAsset: {fileID: 0}

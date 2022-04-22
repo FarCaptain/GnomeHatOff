@@ -7,10 +7,12 @@ using UnityEngine.Events;
 public class LevelManager : MonoBehaviour
 {
     [HideInInspector] public int lockedInPlayers = 0;
+    [SerializeField] Animator faderAnimator;
     [SerializeField] UnityEvent OnPlayersLockedIn;
     [SerializeField] UnityEvent OnPlayersNotLockedIn;
     bool allLockedIn = false;
 
+    private int indexOfLevelToLoad = -1;
     private int numberOfPlayers;
     void Start()
     {
@@ -29,6 +31,11 @@ public class LevelManager : MonoBehaviour
 		{
             allLockedIn = false;
         }
+
+        if(IsAnimationStateOver(faderAnimator,"FadeOut",1f))
+		{
+            SceneManager.LoadScene(indexOfLevelToLoad);
+		}
     }
 
     public void IncrementLockedInPlayers()
@@ -45,6 +52,13 @@ public class LevelManager : MonoBehaviour
 
     public void LoadScene(int levelIndex)
 	{
-        SceneManager.LoadScene(levelIndex);
-	}
+        indexOfLevelToLoad = levelIndex;
+        faderAnimator.SetTrigger("faderFadeOut");
+    }
+
+    private bool IsAnimationStateOver(Animator animator, string animationStateName, float time)
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).IsName(animationStateName)
+               && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= time;
+    }
 }

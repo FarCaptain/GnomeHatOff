@@ -377,6 +377,7 @@ public class ScoreSystem : MonoBehaviour
                 objectsToKillOnRoundOver[i].SetActive(false);
             }
             currentFaderState = FaderStates.FadeIn;
+            DestroyHats();
         }
 
         if (IsAnimationStateOver(faderAnimator, "RoundOverFaderAnim", 1f) && currentFaderState == FaderStates.FadeIn)
@@ -393,6 +394,21 @@ public class ScoreSystem : MonoBehaviour
 		}
 	}
     
+    private void DestroyHats()
+	{
+        GameObject[] hats = GameObject.FindGameObjectsWithTag("Hat");
+        scaleShadow[] hatShadows = FindObjectsOfType<scaleShadow>();
+
+        foreach(GameObject hat in hats)
+		{
+            Destroy(hat);
+		}
+
+        foreach (scaleShadow shadow in hatShadows)
+        {
+            Destroy(shadow);
+        }
+    }
     private void AddScore(GameObject player, int score, int hatCount)
     {
         int player_index = player.GetComponent<PlayerMovement>().playerIndex;

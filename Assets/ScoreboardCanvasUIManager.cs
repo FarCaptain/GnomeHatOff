@@ -112,7 +112,7 @@ public class ScoreboardCanvasUIManager : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.1f);
         }
         hatPileCounter++;
-        if (hatPileCounter < 4 && playerScores[hatPileCounter] != 0)
+        if (hatPileCounter < 4)
         {
             StartCoroutine(SpawnHatPile(playerScores[hatPileCounter], hatPileCounter));
         }

@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: e6241096fb7b7794eb7576dae6215fb8,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -669,7 +669,7 @@ PrefabInstance:
     - target: {fileID: 7554362339072160181, guid: b0a006b4d90729b4dae845579e0ffe10,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.64
+      value: 0.79
       objectReference: {fileID: 0}
     - target: {fileID: 7908821928426056117, guid: b0a006b4d90729b4dae845579e0ffe10,
         type: 3}
@@ -36298,6 +36298,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 196612026862121602, guid: e45d7276328bbd546820118d9e9de48d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f6f9edf949936c94eb2a896fc32a214a,
+        type: 3}
+    - target: {fileID: 196612027150302103, guid: e45d7276328bbd546820118d9e9de48d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2c75f8a1cb4dea240a03bb724b908714,
+        type: 3}
     - target: {fileID: 196612027398242192, guid: e45d7276328bbd546820118d9e9de48d,
         type: 3}
       propertyPath: m_Name
@@ -37703,12 +37715,42 @@ PrefabInstance:
     - target: {fileID: 2043387878616302882, guid: ac46aa849a6929b43a16a8738dcc0b92,
         type: 3}
       propertyPath: m_Name
-      value: Purple
+      value: PurpleGnomeLockInPlatform
+      objectReference: {fileID: 0}
+    - target: {fileID: 2043387878764025195, guid: ac46aa849a6929b43a16a8738dcc0b92,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.55195713
+      objectReference: {fileID: 0}
+    - target: {fileID: 2043387878764025195, guid: ac46aa849a6929b43a16a8738dcc0b92,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.09344961
+      objectReference: {fileID: 0}
+    - target: {fileID: 2043387878764025195, guid: ac46aa849a6929b43a16a8738dcc0b92,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.7924528
+      objectReference: {fileID: 0}
+    - target: {fileID: 2043387878895888869, guid: ac46aa849a6929b43a16a8738dcc0b92,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2043387878895888869, guid: ac46aa849a6929b43a16a8738dcc0b92,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8183497
+      objectReference: {fileID: 0}
+    - target: {fileID: 2043387878895888869, guid: ac46aa849a6929b43a16a8738dcc0b92,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2043387879043873196, guid: ac46aa849a6929b43a16a8738dcc0b92,
         type: 3}
       propertyPath: m_Name
-      value: Yellow
+      value: YellowGnomeLockInPlatform
       objectReference: {fileID: 0}
     - target: {fileID: 6659685664632821896, guid: ac46aa849a6929b43a16a8738dcc0b92,
         type: 3}
@@ -37769,6 +37811,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FancyLockInPlatforms
+      objectReference: {fileID: 0}
+    - target: {fileID: 6659685664632821903, guid: ac46aa849a6929b43a16a8738dcc0b92,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac46aa849a6929b43a16a8738dcc0b92, type: 3}

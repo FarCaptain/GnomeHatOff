@@ -5,6 +5,7 @@ using UnityEngine;
 public class ColliderCheck : MonoBehaviour
 {
     public PlayerMovement player;
+    public BoxCollider hatCollector = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,14 +44,18 @@ public class ColliderCheck : MonoBehaviour
     {
         if (player.hasSeal)
         {
-            //GetComponent<BoxCollider>().isTrigger = false;
+            GetComponent<BoxCollider>().isTrigger = false;
             // Scale the collider into seal size
-            GetComponent<BoxCollider>().transform.localScale = new Vector3(1.5f, 1f, 4f);
+            hatCollector.transform.localScale = new Vector3(1.5f, 1f, 4f);
         }
         else
         {
-            //GetComponent<BoxCollider>().isTrigger = true;
-            GetComponent<BoxCollider>().transform.localScale = new Vector3(1f, 1f, 1f);
+            GetComponent<BoxCollider>().isTrigger = true;
+            if (hatCollector != null)
+            {
+                hatCollector.transform.localScale = new Vector3(1f, 1f, 1f);
+            }
+           
         }
     }
 

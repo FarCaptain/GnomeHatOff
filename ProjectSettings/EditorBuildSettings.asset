@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/IceMapLayout.unity
     guid: c9be03e764a484d4b8282ab3b53ba93c
+  - enabled: 1
+    path: Assets/Scenes/IceMap2Layout.unity
+    guid: 47983a7bf3697884498453e832ebe48b
   m_configObjects: {}

@@ -9,10 +9,6 @@ public class LevelSelectManager : MonoBehaviour
 {
     [SerializeField] Animator[] levelSelectUIAnimators;
 
-    [Header("Map Gif Parameters")]
-    [SerializeField] RenderTexture[] mapGifs;
-    [SerializeField] RawImage mapDisplay;
-
     [Header("Map Name Parameters")]
     [SerializeField] string[] mapNames;
     [SerializeField] TextMeshProUGUI mapTitle;
@@ -40,7 +36,7 @@ public class LevelSelectManager : MonoBehaviour
     private int currentIndex = 0;
     void Start()
     {
-        mapCount = mapGifs.Length;
+        mapCount = 4;
     }
 
 
@@ -99,7 +95,6 @@ public class LevelSelectManager : MonoBehaviour
         {
             videoPlayer.SetActive(false);
         }
-        mapDisplay.texture = mapGifs[index];
         mapTitle.text = mapNames[index];
         selectedMapDescription.text = mapDescriptions[index];
         videoPlayers[index].SetActive(true);
@@ -149,6 +144,10 @@ public class LevelSelectManager : MonoBehaviour
         else if (mapTitle.text == mapNames[2])
         {
             SceneManager.LoadScene(5);
+        }
+        else if (mapTitle.text == mapNames[3])
+        {
+            SceneManager.LoadScene(6);
         }
     }
 

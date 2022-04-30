@@ -12,7 +12,7 @@ public class Hazard : MonoBehaviour
     public enum TypesOfHatSteal { None, Some, All };
     [Header("Hat Steal Variables")]
     [SerializeField] public TypesOfHatSteal typeOfHatStealChosen = TypesOfHatSteal.Some;
-    [SerializeField] public int maxHatsToSteal = 2;
+    [SerializeField] public int maxHatsToSteal = 0;
 
     public float KnockBackTime
 	{

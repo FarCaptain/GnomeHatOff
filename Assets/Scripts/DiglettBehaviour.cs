@@ -21,7 +21,7 @@ public class DiglettBehaviour : Hazard
     public float trackingPathLength;
     public List<Transform> spawners = new List<Transform>();
 
-    private List<Transform> players = new List<Transform>();
+    public List<Transform> players = new List<Transform>();
 
     private NewTimer stayTimer;
     private NewTimer hideTimer;
@@ -30,8 +30,7 @@ public class DiglettBehaviour : Hazard
     private enum diglettStates {Hide, Warn, Stay};
     private int state;
 
-    public ParticleSystem dustPrefab;
-    private ParticleSystem dust;
+    public ParticleSystem dust;
     public VisualEffect poof;
     private NavMeshAgent navMeshAgent;
     public Transform digletModel;
@@ -64,7 +63,6 @@ public class DiglettBehaviour : Hazard
         digletModel.position = new Vector3(pos.x, -2f, pos.z);
 
         navMeshAgent = GetComponent<NavMeshAgent>();
-        UpdatePlayers();
         targetedPlayerIndex = Random.Range(0, players.Count);
     }
 
@@ -77,17 +75,6 @@ public class DiglettBehaviour : Hazard
                 state = (int)diglettStates.Warn;
 
                 // target players in turn
-                if (players.Count == 0)
-                {
-                    UpdatePlayers();
-                    targetedPlayerIndex = Random.Range(0, players.Count);
-
-                    if (players.Count == 0)
-                    {
-                        Debug.LogError("[Diglett]Something Went wrong. Can't find the Players!");
-                        return;
-                    }
-                }
                 targetedPlayerIndex = (targetedPlayerIndex + 1) % players.Count;
                 Vector3 playerPos = players[targetedPlayerIndex].position;
                 // ToDo. might need bias to avoid bug
@@ -106,20 +93,16 @@ public class DiglettBehaviour : Hazard
                 }
                 transform.position = spawnPos;
 
-                navMeshAgent.destination = playerPos + new Vector3(1f, 0f, 1f);
+                navMeshAgent.destination = playerPos;
                 navMeshAgent.speed = diglettSpeed;
                 keepTrack = true;
-                dust = GameObject.Instantiate(dustPrefab, transform.position, Quaternion.identity);
+                dust.Play();
             }
         }
         else if (state == (int)diglettStates.Warn)
         {
             
             Vector3 playerPos = players[targetedPlayerIndex].position;
-
-            dust.transform.position = new Vector3(transform.position.x, 0.01f, transform.position.z);
-            if (dust.isPlaying == false)
-                dust.Play();
 
             // keep following the player if it is not close enough
             //if (keepTrack && Vector3.Distance(playerPos, transform.position) < stopTrackingDistance)
@@ -148,7 +131,6 @@ public class DiglettBehaviour : Hazard
                 // Emerging
                 Vector3 pos = transform.position;
                 digletModel.position = new Vector3(pos.x, 0f, pos.z);
-                Destroy(dust);
                 dust.Stop();
             }
         }
@@ -166,13 +148,9 @@ public class DiglettBehaviour : Hazard
             }
         }
     }
-
-    private void UpdatePlayers()
-    {
-        players.Clear();
-        foreach ( GameObject player in GameObject.FindGameObjectsWithTag("Player"))
-        {
-            players.Add(player.transform);
-        }
-    }
+    //void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = new Color(1f, 0f, 0f, 0.5f);
+    //    Gizmos.DrawSphere(transform.localPosition + playerPos, initialDistance);
+    //}
 }

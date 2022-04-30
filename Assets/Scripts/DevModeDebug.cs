@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class DevModeDebug : MonoBehaviour
 {
@@ -16,15 +15,6 @@ public class DevModeDebug : MonoBehaviour
 		if(!Debug.isDebugBuild)
 		{
 			Destroy(gameObject);
-		}
-
-		if(FindObjectsOfType<DevModeDebug>().Length>1)
-		{
-			Destroy(gameObject);
-		}
-		else
-		{
-			DontDestroyOnLoad(gameObject);
 		}
 	}
 	void Start()
@@ -43,7 +33,6 @@ public class DevModeDebug : MonoBehaviour
 			UseMKeyForDrop();
 			PauseAndUnpauseTime();
 			SpawnAlotOfHats();
-			GoBackToLevelSelect();
 			//TestSomeAudio();
 		}
 	}
@@ -95,13 +84,5 @@ public class DevModeDebug : MonoBehaviour
 				hatSpawner.SpawnHat();
 			}
 		}
-	}
-
-	private void GoBackToLevelSelect()
-	{
-/*		if(Input.GetKeyDown(KeyCode.Escape))
-		{
-			SceneManager.LoadScene(1);
-		}*/
 	}
 }

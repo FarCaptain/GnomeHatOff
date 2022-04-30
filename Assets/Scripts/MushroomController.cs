@@ -9,6 +9,7 @@ public class MushroomController : MonoBehaviour
     private float moveScaleX = 4.5f;
     public float defaultTransparency = 1f;
     public float fadeDuration = 3f;
+    public GameObject player;
     public GameObject shadowPrefab;
     public HatSpawning hatSpawn;
     public ParticleSystem circleDust;
@@ -32,7 +33,7 @@ public class MushroomController : MonoBehaviour
     private bool isGrabbed = false;
 
     bool isOnGround = false;
-    public float headTop;
+    float headTop;
 
     public bool hatFadeEnabled = true;
     private AudioSource mushroomManAudioSource;
@@ -45,7 +46,19 @@ public class MushroomController : MonoBehaviour
         AudioManager.PlayMushroomManAudioClip(MushroomManAudioStates.Falling, mushroomManAudioSource);
 
         hatSpawn = GameObject.Find("HatSpawner").GetComponent<HatSpawning>();
+        player = GameObject.Find("Gnome_0");
         rb.velocity = -dropSpeed;
+
+        // TODO: Adjust for loop code
+        for (int i = 0; i < player.transform.childCount; i++)
+        {
+            // inefficient, way to do on resources?
+            if (player.transform.GetChild(i).name == "HeadTop")
+            {
+                headTop = player.transform.GetChild(i).transform.position.y;
+                break;
+            }
+        }
     }
 
     void FixedUpdate()

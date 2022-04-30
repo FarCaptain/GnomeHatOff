@@ -4,7 +4,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
@@ -17,18 +17,17 @@ public class PlayerMovement : MonoBehaviour
 
     public float slideFactor;
     public float maxSpeed;
-    public float percentOfMaxSpeed;
     public float constantSpeed = 100;
     [Header("The decrease of max speed each hat gives you")]
     public float hatBurden = 0;
     public float speedDecreaseEachHat;
 
     public int playerIndex = 0;
-
+    
     // to filter the value we get from the gyroscope
     public int delayedFrames;
     private int remainingFrames;
-
+  
     private Rigidbody rigidBody;
 
     public ParticleSystem runDust;
@@ -40,42 +39,32 @@ public class PlayerMovement : MonoBehaviour
 
     public float xval;
 
-    public GameObject RespawnCountDown;
 
 
-    Vector3 initPos = new Vector3(0, 0, 0);       // new default position for controller when calibrated
-
-    public bool isMoving = false;
+    Vector3 initPos = new Vector3(0,0,0);       // new default position for controller when calibrated
+    
     [HideInInspector]
     public bool canMove = true;
     public bool isBumping = false;
     int level;
     //for map2
-    public GameObject SealSocket;
     public bool isDrop;
-    public Vector3 speed;
+    Vector3 speed;
     public float collisionTime;
     float testCollisionTime;
     Vector3 dropSpeed;
     public bool knocked;
-    public bool hasSeal;
-    [SerializeField]
-    Transform respawnPos;
     bool disabled;
-
-    public bool moveInWater;
-    public bool moveOnIce;
     void Start()
     {
-
-        hasSeal = false;
         disabled = false;
         knocked = false;
         rigidBody = GetComponent<Rigidbody>();
         isDrop = false;
         collisionTime = 1;
         testCollisionTime = 0;
-        level = MainGameController.instance.level;
+        level = GameObject.Find("GameManager").GetComponent<MainGameController>().level;
+        
     }
 
 
@@ -89,36 +78,25 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        
-
-        if (canMove == false || isMoving)
-        {
-            return;
-        }
-        if (hasSeal)
-        {
-            moveInWater = true;
-            moveOnIce = false;
-        }
-        if (!isDrop && disabled)
+       
+        if(!isDrop && disabled)
         {
             return;
         }
         BoxCollider boxCollider = GetComponent<BoxCollider>();
-        if (!isDrop && !moveInWater)
+        if (!isDrop)
         {
             testCollisionTime += Time.fixedDeltaTime;
         }
-
-        if (level == 2 && testCollisionTime > 0.1f)
+     
+        if (level==2&& testCollisionTime > 0.1f)
         {
-            if (collisionTime < 0.05&&!hasSeal && !moveInWater)
+            if (collisionTime < 0.05)
             {
                 testCollisionTime = 0;
                 isDrop = true;
                 Respawn(3);
-                dropSpeed = 0.1f * speed + new Vector3(0, -200, 0);
-                
+                dropSpeed = 0.1f*speed + new Vector3(0, -200, 0);
             }
             else
             {
@@ -130,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
         // used for calibration
 
         float vel_y = rigidBody.velocity.y;
-
+        
 
         Vector3 move = Vector3.zero;
         if (playerIndex == 0)
@@ -159,9 +137,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (isDrop)
         {
-
+            
             speed = dropSpeed;
-            Debug.Log("hh");
 
         }
 
@@ -173,18 +150,10 @@ public class PlayerMovement : MonoBehaviour
 
             }
 
-            // nullifies an inherit property of vectors that results in faster diagonal movement speed
-            if (Mathf.Abs(speed.x) >= maxSpeed && Mathf.Abs(speed.z) >= maxSpeed)
-            {
-                speed *= percentOfMaxSpeed;
-                
-            }
-
             Move(speed * Time.deltaTime);
             drawRunDust();
         }
 
-        // stop gnome rigidbody from moving
         if (speed.x == 0 && speed.z == 0 && canSlide == false && canMove == true)
         {
             rigidBody.velocity = Vector3.zero;
@@ -199,10 +168,9 @@ public class PlayerMovement : MonoBehaviour
             rigidBody.velocity = motion;
     }
 
-    public void Move(float xaxis, float yaxis, float zaxis)
+    public void Move(float xaxis, float yaxis,float zaxis)
     {
-
-        if (canMove == false||isMoving)
+        if (canMove == false)
         {
             return;
         }
@@ -212,7 +180,7 @@ public class PlayerMovement : MonoBehaviour
 
         //inverted inputs to accomodate physical controller position
         Vector3 move = new Vector3(zval, 0f, xval * -1);
-        //Debug.Log("DebugLog - ReceivingVector: " + move);
+        Debug.Log("DebugLog - ReceivingVector: " + move);
 
         float currentMaxSpeed = maxSpeed;
         if (maxSpeed - hatBurden >= 0)
@@ -234,7 +202,7 @@ public class PlayerMovement : MonoBehaviour
             speed_z = currentMaxSpeed;
         else
             speed_z = constantSpeed;
-        //speed_z = map(Mathf.Abs(move.z), MaxthresholdFB);
+            //speed_z = map(Mathf.Abs(move.z), MaxthresholdFB);
 
         // assigns direction
         speed_x *= Mathf.Sign(move.x);
@@ -278,36 +246,20 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //the player will be respawned in time seconds
-    public void Respawn(int time)
+    public void Respawn(float time)
     {
-        Vector3 respawnPosition = IcePlane.instance.GetRespawnPos();
-         StartCoroutine(CountDown(time, respawnPosition));
         disabled = true;
-        StartCoroutine(RespawnPlayer(time,respawnPosition));
-        
+        Invoke("RespawnPlayer", time);
     }
-    IEnumerator CountDown(int time, Vector3 i_position)
+
+    void RespawnPlayer()
     {
-        RespawnCountDown.GetComponent<Text>().text = time.ToString();
-        RespawnCountDown.SetActive(true);
-        Vector2 screenPos = Camera.main.WorldToScreenPoint(i_position);
-        RespawnCountDown.GetComponent<RectTransform>().position= screenPos + new Vector2(0,150);
-        for(int i = time; i > 0; i--)
-        {
-            yield return new WaitForSeconds(1);
-            RespawnCountDown.GetComponent<Text>().text = (i-1).ToString();
-        }
-    }
-   
-    IEnumerator RespawnPlayer(int time, Vector3 i_position)
-    {
-        yield return new WaitForSeconds(time);
-        RespawnCountDown.SetActive(false);
+       
         speed = Vector3.zero;
-        transform.position = i_position;
+        transform.position = Vector3.zero;
         disabled = false;
         isDrop = false;
         collisionTime = 1;
     }
-
+   
 }

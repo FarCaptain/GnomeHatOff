@@ -31,11 +31,11 @@ public class scaleShadow : MonoBehaviour
         {
             if (attraction == true )
             {
-                Vector3 direction = (gameObject.transform.position - player.transform.position).normalized;
+                Vector3 direction = (this.transform.position - player.transform.position).normalized;
                 // Debug.Log(direction);
                 Vector3 Finaldir = new Vector3(Mathf.Abs(direction.x), Mathf.Abs(direction.y), Mathf.Abs(direction.z));
-                //player.GetComponent<Transform>().position = Vector3.MoveTowards(player.GetComponent<Transform>().position, gameObject.transform.position, 0.1f);
-                player.GetComponent<Rigidbody>().AddForce(Finaldir * MagnetismStrength, ForceMode.Force) ;
+
+                player.GetComponent<Rigidbody>().AddForce((Finaldir) * MagnetismStrength, ForceMode.Force) ;
                 if(MagnetismStrength > 0)
                 MagnetismStrength -= MagnetismReductionOverTime;
                 attraction = false;

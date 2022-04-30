@@ -6,15 +6,6 @@ using TMPro;
 
 public class ScoreSystem : MonoBehaviour
 {
-
-    [SerializeField] Animator cameraAnimator;
-    [SerializeField] Animator faderAnimator;
-    [SerializeField] Animator wellAnimator;
-    [SerializeField] GameObject scoreBoardUI;   
-    [SerializeField] GameObject[] objectsToKillOnRoundOver;
-    enum FaderStates { Inactive, FadeIn, FadeOut }
-    private FaderStates currentFaderState;
-
     [SerializeField] 
     public AudioSource audio;
     [Header("Points Display Objects")]
@@ -68,11 +59,9 @@ public class ScoreSystem : MonoBehaviour
 
     private BonusPointsIndicator[] bonusPointIndicatorsInScene;
     private bool simultaneousBonusesBeingDisplayed = false;
-
-    // We'll enable this script once we already have players in game
+    // Start is called before the first frame update
     void Start()
 	{
-        gameManager = MainGameController.instance;
         PlayerAmount = gameManager.COM.Count;
         for (int id = 0; id < 2; id++)
 			for (int i = 0; i < fires[id].transform.childCount; i++)
@@ -106,25 +95,24 @@ public class ScoreSystem : MonoBehaviour
 		hatDropDisplayScaleTimer.MaxTime = 2f;
 		hatDropDisplayFadeTimer.MaxTime = 1f;
 	}
+
 	public void displayWinner()
     {
-        cameraAnimator.SetBool("isCameraPanUp", true);
-        faderAnimator.SetTrigger("roundOver");
         winPanel.SetActive(true);
-        currentFaderState = FaderStates.FadeOut;
         AudioManager.PlayGeneralGameAudioClip(GameGeneralAudioStates.RoundEnd);
-        winText.text = "Round Over";
-        //int win_Index = 0;
-        //int maxScore = -1;
-        //for(int i = 0; i < PlayerAmount; i++)
-        //{
-        //    if (playerScores[i] > maxScore)
-        //    {
-        //        maxScore = playerScores[i];
-        //        win_Index = i;
-        //    }
-        //}
-        //winnerScoreText.text = "Score: " + maxScore;
+        int win_Index = 0;
+        int maxScore = -1;
+        for(int i = 0; i < PlayerAmount; i++)
+        {
+            if (playerScores[i] > maxScore)
+            {
+                maxScore = playerScores[i];
+                win_Index = i;
+            }
+        }
+        winText.text = "Player "+ win_Index+" Wins!!!";
+        winnerScoreText.text = "Score: " + maxScore;
+
     }
 
     /// <summary>
@@ -368,58 +356,16 @@ public class ScoreSystem : MonoBehaviour
 
 	private void Update()
 	{
-        if (IsAnimationStateOver(faderAnimator, "RoundOverFaderAnim", 0.5f) && currentFaderState == FaderStates.FadeOut)
-        {
-            winPanel.SetActive(false);
-            scoreBoard.gameObject.SetActive(false);
-            for (int i = 0; i < objectsToKillOnRoundOver.Length; i++)
-            {
-                objectsToKillOnRoundOver[i].SetActive(false);
-            }
-            currentFaderState = FaderStates.FadeIn;
-            DestroyHats();
-        }
 
-        if (IsAnimationStateOver(faderAnimator, "RoundOverFaderAnim", 1f) && currentFaderState == FaderStates.FadeIn)
-        {
-            wellAnimator.SetTrigger("roundOver");
-            currentFaderState = FaderStates.Inactive;
-        }
-
-        if(IsAnimationStateOver(wellAnimator, "WellTransposeDown",1f))
-		{
-
-            scoreBoardUI.SetActive(true);
-            FindObjectOfType<ScoreboardCanvasUIManager>().playerScores = playerScores;
-		}
 	}
     
-    private void DestroyHats()
-	{
-        GameObject[] hats = GameObject.FindGameObjectsWithTag("Hat");
-        scaleShadow[] hatShadows = FindObjectsOfType<scaleShadow>();
-
-        foreach(GameObject hat in hats)
-		{
-            Destroy(hat);
-		}
-
-        foreach (scaleShadow shadow in hatShadows)
-        {
-            Destroy(shadow);
-        }
-    }
     private void AddScore(GameObject player, int score, int hatCount)
     {
-        int player_index = player.GetComponent<PlayerMovement>().playerIndex;
-        Debug.Log("DebugLog - " + player.name + " Index: " + player_index);
+        int player_index = player.GetComponent<Player>().playerIndex;
 
-        int newScore = score;
-        if (playerScores.ContainsKey(player_index))
-        {
-            newScore = playerScores[player_index] + score;
-            playerScores.Remove(player_index);
-        }
+        int newScore = playerScores[player_index] + score;
+        Debug.Log("DebugLog - " + player.name +" Index: " + player_index);
+        playerScores.Remove(player_index);
         playerScores.Add(player_index, newScore);
 
         go_playerScores[player_index].transform.Find("Text").GetComponent<TMPro.TextMeshProUGUI>().text = newScore.ToString();
@@ -430,11 +376,5 @@ public class ScoreSystem : MonoBehaviour
         //revertChangesOnFire(player_index);
         //magnifyFire(player_index, getFireSize(player.gameObject));
         //fires[player_index].Play();
-    }
-
-    private bool IsAnimationStateOver(Animator animator, string animationStateName, float time)
-    {
-        return animator.GetCurrentAnimatorStateInfo(0).IsName(animationStateName)
-               && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= time;
     }
 }

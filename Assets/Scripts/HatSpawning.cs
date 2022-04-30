@@ -14,8 +14,6 @@ public class HatSpawning : MonoBehaviour
     public Animator hatRushAnim;
     public float hatshadowDestroyTime=4;
 
-    public AnimationCurve timeCurve;
-
     public Vector3 center;
     public Vector3 size;
     public Vector3 scale_mushroom;
@@ -42,17 +40,16 @@ public class HatSpawning : MonoBehaviour
     void Start()
     {
         mushroomTime = 0;
-        timeGap = 0;
-        
+        timeGap = Random.Range( 0.6f, 3.5f);
         mushroomSpawnTime = Random.Range(20, 40);
         ColorUtility.TryParseHtmlString("#3768A7",out hatColors[0]);
         ColorUtility.TryParseHtmlString("#7637A7", out hatColors[1]);
         ColorUtility.TryParseHtmlString("#A7A037", out hatColors[2]);
         ColorUtility.TryParseHtmlString("#FFFFFF", out hatColors[3]); //original
-        
+
         float dashStartSpeed = minGap;
         hatRushMinGap = Mathf.Min(dashStartSpeed, hatRushMinGap);
-        
+
         deltaDashChange = (dashStartSpeed - hatRushMinGap) / hatRushTime;
         accumulatedSpeed = dashStartSpeed;
     }
@@ -67,16 +64,15 @@ public class HatSpawning : MonoBehaviour
             isHatRush = true;
             timerText.color = Color.red;
             hatRushMessage.SetActive(true);
-            //AudioManager.PlayGeneralGameAudioClip(GameGeneralAudioStates.HatRushBegin);
+            AudioManager.PlayGeneralGameAudioClip(GameGeneralAudioStates.HatRushBegin);
             hatRushAnim.Play("FadeAnimation");
         }
             
         timeInterval += Time.deltaTime;
-        timeGap = timeCurve.Evaluate(Timer.elapsedTime);
 
         if(mushroomTime > mushroomSpawnTime && mushroomManPrefab)
         {
-            //timeGap = Random.Range(minGap, maxGap);
+            timeGap = Random.Range(minGap, maxGap);
             if (mushroomOneTime < 1 && mushroomCount < mushroomMaxCount)
             {
                 SpawnMushroomMan();
@@ -89,7 +85,7 @@ public class HatSpawning : MonoBehaviour
         if (timeInterval > timeGap)
         {
            
-            //timeGap = isHatRush ? accumulatedSpeed = Mathf.Max(accumulatedSpeed - (deltaDashChange * timeGap), hatRushMinGap) : Random.Range(minGap, maxGap);
+            timeGap = isHatRush ? accumulatedSpeed = Mathf.Max(accumulatedSpeed - (deltaDashChange * timeGap), hatRushMinGap) : Random.Range(minGap, maxGap);
             SpawnHat();
           
             

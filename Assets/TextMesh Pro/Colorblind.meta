@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/TextMesh Pro/Colorblind.meta
 guid: 3090868a09c38a74db87f2541e36fea1
+========
+guid: e911c3512cace324ba513d4848bc8559
+>>>>>>>> main:Assets/Animations/Map1LockInPlatforms.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

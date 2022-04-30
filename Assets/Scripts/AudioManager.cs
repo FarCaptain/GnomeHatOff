@@ -130,13 +130,6 @@ public class AudioManager : MonoBehaviour
         gameGeneralAudioClipsLibrary.Add(GameGeneralAudioStates.HatRushBegin, (AudioClip)gameGeneralAudioClips[2]);
     }
 
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public static void PlayHatAudioClip(HatAudioStates audioState, AudioSource audio)
 	{
         hatAudioSource = audio;

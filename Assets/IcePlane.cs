@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class IcePlane : MonoBehaviour
 {
-
+    public static IcePlane instance;
     public float time;
     public float iceSize;
     public Vector2Int size;
+    public bool manuallySet;
     float t = 0;
-    GameObject ice;
     float maxDis;
     float minDis;
     public int shrinkStage;
@@ -19,24 +19,60 @@ public class IcePlane : MonoBehaviour
     int currentStage;
     float scale;
     SortedList<float, List<Ice>> planeMap;
-    GameObject[] iceList;
+    public Dictionary<int, Ice> iceSet;
+    public GameObject[] icePrefabs;
     // Start is called before the first frame update
     void Start()
     {
-        ice = Resources.Load<GameObject>("Ice/Ice");
+        iceSet = new Dictionary<int, Ice>();
+        iceSet.Clear();
         planeMap = new SortedList<float, List<Ice>>();
         currentStage = 0;
         shrinkStage += 1;
         shrinkStopStage += 1;
-        InitiatePlane();
+        if (manuallySet)
+        {
+            GameObject[] ices = GameObject.FindGameObjectsWithTag("Ground");
+            int len = ices.Length;
+            int amount = 0;
+            for (int i = 0; i < len; i++)
+            {
+                Ice ice = ices[i].GetComponent<Ice>();
+                if (ice != null)
+                {
+                    
+                    iceSet.Add(amount++, ice);
+                   
+                }
+                
+                
+                
+            }
+            
+        }
+        else
+        {
+            InitiatePlane();
+        }
+        
     }
-
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
     // Update is called once per frame
     void Update()
     {
         t += Time.deltaTime;
-
-        if (t > time)
+        
+        if (t > time && !manuallySet)
         {
             t = 0;
             Shrink();
@@ -60,8 +96,13 @@ public class IcePlane : MonoBehaviour
                     int count = list.Count;
                     for (int i = 0; i < count; i++)
                     {
+                        
                         if (list[i] != null)
+                        {
+                            iceSet.Remove(list[i].id);
                             list[i].Melt();
+                        }
+                            
                     }
                     planeMap.RemoveAt(j);
                 }
@@ -79,7 +120,7 @@ public class IcePlane : MonoBehaviour
 
     void InitiatePlane()
     {
-#if automatically
+
         int check = 0;
         for (float i = -size.x * 0.797f * iceSize + 0.797f * 0.5f * iceSize; i <= size.x * 0.797f * iceSize + 0.797f * 0.5f * iceSize; i += 0.797f * iceSize)
         {
@@ -95,8 +136,13 @@ public class IcePlane : MonoBehaviour
             }
             for (float j = initPos; j <= size.y * 2.763f * iceSize - 2.763f * 0.5f * iceSize; j += 2.763f * iceSize)
             {
-                GameObject go_ice = Instantiate(ice, new Vector3(j, 0, i), Quaternion
+                int index = Random.Range(0, 3);
+                GameObject go_ice = Instantiate(icePrefabs[index], new Vector3(j, -0.1f, i), Quaternion
                     .identity, transform);
+                int count = iceSet.Count;
+                go_ice.GetComponent<Ice>().id = count + 1;
+                Debug.Log("addd");
+                iceSet.Add(count+1,go_ice.GetComponent<Ice>());
                 go_ice.transform.localScale *= iceSize;
                 float distance = Vector3.Distance(go_ice.transform.position, transform.position);
                 if (planeMap.ContainsKey(distance))
@@ -117,8 +163,27 @@ public class IcePlane : MonoBehaviour
         minDis = planeMap.Keys[0];
         scale = (maxDis - minDis) / shrinkStage;
 
-#else
-        iceList = GameObject.FindGameObjectsWithTag("Ground");
-#endif
+
+    }
+
+    public Vector3 GetRespawnPos()
+    {
+        int amount = iceSet.Count;
+        int random = Random.Range(0, amount);
+        if(amount <= 0)
+        {
+            return Vector3.zero;
+        }
+        while (true)
+        {
+            if (iceSet.ContainsKey(random) && iceSet[random]!=null)
+            {
+                Debug.Log(random + " " + iceSet[random]);
+                return iceSet[random].transform.position;
+            }
+            random = Random.Range(0, amount);
+        }
+
+        return Vector3.zero;
     }
 }

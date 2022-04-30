@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3265288508040520157}
   - component: {fileID: 3265288508040520158}
   - component: {fileID: 3265288508040520159}
+  - component: {fileID: 7968410501865057808}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -225,5 +226,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ca5a8a556bccc4d9ae0a19623fb8cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 0
   players:
   - {fileID: 0}
+  Arduino: {fileID: 0}
+  COM: []
+  manualMode: 0
+--- !u!95 &7968410501865057808
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3265288508040520145}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 67c06d9c126f3014c990efae58f10b42, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 47503b6ac1e0f0643be7470b6115d883
+<<<<<<<< HEAD:Assets/Animations/Main Menu.meta
+guid: 784bc15efb223fd4fae5050aace0e378
+========
+guid: 07904a7ab765fa54994aefb2d63c4b93
+>>>>>>>> main:Assets/Animations/Fader.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

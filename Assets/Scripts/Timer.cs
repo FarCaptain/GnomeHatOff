@@ -12,6 +12,7 @@ public class Timer : MonoBehaviour
     private Scene currentScene;
     private TextMeshProUGUI timerText;
     public static float timeRemaining = 60;      // measured in seconds
+    public static float elapsedTime = 0;
     private bool isTimerRunning = false;
     [HideInInspector] public bool timerPaused = false;
 
@@ -44,16 +45,23 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
+        //Please Remove
+        if(Input.GetKeyDown(KeyCode.L))
+		{
+            scoreSystem.displayWinner();
+        }
         if (isTimerRunning)
         {
             if (timeRemaining > 0 && timerPaused == false)
             {
                 timeRemaining -= Time.deltaTime;
+                elapsedTime += Time.deltaTime;
                 DisplayTime(timeRemaining);
             }
             else if(timeRemaining<=0)
             {
                 scoreSystem.displayWinner();
+                elapsedTime = 0;
                 timeRemaining = 0;
                 isTimerRunning = false;
             }

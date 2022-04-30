@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Materials/seal.meta
+guid: f8374abe946043a4999aebea859c1298
+========
+guid: ff27b08e0d53cee4b859e4d196359cf4
+>>>>>>>> main:Assets/Animations/LevelSelectionDisplay.meta
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

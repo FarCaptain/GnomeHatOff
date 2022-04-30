@@ -159,7 +159,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultTransparency: 2
   fadeDuration: 2
-  player: {fileID: 0}
   shadowPrefab: {fileID: 0}
   hatSpawn: {fileID: 0}
   circleDust: {fileID: 777350855108792525}
@@ -171,6 +170,7 @@ MonoBehaviour:
   highSpeed: 2.5
   lowSpeed: 1
   catchTime: 10
+  headTop: 0.5
   hatFadeEnabled: 1
   playerHit: {fileID: 0}
 --- !u!82 &2598964022959836559

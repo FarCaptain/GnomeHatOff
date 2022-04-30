@@ -22,7 +22,9 @@ public class HatCollecter : MonoBehaviour
     public bool isTouchingWell = false;
 
     // stay for some time to drop the hat
+
     public NewTimer hatDropTimer;
+    [SerializeField]
     public float hatDropDuration;
 
     public Stack<GameObject> hatStack = new Stack<GameObject>();
@@ -78,11 +80,12 @@ public class HatCollecter : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Hat" && isdamaged == false && other.gameObject.GetComponent<HatFade>().hatCollectedByPlayer==false)
+        HatFade hatFade = other.gameObject.GetComponent<HatFade>();
+        if (other.tag == "Hat" && isdamaged == false && hatFade.hatCollectedByPlayer==false)
         {
-            if (other.gameObject.transform.position.y > (headTop + 0.01f))
+            if (hatCount < 9)
             {
-                if(hatCount < 9)
+                if (hatFade.isFadingDown == false)
                 {
                     if (playerAudioSource.isPlaying == false)
                     {
@@ -90,15 +93,13 @@ public class HatCollecter : MonoBehaviour
                     }
                     AddHat(other.gameObject);
                 }
-                else
-                {
-                    Destroy(other.gameObject);
-                }
-                //print("Yeay! Hat Collected!" + (++count));
-               
-                
-                other.gameObject.GetComponent<HatFade>().hatShadowDestroy();
             }
+            else
+            {
+                Destroy(other.gameObject);
+            }
+
+            other.gameObject.GetComponent<HatFade>().hatShadowDestroy();
         }
         if (other.tag == "Mushroom")
         {
@@ -106,15 +107,15 @@ public class HatCollecter : MonoBehaviour
             {
                 AudioManager.PlayMushroomManAudioClip(MushroomManAudioStates.Collected, playerAudioSource);
             }
-            
-            //for (int i=hatCount; i < 9; i++)
-            //{
-            //    GameObject hat = Instantiate(hatPrefab, hatTop.transform.position, Quaternion.identity);
-            //    hat.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = hatColors[Random.Range(0, hatColors.Length - 1)];
-            //    AddHat(hat);
-            //}
-            playerScript.SuperBounce();
-            other.GetComponent<MushroomController>().playerHit = transform.parent.gameObject;
+
+			for (int i = hatCount; i < 9; i++)
+			{
+				GameObject hat = Instantiate(hatPrefab, hatTop.transform.position, Quaternion.identity);
+				hat.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = hatColors[Random.Range(0, hatColors.Length - 1)];
+				AddHat(hat);
+			}
+			//playerScript.SuperBounce();
+			other.GetComponent<MushroomController>().playerHit = transform.parent.gameObject;
             other.GetComponent<MushroomController>().Caught();
             other.GetComponent<MushroomController>().hatShadowDestroy();
             
@@ -153,12 +154,11 @@ public class HatCollecter : MonoBehaviour
         Destroy(hat.GetComponent<Rigidbody>());
         //other.gameObject.GetComponentInChildren<MeshRenderer>().material
 
-       
-        //hat.gameObject.GetInstanceID
         hatStack.Push(hat);
 
         hat.transform.parent = gnome.transform;
         hat.gameObject.transform.position = hatPos;
+        hat.gameObject.transform.rotation = Quaternion.identity;
         hatTop.transform.position = hatPos;
 
         sparks.gameObject.transform.position = hatPos;

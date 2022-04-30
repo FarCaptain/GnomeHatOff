@@ -7,17 +7,17 @@ public class HatFade : MonoBehaviour
     private AudioSource hatAudioSource;
     public float defaultTransparency = 1f;
     public float fadeDuration = 3f;
-    public GameObject player;
+    public float groundDuration;
     public GameObject shadowPrefab;
 
     public ParticleSystem circleDust;
+    public float headTop;
 
     float currentTransparency;
     float toFadeTo;
     float tempDist;
     bool isFadingUp;
-    bool isFadingDown;
-    float headTop;
+    public bool isFadingDown;
 
     public bool hatFadeEnabled = true;
     public bool hatCollectedByPlayer = false;
@@ -26,7 +26,6 @@ public class HatFade : MonoBehaviour
     private bool dropAnimationOn = false;
     private Vector3 dropAnimationEnd;
     private float dropAnimationTime = 0f;
-    private NewTimer pauseTimer;
     public float dropAnimationDuration;
     public float pauseBetweenDropAnimations;
 
@@ -35,22 +34,6 @@ public class HatFade : MonoBehaviour
         hatAudioSource = GetComponent<AudioSource>();
         currentTransparency = defaultTransparency;
         ApplyTransparency();
-
-        player = GameObject.Find("Gnome_0");
-
-        // TODO: Adjust for loop code
-        for (int i = 0; i < player.transform.childCount; i++)
-        {
-            // inefficient, way to do on resources?
-            if (player.transform.GetChild(i).name == "HeadTop")
-            {
-                headTop = player.transform.GetChild(i).transform.position.y;
-                break;
-            }
-        }
-
-        pauseTimer = gameObject.AddComponent<NewTimer>();
-        pauseTimer.TimerStart = false;
     }
 
     void FixedUpdate()
@@ -59,9 +42,9 @@ public class HatFade : MonoBehaviour
         /// Fading
         if (hatFadeEnabled && transform.position.y < headTop)
         {
-            FadeT(0.0f);
 
-            Destroy(gameObject, 2f);
+            StartCoroutine(FadeT(0.0f));
+            
             hatShadowDestroy();
 
             circleDust.Play();
@@ -96,7 +79,7 @@ public class HatFade : MonoBehaviour
         }
 
         /// Drop Animation
-        if(dropAnimationOn && pauseTimer.TimerStart == false)
+        if(dropAnimationOn)
         {
             // interpolation
             Vector3 pos = Vector3.Lerp(transform.position, dropAnimationEnd, dropAnimationTime/ dropAnimationDuration);
@@ -105,12 +88,14 @@ public class HatFade : MonoBehaviour
             transform.position = pos;
 
             // get to the end
-            if(dropAnimationTime == dropAnimationDuration)
+            if(dropAnimationTime >= dropAnimationDuration || transform.position == dropAnimationEnd)
             {
                 // reset things
                 dropAnimationTime = 0f;
                 dropAnimationOn = false;
                 dropAnimationEnd = Vector3.zero;
+
+                Destroy(gameObject);
             }
         }
     }
@@ -125,32 +110,36 @@ public class HatFade : MonoBehaviour
         currentTransparency = newT;
         ApplyTransparency();
     }
-    public void FadeT(float newT)
+    public IEnumerator FadeT(float newT)
     {
-        toFadeTo = newT;
-        if (currentTransparency < toFadeTo)
+        yield return new WaitForSeconds(groundDuration);
+
+        if (hatCollectedByPlayer == false)
         {
-            tempDist = toFadeTo - currentTransparency;
-            isFadingUp = true;
-        }
-        else
-        {
-            tempDist = currentTransparency - toFadeTo;
-            isFadingDown = true;
+            toFadeTo = newT;
+            if (currentTransparency < toFadeTo)
+            {
+                tempDist = toFadeTo - currentTransparency;
+                isFadingUp = true;
+            }
+            else
+            {
+                tempDist = currentTransparency - toFadeTo;
+                isFadingDown = true;
+            }
+
+            Destroy(gameObject, fadeDuration);
         }
     }
 
     public void RegisterDropAnimation(Vector3 ed)
     {
-        if (dropAnimationOn)
-            return;
-
-        transform.parent = null;
-        dropAnimationOn = true;
-        dropAnimationEnd = ed;
-
-        pauseTimer.MaxTime = pauseBetweenDropAnimations;
-        pauseTimer.TimerStart = true;
+        if (dropAnimationOn == false)
+        {
+            transform.parent = null;
+            dropAnimationOn = true;
+            dropAnimationEnd = ed;
+        }
     }
 
     public void hatFadeDisable()

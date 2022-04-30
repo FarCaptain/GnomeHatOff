@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/UI.unity
+    path: Assets/Scenes/UI_Ivan.unity
     guid: d897dab6ad9b7514bafab4d7b01f693e
   - enabled: 1
     path: Assets/Scenes/Map1Level Layout.unity

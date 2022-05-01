@@ -72,7 +72,7 @@ public class ScoreSystem : MonoBehaviour
     // We'll enable this script once we already have players in game
     void Start()
 	{
-        gameManager = MainGameController.instance;
+        gameManager = GameObject.Find("GameManager").GetComponent<MainGameController>();
         PlayerAmount = gameManager.COM.Count;
         for (int id = 0; id < 2; id++)
 			for (int i = 0; i < fires[id].transform.childCount; i++)

@@ -1416,7 +1416,7 @@ SpriteRenderer:
   m_Size: {x: 38.399998, y: 21.599998}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &427658309
@@ -2035,8 +2035,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a4a94dd223d2674a93cddf672e2f0f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toggleNone: {fileID: 0}
-  toggleColorblind: {fileID: 0}
+  toggleNone: {fileID: 1026457609}
+  toggleColorblind: {fileID: 163465766}
 --- !u!1 &711212958
 GameObject:
   m_ObjectHideFlags: 0

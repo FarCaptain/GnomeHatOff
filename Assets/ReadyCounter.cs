@@ -12,7 +12,7 @@ public class ReadyCounter : MonoBehaviour
     [SerializeField] TextMeshProUGUI counterText;
     [SerializeField] UnityEvent OnCounterFinished;
     enum CounterStates { Started, Stopped, Finished }
-    private int maxTime = 6;
+    private int maxTime = 4;
     private NewTimer counterIntervalTimer;
     void Start()
     {
@@ -31,7 +31,7 @@ public class ReadyCounter : MonoBehaviour
             }
             if (!counterIntervalTimer.TimerStart)
 			{
-                maxTime = Mathf.Clamp(maxTime-1, 0, 5);
+                maxTime = Mathf.Clamp(maxTime-1, 0, 3);
                 counterIntervalTimer.TimerStart = true;
                 counterText.text = maxTime.ToString();
                 counterText.color = Color.yellow;

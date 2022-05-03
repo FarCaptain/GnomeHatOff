@@ -140,13 +140,17 @@ public class LevelSelectManager : MonoBehaviour
     {
         if (mapTitle.text == mapNames[0])
         {
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene(2);
         }
         else if (mapTitle.text == mapNames[1])
         {
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene(3);
         }
         else if (mapTitle.text == mapNames[2])
+        {
+            SceneManager.LoadScene(4);
+        }
+        else if (mapTitle.text == mapNames[3])
         {
             SceneManager.LoadScene(5);
         }

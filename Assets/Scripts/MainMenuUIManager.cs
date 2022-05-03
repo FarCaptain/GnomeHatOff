@@ -21,13 +21,13 @@ public class MainMenuUIManager : MonoBehaviour
 
     public void QuickStartButtonClicked()
 	{
-        levelManager.LoadScene(2);
+        levelManager.LoadScene(1);
 
     }
     IEnumerator WaitAndLoad(int sceneIndex)
 	{
         //confirmationText.text = "LEVEL SELECT LOADING";
         yield return new WaitForSecondsRealtime(1f);
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
 	}
 }

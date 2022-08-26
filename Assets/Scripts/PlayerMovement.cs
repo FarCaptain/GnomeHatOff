@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public float slideFactor;
     public float maxSpeed;
     public float percentOfMaxSpeed;
-    public float constantSpeed = 100;
+    public float constantSpeed = 101;
     [Header("The decrease of max speed each hat gives you")]
     public float hatBurden = 0;
     public float speedDecreaseEachHat;

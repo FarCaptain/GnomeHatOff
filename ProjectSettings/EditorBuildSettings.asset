@@ -18,9 +18,18 @@ EditorBuildSettings:
     path: Assets/Scenes/Map1Level Layout.unity
     guid: a7a585abf903424498d6bf5fb1d60888
   - enabled: 1
+    path: Assets/Scenes/Map1Level2 Layout.unity
+    guid: 9edde1d24def5204281c334210db655b
+  - enabled: 1
     path: Assets/Scenes/Map2Level2 Layout 1.unity
     guid: 4ec3e97bbc57ce34ebc912b2b774e411
   - enabled: 1
     path: Assets/Scenes/IceMapLayout.unity
     guid: c9be03e764a484d4b8282ab3b53ba93c
+  - enabled: 1
+    path: Assets/Scenes/IceMap2Layout.unity
+    guid: 47983a7bf3697884498453e832ebe48b
+  - enabled: 1
+    path: Assets/Scenes/Normal Level UI.unity
+    guid: 4e565a7c1834ecc42a5b112bbe0e991c
   m_configObjects: {}
